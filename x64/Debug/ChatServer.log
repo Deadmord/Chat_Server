@@ -1,0 +1,6 @@
+﻿  Reading Qt configuration (C:/Qt/6.5.0/msvc2019_64/bin/qmake)
+  moc server.h
+  main.cpp
+  server.cpp
+  moc_server.cpp
+  ChatServer.vcxproj -> C:\01_MasaStudying\21_FinalProject\project\InetChat\x64\Debug\ChatServer.exe
