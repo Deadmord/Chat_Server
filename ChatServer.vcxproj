@@ -83,10 +83,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DB\JSONS\messages.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="DB\JSONS\messages.h" />
     <ClInclude Include="entities.h" />
     <QtMoc Include="server.h" />
   </ItemGroup>
