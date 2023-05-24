@@ -104,10 +104,12 @@
     <ClCompile Include="DBRoom.cpp" />
     <ClCompile Include="DBTopic.cpp" />
     <ClCompile Include="DBUser.cpp" />
+    <ClCompile Include="DB\JSONS\messages.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="DB\JSONS\messages.h" />
     <ClInclude Include="DBService.h" />
     <ClInclude Include="entities.h" />
     <QtMoc Include="server.h" />

@@ -53,6 +53,9 @@
     <ClCompile Include="DBUser.cpp">
       <Filter>Source Files\Classes\DBClasses</Filter>
     </ClCompile>
+    <ClCompile Include="DB\JSONS\messages.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entities.h">
@@ -64,6 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="server.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="DB\JSONS\messages.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="DBUser.h">
