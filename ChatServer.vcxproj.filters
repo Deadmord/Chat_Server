@@ -21,6 +21,21 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
+    <Filter Include="Header Files\Classes">
+      <UniqueIdentifier>{bffde79e-6b5e-4f59-84c0-3d2e089e2aa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classes\DBClasses">
+      <UniqueIdentifier>{2e162919-ee85-4653-a49c-2f70e9c8399e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes">
+      <UniqueIdentifier>{5ccea9e3-6ad2-4942-aa6c-0a0d82c847f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\DBClasses">
+      <UniqueIdentifier>{65349e25-2c3b-4575-8e86-8f972c918d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classes\DBService">
+      <UniqueIdentifier>{89cd9b24-3628-4b8a-a5c2-f738f47778a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -29,15 +44,36 @@
     <ClCompile Include="server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DBRoom.cpp">
+      <Filter>Source Files\Classes\DBClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTopic.cpp">
+      <Filter>Source Files\Classes\DBClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="DBUser.cpp">
+      <Filter>Source Files\Classes\DBClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DBService.h">
+      <Filter>Header Files\Classes\DBService</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="server.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="DBUser.h">
+      <Filter>Header Files\Classes\DBClasses</Filter>
+    </QtMoc>
+    <QtMoc Include="DBRoom.h">
+      <Filter>Header Files\Classes\DBClasses</Filter>
+    </QtMoc>
+    <QtMoc Include="DBTopic.h">
+      <Filter>Header Files\Classes\DBClasses</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>
