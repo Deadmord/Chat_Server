@@ -1,0 +1,27 @@
+{
+	"ServerAddress": "127.0.0.1",
+	"ServerPort": 5555,
+	"FloodLimit": 5,
+	"BlackListPath": "./black-list.json"
+	
+	"RoomsSettings":{
+		"TopicsList":["Sport", "Studing", "Work", "Fun"]
+	}
+	
+	"MessagesHistorySettings": {
+		"Path": "./history",
+		"ExpireTime": "7d",
+		"TimeSlot": "5m"
+	},
+	
+	"DBSettings": {
+		"DBConnectionString": "------DB-String------"
+	},
+	
+	"LoggingSettings": {
+		"Path": "./history",
+		"LogLevel": "Debug",
+		"SizeLimit": 100,
+		"FilesNumberLimit": 10
+	}
+}

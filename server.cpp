@@ -40,7 +40,7 @@ void Server::loadMsgHistory(const QString path)
             {
                 Message msg {msgJson.toObject().value("nickname").toString(),
                             msgJson.toObject().value("text").toString(),
-                            QTime::fromString(msgJson.toObject().value("time").toString()),
+                            QDateTime::fromString(msgJson.toObject().value("time").toString()),
                             msgJson.toObject().value("id").toString(),
                             msgJson.toObject().value("deleted").toBool() };
                 messanges.push_back(msg);
@@ -210,7 +210,7 @@ void Server::SendToClient(const QVector<Message> &msgs, QTcpSocket *socket)
 //    Data.clear();
 //    QDataStream out(&Data, QIODevice::WriteOnly);
 //    out.setVersion(QDataStream::Qt_6_5);
-//    Message msg { "Server", str, QTime::currentTime(), QUuid::createUuid().toString(), false};
+//    Message msg { "Server", str, QDateTime::currentTime(), QUuid::createUuid().toString(), false};
 //    out << quint16(0) << msg.id << msg.time << msg.nickname << msg.deleted << msg.text; // преобразовали в stream
 //    out.device()->seek(0);          //переходим в начало "данных"
 //    out << quint16(Data.size() - sizeof(quint16));
@@ -239,5 +239,5 @@ void Server::SendToAllClients(const Message &msg)
 
 Message Server::createMessage(QString nickame, QString text)
 {
-    return Message{ nickame, text, QTime::currentTime(), QUuid::createUuid().toString(), false };
+    return Message{ nickame, text, QDateTime::currentDateTime(), QUuid::createUuid().toString(), false };
 }
