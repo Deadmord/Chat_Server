@@ -13,6 +13,7 @@ namespace DBEntity {
 		QString a_name;
 
 	public:
+
 		explicit DBTopic(qint32 id_, QString name_);
 
 		qint32 getId() const;

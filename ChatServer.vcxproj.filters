@@ -33,6 +33,9 @@
     <Filter Include="Source Files\Classes\DBClasses">
       <UniqueIdentifier>{65349e25-2c3b-4575-8e86-8f972c918d3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Classes\DBService">
+      <UniqueIdentifier>{89cd9b24-3628-4b8a-a5c2-f738f47778a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -49,6 +52,9 @@
     </ClCompile>
     <ClCompile Include="DBUser.cpp">
       <Filter>Source Files\Classes\DBClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="DB\JSONS\messages.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +74,18 @@
   <ItemGroup>
     <QtMoc Include="server.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="DB\JSONS\messages.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="DBUser.h">
+      <Filter>Header Files\Classes\DBClasses</Filter>
+    </QtMoc>
+    <QtMoc Include="DBRoom.h">
+      <Filter>Header Files\Classes\DBClasses</Filter>
+    </QtMoc>
+    <QtMoc Include="DBTopic.h">
+      <Filter>Header Files\Classes\DBClasses</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>

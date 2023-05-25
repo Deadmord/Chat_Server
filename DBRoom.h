@@ -18,6 +18,7 @@ namespace DBEntity {
 		bool a_is_deleted;
 
 	public:
+
 		explicit DBRoom(qint32 id_, QString name_, QString description_, qint32 topic_id_, bool is_private_, QString password_, bool is_deleted_);
 	
 		qint32 getId() const;
