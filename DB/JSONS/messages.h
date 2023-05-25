@@ -20,17 +20,17 @@ namespace DBEntity{
 
 
     class DBMessage : public QObject{
-        Q_OBJECT
+        //Q_OBJECT
 
-        Q_PROPERTY(QUuid id READ getId)
-        Q_PROPERTY(QDateTime date_time READ getDateTime)
-        Q_PROPERTY(QUuid room_id READ getRoomId)
-        Q_PROPERTY(QString login READ getLogin)
-        Q_PROPERTY(QUuid parent_id READ getParentId)
-        Q_PROPERTY(QString text READ getText)
-        Q_PROPERTY(QString media READ getMedia)
-        Q_PROPERTY(bool deleted READ isDeleted WRITE setDeleted)
-        Q_PROPERTY(QHash<QUuid, bool> likes READ getLikes WRITE setLikes)
+        //Q_PROPERTY(QUuid id READ getId)
+        //Q_PROPERTY(QDateTime date_time READ getDateTime)
+        //Q_PROPERTY(QUuid room_id READ getRoomId)
+        //Q_PROPERTY(QString login READ getLogin)
+        //Q_PROPERTY(QUuid parent_id READ getParentId)
+        //Q_PROPERTY(QString text READ getText)
+        //Q_PROPERTY(QString media READ getMedia)
+        //Q_PROPERTY(bool deleted READ isDeleted WRITE setDeleted)
+        //Q_PROPERTY(QHash<QUuid, bool> likes READ getLikes WRITE setLikes)
     private:
         QUuid id;
     public:
