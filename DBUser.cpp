@@ -2,7 +2,7 @@
 
 namespace DBEntity {
 
-    DBUser::DBUser(QObject* parent) : QObject(parent), a_login(), a_password(), a_userpic_path(), a_rating(), a_is_deleted(false) {}
+    DBUser::DBUser(QString login_, QString password_, QString userpic_path_, qint32 rating_, bool is_deleted_) : a_login(login_), a_password(password_), a_userpic_path(userpic_path_), a_rating(rating_), a_is_deleted(is_deleted_) {}
 
     QString DBUser::getLogin() const { return this->a_login; }
     void DBUser::setLogin(const QString& login_) { this->a_login = login_; }

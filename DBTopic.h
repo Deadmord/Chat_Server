@@ -6,18 +6,15 @@
 
 namespace DBEntity {
 
-	class DBTopic : public QObject {
-
-		Q_OBJECT
-		Q_PROPERTY(qint32 id READ getId WRITE setId NOTIFY idChanged)
-		Q_PROPERTY(QString name READ getName WRITE setName NOTIFY nameChanged)
+	class DBTopic {
 
 	private:
 		qint32 a_id;
 		QString a_name;
 
 	public:
-		explicit DBTopic(QObject* parent = nullptr);
+
+		explicit DBTopic(qint32 id_, QString name_);
 
 		qint32 getId() const;
 		void setId(const qint32& id_);

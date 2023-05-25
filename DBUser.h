@@ -6,14 +6,7 @@
 
 namespace DBEntity {
 
-    class DBUser : public QObject {
-
-        Q_OBJECT
-        Q_PROPERTY(QString login READ getLogin WRITE setLogin NOTIFY loginChanged)
-        Q_PROPERTY(QString password READ getPassword WRITE setPassword NOTIFY passwordChanged)
-        Q_PROPERTY(QString userpick_path READ getUserpicPath WRITE setUserpicPath NOTIFY userpicPathChanged)
-        Q_PROPERTY(qint32 rating READ getRating WRITE setRating NOTIFY ratingChanged)
-        Q_PROPERTY(bool is_deleted READ isDeleted WRITE setIsDeleted NOTIFY isDeletedChanged)
+    class DBUser {
 
     private:
         QString a_login;
@@ -23,7 +16,7 @@ namespace DBEntity {
         bool a_is_deleted;
 
     public:
-        explicit DBUser(QObject* parent = nullptr);
+        explicit DBUser(QString login_, QString password_, QString userpic_path_, qint32 rating_, bool is_deleted_);
 
         QString getLogin() const;
         void setLogin(const QString& login_);
