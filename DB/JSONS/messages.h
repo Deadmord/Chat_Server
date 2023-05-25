@@ -11,6 +11,9 @@
 #include <QFile>
 #include <QTime>
 #include <QUuid>
+#include <QPointer>
+#include "../../DBRoom.h"
+
 
 namespace DBEntity{
 //    struct Likes{
@@ -22,15 +25,17 @@ namespace DBEntity{
     class DBMessage : public QObject{
         //Q_OBJECT
 
-        //Q_PROPERTY(QUuid id READ getId)
-        //Q_PROPERTY(QDateTime date_time READ getDateTime)
-        //Q_PROPERTY(QUuid room_id READ getRoomId)
-        //Q_PROPERTY(QString login READ getLogin)
-        //Q_PROPERTY(QUuid parent_id READ getParentId)
-        //Q_PROPERTY(QString text READ getText)
-        //Q_PROPERTY(QString media READ getMedia)
-        //Q_PROPERTY(bool deleted READ isDeleted WRITE setDeleted)
-        //Q_PROPERTY(QHash<QUuid, bool> likes READ getLikes WRITE setLikes)
+
+
+        Q_PROPERTY(QUuid id READ getId)
+        Q_PROPERTY(QDateTime date_time READ getDateTime)
+        Q_PROPERTY(quint32 room_id READ getRoomId)
+        Q_PROPERTY(QString login READ getLogin)
+        Q_PROPERTY(QString parent_id READ getParentId)
+        Q_PROPERTY(QString text READ getText)
+        Q_PROPERTY(QString media READ getMedia)
+        Q_PROPERTY(bool deleted READ isDeleted WRITE setDeleted)
+        Q_PROPERTY(QHash<QUuid, bool> likes READ getLikes WRITE setLikes)
     private:
         QUuid id;
     public:
@@ -43,11 +48,11 @@ namespace DBEntity{
     public:
         [[nodiscard]] const QDateTime &getDateTime() const;
 
-        [[nodiscard]] const QUuid &getRoomId() const;
+       [[nodiscard]] qint32 getRoomId() const;
 
         [[nodiscard]] const QString &getLogin() const;
 
-        [[nodiscard]] const QUuid &getParentId() const;
+        [[nodiscard]] QString getParentId() const;
 
         [[nodiscard]] const QString &getText() const;
 
@@ -58,9 +63,9 @@ namespace DBEntity{
         [[nodiscard]] const QHash<QUuid, bool> &getLikes() const;
 
     private:
-        QUuid room_id;
+        qint32 room_id;
         QString login;
-        QUuid parent_id;
+        QPointer<DBMessage> parent_id;
         QString text;
 
         //TODO: how to store media
@@ -70,21 +75,10 @@ namespace DBEntity{
 
         [[nodiscard]] QJsonObject toJson() const;
     public:
-        DBMessage(QUuid id_room_, const QString& login_, const QString& text_, const QString& media_){
-            id = QUuid::createUuid();
-            date_time = QDateTime::currentDateTime();
-            room_id = id_room_;
-            login = login_;
-            text = text_;
-            media = media_;
 
-        }
-        ~DBMessage()= default;
-
-
-        const QUuid &getId() const;
-
-
+        DBMessage(qint32 room_id_, const QString &login_, const QString &text_, const QString &media_);
+        [[nodiscard]] const QUuid &getId() const;
+       
         static void writeMessage(const QString& file_name_, const DBEntity::DBMessage& message_) ;
 
         static QList<DBMessage> readMessage(const QString& file_name_) ;
