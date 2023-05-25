@@ -33,9 +33,6 @@
     <Filter Include="Source Files\Classes\DBClasses">
       <UniqueIdentifier>{65349e25-2c3b-4575-8e86-8f972c918d3c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Classes\DBService">
-      <UniqueIdentifier>{89cd9b24-3628-4b8a-a5c2-f738f47778a1}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,22 +55,19 @@
     <ClInclude Include="entities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DBService.h">
-      <Filter>Header Files\Classes\DBService</Filter>
+    <ClInclude Include="DBUser.h">
+      <Filter>Header Files\Classes\DBClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="DBRoom.h">
+      <Filter>Header Files\Classes\DBClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTopic.h">
+      <Filter>Header Files\Classes\DBClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="server.h">
       <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="DBUser.h">
-      <Filter>Header Files\Classes\DBClasses</Filter>
-    </QtMoc>
-    <QtMoc Include="DBRoom.h">
-      <Filter>Header Files\Classes\DBClasses</Filter>
-    </QtMoc>
-    <QtMoc Include="DBTopic.h">
-      <Filter>Header Files\Classes\DBClasses</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>
