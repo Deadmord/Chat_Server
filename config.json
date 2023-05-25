@@ -2,14 +2,10 @@
 	"ServerAddress": "127.0.0.1",
 	"ServerPort": 5555,
 	"FloodLimit": 5,
-	"BlackListPath": "./black-list.json"
-	
-	"RoomsSettings":{
-		"TopicsList":["Sport", "Studing", "Work", "Fun"]
-	}
+	"BlackListPath": "./black-list.json",
 	
 	"MessagesHistorySettings": {
-		"Path": "./history",
+		"Path": "./msg_history.json",
 		"ExpireTime": "7d",
 		"TimeSlot": "5m"
 	},
