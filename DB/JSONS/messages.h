@@ -23,7 +23,7 @@ namespace DBEntity{
 
 
     class DBMessage : public QObject{
-        Q_OBJECT
+        //Q_OBJECT
 
 
 
