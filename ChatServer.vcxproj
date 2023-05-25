@@ -111,7 +111,7 @@
     <ClCompile Include="server.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DB\JSONS\messages.h" />
+    <QtMoc Include="DB\JSONS\messages.h" />
     <ClInclude Include="entities.h" />
     <QtMoc Include="server.h" />
   </ItemGroup>

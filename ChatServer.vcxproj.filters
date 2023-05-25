@@ -76,15 +76,15 @@
     <ClInclude Include="DBTopic.h">
       <Filter>Header Files\Classes\DBClasses</Filter>
     </ClInclude>
-    <ClInclude Include="DB\JSONS\messages.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DBService.h">
       <Filter>Header Files\Classes\DBService</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="server.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="DB\JSONS\messages.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
