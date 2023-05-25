@@ -70,6 +70,9 @@
     <ClInclude Include="DBTopic.h">
       <Filter>Header Files\Classes\DBClasses</Filter>
     </ClInclude>
+    <ClInclude Include="DBService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="server.h">
@@ -77,15 +80,6 @@
     </QtMoc>
     <QtMoc Include="DB\JSONS\messages.h">
       <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="DBUser.h">
-      <Filter>Header Files\Classes\DBClasses</Filter>
-    </QtMoc>
-    <QtMoc Include="DBRoom.h">
-      <Filter>Header Files\Classes\DBClasses</Filter>
-    </QtMoc>
-    <QtMoc Include="DBTopic.h">
-      <Filter>Header Files\Classes\DBClasses</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>
