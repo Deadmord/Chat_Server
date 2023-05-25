@@ -8,16 +8,17 @@ QJsonObject DBEntity::DBMessage::toJson() const {
     QJsonObject obj;
     obj["id"] = id.toString();
     obj["date_time"] = date_time.toString();
-    obj["room_id"] = room_id.toString();
+    obj["room_id"] = room_id;
     obj["login"] = login;
-    obj["parent_id"] = parent_id.toString();
+    obj["parent_id"] = parent_id.isNull()?"":parent_id->getId().toString();
     obj["text"] = text;
-    obj["media"] = media;
+    obj["media"] = media.isNull()?"":media;
     obj["deleted"] = deleted;
     //TODO: likes
 //    obj["likes"] = likes;
     return obj;
 }
+
 
 void DBEntity::DBMessage::setDeleted(bool flag) {
     DBMessage::deleted = flag;
@@ -48,13 +49,14 @@ void DBEntity::DBMessage::writeMessage(const QString& file_name_,const DBEntity:
 
     doc.setArray(messagesJson);
     file.write(doc.toJson());
+    file.close();
 }
 
 const QDateTime &DBEntity::DBMessage::getDateTime() const {
     return date_time;
 }
 
-const QUuid &DBEntity::DBMessage::getRoomId() const {
+qint32 DBEntity::DBMessage::getRoomId() const {
     return room_id;
 }
 
@@ -62,8 +64,8 @@ const QString &DBEntity::DBMessage::getLogin() const {
     return login;
 }
 
-const QUuid &DBEntity::DBMessage::getParentId() const {
-    return parent_id;
+QString DBEntity::DBMessage::getParentId() const {
+    return parent_id.isNull()?"":parent_id->getId().toString();
 }
 
 const QString &DBEntity::DBMessage::getText() const {
@@ -86,4 +88,13 @@ const QUuid &DBEntity::DBMessage::getId() const {
     return id;
 }
 
+DBEntity::DBMessage::DBMessage( qint32 room_id_, const QString &login_, const QString &text_, const QString &media_) {
+
+    id = QUuid::createUuid();
+    date_time = QDateTime::currentDateTime();
+    room_id = room_id_;
+    login = login_;
+    text = text_;
+    media = media_;
+}
 
