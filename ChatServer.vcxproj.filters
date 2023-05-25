@@ -61,8 +61,14 @@
     <ClInclude Include="entities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DBService.h">
-      <Filter>Header Files\Classes\DBService</Filter>
+    <ClInclude Include="DBUser.h">
+      <Filter>Header Files\Classes\DBClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="DBRoom.h">
+      <Filter>Header Files\Classes\DBClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTopic.h">
+      <Filter>Header Files\Classes\DBClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
