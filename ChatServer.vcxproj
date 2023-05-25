@@ -106,6 +106,7 @@
     <ClCompile Include="DBService.cpp" />
     <ClCompile Include="DBTopic.cpp" />
     <ClCompile Include="DBUser.cpp" />
+    <ClCompile Include="DB\JSONS\messages.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server.cpp" />
   </ItemGroup>

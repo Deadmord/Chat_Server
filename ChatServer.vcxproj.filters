@@ -59,6 +59,9 @@
     <ClCompile Include="DBService.cpp">
       <Filter>Source Files\Classes\DBService</Filter>
     </ClCompile>
+    <ClCompile Include="DB\JSONS\messages.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entities.h">
