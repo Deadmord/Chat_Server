@@ -8,7 +8,7 @@ struct Message
 {
     QString nickname;
     QString text;
-    QTime   time;
+    QDateTime   time;
     QString id;
     bool    deleted;
     //
@@ -20,7 +20,7 @@ struct Message
 struct client
 {
     QString userName = nullptr;
-    QTime lastMessageTime;
+    QDateTime lastMessageTime;
     qint32 reiting;
 };
 

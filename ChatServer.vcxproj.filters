@@ -21,6 +21,9 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
+    <Filter Include="Entities Files">
+      <UniqueIdentifier>{9abff8b5-facc-4714-ae82-c2ecddb745c4}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\Classes">
       <UniqueIdentifier>{bffde79e-6b5e-4f59-84c0-3d2e089e2aa4}</UniqueIdentifier>
     </Filter>
@@ -87,5 +90,10 @@
     <QtMoc Include="DB\JSONS\messages.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="entities.h">
+      <Filter>Entities Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
