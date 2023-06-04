@@ -3,6 +3,7 @@
 #include <QtSql>
 #include <QSqlQuery>
 #include <QString>
+#include <QtConcurrent>
 
 namespace DBService {
 
@@ -60,28 +61,112 @@ namespace DBService {
 			}
 			qDebug() << "----------------------";
 		}
+
 	}
 
-	void DBConnection::getRooms(const QString& query_string_) {
-		QList<DBEntity::DBRoom> roomList;
+	QFuture<QList<DBEntity::DBRoom>> DBConnection::getRooms(const QString& query_string_) {
+		return QtConcurrent::run([this, query_string_]() {
+			QList<DBEntity::DBRoom> roomList;
+			databaseConnectionOpen();
 
-		QSqlQuery query;
-		query.exec(query_string_);
+			if (this->a_database.isOpen()) {
+				QSqlQueryModel queryModel;
+				queryModel.setQuery(query_string_);
 
-		while (query.next()) {
-			qint32 id = query.value("id").toInt();
-			QString name = query.value("name").toString();
-			QString description = query.value("description").toString();
-			qint32 topic_id = query.value("topic_id").toInt();
-			bool is_private = query.value("is_private").toBool();
-			QString password = query.value("password").toString();
-			bool is_deleted = query.value("is_deleted").toBool();
+				if (queryModel.lastError().isValid()) {
+					qDebug() << "Query error: " << queryModel.lastError().text();
+					return roomList;
+				}
 
-			DBEntity::DBRoom room(id, name, description, topic_id, is_private, password, is_deleted);
-			roomList.append(room);
+				const int rowCount = queryModel.rowCount();
+				for (int i = 0; i < rowCount; ++i) {
+					qint32 id = queryModel.record(i).value("id").toInt();
+					QString name = queryModel.record(i).value("name").toString();
+					QString description = queryModel.record(i).value("description").toString();
+					qint32 topic_id = queryModel.record(i).value("topic_id").toInt();
+					bool is_private = queryModel.record(i).value("is_private").toBool();
+					QString password = queryModel.record(i).value("password").toString();
+					bool is_deleted = queryModel.record(i).value("is_deleted").toBool();
+
+					DBEntity::DBRoom room(id, name, description, topic_id, is_private, password, is_deleted);
+					roomList.append(room);
+				}
+
+				databaseConnectionClose();
+
+				if (!roomList.isEmpty()) {
+					return roomList;
+				}
+				else {
+					qDebug() << "No data found";
+				}
+			}
+
+			return roomList;
+		});
+	}
+
+	bool DBConnection::addRoom(const QString& query_string_, const DBEntity::DBRoom& room_) {
+		databaseConnectionOpen();
+
+		if (this->a_database.isOpen()) {
+
+			QSqlQuery query;
+			query.prepare(query_string_);
+
+			query.bindValue(":name", room_.getName());
+			query.bindValue(":description", room_.getDescription());
+			query.bindValue(":topic_id", room_.getTopicId());
+			query.bindValue(":is_private", room_.isPrivate());
+			query.bindValue(":password", room_.getPassword());
+			query.bindValue(":is_deleted", room_.isDeleted());
+
+			if (query.exec()) {
+				qint32 id = query.lastInsertId().toInt();
+				qDebug() << "id of a new entity: " << id;
+				databaseConnectionClose();
+				return true;
+			}
+			else {
+				qDebug() << "error adding an entity";
+				databaseConnectionClose();
+				return false;
+			}
 		}
-		for (const DBEntity::DBRoom& room : roomList) {
-			qDebug() << "ID: " << room.getId() << " Name: " << room.getName();
+		else {
+			return false;
+		}
+	}
+
+	bool DBConnection::updateRoom(const QString& query_string_, const DBEntity::DBRoom& room_) {
+		databaseConnectionOpen();
+
+		if (this->a_database.isOpen()) {
+
+			QSqlQuery query;
+			query.prepare(query_string_);
+
+			query.bindValue(":id", room_.getId());
+			query.bindValue(":name", room_.getName());
+			query.bindValue(":description", room_.getDescription());
+			query.bindValue(":topic_id", room_.getTopicId());
+			query.bindValue(":is_private", room_.isPrivate());
+			query.bindValue(":password", room_.getPassword());
+			query.bindValue(":is_deleted", room_.isDeleted());
+
+			if (query.exec()) {
+				qDebug() << "room with ID " << room_.getId() << "was updated successfully";
+				databaseConnectionClose();
+				return true;
+			}
+			else {
+				qDebug() << "room with ID " << room_.getId() << "was not updated";
+				databaseConnectionClose();
+				return false;
+			}
+		}
+		else {
+			return false;
 		}
 	}
 }

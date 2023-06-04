@@ -2,6 +2,7 @@
 #define DBSERVICE_H
 
 #include <QtSql>
+#include "DBRoom.h"
 
 namespace DBService {
 
@@ -20,8 +21,10 @@ namespace DBService {
 		void databaseConnectionOpen();
 		void databaseConnectionClose();
 		void databaseQuery(const QString& query_string_);
-		void getRooms(const QString& query_string_);
+		QFuture<QList<DBEntity::DBRoom>> getRooms(const QString& query_string_);
 		void databaseQueryFull(const QString& query_string_);
+		bool addRoom(const QString& query_string_, const DBEntity::DBRoom& room);
+		bool updateRoom(const QString& query_string_, const DBEntity::DBRoom& room);
 	};
 }
 
