@@ -27,20 +27,20 @@
     <Filter Include="Header Files\Classes">
       <UniqueIdentifier>{bffde79e-6b5e-4f59-84c0-3d2e089e2aa4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Classes\DBClasses">
-      <UniqueIdentifier>{2e162919-ee85-4653-a49c-2f70e9c8399e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Classes">
       <UniqueIdentifier>{5ccea9e3-6ad2-4942-aa6c-0a0d82c847f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Classes\DBClasses">
-      <UniqueIdentifier>{65349e25-2c3b-4575-8e86-8f972c918d3c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Classes\DBService">
       <UniqueIdentifier>{89cd9b24-3628-4b8a-a5c2-f738f47778a1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Classes\DBService">
       <UniqueIdentifier>{3e8a1ee4-7562-43ed-af56-472227306d04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classes\DBModels">
+      <UniqueIdentifier>{2e162919-ee85-4653-a49c-2f70e9c8399e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\DBModels">
+      <UniqueIdentifier>{65349e25-2c3b-4575-8e86-8f972c918d3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,13 +51,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DBRoom.cpp">
-      <Filter>Source Files\Classes\DBClasses</Filter>
+      <Filter>Source Files\Classes\DBModels</Filter>
     </ClCompile>
     <ClCompile Include="DBTopic.cpp">
-      <Filter>Source Files\Classes\DBClasses</Filter>
+      <Filter>Source Files\Classes\DBModels</Filter>
     </ClCompile>
     <ClCompile Include="DBUser.cpp">
-      <Filter>Source Files\Classes\DBClasses</Filter>
+      <Filter>Source Files\Classes\DBModels</Filter>
     </ClCompile>
     <ClCompile Include="DBService.cpp">
       <Filter>Source Files\Classes\DBService</Filter>
@@ -71,13 +71,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DBUser.h">
-      <Filter>Header Files\Classes\DBClasses</Filter>
+      <Filter>Header Files\Classes\DBModels</Filter>
     </ClInclude>
     <ClInclude Include="DBRoom.h">
-      <Filter>Header Files\Classes\DBClasses</Filter>
+      <Filter>Header Files\Classes\DBModels</Filter>
     </ClInclude>
     <ClInclude Include="DBTopic.h">
-      <Filter>Header Files\Classes\DBClasses</Filter>
+      <Filter>Header Files\Classes\DBModels</Filter>
     </ClInclude>
     <ClInclude Include="DBService.h">
       <Filter>Header Files\Classes\DBService</Filter>

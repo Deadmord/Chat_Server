@@ -11,5 +11,4 @@ int main(int argc, char* argv[])
     Server server;
     server.startServer();
     return a.exec();
-    
 }
