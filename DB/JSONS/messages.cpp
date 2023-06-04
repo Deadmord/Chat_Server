@@ -20,38 +20,35 @@ QJsonObject DBEntity::DBMessage::toJson() const {
 }
 
 
-void DBEntity::DBMessage::setDeleted(bool flag) {
-    DBMessage::deleted = flag;
+void DBEntity::DBMessage::setDeleted(bool flag_) {
+    DBMessage::deleted = flag_;
 }
 
-void DBEntity::DBMessage::setLikes(const QHash<QUuid, bool> &likes) {
-    DBMessage::likes = likes;
+void DBEntity::DBMessage::setLikes(const QHash<QUuid, bool> &likes_) {
+    DBMessage::likes = likes_;
 }
 
-void DBEntity::DBMessage::writeMessage(const QString& file_name_,const DBEntity::DBMessage& message_) {
+void DBEntity::DBMessage::writeMessage(const QString& file_name_,const QList<DBEntity::DBMessage>& messages_) {
 
-    QFile file(file_name_);
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        qCritical() << "File cannot be opened" << Qt::endl;
-        return;
+    QJsonArray array;
+    for (const auto& message: messages_) {
+        array.append(message.toJson());
     }
-    QByteArray content = file.readAll();
-    file.resize(0);  // Clear the file content
-
-    QJsonDocument doc = QJsonDocument::fromJson(content);
-    QJsonArray messagesJson;
-    if (!doc.isNull() && doc.isArray()) {
-        messagesJson = doc.array();
+    if (!FileRepository::writeJsonArr(file_name_, array)){
+        qCritical() << "Error writing to file";
     }
-
-
-    messagesJson.append(message_.toJson());
-
-    doc.setArray(messagesJson);
-    file.write(doc.toJson());
-    file.close();
 }
 
+void DBEntity::DBMessage::writeMessage(const QString& file_name_,const DBEntity::DBMessage& messages_) {
+
+    QJsonArray array;
+
+    array.append(messages_.toJson());
+
+    if (!FileRepository::writeJsonArr(file_name_, array)){
+        qCritical() << "Error writing to file";
+    }
+}
 const QDateTime &DBEntity::DBMessage::getDateTime() const {
     return date_time;
 }

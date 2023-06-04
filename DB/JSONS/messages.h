@@ -13,6 +13,7 @@
 #include <QUuid>
 #include <QPointer>
 #include "../../DBRoom.h"
+#include "../../file_repository.h"
 
 
 namespace DBEntity{
@@ -39,9 +40,9 @@ namespace DBEntity{
     private:
         QUuid id;
     public:
-        void setDeleted(bool flag);
+        void setDeleted(bool flag_);
 
-        void setLikes(const QHash<QUuid, bool> &likes);
+        void setLikes(const QHash<QUuid, bool> &likes_);
 
     private:
         QDateTime date_time;
@@ -79,8 +80,8 @@ namespace DBEntity{
         DBMessage(qint32 room_id_, const QString &login_, const QString &text_, const QString &media_);
         [[nodiscard]] const QUuid &getId() const;
        
-        static void writeMessage(const QString& file_name_, const DBEntity::DBMessage& message_) ;
-
+        static void writeMessage(const QString& file_name_, const QList<DBEntity::DBMessage>& message_) ;
+        static void writeMessage(const QString& file_name_,const DBEntity::DBMessage& messages_) ;
         static QList<DBMessage> readMessage(const QString& file_name_) ;
     };
 
