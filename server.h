@@ -4,13 +4,15 @@
 #include <QTcpSocket>
 #include <QVector>
 #include <QJsonObject>
+#include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonParseError>
 #include <QFile>
 #include <QTime>
 #include <QUuid>
-
 #include "entities.h"
+
+const QString CONFIG_FILE_PATH = "./config.json";
 
 class Server : public QTcpServer
 {
@@ -18,10 +20,19 @@ class Server : public QTcpServer
 public:
     Server();
     ~Server();
+
     void startServer();
-    QTcpSocket *socket;              //почему указатель?
+    
+
+public slots:
+    void incomingConnection(qintptr socketDescriptor);
+    void slotDisconnect();
+    void slotReadyRead();
 
 private:
+    void loadConfig(QString _path);
+    void openConnection();
+    void loadRooms();
     void loadMsgHistory(const QString path);
     void uploadMsgHistory(const QString path);
     void SendToClient(const Message &msg, QTcpSocket* socket);
@@ -33,18 +44,18 @@ private:
     Message createMessage(QString nickame, QString text);
 
 private:
-    QVector <QTcpSocket*> Sockets;
-    QVector <Message> messanges;
+    QString server_address;
+    quint16 server_port;
+    quint16 flood_limit;
+    QString black_list_path;
+    QString msg_history_path;   // = "./msg_history.json";
+
+    QTcpSocket* socket;
+    QVector <QTcpSocket*> sockets;
+    QVector <Message> messages;
+
     QByteArray Data;
     quint16 nextBlockSize = 0;
-
-    QString msgHistoryPath;
-
-public slots:                       //что за слоты??
-    void incomingConnection(qintptr socketDescriptor);
-    void slotDisconnect();
-    void slotReadyRead();
-    
 };
 
 #endif // SERVER_H
