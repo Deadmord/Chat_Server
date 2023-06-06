@@ -110,9 +110,9 @@
     <ClCompile Include="DBUser.cpp" />
     <ClCompile Include="DB\JSONS\messages.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="RoomController.cpp" />
     <ClCompile Include="server.cpp" />
-    <QtMoc Include="Room.h" />
+    <QtMoc Include="RoomController.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="DB\JSONS\messages.h" />

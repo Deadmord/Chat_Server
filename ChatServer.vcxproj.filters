@@ -65,7 +65,7 @@
     <ClCompile Include="DB\JSONS\messages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Room.cpp">
+    <ClCompile Include="RoomController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,7 +93,7 @@
     <QtMoc Include="DB\JSONS\messages.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Room.h">
+    <QtMoc Include="RoomController.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

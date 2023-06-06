@@ -4,16 +4,16 @@
 #include <QString>
 #include <QDebug>
 
-class Room_Controller : public QObject
+class RoomController : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QString	text MEMBER _text READ get_text WRITE set_text NOTIFY text_changed RESET reset_text)
 
 public:
-	explicit Room_Controller(QObject* parent = nullptr);
-	~Room_Controller() override;
-	Room_Controller(const Room_Controller& other);
-	Room_Controller& operator = (const Room_Controller& other);
+	explicit RoomController(QObject* parent = nullptr);
+	~RoomController() override;
+	RoomController(const RoomController& other);
+	RoomController& operator = (const RoomController& other);
 
 Q_SIGNALS:
 	void signal_1(int val);
@@ -43,4 +43,4 @@ private:
 
 };
 
-Q_DECLARE_METATYPE(Room_Controller)
+Q_DECLARE_METATYPE(RoomController)
