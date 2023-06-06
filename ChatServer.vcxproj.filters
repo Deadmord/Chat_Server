@@ -42,6 +42,12 @@
     <Filter Include="Source Files\Classes\DBModels">
       <UniqueIdentifier>{65349e25-2c3b-4575-8e86-8f972c918d3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classes\DBRepositories">
+      <UniqueIdentifier>{b1b6863f-dc43-4a7f-9ff6-8cfa01e5e750}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classes\DBRepositories">
+      <UniqueIdentifier>{641053ee-c6c4-42e2-b7eb-0679dd7827ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,6 +64,12 @@
     </ClCompile>
     <ClCompile Include="DBUser.cpp">
       <Filter>Source Files\Classes\DBModels</Filter>
+    </ClCompile>
+    <ClCompile Include="DB\JSONS\messages.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomRepository.cpp">
+      <Filter>Source Files\Classes\DBRepositories</Filter>
     </ClCompile>
     <ClCompile Include="DBService.cpp">
       <Filter>Source Files\Classes\DBService</Filter>
@@ -95,6 +107,9 @@
     </QtMoc>
     <QtMoc Include="DB\JSONS\messages.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="RoomRepository.h">
+      <Filter>Header Files\Classes\DBRepositories</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
