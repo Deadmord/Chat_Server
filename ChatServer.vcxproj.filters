@@ -80,6 +80,9 @@
     <ClCompile Include="file_repository.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UserRepository.cpp">
+      <Filter>Source Files\Classes\DBRepositories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entities.h">
@@ -109,6 +112,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="RoomRepository.h">
+      <Filter>Header Files\Classes\DBRepositories</Filter>
+    </QtMoc>
+    <QtMoc Include="UserRepository.h">
       <Filter>Header Files\Classes\DBRepositories</Filter>
     </QtMoc>
   </ItemGroup>
