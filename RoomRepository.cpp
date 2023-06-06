@@ -4,17 +4,18 @@
 
 namespace DBService {
 
-	RoomRepository::RoomRepository(DBConnection* connection_) : a_dbConnection(connection_) {}
-	RoomRepository::~RoomRepository(){}
+	//RoomRepository::RoomRepository(DBConnection* connection_) : a_dbConnection(connection_) {}
+	RoomRepository::RoomRepository(const QString& connection_string_) : a_dbConnection(connection_string_) {}
+	RoomRepository::~RoomRepository() {}
 
 	QFuture<QList<DBEntity::DBRoom>> RoomRepository::getAllRooms() {
 		return QtConcurrent::run([this, query_string_ = "SELECT * from room;"]() {
 			QList<DBEntity::DBRoom> roomList;
 			try
 			{
-				a_dbConnection->databaseConnectionOpen();
+				a_dbConnection.databaseConnectionOpen();
 
-				if (a_dbConnection->getDatabase().isOpen()) {
+				if (a_dbConnection.getDatabase().isOpen()) {
 					QSqlQueryModel queryModel;
 					queryModel.setQuery(query_string_);
 
@@ -37,7 +38,7 @@ namespace DBService {
 						roomList.append(room);
 					}
 
-					a_dbConnection->databaseConnectionClose();
+					a_dbConnection.databaseConnectionClose();
 
 					if (!roomList.isEmpty()) {
 						return roomList;
@@ -48,6 +49,7 @@ namespace DBService {
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the data base.";
+					a_dbConnection.databaseConnectionClose();
 				}
 			}
 			catch (const std::exception& exception)
@@ -63,8 +65,8 @@ namespace DBService {
 			QList<DBEntity::DBRoom> roomList;
 			try
 			{
-				a_dbConnection->databaseConnectionOpen();
-				if (a_dbConnection->getDatabase().isOpen()) {
+				a_dbConnection.databaseConnectionOpen();
+				if (a_dbConnection.getDatabase().isOpen()) {
 					QSqlQueryModel queryModel;
 					queryModel.setQuery(query_string_);
 
@@ -87,7 +89,7 @@ namespace DBService {
 						roomList.append(room);
 					}
 
-					a_dbConnection->databaseConnectionClose();
+					a_dbConnection.databaseConnectionClose();
 
 					if (!roomList.isEmpty()) {
 						return roomList;
@@ -112,8 +114,8 @@ namespace DBService {
 		return QtConcurrent::run([this, query_string_ = "INSERT INTO room (name, description, topic_id, is_private, password, is_deleted) VALUES (:name, :description, :topic_id, :is_private, :password, :is_deleted)", room_]() {
 			try
 			{
-				a_dbConnection->databaseConnectionOpen();
-				if (a_dbConnection->getDatabase().isOpen()) {
+				a_dbConnection.databaseConnectionOpen();
+				if (a_dbConnection.getDatabase().isOpen()) {
 
 					QSqlQuery query;
 					query.prepare(query_string_);
@@ -123,22 +125,23 @@ namespace DBService {
 					query.bindValue(":topic_id", room_.getTopicId());
 					query.bindValue(":is_private", room_.isPrivate());
 					query.bindValue(":password", room_.getPassword());
-					query.bindValue(":is_deleted", room_.isDeleted());
+					query.bindValue(":is_deleted", false);
 
 					if (query.exec()) {
 						qint32 id = query.lastInsertId().toInt();
 						PLOG_INFO << "ID of a new Room db entity: " << id;
+						a_dbConnection.databaseConnectionClose();
 						return id;
 					}
 					else {
 						PLOG_ERROR << "Error adding a new Room db entity.";
-						a_dbConnection->databaseConnectionClose();
+						a_dbConnection.databaseConnectionClose();
 						return -1;
 					}
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the data base.";
-					a_dbConnection->databaseConnectionClose();
+					a_dbConnection.databaseConnectionClose();
 					return -1;
 				}
 			}
@@ -154,8 +157,8 @@ namespace DBService {
 		return QtConcurrent::run([this, query_string_ = "UPDATE room SET is_deleted=:is_deleted WHERE id=:id", id_]() {
 			try
 			{
-				a_dbConnection->databaseConnectionOpen();
-				if (a_dbConnection->getDatabase().isOpen()) {
+				a_dbConnection.databaseConnectionOpen();
+				if (a_dbConnection.getDatabase().isOpen()) {
 
 					QSqlQuery query;
 					query.prepare(query_string_);
@@ -165,18 +168,18 @@ namespace DBService {
 
 					if (query.exec()) {
 						PLOG_INFO << "Room with ID: " << id_ << " was deleted successfully.";
-						a_dbConnection->databaseConnectionClose();
+						a_dbConnection.databaseConnectionClose();
 						return true;
 					}
 					else {
 						PLOG_ERROR << "Room with ID: " << id_ << " was not deleted.";
-						a_dbConnection->databaseConnectionClose();
+						a_dbConnection.databaseConnectionClose();
 						return false;
 					}
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the data base.";
-					a_dbConnection->databaseConnectionClose();
+					a_dbConnection.databaseConnectionClose();
 					return false;
 				}
 			}

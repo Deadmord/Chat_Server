@@ -1,5 +1,5 @@
-#ifndef USERREPOSITORY_H
-#define USERREPOSITORY_H
+#ifndef ROOMREPOSITORY_H
+#define ROOMREPOSITORY_H
 
 #include "DBService.h"
 
@@ -10,9 +10,12 @@ namespace DBService {
 		Q_OBJECT
 
 	private:
-		DBConnection* a_dbConnection;
+		//DBConnection* a_dbConnection;
+		DBConnection a_dbConnection;
 	public:
-		explicit RoomRepository(DBConnection* connection_);
+		//explicit RoomRepository(DBConnection* connection_);
+		explicit RoomRepository(const QString& connection_string_);
+
 		~RoomRepository();
 		QFuture<QList<DBEntity::DBRoom>> getAllRooms();
 		QFuture<QList<DBEntity::DBRoom>> getAllActiveRooms();
