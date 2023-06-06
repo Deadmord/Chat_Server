@@ -115,8 +115,10 @@
     <ClCompile Include="DBTopic.cpp" />
     <ClCompile Include="DBUser.cpp" />
     <ClCompile Include="DB\JSONS\messages.cpp" />
+    <ClCompile Include="file_repository.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server.cpp" />
+    <ClInclude Include="file_repository.h" />
     <QtMoc Include="RoomRepository.h" />
   </ItemGroup>
   <ItemGroup>
