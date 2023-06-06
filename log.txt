@@ -37,3 +37,5 @@
 2023-06-06 16:04:22.807 INFO  [19672] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
 2023-06-06 16:04:23.010 INFO  [19672] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@128] User updated.
 2023-06-06 16:04:23.025 INFO  [19672] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-06 16:22:53.713 INFO  [23444] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-06 16:22:59.719 INFO  [23444] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
