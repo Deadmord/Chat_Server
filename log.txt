@@ -1,0 +1,13 @@
+﻿2023-06-05 13:22:42.488 INFO  [7768] [DBService::DBConnection::databaseConnectionOpen@24] connected to db.
+2023-06-05 13:22:47.776 INFO  [7768] [DBService::DBConnection::databaseConnectionClose@59] connection to db closed
+2023-06-05 13:54:46.871 INFO  [7980] [DBService::DBConnection::databaseConnectionOpen@24] connected to db.
+2023-06-05 13:54:47.903 INFO  [7980] [DBService::RoomRepository::createRoom::<lambda_1>::operator ()@80] ID of a new Room db entity: 13
+2023-06-05 13:54:47.913 INFO  [7980] [DBService::DBConnection::databaseConnectionClose@59] connection to db closed.
+2023-06-05 14:00:21.977 INFO  [13976] [DBService::DBConnection::databaseConnectionOpen@24] connected to db.
+2023-06-05 14:00:23.012 INFO  [13976] [DBService::RoomRepository::createRoom::<lambda_1>::operator ()@80] ID of a new Room db entity: 14
+2023-06-05 14:00:23.020 INFO  [13976] [DBService::DBConnection::databaseConnectionClose@59] connection to db closed.
+2023-06-05 15:54:45.032 INFO  [9652] [DBService::DBConnection::databaseConnectionOpen@24] connected to db.
+2023-06-05 15:54:45.271 INFO  [9652] [DBService::RoomRepository::deleteRoom::<lambda_1>::operator ()@118] Room with ID: 7 was deleted successfully.
+2023-06-05 15:54:45.282 INFO  [9652] [DBService::DBConnection::databaseConnectionClose@59] connection to db closed.
+2023-06-05 15:59:30.314 INFO  [12040] [DBService::DBConnection::databaseConnectionOpen@24] connected to db.
+2023-06-05 15:59:36.246 INFO  [12040] [DBService::DBConnection::databaseConnectionClose@59] connection to db closed.
