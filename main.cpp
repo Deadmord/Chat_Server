@@ -16,13 +16,6 @@ int main(int argc, char* argv[])
     //Server server;
     //server.startServer();
     //return a.exec();
-
-    DBService::RoomRepository roomRepo("Driver={ODBC Driver 18 for SQL Server};Server=tcp:comp-zionet-server.database.windows.net,1433;Database=CPP_Chat_DB;Uid=Logika4417;Pwd=Fyyf1998;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;");
-    auto future = roomRepo.getAllActiveRooms();
-    QList<DBEntity::DBRoom> roomList = future.result();
-    for (const DBEntity::DBRoom& room : roomList) {
-        qDebug() << "ID: " << room.getId() << " Name: " << room.getName();
-    }
 }
 
 //Logger severity
