@@ -16,6 +16,13 @@ int main(int argc, char* argv[])
     //Server server;
     //server.startServer();
     //return a.exec();
+
+    QByteArray arrayThis("from ldskgfjbdslfkjghadfighjdfkghdfkgdfh");
+
+    DBService::UserRepository userRepo("Driver={ODBC Driver 18 for SQL Server};Server=tcp:comp-zionet-server.database.windows.net,1433;Database=CPP_Chat_DB;Uid=Logika4417;Pwd=Fyyf1998;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;");
+
+    auto future = userRepo.updateUser("loginn", "", arrayThis);
+    qDebug() << "result: " << future.result();
 }
 
 //Logger severity

@@ -39,3 +39,49 @@
 2023-06-06 16:04:23.025 INFO  [19672] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
 2023-06-06 16:22:53.713 INFO  [23444] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
 2023-06-06 16:22:59.719 INFO  [23444] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 18:55:41.719 INFO  [16656] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 18:55:42.555 INFO  [16656] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 18:57:38.858 INFO  [17296] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 18:57:39.042 ERROR [17296] [DBService::UserRepository::createUser::<lambda_1>::operator ()@80] Error adding a new User db entity.
+2023-06-07 18:57:39.056 INFO  [17296] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 18:58:07.213 INFO  [22636] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 18:58:07.384 INFO  [22636] [DBService::UserRepository::createUser::<lambda_1>::operator ()@75] Created new User db entity with login: newLogin
+2023-06-07 18:58:07.400 INFO  [22636] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 18:59:45.565 INFO  [10548] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 18:59:46.360 INFO  [10548] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 19:01:11.175 INFO  [16748] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 19:01:11.337 ERROR [16748] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@130] Error updating a user.
+2023-06-07 19:01:11.355 INFO  [16748] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 19:01:56.321 INFO  [18440] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 19:01:56.484 ERROR [18440] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@130] Error updating a user.
+2023-06-07 19:01:56.517 INFO  [18440] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 19:03:52.481 INFO  [8760] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 19:03:52.641 ERROR [8760] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@130] Error updating a user.
+2023-06-07 19:03:52.682 INFO  [8760] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 19:06:09.586 INFO  [15988] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 19:06:09.762 INFO  [15988] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@126] User updated.
+2023-06-07 19:06:09.795 INFO  [15988] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 19:11:00.379 INFO  [17540] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 19:11:00.542 INFO  [17540] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@126] User updated.
+2023-06-07 19:11:00.560 INFO  [17540] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 19:12:31.155 INFO  [3580] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 19:12:31.340 INFO  [3580] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@126] User updated.
+2023-06-07 19:12:31.359 INFO  [3580] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 19:18:24.341 INFO  [15904] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 19:18:24.504 INFO  [15904] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@127] User updated.
+2023-06-07 19:18:24.517 INFO  [15904] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 19:19:25.871 INFO  [23020] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 19:19:26.054 INFO  [23020] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@127] User updated.
+2023-06-07 19:19:26.104 INFO  [23020] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 19:21:13.755 INFO  [8072] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 19:21:13.936 INFO  [8072] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@127] User updated.
+2023-06-07 19:21:13.956 INFO  [8072] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 19:23:23.769 INFO  [22356] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 19:23:23.942 INFO  [22356] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@126] User updated.
+2023-06-07 19:23:23.957 INFO  [22356] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 19:23:50.321 INFO  [23376] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 19:23:50.486 INFO  [23376] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@126] User updated.
+2023-06-07 19:23:50.499 INFO  [23376] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 19:26:06.750 INFO  [17920] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 19:26:06.918 INFO  [17920] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@126] User updated.
+2023-06-07 19:26:06.938 INFO  [17920] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.

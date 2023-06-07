@@ -20,7 +20,7 @@ namespace DBService {
 		~UserRepository();
 		QFuture<DBEntity::DBUser*> getUserByLogin(const QString& login_);
 		QFuture<bool> createUser(const DBEntity::DBUser& user_);
-		QFuture<bool> updateUser(const QString& login_, const QString& new_password_, const QString& new_userpic_path_);
+		QFuture<bool> updateUser(const QString& login_, const QString& new_password_, const QByteArray& new_userpic_);
 	};
 }
 

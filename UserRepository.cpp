@@ -22,12 +22,12 @@ namespace DBService {
 					if (query.exec() && query.next()) {
 						QString login = query.value("login").toString();
 						QString password = query.value("password").toString();
-						QString userpic_path = query.value("userpic_path").toString();
+						QByteArray userpic = query.value("userpic").toByteArray();
 						qint32 rating = query.value("rating").toInt();
 						bool is_deleted = query.value("is_deleted").toBool();
 
 						a_dbConnection.databaseConnectionClose();
-						DBEntity::DBUser* user = new DBEntity::DBUser(login, password, userpic_path, rating, is_deleted);
+						DBEntity::DBUser* user = new DBEntity::DBUser(login, password, userpic, rating, is_deleted);
 						return user;
 					}
 					else {
@@ -51,7 +51,7 @@ namespace DBService {
 	}
 
 	QFuture<bool> UserRepository::createUser(const DBEntity::DBUser& user_) {
-		return QtConcurrent::run([this, query_string_ = "INSERT INTO [user] (login, password, userpic_path, rating, is_deleted) VALUES (:login, :password, :userpic_path, :rating, :is_deleted)", user_]() {
+		return QtConcurrent::run([this, query_string_ = "INSERT INTO [user] (login, password, userpic, rating, is_deleted) VALUES (:login, :password, :userpic, :rating, :is_deleted)", user_]() {
 			try
 			{
 				a_dbConnection.databaseConnectionOpen();
@@ -66,8 +66,9 @@ namespace DBService {
 
 					query.bindValue(":login", user_.getLogin());
 					query.bindValue(":password", QString(hash.result().toHex()));
-					query.bindValue(":userpic_path", user_.getUserpicPath());
-					query.bindValue(":rating", user_.getRating());
+					query.bindValue(":userpic", user_.getUserpic());
+					//query.bindValue(":rating", user_.getRating());
+					query.bindValue(":rating", 0);
 					query.bindValue(":is_deleted", false);
 
 					if (query.exec()) {
@@ -95,8 +96,8 @@ namespace DBService {
 			});
 	}
 
-	QFuture<bool> UserRepository::updateUser(const QString& login_, const QString& new_password_, const QString& new_userpic_path_) {
-		return QtConcurrent::run([this, login_, new_password_, new_userpic_path_]() {
+	QFuture<bool> UserRepository::updateUser(const QString& login_, const QString& new_password_, const QByteArray& new_userpic_) {
+		return QtConcurrent::run([this, login_, new_password_, new_userpic_]() {
 			try
 			{
 				a_dbConnection.databaseConnectionOpen();
@@ -109,11 +110,12 @@ namespace DBService {
 						hash.addData(new_password_.toUtf8());
 						query_string += "password = '" + QString(hash.result().toHex()) + "'";
 					}
-					if (!new_userpic_path_.isEmpty()) {
+					if (!new_userpic_.isEmpty()) {
 						if (!new_password_.isEmpty()) {
 							query_string += ", ";
 						}
-						query_string += "userpic_path = '" + new_userpic_path_ + "'";
+						query_string += "userpic=:userpic";// TODO: ne rabotaet ((((
+						query.bindValue(":userpic", QVariant(new_userpic_));
 					}
 
 					query_string += " WHERE login=:login";
