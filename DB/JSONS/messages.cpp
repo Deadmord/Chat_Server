@@ -3,6 +3,8 @@
 //
 
 #include "messages.h"
+#include <plog/Log.h>
+#include <QObject>
 
 QJsonObject DBEntity::DBMessage::toJson() const {
     QJsonObject obj;
@@ -14,29 +16,54 @@ QJsonObject DBEntity::DBMessage::toJson() const {
     obj["text"] = text;
     obj["media"] = media.isNull()?"":media;
     obj["deleted"] = deleted;
-    //TODO: likes
-//    obj["likes"] = likes;
+    QJsonObject json;
+    QMapIterator<QUuid, bool> i(likes);
+    while (i.hasNext()) {
+        i.next();
+        json.insert(i.key().toString(), i.value());
+    }
+    obj["likes"] = json;
+
     return obj;
 }
 
+void DBEntity::DBMessage::fromJson(const QJsonObject &obj_) {
 
-void DBEntity::DBMessage::setDeleted(bool flag_) {
+    id = QUuid::fromString(obj_.value("id").toString());
+    date_time = QDateTime::fromString(obj_.value("date_time").toString());
+    room_id = obj_.value("room_id").toInt();
+    login = obj_.value("login").toString();
+//    todo: parent id
+//    parent_id = obj.value("parent_id").toString();
+    text = obj_.value("text").toString();
+    media = obj_.value("media").toString();
+    likes.clear();
+    auto temp = obj_.value("likes").toObject().toVariantMap();
+    for (auto it =temp.constBegin(); it != temp.constEnd(); ++it)
+    {
+        
+        likes.insert(QUuid::fromString(it.key()) , it.value().toBool());
+    }
+}
+
+void DBEntity::DBMessage::setDeleted(const bool flag_) {
     DBMessage::deleted = flag_;
 }
 
-void DBEntity::DBMessage::setLikes(const QHash<QUuid, bool> &likes_) {
+void DBEntity::DBMessage::setLikes(const QMap<QUuid, bool> &likes_) {
     DBMessage::likes = likes_;
 }
 
-void DBEntity::DBMessage::writeMessage(const QString& file_name_,const QList<DBEntity::DBMessage>& messages_) {
+void DBEntity::DBMessage::writeMessages(const QString& file_name_,const QList<DBEntity::DBMessage>& messages_) {
 
     QJsonArray array;
     for (const auto& message: messages_) {
         array.append(message.toJson());
     }
     if (!FileRepository::writeJsonArr(file_name_, array)){
-        qCritical() << "Error writing to file";
+        PLOGE << "Error writing to file";
     }
+
 }
 
 void DBEntity::DBMessage::writeMessage(const QString& file_name_,const DBEntity::DBMessage& messages_) {
@@ -46,9 +73,35 @@ void DBEntity::DBMessage::writeMessage(const QString& file_name_,const DBEntity:
     array.append(messages_.toJson());
 
     if (!FileRepository::writeJsonArr(file_name_, array)){
-        qCritical() << "Error writing to file";
+       PLOGE << "Error writing to file";
     }
+    PLOGI << "Writing message successfully";
 }
+
+QList<DBEntity::DBMessage*> DBEntity::DBMessage::readMessages(const QString& file_name_)
+{
+    QJsonArray array;
+   FileRepository::readJsonArr(file_name_, array);
+   QList<DBMessage*> messages;
+
+   for(const auto & obj: array) {
+       if (obj.isObject())
+       {
+           QJsonObject jsonObject = obj.toObject();
+           auto* message = new DBMessage;
+           message->fromJson(jsonObject);
+           messages.append(message);
+       }
+       else
+       {
+           PLOGE << "File is corrupted";
+       }
+   }
+  
+   	return messages;
+
+}
+
 const QDateTime &DBEntity::DBMessage::getDateTime() const {
     return date_time;
 }
@@ -77,7 +130,7 @@ bool DBEntity::DBMessage::isDeleted() const {
     return deleted;
 }
 
-const QHash<QUuid, bool> &DBEntity::DBMessage::getLikes() const {
+const QMap<QUuid, bool> &DBEntity::DBMessage::getLikes() const {
     return likes;
 }
 
@@ -85,7 +138,7 @@ const QUuid &DBEntity::DBMessage::getId() const {
     return id;
 }
 
-DBEntity::DBMessage::DBMessage( qint32 room_id_, const QString &login_, const QString &text_, const QString &media_) {
+DBEntity::DBMessage::DBMessage(const qint32 room_id_, const QString &login_, const QString &text_, const QString &media_, const QObject* parent_) {
 
     id = QUuid::createUuid();
     date_time = QDateTime::currentDateTime();
@@ -94,4 +147,8 @@ DBEntity::DBMessage::DBMessage( qint32 room_id_, const QString &login_, const QS
     text = text_;
     media = media_;
 }
+    DBEntity::DBMessage::DBMessage(QObject * parent_):QObject(parent_)
+    {}
+
+
 

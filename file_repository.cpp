@@ -4,14 +4,16 @@
 
 #include "file_repository.h"
 
+#include <plog/Log.h>
+
 
 bool FileRepository::writeJsonArr(const QString &file_name_, const QJsonArray &data_) {
     QFile file(file_name_);
     if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        qCritical() << "File cannot be opened" << Qt::endl;
+        PLOGE<< "File cannot be opened" << Qt::endl;
         return false;
     }
-    QByteArray content = file.readAll();
+    const QByteArray content = file.readAll();
     file.resize(0);  // Clear the file content
 
     QJsonDocument doc = QJsonDocument::fromJson(content);
@@ -34,52 +36,49 @@ bool FileRepository::readJson(const QString &filePath, QJsonObject &jsonObject) 
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Failed to open file for reading:" << file.errorString();
+        PLOGE << "Failed to open file for reading:" << file.errorString();
         return false;
     }
 
-    QByteArray jsonData = file.readAll();
+    const QByteArray json_data = file.readAll();
     file.close();
 
-    QJsonParseError parseError;
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &parseError);
-    if (parseError.error != QJsonParseError::NoError)
+    QJsonParseError parse_error;
+    const QJsonDocument json_doc = QJsonDocument::fromJson(json_data, &parse_error);
+    if (parse_error.error != QJsonParseError::NoError)
     {
-        qDebug() << "Failed to parse JSON:" << parseError.errorString();
+        PLOGE << "Failed to parse JSON:" << parse_error.errorString();
         return false;
     }
 
-    jsonObject = jsonDoc.object();
+    jsonObject = json_doc.object();
     return true;
 }
 
 bool FileRepository::readJsonArr(const QString &filePath, QJsonArray &jsonObject) {
     QFile file(filePath);
     if (!file.exists()) {
-        qCritical() << "File not found" << Qt::endl;
-        qDebug() << "File not found" << Qt::endl;
+    	PLOGE<< "File not found" << Qt::endl;
         return false;
     }
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qDebug() << "Failed to open file for reading:" << file.errorString();
-        qCritical() << "Failed to open file for reading:" << file.errorString();
+        PLOGE << "Failed to open file for reading:" << file.errorString();
         return false;
     }
 
-    QByteArray jsonData = file.readAll();
+    const QByteArray json_data = file.readAll();
     file.close();
 
-    QJsonParseError parseError;
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &parseError);
-    if (parseError.error != QJsonParseError::NoError)
+    QJsonParseError parse_error;
+    const QJsonDocument json_doc = QJsonDocument::fromJson(json_data, &parse_error);
+    if (parse_error.error != QJsonParseError::NoError)
     {
-        qDebug() << "Failed to parse JSON:" << parseError.errorString();
-        qCritical() << "Failed to parse JSON:" << parseError.errorString();
+        PLOGE << "Failed to parse JSON:" << parse_error.errorString();
         return false;
     }
 
-    jsonObject = jsonDoc.array();
+    jsonObject = json_doc.array();
     return true;
 }
 
