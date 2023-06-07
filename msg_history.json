@@ -1,59 +1,73 @@
 {"messanges":[
     {
-        "deleted": false,
-        "id": "{41e9c0d3-1ac3-44de-bd77-f55bf4b1970c}",
-        "nickname": "User",
-        "text": "wewe",
+        "deleted": true,
+        "id": "",
+        "nickname": "",
+        "text": "",
         "time": ""
     },
     {
-        "deleted": false,
-        "id": "{c441df29-6071-4a05-b33c-cf84a13b9e5b}",
-        "nickname": "User",
-        "text": "wdewed",
+        "deleted": true,
+        "id": "",
+        "nickname": "",
+        "text": "",
         "time": ""
     },
     {
-        "deleted": false,
-        "id": "{01ac1c33-8972-4335-b6dc-a5ebceaf927c}",
-        "nickname": "User",
-        "text": "12345",
+        "deleted": true,
+        "id": "",
+        "nickname": "",
+        "text": "",
         "time": ""
     },
     {
-        "deleted": false,
-        "id": "{cd56f55f-e89f-4889-8458-39e9b009e3d6}",
-        "nickname": "User",
-        "text": "0000000",
+        "deleted": true,
+        "id": "",
+        "nickname": "",
+        "text": "",
         "time": ""
     },
     {
-        "deleted": false,
-        "id": "{bd6b62a0-fe74-4c09-9208-2fc00970055b}",
-        "nickname": "User",
-        "text": "dfd",
+        "deleted": true,
+        "id": "",
+        "nickname": "",
+        "text": "",
         "time": ""
     },
     {
-        "deleted": false,
-        "id": "{6f5eac2a-ff5b-42fb-9d18-a04f0cf89515}",
-        "nickname": "User123",
-        "text": "12345",
+        "deleted": true,
+        "id": "",
+        "nickname": "",
+        "text": "",
         "time": ""
     },
     {
-        "deleted": false,
-        "id": "{3852ae05-b29e-4d80-8114-c31ef8669346}",
-        "nickname": "User123",
-        "text": "wer",
+        "deleted": true,
+        "id": "",
+        "nickname": "",
+        "text": "",
         "time": ""
     },
     {
-        "deleted": false,
-        "id": "{53637318-7abd-4910-ab4f-2b608c7077d4}",
-        "nickname": "User123",
-        "text": "asdf",
-        "time": "2023-06-01T17:45:58.304"
+        "deleted": true,
+        "id": "",
+        "nickname": "",
+        "text": "",
+        "time": ""
+    },
+    {
+        "deleted": true,
+        "id": "",
+        "nickname": "",
+        "text": "",
+        "time": ""
+    },
+    {
+        "deleted": true,
+        "id": "",
+        "nickname": "",
+        "text": "",
+        "time": ""
     }
 ]
 }

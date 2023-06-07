@@ -1,33 +1,33 @@
 #include "RoomController.h"
 
-RoomController::RoomController(QObject* parent) : QObject(parent), _text("Default Text")
+RoomController::RoomController(QObject* parent) : QObject(parent), name("Default name")
 {
 	connect(this, qOverload<int>(&RoomController::signal_1), this, qOverload<int>(&RoomController::on_signal_1));
 	connect(this, qOverload<QString>(&RoomController::signal_1), this, qOverload<QString>(&RoomController::on_signal_1));
 }
 
-RoomController::RoomController(const RoomController& other)
-{
-	_text = other._text;
-}
-
 RoomController::~RoomController()
 = default;
+
+RoomController::RoomController(const RoomController& other)
+{
+	name = other.name;
+}
 
 RoomController& RoomController::operator=(const RoomController& other)
 {
 	if (this != &other)
 	{
-		_text = other._text;
+		name = other.name;
 	}
 	return *this;
 }
+
 
 void RoomController::initDir()
 {
 
 }
-
 
 //-----------slots------------
 void RoomController::on_signal_1(int val)

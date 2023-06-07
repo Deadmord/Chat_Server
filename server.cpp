@@ -77,13 +77,15 @@ void Server::slotReadyRead()
             }
             //очевидно что условие выше выводит из цикла for, но как мы попадаем сюда снова? получается in.status обновляет значение после выполнения строки ниже?
             Message msg;
-            in >> msg.id >> msg.time >> msg.nickname >> msg.deleted >> msg.text;
+            in >> msg.id >> msg.date_time >> msg.nickname >> msg.deleted >> msg.text;
             nextBlockSize = 0;
 
-            messages.push_back(msg);
+            //parce to User_Message----------------------------------
+
+            messages.push_back((Message)msg);    //implecetly
 
             qDebug() << "The message: " << msg.text;
-            SendToAllClients(msg);
+            SendToAllClients((Message)msg);
 
             //To archive messanges
             uploadMsgHistory(msg_history_path);
@@ -191,10 +193,13 @@ void Server::loadMsgHistory(const QString path)
             msgArray = QJsonValue(msgHistory.object().value("messanges")).toArray();
             for (const auto &msgJson : msgArray)
             {
-                Message msg {msgJson.toObject().value("nickname").toString(),
-                            msgJson.toObject().value("text").toString(),
+                Message msg { msgJson.toObject().value("id").toString(),
+                            msgJson.toObject().value("roomId").toInt(),
                             QDateTime::fromString(msgJson.toObject().value("time").toString()),
-                            msgJson.toObject().value("id").toString(),
+                            msgJson.toObject().value("nickname").toString(),
+                            msgJson.toObject().value("text").toString(),
+                            msgJson.toObject().value("mediaId").toString(),
+                            msgJson.toObject().value("parentId").toString(),
                             msgJson.toObject().value("deleted").toBool() };
                 messages.push_back(msg);
             }
@@ -221,14 +226,17 @@ void Server::uploadMsgHistory(const QString path)
     {
         msgArray = msgHistory.object().value("messanges").toArray();
 
-        for (const Message &msg : messages)
+        for (const User_Message &msg : messages)
         {
             QVariantMap map;
-            map.insert("nickname",msg.nickname);
-            map.insert("text",msg.text);
-            map.insert("time",msg.time);
-            map.insert("id",msg.id);
-            map.insert("deleted",msg.deleted);
+            map.insert("id", msg.getId());
+            map.insert("roomId", msg.getRoomId());
+            map.insert("time", msg.getDateTime());
+            map.insert("nickname",msg.getNickname());
+            map.insert("text",msg.getText());
+            map.insert("mediaId", msg.getMedia());
+            map.insert("parentId", msg.getParentId());
+            map.insert("deleted",msg.isDeleted());
 
             QJsonObject msgJson = QJsonObject::fromVariantMap(map);
             msgArray.append(msgJson);           //Тут нужно проверять есть ли такой элемент уже в массиве и вставлять если нет
@@ -244,26 +252,26 @@ void Server::uploadMsgHistory(const QString path)
 
 //----------------SendToClient-----------------
 
-void Server::SendToClient(const Message &msg, QTcpSocket *socket)
+void Server::SendToClient(const User_Message &msg, QTcpSocket *socket)
 {
     Data.clear();
     QDataStream out(&Data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_6_5);
 
-    out << quint16(0) << msg.id << msg.time << msg.nickname << msg.deleted << msg.text; // преобразовали в stream
+    out << quint16(0) << msg.getId() << msg.getDateTime() << msg.getNickname() << msg.isDeleted() << msg.getText(); // преобразовали в stream
     out.device()->seek(0);          //переходим в начало "данных"
     out << quint16(Data.size() - sizeof(quint16));
     socket->write(Data);
 }
 
-void Server::SendToClient(const QVector<Message> &msgs, QTcpSocket *socket)
+void Server::SendToClient(const QVector<User_Message> &msgs, QTcpSocket *socket)
 {
-    for (const Message &msg : msgs)
+    for (const User_Message& msg : msgs)
     {
     Data.clear();
     QDataStream out(&Data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_6_5);
-    out << quint16(0) << msg.id << msg.time << msg.nickname << msg.deleted << msg.text; // преобразовали в stream
+    out << quint16(0) << msg.getId() << msg.getDateTime() << msg.getNickname() << msg.isDeleted() << msg.getText(); // преобразовали в stream
     out.device()->seek(0);          //переходим в начало "данных"
     out << quint16(Data.size() - sizeof(quint16));
     socket->write(Data);
@@ -286,13 +294,13 @@ void Server::SendToClient(const QVector<Message> &msgs, QTcpSocket *socket)
 //    }
 //}
 
-void Server::SendToAllClients(const Message &msg)
+void Server::SendToAllClients(const User_Message &msg)
 {
     Data.clear();
     QDataStream out(&Data, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_6_5);
 
-    out << quint16(0) << msg.id << msg.time << msg.nickname << msg.deleted << msg.text; // преобразовали в stream
+    out << quint16(0) << msg.getId() << msg.getDateTime() << msg.getNickname() << msg.isDeleted() << msg.getText(); // преобразовали в stream
     out.device()->seek(0);          //переходим в начало "данных"
     out << quint16(Data.size() - sizeof(quint16));
     //socket->write(Data);
@@ -302,7 +310,9 @@ void Server::SendToAllClients(const Message &msg)
     }
 }
 
-Message Server::createMessage(QString nickame, QString text)
+User_Message Server::createMessage(QString nickname, QString text)
 {
-    return Message{ nickame, text, QDateTime::currentDateTime(), QUuid::createUuid().toString(), false };
+    User_Message newMsg(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), nickname, text);
+    return newMsg;
 }
+

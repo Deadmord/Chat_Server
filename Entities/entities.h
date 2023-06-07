@@ -3,14 +3,20 @@
 #include <QVector>
 #include <QTime>
 #include <QSet>
+#include "SrvModels/Message.h"
 
 struct Message
 {
-    QString nickname;
-    QString text;
-    QDateTime   time;
-    QString id;
-    bool    deleted;
+    QString     id;
+    quint32     room_id;
+    QDateTime   date_time;
+    QString     nickname;
+    QString     text;
+    QString     media_id;
+    QString     parent_id;
+    bool        deleted;
+    QHash<QUuid, bool> likes;
+
     //
     //    void generateId() {
     //        id = QUuid::createUuid().toString();
@@ -27,7 +33,7 @@ struct client
 struct room
 {
     QString name;
-    QVector<Message> messages;
+    //QVector<User_Message> messages;
     QSet<client> clients;
     // Другие необходимые поля
 };
