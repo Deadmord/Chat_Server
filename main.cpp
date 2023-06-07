@@ -8,14 +8,17 @@
 #include <plog/Initializers/RollingFileInitializer.h>
 #include "RoomRepository.h"
 #include "UserRepository.h"
+#include "MessageSaver_service/MessageSaver_Service.h"
 
 int main(int argc, char* argv[])
 {
     plog::init(plog::debug, "log.txt", 1000000, 5);
-    //QCoreApplication a(argc, argv);
-    //Server server;
-    //server.startServer();
-    //return a.exec();
+    initialize(plog::debug, plog::get());
+    QCoreApplication a(argc, argv);
+    MessageSaver_Service::start();
+    Server server;
+    server.startServer();
+    return a.exec();
 }
 
 //Logger severity
