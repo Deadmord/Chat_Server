@@ -74,9 +74,6 @@
     <ClCompile Include="DB\JSONS\messages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RoomRepository.cpp">
-      <Filter>Source Files\Classes\DBRepositories</Filter>
-    </ClCompile>
     <ClCompile Include="DBService.cpp">
       <Filter>Source Files\Classes\DBService</Filter>
     </ClCompile>
@@ -92,11 +89,11 @@
     <ClCompile Include="Core\async_console_win.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="file_repository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="entities.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DBUser.h">
       <Filter>Header Files\Classes\DBModels</Filter>
     </ClInclude>
@@ -111,6 +108,9 @@
     </ClInclude>
     <ClInclude Include="Entities\entities.h">
       <Filter>Entities Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file_repository.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
