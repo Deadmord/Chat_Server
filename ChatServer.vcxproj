@@ -92,8 +92,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="RoomRepository.cpp" />
-    <ClCompile Include="UserRepository.cpp" />
+    <QtMoc Include="Controllers\RoomController\RoomController.h" />
+    <QtMoc Include="Core\async_console_win.h" />
     <ClInclude Include="DBService.h" />
     <ClInclude Include="DBUser.h">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
@@ -113,6 +113,8 @@
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClInclude>
+    <ClCompile Include="Controllers\RoomController\RoomController.cpp" />
+    <ClCompile Include="Core\async_console_win.cpp" />
     <ClCompile Include="DBRoom.cpp" />
     <ClCompile Include="DBService.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
@@ -123,20 +125,18 @@
     <ClCompile Include="DBTopic.cpp" />
     <ClCompile Include="DBUser.cpp" />
     <ClCompile Include="DB\JSONS\messages.cpp" />
-    <ClCompile Include="file_repository.cpp" />
+    <ClCompile Include="Entities\SrvModels\Message.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server.cpp" />
-    <ClInclude Include="file_repository.h" />
-    <ClInclude Include="resource.h" />
-    <QtMoc Include="UserRepository.h" />
-    <QtMoc Include="RoomRepository.h" />
+    <ClInclude Include="Entities\entities.h" />
+    <QtMoc Include="Entities\SrvModels\Message.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="DB\JSONS\messages.h" />
-    <ClInclude Include="entities.h" />
     <QtMoc Include="server.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="cpp.hint" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -42,11 +42,17 @@
     <Filter Include="Source Files\Classes\DBModels">
       <UniqueIdentifier>{65349e25-2c3b-4575-8e86-8f972c918d3c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Classes\DBRepositories">
-      <UniqueIdentifier>{b1b6863f-dc43-4a7f-9ff6-8cfa01e5e750}</UniqueIdentifier>
+    <Filter Include="Entities Files\Srv Models">
+      <UniqueIdentifier>{4ff468a1-183e-440e-9dc3-6b125a9d4581}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Classes\DBRepositories">
-      <UniqueIdentifier>{641053ee-c6c4-42e2-b7eb-0679dd7827ef}</UniqueIdentifier>
+    <Filter Include="Controllers">
+      <UniqueIdentifier>{8af448a0-2054-4be3-a2a6-357c6506ee2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controllers\Room Controller">
+      <UniqueIdentifier>{6c692342-3abb-4fad-bb21-e6f8cbb60292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{ba0d413b-4939-47d8-86cb-a47b8e6072dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -77,11 +83,14 @@
     <ClCompile Include="DB\JSONS\messages.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="file_repository.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Entities\SrvModels\Message.cpp">
+      <Filter>Entities Files\Srv Models</Filter>
     </ClCompile>
-    <ClCompile Include="UserRepository.cpp">
-      <Filter>Source Files\Classes\DBRepositories</Filter>
+    <ClCompile Include="Controllers\RoomController\RoomController.cpp">
+      <Filter>Controllers\Room Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\async_console_win.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,11 +109,8 @@
     <ClInclude Include="DBService.h">
       <Filter>Header Files\Classes\DBService</Filter>
     </ClInclude>
-    <ClInclude Include="file_repository.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Entities\entities.h">
+      <Filter>Entities Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -114,11 +120,14 @@
     <QtMoc Include="DB\JSONS\messages.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="RoomRepository.h">
-      <Filter>Header Files\Classes\DBRepositories</Filter>
+    <QtMoc Include="Controllers\RoomController\RoomController.h">
+      <Filter>Controllers\Room Controller</Filter>
     </QtMoc>
-    <QtMoc Include="UserRepository.h">
-      <Filter>Header Files\Classes\DBRepositories</Filter>
+    <QtMoc Include="Entities\SrvModels\Message.h">
+      <Filter>Entities Files\Srv Models</Filter>
+    </QtMoc>
+    <QtMoc Include="Core\async_console_win.h">
+      <Filter>Core</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ChatServer.rc">
