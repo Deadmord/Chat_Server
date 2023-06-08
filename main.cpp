@@ -53,7 +53,10 @@ static void startup_routine()
 #else
 
 #endif
-    //MessageSaver_Service::start();
+    QTimer::singleShot(0, [&]()
+        {
+            MessageSaver_Service::start();
+        });
     QTimer::singleShot(0, [&]()
         {
             server.startServer();
@@ -66,8 +69,6 @@ Q_COREAPP_STARTUP_FUNCTION(startup_routine)
 int main(int argc, char* argv[])
 {
     QCoreApplication a(argc, argv);
-    Server server;
-    server.startServer();
     return a.exec();
 }
 
