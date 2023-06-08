@@ -71,6 +71,12 @@
     <ClCompile Include="DBUser.cpp">
       <Filter>Source Files\Classes\DBModels</Filter>
     </ClCompile>
+    <ClCompile Include="DB\JSONS\messages.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomRepository.cpp">
+      <Filter>Source Files\Classes\DBRepositories</Filter>
+    </ClCompile>
     <ClCompile Include="DBService.cpp">
       <Filter>Source Files\Classes\DBService</Filter>
     </ClCompile>
@@ -132,5 +138,10 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="cpp.hint" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ChatServer.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

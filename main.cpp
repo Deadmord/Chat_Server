@@ -8,6 +8,9 @@
 
 #include <plog/Log.h> 
 #include <plog/Initializers/RollingFileInitializer.h>
+#include "RoomRepository.h"
+#include "UserRepository.h"
+#include "MessageSaver_service/MessageSaver_Service.h"
 
 #if defined (Q_OS_WIN)
 #include "Core/async_console_win.h"
@@ -42,6 +45,7 @@ static void startup_routine()
     qRegisterMetaType<RoomController>();
 
     plog::init(plog::debug, "log.txt", 1000000, 5);
+    initialize(plog::debug, plog::get());
     PLOGD << "Server Application Starting. Logging is enabled.";
 
 #if defined (Q_OS_WIN)
@@ -49,7 +53,7 @@ static void startup_routine()
 #else
 
 #endif
-
+    //MessageSaver_Service::start();
     QTimer::singleShot(0, [&]()
         {
             server.startServer();
@@ -62,6 +66,8 @@ Q_COREAPP_STARTUP_FUNCTION(startup_routine)
 int main(int argc, char* argv[])
 {
     QCoreApplication a(argc, argv);
+    Server server;
+    server.startServer();
     return a.exec();
 }
 
