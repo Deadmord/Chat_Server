@@ -52,6 +52,9 @@ public:
     void setLikes(const QHash<QUuid, bool>& likes);
 
 private:
+    [[nodiscard]] QString generateId();
+
+private:
     QString _id;
     //QUuid _id;
     quint32 _room_id {0};
@@ -63,12 +66,6 @@ private:
     //QUuid _parent_id;
     bool _deleted {false};
     QHash<QUuid, bool> _likes;
-
-
-    //
-    //    void generateId() {
-    //        id = QUuid::createUuid().toString();
-    //    }
 
 };
 Q_DECLARE_METATYPE(User_Message)

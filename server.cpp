@@ -31,7 +31,7 @@ void Server::incomingConnection(qintptr socketDescriptor)
     //Send msg history to the client
     SendToClient(messages, socket);
 
-    SendToAllClients(createMessage("Server msg", "New connection! Hello!"));
+    SendToAllClients(createMessage("Server", "New connection! Hello!"));
 }
 
 void Server::slotDisconnect()
@@ -310,9 +310,14 @@ void Server::SendToAllClients(const User_Message &msg)
     }
 }
 
-User_Message Server::createMessage(QString nickname, QString text)
+User_Message Server::createMessage(QString _nickname, QString _text)
 {
-    User_Message newMsg(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), nickname, text);
-    return newMsg;
+    Message msg;
+    msg.nickname = _nickname;
+    msg.text = _text;
+    msg.room_id = 0;
+    msg.deleted = false;
+    return User_Message(msg);
+    //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
 }
 

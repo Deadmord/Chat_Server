@@ -1,10 +1,16 @@
 #include "Message.h"
 
-User_Message::User_Message(QObject* parent_): _deleted(false) {}
+User_Message::User_Message(QObject* parent_): _deleted(false) 
+{
+	_id = generateId();
+}
 
 User_Message::User_Message(const Message& msg_sruct_, QObject* parent_)
 	: _id(msg_sruct_.id), _room_id(msg_sruct_.room_id), _date_time(msg_sruct_.date_time), _nickname(msg_sruct_.nickname), _text(msg_sruct_.text), _media_id(msg_sruct_.media_id), _parent_id(msg_sruct_.parent_id), _deleted(msg_sruct_.deleted), _likes(msg_sruct_.likes)
-{}
+{
+	if (msg_sruct_.id.isEmpty()) { _id = generateId(); };
+	if (msg_sruct_.date_time.isNull()) { _date_time = QDateTime::currentDateTime(); }
+}
 
 
 User_Message::User_Message(const QString& id_, const quint32& room_id_, const QDateTime& date_time_, const QString& nickname_, const QString& text_, const QString& media_id_, const QString& parent_id_, const bool& deleted_, const QHash<QUuid, bool>& likes_, QObject* parent_)
@@ -85,6 +91,11 @@ void User_Message::setDeleted(bool flag) {
 
 void User_Message::setLikes(const QHash<QUuid, bool>& likes) {
 	_likes = likes;
+}
+
+QString User_Message::generateId()
+{
+	return QUuid::createUuid().toString();
 }
 
 
