@@ -51,6 +51,9 @@
     <Filter Include="Controllers\Room Controller">
       <UniqueIdentifier>{6c692342-3abb-4fad-bb21-e6f8cbb60292}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{ba0d413b-4939-47d8-86cb-a47b8e6072dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -79,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="Controllers\RoomController\RoomController.cpp">
       <Filter>Controllers\Room Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\async_console_win.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +119,9 @@
     </QtMoc>
     <QtMoc Include="Entities\SrvModels\Message.h">
       <Filter>Entities Files\Srv Models</Filter>
+    </QtMoc>
+    <QtMoc Include="Core\async_console_win.h">
+      <Filter>Core</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

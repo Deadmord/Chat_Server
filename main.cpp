@@ -9,7 +9,13 @@
 #include <plog/Log.h> 
 #include <plog/Initializers/RollingFileInitializer.h>
 
-Server server;
+#if defined (Q_OS_WIN)
+#include "Core/async_console_win.h"
+#else
+
+#endif
+
+Server server;  //create server instace
 
 static void shutdown_routine()
 {
@@ -37,6 +43,12 @@ static void startup_routine()
 
     plog::init(plog::debug, "log.txt", 1000000, 5);
     PLOGD << "Server Application Starting. Logging is enabled.";
+
+#if defined (Q_OS_WIN)
+    (void)new asyncConsoleWin(qApp);
+#else
+
+#endif
 
     QTimer::singleShot(0, [&]()
         {

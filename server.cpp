@@ -14,6 +14,7 @@ void Server::startServer()
 
 void Server::incomingConnection(qintptr socketDescriptor)
 {
+    //socket = nextPendingConnection();     //return nullptr
     socket = new QTcpSocket(this);
     socket->setSocketDescriptor(socketDescriptor);
     connect(socket, &QTcpSocket::readyRead, this, &Server::slotReadyRead);      //сигнально слотовые соединения, как работают?
