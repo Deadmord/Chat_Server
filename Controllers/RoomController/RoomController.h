@@ -61,7 +61,6 @@ private:
 
 	QVector<User_Message> messages;
 	QVector<QMap<User, QTcpSocket*>*> connected_users;
-
 };
 
 Q_DECLARE_METATYPE(RoomController)

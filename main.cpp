@@ -45,6 +45,7 @@ static void startup_routine()
     qRegisterMetaType<RoomController>();
 
     plog::init(plog::debug, "log.txt", 1000000, 5);
+    initialize(plog::debug, plog::get());
     PLOGD << "Server Application Starting. Logging is enabled.";
 
 #if defined (Q_OS_WIN)
@@ -52,7 +53,10 @@ static void startup_routine()
 #else
 
 #endif
-
+    QTimer::singleShot(0, [&]()
+        {
+            MessageSaver_Service::start();
+        });
     QTimer::singleShot(0, [&]()
         {
             server.startServer();
