@@ -6,12 +6,20 @@ RoomController::RoomController(QObject* parent) : QObject(parent), name("Default
 	connect(this, qOverload<QString>(&RoomController::signal_1), this, qOverload<QString>(&RoomController::on_signal_1));
 }
 
-RoomController::~RoomController()
-= default;
+RoomController::~RoomController() = default;
 
 RoomController::RoomController(const RoomController& other)
 {
+	id = other.id;
 	name = other.name;
+	description = other.description;
+	topic_id = other.topic_id;
+	is_private = other.is_private;
+	password = other.password;
+	is_deleted = other.is_deleted;
+	messages = other.messages;
+
+	QVector<QMap<User, QTcpSocket*>*> connected_users;
 }
 
 RoomController& RoomController::operator=(const RoomController& other)

@@ -22,18 +22,20 @@ struct Message
     //    }
 };
 
-struct client
+struct User
 {
-    QString userName = nullptr;
+    QString id;
+    QString user_name;
+    QString password;
+    QString userpic_id;
+    quint32 rating_likes;
+    quint32 rating_dislikes;
     QDateTime lastMessageTime;
-    qint32 reiting;
 };
 
-struct room
+struct Topic
 {
+    quint32 id;
     QString name;
-    //QVector<User_Message> messages;
-    QSet<client> clients;
-    // Другие необходимые поля
 };
 

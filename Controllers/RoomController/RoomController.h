@@ -5,9 +5,12 @@
 #include <QVector>
 #include <QMap>
 #include <QDebug>
+#include <QTcpServer>
+#include <QTcpSocket>
 
 #include "../../DBRoom.h"
 #include "../../Entities/SrvModels/Message.h"
+
 
 class RoomController : public QObject
 {
@@ -25,11 +28,6 @@ protected:
 	RoomController(const RoomController& other);
 	RoomController& operator = (const RoomController& other);
 
-Q_SIGNALS:
-	void signal_1(int val);
-	void signal_1(QString str);
-	void name_changed(const QString& newText);
-
 public:
 	void initDir();
 
@@ -39,6 +37,11 @@ public:
 		name = val; emit name_changed(val);
 	}
 	void reset_name() { name.clear(); }
+
+Q_SIGNALS:
+	void signal_1(int val);
+	void signal_1(QString str);
+	void name_changed(const QString& newText);
 
 public Q_SLOTS:
 
@@ -57,7 +60,7 @@ private:
 	bool	is_deleted;
 
 	QVector<User_Message> messages;
-	//QMap<User, Connection>
+	QVector<QMap<User, QTcpSocket*>*> connected_users;
 
 };
 
