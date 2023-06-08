@@ -1,5 +1,4 @@
-#ifndef SERVER_H
-#define SERVER_H
+#pragma once
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QVector>
@@ -60,4 +59,3 @@ private:
     quint16 nextBlockSize = 0;
 };
 
-#endif // SERVER_H

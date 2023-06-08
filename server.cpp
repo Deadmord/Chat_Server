@@ -82,10 +82,10 @@ void Server::slotReadyRead()
 
             //parce to User_Message----------------------------------
 
-            messages.push_back((Message)msg);    //implecetly
+            messages.push_back(msg);    //implecetly
 
             qDebug() << "The message: " << msg.text;
-            SendToAllClients((Message)msg);
+            SendToAllClients(msg);      //implecetly
 
             //To archive messanges
             uploadMsgHistory(msg_history_path);

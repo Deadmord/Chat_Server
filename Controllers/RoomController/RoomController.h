@@ -38,7 +38,7 @@ public:
 	{
 		name = val; emit name_changed(val);
 	}
-	void reset_text() { name.clear(); }
+	void reset_name() { name.clear(); }
 
 public Q_SLOTS:
 

@@ -1,9 +1,8 @@
-#ifndef ENTITIES_H
-#define ENTITIES_H
+#pragma once
 #include <QVector>
 #include <QTime>
 #include <QSet>
-#include "SrvModels/Message.h"
+//#include "SrvModels/Message.h"
 
 struct Message
 {
@@ -38,4 +37,3 @@ struct room
     // Другие необходимые поля
 };
 
-#endif // ENTITIES_H
