@@ -55,6 +55,7 @@ private:
 
     QTcpSocket* socket;
     QVector <QTcpSocket*> sockets;
+    QVector<UserConnection*> connected_users;
     QVector <User_Message> messages;
 
     QByteArray Data;

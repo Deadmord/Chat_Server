@@ -194,10 +194,9 @@ void Server::openConnection()
 
 void Server::disableUsers()
 {
-    //---------------------------------TO-DO---------------------------------
-    //for (UserConnection* user : socket_users) {
-    //    user->disconnectFromClient();
-    //}
+    for (UserConnection* user : connected_users) {
+        user->disconnectFromClient();
+    }
 }
 
 void Server::loadRooms()

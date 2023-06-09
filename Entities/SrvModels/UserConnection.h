@@ -5,6 +5,7 @@
 #include <QJsonDocument>
 #include <QJsonParseError>
 #include <QJsonObject>
+#include <QTimer>
 
 class UserConnection : public QObject
 {
@@ -27,9 +28,6 @@ public:
     void setRatingLikes(const quint32& _rating_likes);
     quint32 getRatingDislikes() const;
     void setRatingDislikes(const quint32& _rating_dislikes);
-    bool isFloodLimit() const;
-
-    void sendJson(const QJsonObject& _json_data);
 
 signals:
     void jsonReceived(const QJsonObject& _json_doc);
@@ -39,9 +37,11 @@ signals:
 
 public slots:
     void disconnectFromClient();
+    void sendJson(const QJsonObject& _json_data);
 
 private slots:
     void receiveJson();
+    bool isFloodLimit() const;
 
 private:
     QTcpSocket* user_socket;

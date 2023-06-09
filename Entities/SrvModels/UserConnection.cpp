@@ -13,19 +13,6 @@ bool UserConnection::setSocketDescriptor(qintptr socketDescriptor)
     return user_socket->setSocketDescriptor(socketDescriptor);
 }
 
-void UserConnection::sendJson(const QJsonObject& json)
-{
-    // we crate a temporary QJsonDocument forom the object and then convert it
-    // to its UTF-8 encoded version. We use QJsonDocument::Compact to save bandwidth
-    const QByteArray jsonData = QJsonDocument(json).toJson(QJsonDocument::Compact);
-    // we notify the central server we are about to send the message
-    emit logMessage(QLatin1String("Sending to ") + getUserName() + QLatin1String(" - ") + QString::fromUtf8(jsonData));
-    // we send the message to the socket in the exact same way we did in the client
-    QDataStream socketStream(user_socket);
-    socketStream.setVersion(QDataStream::Qt_6_5);
-    socketStream << jsonData;
-}
-
 void UserConnection::disconnectFromClient()
 {
     user_socket->disconnectFromHost();
@@ -42,8 +29,34 @@ void UserConnection::setUserName(const QString& userName)
     user_name = userName;
 }
 
+void UserConnection::sendJson(const QJsonObject& json)
+{
+    // we crate a temporary QJsonDocument forom the object and then convert it
+    // to its UTF-8 encoded version. We use QJsonDocument::Compact to save bandwidth
+    const QByteArray jsonData = QJsonDocument(json).toJson(QJsonDocument::Compact);
+    // we notify the central server we are about to send the message
+    emit logMessage(QLatin1String("Sending to ") + getUserName() + QLatin1String(" - ") + QString::fromUtf8(jsonData));
+    // we send the message to the socket in the exact same way we did in the client
+    QDataStream socketStream(user_socket);
+    socketStream.setVersion(QDataStream::Qt_6_5);
+    socketStream << jsonData;
+}
+
+bool UserConnection::isFloodLimit() const { return flood_limit; }
+
 void UserConnection::receiveJson()
 {
+    //implementation of flood protection mechanism
+    if(isFloodLimit())
+    {
+        emit logMessage(QLatin1String("flood protection, wait...")); //notify the server of invalid data
+    }
+    else
+    {
+        QTimer::singleShot(1000, [&]() { flood_limit = false; });
+        flood_limit = true;
+    }
+    
     // prepare a container to hold the UTF-8 encoded JSON we receive from the socket
     QByteArray jsonData;
     // create a QDataStream operating on the socket
