@@ -12,19 +12,37 @@ class UserConnection : public QObject
     Q_DISABLE_COPY(UserConnection)
 public:
     explicit UserConnection(QObject* parent = nullptr);
-    virtual bool setSocketDescriptor(qintptr socketDescriptor);
+
+    virtual bool setSocketDescriptor(qintptr _socket_descriptor);
+
+    QString getId() const;
+    void setId(const QString& _id);
     QString getUserName() const;
-    void setUserName(const QString& user_name);
-    void sendJson(const QJsonObject& jsonData);
+    void setUserName(const QString& _user_name);
+    QString getPassword() const;
+    void setPassword(const QString& _password);
+    QString getUserPicId() const;
+    void setUserPicId(const QString& _userpic_id);
+    quint32 getRatingLikes() const;
+    void setRatingLikes(const quint32& _rating_likes);
+    quint32 getRatingDislikes() const;
+    void setRatingDislikes(const quint32& _rating_dislikes);
+    bool isFloodLimit() const;
+
+    void sendJson(const QJsonObject& _json_data);
+
 signals:
-    void jsonReceived(const QJsonObject& jsonDoc);
+    void jsonReceived(const QJsonObject& _json_doc);
     void disconnectedFromClient();
     void error();
     void logMessage(const QString& msg);
+
 public slots:
     void disconnectFromClient();
+
 private slots:
     void receiveJson();
+
 private:
     QTcpSocket* user_socket;
     QString id;
@@ -33,6 +51,6 @@ private:
     QString userpic_id;
     quint32 rating_likes;
     quint32 rating_dislikes;
-    QDateTime lastMessageTime;
+    bool flood_limit;
 };
 

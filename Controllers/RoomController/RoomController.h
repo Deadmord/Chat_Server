@@ -10,6 +10,7 @@
 
 #include "../../DBRoom.h"
 #include "../../Entities/SrvModels/Message.h"
+#include "../../Entities/SrvModels/UserConnection.h"
 
 
 class RoomController : public QObject
@@ -60,7 +61,7 @@ private:
 	bool	is_deleted;
 
 	QVector<User_Message> messages;
-	QVector<QMap<User, QTcpSocket*>*> connected_users;
+	QVector<UserConnection*> connected_users;
 };
 
 Q_DECLARE_METATYPE(RoomController)

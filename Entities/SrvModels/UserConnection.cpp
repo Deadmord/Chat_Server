@@ -1,6 +1,5 @@
 #include "UserConnection.h"
-UserConnection::UserConnection(QObject* parent) : QObject(parent)
-    , user_socket(new QTcpSocket(this))
+UserConnection::UserConnection(QObject* parent) : QObject(parent) , user_socket(new QTcpSocket(this))
 {
     // connect readyRead() to the slot that will take care of reading the data in
     connect(user_socket, &QTcpSocket::readyRead, this, &UserConnection::receiveJson);
@@ -8,7 +7,6 @@ UserConnection::UserConnection(QObject* parent) : QObject(parent)
     connect(user_socket, &QTcpSocket::disconnected, this, &UserConnection::disconnectedFromClient);
     connect(user_socket, &QAbstractSocket::errorOccurred, this, &UserConnection::error);
 }
-
 
 bool UserConnection::setSocketDescriptor(qintptr socketDescriptor)
 {
@@ -24,13 +22,14 @@ void UserConnection::sendJson(const QJsonObject& json)
     emit logMessage(QLatin1String("Sending to ") + getUserName() + QLatin1String(" - ") + QString::fromUtf8(jsonData));
     // we send the message to the socket in the exact same way we did in the client
     QDataStream socketStream(user_socket);
-    socketStream.setVersion(QDataStream::Qt_5_7);
+    socketStream.setVersion(QDataStream::Qt_6_5);
     socketStream << jsonData;
 }
 
 void UserConnection::disconnectFromClient()
 {
     user_socket->disconnectFromHost();
+    //-----------------сделать рефакторинг тут и в сервере-------------------------------
 }
 
 QString UserConnection::getUserName() const
@@ -50,7 +49,7 @@ void UserConnection::receiveJson()
     // create a QDataStream operating on the socket
     QDataStream socketStream(user_socket);
     // set the version so that programs compiled with different versions of Qt can agree on how to serialise
-    socketStream.setVersion(QDataStream::Qt_5_7);
+    socketStream.setVersion(QDataStream::Qt_6_5);
     // start an infinite loop
     for (;;) {
         // we start a transaction so we can revert to the previous state in case we try to read more data than is available on the socket
