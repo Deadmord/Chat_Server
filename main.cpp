@@ -19,6 +19,7 @@
 #endif
 
 Server server;  //create server instace
+asyncConsoleWin* asyncConsole;
 
 static void shutdown_routine()
 {
@@ -37,7 +38,7 @@ static void startup_routine()
     // add a routine to be executed just before application exits through signal
     QObject::connect(qApp, &QCoreApplication::aboutToQuit, []()
         {
-            qDebug() << "AboutToQuit : InetChat finishing...";;
+            qDebug() << "AboutToQuit : InetChat finishing...";
         }
     );
 
@@ -49,7 +50,10 @@ static void startup_routine()
     PLOGD << "Server Application Starting. Logging is enabled.";
 
 #if defined (Q_OS_WIN)
-    (void)new asyncConsoleWin(qApp);
+    //(void)new asyncConsoleWin(qApp);
+    asyncConsole = new asyncConsoleWin(qApp);
+    QObject::connect(asyncConsole, &asyncConsoleWin::startServer, &server, &Server::startServer);
+    QObject::connect(asyncConsole, &asyncConsoleWin::stopServer, &server, &Server::stopServer);
 #else
 
 #endif
@@ -60,8 +64,6 @@ static void startup_routine()
     QTimer::singleShot(0, [&]()
         {
             server.startServer();
-
-        QTimer::singleShot(100, []() { qDebug() << "Server initialized"; });
         });
 }
 Q_COREAPP_STARTUP_FUNCTION(startup_routine)

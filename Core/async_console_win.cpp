@@ -61,8 +61,21 @@ void asyncConsoleWin::processInputCommand(const QString& input)
     if (input == "/quit")
     {                                                   // Exit the application if the user types "quit"  
         qDebug() << "Command \"quit\" detected. Exiting...";
-        //QTimer::singleShot(gl_exit_timeout, qApp, &QCoreApplication::quit);
-        QCoreApplication::quit;
+        PLOGD << "Command \"quit\" detected. Exiting...";
+        QTimer::singleShot(0, qApp, &QCoreApplication::quit);
+        //qApp->quit;
+    }
+    else if (input == "/start")
+    {                                                   // Start Server 
+        qDebug() << "Start server";
+        PLOGD << "Start server";
+        emit startServer();
+    }
+    else if (input == "/stop")
+    {                                                   // Start Server 
+        qDebug() << "Stop server";
+        PLOGD << "Stop server";
+        emit stopServer();
     }
     else if (input == "/config")
     {                                                   // opens a Notepad with settings file 

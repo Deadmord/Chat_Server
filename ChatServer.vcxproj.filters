@@ -92,6 +92,9 @@
     <ClCompile Include="file_repository.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Entities\SrvModels\UserConnection.cpp">
+      <Filter>Entities Files\Srv Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBUser.h">
@@ -129,11 +132,9 @@
     <QtMoc Include="Core\async_console_win.h">
       <Filter>Core</Filter>
     </QtMoc>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="entities.h">
-      <Filter>Entities Files</Filter>
-    </ClInclude>
+    <QtMoc Include="Entities\SrvModels\UserConnection.h">
+      <Filter>Entities Files\Srv Models</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

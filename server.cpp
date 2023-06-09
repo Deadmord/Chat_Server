@@ -10,6 +10,21 @@ void Server::startServer()
     loadRooms();
     //определить функцию загрузки данных из истории
     loadMsgHistory(msg_history_path);
+    QTimer::singleShot(100, []() { qDebug() << "Server initialized"; });
+}
+
+void Server::stopServer()
+{
+    if (this->isListening()) {
+        this->disableUsers();
+        close();
+        qDebug() << "Server stop - OK";
+        PLOGD << "Server stop - OK";
+    }
+    else
+    {
+        qDebug() << "Server alrady spopped";
+    }
 }
 
 void Server::incomingConnection(qintptr socketDescriptor)
@@ -159,14 +174,30 @@ void Server::loadConfig(QString _path)
 
 void Server::openConnection()
 {
-    if (this->listen(QHostAddress::Any, server_port))      //QHostAddress::Any, 5555
-    {
-        qDebug() << "Server start - OK";
+    if (!this->isListening()) {
+        if (this->listen(QHostAddress::Any, server_port))      //QHostAddress::Any, 5555
+        {
+            qDebug() << "Server start - OK";
+            PLOGD << "Server start - OK";
+        }
+        else
+        {
+            qDebug() << "Sever start - Error";
+            PLOGD << "Server start - Error";
+        }
     }
     else
     {
-        qDebug() << "Sever start - Error";
+        qDebug() << "Server alrady listen";
     }
+}
+
+void Server::disableUsers()
+{
+    //---------------------------------TO-DO---------------------------------
+    //for (UserConnection* user : socket_users) {
+    //    user->disconnectFromClient();
+    //}
 }
 
 void Server::loadRooms()

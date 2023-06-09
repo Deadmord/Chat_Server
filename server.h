@@ -9,6 +9,8 @@
 #include <QFile>
 #include <QTime>
 #include <QUuid>
+#include <QTimer>
+#include <plog/Log.h>
 #include "Entities/entities.h"
 #include "Entities/SrvModels/Message.h"
 #include "Controllers/RoomController/RoomController.h"
@@ -22,10 +24,9 @@ public:
     Server();
     ~Server();
 
-    void startServer();
-    
-
 public slots:
+    void startServer();
+    void stopServer();
     void incomingConnection(qintptr socketDescriptor);
     void slotDisconnect();
     void slotReadyRead();
@@ -33,6 +34,7 @@ public slots:
 private:
     void loadConfig(QString _path);
     void openConnection();
+    void disableUsers();
     void loadRooms();
     void loadMsgHistory(const QString path);
     void uploadMsgHistory(const QString path);
@@ -58,4 +60,3 @@ private:
     QByteArray Data;
     quint16 nextBlockSize = 0;
 };
-

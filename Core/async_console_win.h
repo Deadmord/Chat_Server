@@ -5,6 +5,8 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QTimer>
+#include <plog/Log.h>
+#include "../server.h"
 
 #if defined (Q_OS_WIN)
 #   include <windows.h>  
@@ -18,9 +20,14 @@ public:
 	asyncConsoleWin(QObject *parent);
 	~asyncConsoleWin() override = default;
 
+Q_SIGNALS:
+	void startServer();
+	void stopServer();
+
 public Q_SLOTS :
 
 	void handleInput(HANDLE h);
+
 
 private :
 	void processInputText(const QString& input);
