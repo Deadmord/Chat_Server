@@ -50,7 +50,7 @@ static void startup_routine()
 
     plog::init(plog::debug, "log.txt", 1000000, 5);
     initialize(plog::debug, plog::get());
-    PLOGD << "Server Application Starting. Logging is enabled.";
+    PLOGD << "Server application starting. Logging is enabled.";
 
 
 

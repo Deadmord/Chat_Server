@@ -52,6 +52,6 @@ private:
     QString userpic_id;
     quint32 rating_likes;
     quint32 rating_dislikes;
-    bool flood_limit;
+    bool flood_limit = false;
 };
 
