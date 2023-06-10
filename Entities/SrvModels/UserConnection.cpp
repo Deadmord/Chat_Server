@@ -1,11 +1,11 @@
-#include "UserConnection.h"
+п»ї#include "UserConnection.h"
 UserConnection::UserConnection(QObject* parent) : QObject(parent) , user_socket(new QTcpSocket(this))
 {
     // connect readyRead() to the slot that will take care of reading the data in
     connect(user_socket, &QTcpSocket::readyRead, this, &UserConnection::receiveJson);
     // forward the disconnected and error signals coming from the socket
     connect(user_socket, &QTcpSocket::disconnected, this, &UserConnection::disconnectedFromClient);
-    connect(user_socket, &QAbstractSocket::errorOccurred, this, &UserConnection::error);
+    connect(user_socket, &QAbstractSocket::errorOccurred, this, &UserConnection::errorSignal);
 }
 
 bool UserConnection::setSocketDescriptor(qintptr socketDescriptor)
@@ -16,7 +16,7 @@ bool UserConnection::setSocketDescriptor(qintptr socketDescriptor)
 void UserConnection::disconnectFromClient()
 {
     user_socket->disconnectFromHost();
-    //-----------------сделать рефакторинг тут и в сервере-------------------------------
+    //-----------------СЃРґРµР»Р°С‚СЊ СЂРµС„Р°РєС‚РѕСЂРёРЅРі С‚СѓС‚ Рё РІ СЃРµСЂРІРµСЂРµ-------------------------------
 }
 
 QString UserConnection::getUserName() const
@@ -35,7 +35,7 @@ void UserConnection::sendJson(const QJsonObject& json)
     // to its UTF-8 encoded version. We use QJsonDocument::Compact to save bandwidth
     const QByteArray jsonData = QJsonDocument(json).toJson(QJsonDocument::Compact);
     // we notify the central server we are about to send the message
-    emit logMessage(QLatin1String("Sending to ") + getUserName() + QLatin1String(" - ") + QString::fromUtf8(jsonData));
+    emit logMessage(debug,QLatin1String("Sending to ") + getUserName() + QLatin1String(" - ") + QString::fromUtf8(jsonData));
     // we send the message to the socket in the exact same way we did in the client
     QDataStream socketStream(user_socket);
     socketStream.setVersion(QDataStream::Qt_6_5);
@@ -49,7 +49,7 @@ void UserConnection::receiveJson()
     //implementation of flood protection mechanism
     if(isFloodLimit())
     {
-        emit logMessage(QLatin1String("flood protection, wait...")); //notify the server of invalid data
+        emit logMessage(debug, QLatin1String("flood protection, wait...")); //notify the server of invalid data
     }
     else
     {
@@ -80,10 +80,10 @@ void UserConnection::receiveJson()
                 if (jsonDoc.isObject()) // and is a JSON object
                     emit jsonReceived(jsonDoc.object()); // send the message to the central server
                 else
-                    emit logMessage(QLatin1String("Invalid message: ") + QString::fromUtf8(jsonData)); //notify the server of invalid data
+                    emit logMessage(error, QLatin1String("Invalid message: ") + QString::fromUtf8(jsonData)); //notify the server of invalid data
             }
             else {
-                emit logMessage(QLatin1String("Invalid message: ") + QString::fromUtf8(jsonData)); //notify the server of invalid data
+                emit logMessage(error, QLatin1String("Invalid message: ") + QString::fromUtf8(jsonData)); //notify the server of invalid data
             }
             // loop and try to read more JSONs if they are available
         }

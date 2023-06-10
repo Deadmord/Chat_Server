@@ -106,7 +106,56 @@ void asyncConsoleWin::processInputCommand(const QString& input)
     {
         qDebug() << "Unknown command detected. You entered: " << input;
     }
-
-
 }
+
+void asyncConsoleWin::logMessage(enum Severity log_lvl, const QString& msg)
+{
+    qDebug() << msg;
+    switch (log_lvl)
+    {
+    case fatal:
+        PLOGF << msg;
+        break;
+    case error:
+        PLOGE << msg;
+        break;
+    case warning:
+        PLOGW << msg;
+        break;
+    case info:
+        PLOGI << msg;
+        break;
+    case debug:
+        PLOGD << msg;
+        break;
+    case verbose:
+        PLOGV << msg;
+        break;
+    default:
+        PLOGN << msg;
+        break;
+    }
+
+    //Logger severity
+    //enum Severity
+    //{
+    //    none = 0,
+    //    fatal = 1,
+    //    error = 2,
+    //    warning = 3,
+    //    info = 4,
+    //    debug = 5,
+    //    verbose = 6
+    //};
+
+    //Short simple macros
+    //PLOGV << "verbose";
+    //PLOGD << "debug";
+    //PLOGI << "info";
+    //PLOGW << "warning";
+    //PLOGE << "error";
+    //PLOGF << "fatal";
+    //PLOGN << "none";
+}
+
 #endif

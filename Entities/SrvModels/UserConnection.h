@@ -6,6 +6,7 @@
 #include <QJsonParseError>
 #include <QJsonObject>
 #include <QTimer>
+#include "../Enums/Enums.h"
 
 class UserConnection : public QObject
 {
@@ -32,8 +33,8 @@ public:
 signals:
     void jsonReceived(const QJsonObject& _json_doc);
     void disconnectedFromClient();
-    void error();
-    void logMessage(const QString& msg);
+    void errorSignal();
+    void logMessage(enum Severity log_lvl, const QString& msg);
 
 public slots:
     void disconnectFromClient();

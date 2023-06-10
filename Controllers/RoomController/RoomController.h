@@ -9,6 +9,7 @@
 #include <QTcpSocket>
 
 #include "../../DBRoom.h"
+#include "../../Entities/Enums/Enums.h"
 #include "../../Entities/SrvModels/Message.h"
 #include "../../Entities/SrvModels/UserConnection.h"
 

@@ -1,6 +1,6 @@
 #include "server.h"
 
-Server::Server(){}
+Server::Server(QObject* parent) : QTcpServer(parent) {}
 Server::~Server(){}
 
 void Server::startServer()
@@ -10,16 +10,15 @@ void Server::startServer()
     loadRooms();
     //определить функцию загрузки данных из истории
     loadMsgHistory(msg_history_path);
-    QTimer::singleShot(100, []() { qDebug() << "Server initialized"; });
+    emit logMessage(info, "Server initialized");
 }
 
 void Server::stopServer()
 {
-    if (this->isListening()) {
-        this->disableUsers();
+    if (isListening()) {
+        disableUsers();
         close();
-        qDebug() << "Server stop - OK";
-        PLOGD << "Server stop - OK";
+        emit logMessage(info, "Server stop - OK");
     }
     else
     {
@@ -29,27 +28,42 @@ void Server::stopServer()
 
 void Server::incomingConnection(qintptr socketDescriptor)
 {
-    //socket = nextPendingConnection();     //return nullptr
-    socket = new QTcpSocket(this);
-    socket->setSocketDescriptor(socketDescriptor);
-    connect(socket, &QTcpSocket::readyRead, this, &Server::slotReadyRead);      //сигнально слотовые соединения, как работают?
-    connect(socket, &QTcpSocket::disconnected, this, &Server::slotDisconnect);
-    //connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
+    UserConnection* user_connection = new UserConnection(this);
+    if (!user_connection->setSocketDescriptor(socketDescriptor)) {
+        user_connection->deleteLater();         //if the socket descriptor could not be set, delete the socket
+        emit logMessage(error, "Socket descriptor could not be set");
+        return;
+    }
+    connect(user_connection, &UserConnection::disconnectedFromClient, this, std::bind(&Server::userDisconnected, this, user_connection));
+    connect(user_connection, &UserConnection::errorSignal, this, std::bind(&Server::userError, this, user_connection));
+    connect(user_connection, &UserConnection::jsonReceived, this, std::bind(&Server::jsonReceived, this, user_connection, std::placeholders::_1));
+    connect(user_connection, &UserConnection::logMessage, this, &Server::logMessage);
+    connected_users.append(user_connection);
+    emit logMessage(info ,"New client Connected");
 
-    //тут отправлять по новому соединению запрос данных клиента
-    //после возврата и получения данных
-    //записывать их как пару в vector сокетов
+    ////---------------old------------------
+    ////socket = nextPendingConnection();     //return nullptr
+    //socket = new QTcpSocket(this);
+    //socket->setSocketDescriptor(socketDescriptor);
+    //connect(socket, &QTcpSocket::readyRead, this, &Server::slotReadyRead);      //сигнально слотовые соединения, как работают?
+    //connect(socket, &QTcpSocket::disconnected, this, &Server::slotDisconnect);
+    ////connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
 
-    sockets.push_back(socket);
+    ////тут отправлять по новому соединению запрос данных клиента
+    ////после возврата и получения данных
+    ////записывать их как пару в vector сокетов
 
-    qDebug() << "new client connected" << socketDescriptor << " Now users : " << sockets.size();
+    //sockets.push_back(socket);
 
-    //Send msg history to the client
-    SendToClient(messages, socket);
+    //qDebug() << "new client connected" << socketDescriptor << " Now users : " << sockets.size();
 
-    SendToAllClients(createMessage("Server", "New connection! Hello!"));
+    ////Send msg history to the client
+    //SendToClient(messages, socket);
+
+    //SendToAllClients(createMessage("Server", "New connection! Hello!"));
 }
 
+//---------------old------------------
 void Server::slotDisconnect()
 {
 
@@ -61,6 +75,7 @@ void Server::slotDisconnect()
     //лучше создать сервис который будет чистить вектор подключений периодически по таймеру
 }
 
+//---------------old------------------
 void Server::slotReadyRead()
 {
     socket = (QTcpSocket*)sender();
@@ -101,7 +116,7 @@ void Server::slotReadyRead()
             messages.push_back(msg);    //implecetly
 
             qDebug() << "The message: " << msg.text;
-            SendToAllClients(msg);      //implecetly
+            //SendToAllClients(msg);      //implecetly
 
             //To archive messanges
             uploadMsgHistory(msg_history_path);
@@ -177,18 +192,16 @@ void Server::openConnection()
     if (!this->isListening()) {
         if (this->listen(QHostAddress::Any, server_port))      //QHostAddress::Any, 5555
         {
-            qDebug() << "Server start - OK";
-            PLOGD << "Server start - OK";
+            emit logMessage(info, "Server start - OK");
         }
         else
         {
-            qDebug() << "Sever start - Error";
-            PLOGD << "Server start - Error";
+            emit logMessage(error, "Sever start - Error");
         }
     }
     else
     {
-        qDebug() << "Server alrady listen";
+        emit logMessage(debug, "Server alrady listen");
     }
 }
 
@@ -283,31 +296,31 @@ void Server::uploadMsgHistory(const QString path)
 
 //----------------SendToClient-----------------
 
-void Server::SendToClient(const User_Message &msg, QTcpSocket *socket)
-{
-    Data.clear();
-    QDataStream out(&Data, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_6_5);
-
-    out << quint16(0) << msg.getId() << msg.getDateTime() << msg.getNickname() << msg.isDeleted() << msg.getText(); // преобразовали в stream
-    out.device()->seek(0);          //переходим в начало "данных"
-    out << quint16(Data.size() - sizeof(quint16));
-    socket->write(Data);
-}
-
-void Server::SendToClient(const QVector<User_Message> &msgs, QTcpSocket *socket)
-{
-    for (const User_Message& msg : msgs)
-    {
-    Data.clear();
-    QDataStream out(&Data, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_6_5);
-    out << quint16(0) << msg.getId() << msg.getDateTime() << msg.getNickname() << msg.isDeleted() << msg.getText(); // преобразовали в stream
-    out.device()->seek(0);          //переходим в начало "данных"
-    out << quint16(Data.size() - sizeof(quint16));
-    socket->write(Data);
-    }
-}
+//void Server::SendToClient(const User_Message &msg, QTcpSocket *socket)
+//{
+//    Data.clear();
+//    QDataStream out(&Data, QIODevice::WriteOnly);
+//    out.setVersion(QDataStream::Qt_6_5);
+//
+//    out << quint16(0) << msg.getId() << msg.getDateTime() << msg.getNickname() << msg.isDeleted() << msg.getText(); // преобразовали в stream
+//    out.device()->seek(0);          //переходим в начало "данных"
+//    out << quint16(Data.size() - sizeof(quint16));
+//    socket->write(Data);
+//}
+//
+//void Server::SendToClient(const QVector<User_Message> &msgs, QTcpSocket *socket)
+//{
+//    for (const User_Message& msg : msgs)
+//    {
+//    Data.clear();
+//    QDataStream out(&Data, QIODevice::WriteOnly);
+//    out.setVersion(QDataStream::Qt_6_5);
+//    out << quint16(0) << msg.getId() << msg.getDateTime() << msg.getNickname() << msg.isDeleted() << msg.getText(); // преобразовали в stream
+//    out.device()->seek(0);          //переходим в начало "данных"
+//    out << quint16(Data.size() - sizeof(quint16));
+//    socket->write(Data);
+//    }
+//}
 
 //void Server::SendToAllClients(const QString &str)
 //{
@@ -325,21 +338,21 @@ void Server::SendToClient(const QVector<User_Message> &msgs, QTcpSocket *socket)
 //    }
 //}
 
-void Server::SendToAllClients(const User_Message &msg)
-{
-    Data.clear();
-    QDataStream out(&Data, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_6_5);
-
-    out << quint16(0) << msg.getId() << msg.getDateTime() << msg.getNickname() << msg.isDeleted() << msg.getText(); // преобразовали в stream
-    out.device()->seek(0);          //переходим в начало "данных"
-    out << quint16(Data.size() - sizeof(quint16));
-    //socket->write(Data);
-    for(int i(0); i < sockets.size(); i++)
-    {
-        sockets[i]->write(Data);
-    }
-}
+//void Server::SendToAllClients(const User_Message &msg)
+//{
+//    Data.clear();
+//    QDataStream out(&Data, QIODevice::WriteOnly);
+//    out.setVersion(QDataStream::Qt_6_5);
+//
+//    out << quint16(0) << msg.getId() << msg.getDateTime() << msg.getNickname() << msg.isDeleted() << msg.getText(); // преобразовали в stream
+//    out.device()->seek(0);          //переходим в начало "данных"
+//    out << quint16(Data.size() - sizeof(quint16));
+//    //socket->write(Data);
+//    for(int i(0); i < sockets.size(); i++)
+//    {
+//        sockets[i]->write(Data);
+//    }
+//}
 
 User_Message Server::createMessage(QString _nickname, QString _text)
 {
@@ -351,4 +364,108 @@ User_Message Server::createMessage(QString _nickname, QString _text)
     return User_Message(msg);
     //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
 }
+
+void Server::broadcastSend(const QJsonObject& message, UserConnection* exclude)
+{
+    for (UserConnection* user : connected_users) {
+        Q_ASSERT(user);
+        if (user == exclude)
+            continue;
+        sendJson(user, message);
+    }
+}
+
+void Server::sendJson(UserConnection* destination, const QJsonObject& message)
+{
+    Q_ASSERT(destination);
+    destination->sendJson(message);
+}
+
+void Server::jsonReceived(UserConnection* sender, const QJsonObject& doc)
+{
+    Q_ASSERT(sender);
+    emit logMessage(info, QLatin1String("JSON received ") + QString::fromUtf8(QJsonDocument(doc).toJson()));
+    if (sender->getUserName().isEmpty())
+        return jsonFromLoggedOut(sender, doc);
+    jsonFromLoggedIn(sender, doc);
+}
+
+void Server::userDisconnected(UserConnection* sender)
+{
+    connected_users.removeAll(sender);
+    const QString userName = sender->getUserName();
+    if (!userName.isEmpty()) {
+        QJsonObject disconnectedMessage;
+        disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
+        disconnectedMessage[QStringLiteral("username")] = userName;
+        broadcastSend(disconnectedMessage, nullptr);
+        emit logMessage(info, userName + QLatin1String(" disconnected"));
+    }
+    sender->deleteLater();
+}
+
+void Server::userError(UserConnection* sender)
+{
+    Q_UNUSED(sender)
+        emit logMessage(error, QLatin1String("Error from ") + sender->getUserName());
+}
+
+void Server::jsonFromLoggedOut(UserConnection* sender, const QJsonObject& docObj)
+{
+    Q_ASSERT(sender);
+    const QJsonValue typeVal = docObj.value(QLatin1String("type"));
+    if (typeVal.isNull() || !typeVal.isString())
+        return;
+    if (typeVal.toString().compare(QLatin1String("login"), Qt::CaseInsensitive) != 0)
+        return;
+    const QJsonValue usernameVal = docObj.value(QLatin1String("username"));
+    if (usernameVal.isNull() || !usernameVal.isString())
+        return;
+    const QString newUserName = usernameVal.toString().simplified();
+    if (newUserName.isEmpty())
+        return;
+    for (UserConnection* user : qAsConst(connected_users)) {    //Find duplicat username
+        if (user == sender)
+            continue;
+        if (user->getUserName().compare(newUserName, Qt::CaseInsensitive) == 0) {
+            QJsonObject message;
+            message[QStringLiteral("type")] = QStringLiteral("login");
+            message[QStringLiteral("success")] = false;
+            message[QStringLiteral("reason")] = QStringLiteral("duplicate username");
+            sendJson(sender, message);
+            return;
+        }
+    }
+    sender->setUserName(newUserName);
+    QJsonObject successMessage;
+    successMessage[QStringLiteral("type")] = QStringLiteral("login");
+    successMessage[QStringLiteral("success")] = true;
+    sendJson(sender, successMessage);
+    QJsonObject connectedMessage;
+    connectedMessage[QStringLiteral("type")] = QStringLiteral("newuser");
+    connectedMessage[QStringLiteral("username")] = newUserName;
+    broadcastSend(connectedMessage, sender);
+}
+
+void Server::jsonFromLoggedIn(UserConnection* sender, const QJsonObject& docObj)
+{
+    Q_ASSERT(sender);
+    const QJsonValue typeVal = docObj.value(QLatin1String("type"));
+    if (typeVal.isNull() || !typeVal.isString())
+        return;
+    if (typeVal.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) != 0)
+        return;
+    const QJsonValue textVal = docObj.value(QLatin1String("text"));
+    if (textVal.isNull() || !textVal.isString())
+        return;
+    const QString text = textVal.toString().trimmed();
+    if (text.isEmpty())
+        return;
+    QJsonObject message;
+    message[QStringLiteral("type")] = QStringLiteral("message");
+    message[QStringLiteral("text")] = text;
+    message[QStringLiteral("sender")] = sender->getUserName();
+    broadcastSend(message, sender);
+}
+
 

@@ -3,6 +3,7 @@
 
 #include "server.h"
 #include "Controllers/RoomController/RoomController.h"
+#include "Entities/Enums/Enums.h"
 #include "DBRoom.h"
 #include "DBService.h"
 
@@ -18,6 +19,7 @@
 
 #endif
 
+
 Server server;  //create server instace
 asyncConsoleWin* asyncConsole;
 
@@ -28,12 +30,13 @@ static void shutdown_routine()
 
 static void startup_routine()
 {
-    // set up some application settings
-    qApp->setOrganizationName("C++ Final Project"); // through macro
-    qApp->setApplicationName("InetChat");
 
     // add QT post exit rotine
     qAddPostRoutine(shutdown_routine);
+
+    // set up some application settings
+    qApp->setOrganizationName("C++ Final Project"); // through macro
+    qApp->setApplicationName("InetChat");
 
     // add a routine to be executed just before application exits through signal
     QObject::connect(qApp, &QCoreApplication::aboutToQuit, []()
@@ -49,13 +52,17 @@ static void startup_routine()
     initialize(plog::debug, plog::get());
     PLOGD << "Server Application Starting. Logging is enabled.";
 
+
+
 #if defined (Q_OS_WIN)
     //(void)new asyncConsoleWin(qApp);
     asyncConsole = new asyncConsoleWin(qApp);
     QObject::connect(asyncConsole, &asyncConsoleWin::startServer, &server, &Server::startServer);
     QObject::connect(asyncConsole, &asyncConsoleWin::stopServer, &server, &Server::stopServer);
+    QObject::connect(&server, &Server::logMessage, asyncConsole, &asyncConsoleWin::logMessage);
 #else
-
+    qDebug() << "AsyncConsoleWin can't be loaded! Curent OS doesnt support.";
+    PLOGD << "AsyncConsoleWin can't be loaded! Curent OS doesnt support.";
 #endif
     QTimer::singleShot(0, [&]()
         {

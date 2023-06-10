@@ -20,14 +20,14 @@ public:
 	asyncConsoleWin(QObject *parent);
 	~asyncConsoleWin() override = default;
 
-Q_SIGNALS:
+signals:
 	void startServer();
 	void stopServer();
 
-public Q_SLOTS :
+public slots:
 
 	void handleInput(HANDLE h);
-
+	void logMessage(enum Severity log_lvl, const QString& msg);
 
 private :
 	void processInputText(const QString& input);

@@ -5,6 +5,7 @@
 #include <QHash>
 #include <QUuid>
 #include "../entities.h"
+#include "../Enums/Enums.h"
 
 class User_Message : public QObject
 {
