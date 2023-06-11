@@ -74,5 +74,4 @@ private:
     QVector <User_Message> messages;
 
     QByteArray Data;
-    quint16 nextBlockSize = 0;
 };

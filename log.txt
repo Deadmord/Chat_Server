@@ -1920,3 +1920,108 @@
 2023-06-11 03:21:14.498 NONE  [29996] [MessageSaver_Service::test@34] ASDASDASDASDASD
 2023-06-11 03:21:15.492 NONE  [29996] [MessageSaver_Service::test@34] ASDASDASDASDASD
 2023-06-11 03:21:16.489 NONE  [29996] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:44.078 DEBUG [20968] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 04:01:44.082 INFO  [20968] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 04:01:44.082 INFO  [20968] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 04:01:44.101 INFO  [20968] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 04:01:44.103 INFO  [20968] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 04:01:45.081 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:46.091 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:47.087 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:48.081 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:49.084 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:49.467 INFO  [20968] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 04:01:50.092 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:50.616 DEBUG [20968] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 04:01:50.616 DEBUG [20968] [asyncConsoleWin::logMessage@129] nextBlockSize = 
+2023-06-11 04:01:50.616 INFO  [20968] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 04:01:50.616 DEBUG [20968] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-11 04:01:50.617 DEBUG [20968] [asyncConsoleWin::logMessage@129] 
+2023-06-11 04:01:50.617 DEBUG [20968] [asyncConsoleWin::logMessage@129] Data not full, waiting...
+2023-06-11 04:01:51.084 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:52.088 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:53.082 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:54.083 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:55.092 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:56.083 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:57.083 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:58.083 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:01:59.093 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:00.090 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:01.089 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:02.086 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:03.084 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:04.095 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:05.088 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:06.089 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:07.084 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:08.093 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:09.090 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:10.088 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:11.085 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:12.082 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:13.095 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:14.095 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:15.088 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:16.083 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:17.093 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:18.090 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:19.085 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:20.085 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:21.083 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:22.093 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:23.087 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:24.081 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:25.085 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:26.090 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:27.083 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:28.088 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:29.085 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:29.337 DEBUG [20968] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 04:02:29.337 ERROR [20968] [asyncConsoleWin::logMessage@120] Invalid message: 
+2023-06-11 04:02:29.337 DEBUG [20968] [asyncConsoleWin::logMessage@129] g...
+2023-06-11 04:02:30.091 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:31.088 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:32.086 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:33.086 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:34.093 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:35.086 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:36.085 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:37.083 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:38.084 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:38.721 DEBUG [20968] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 04:02:39.082 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:40.080 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:41.092 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:42.084 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:43.090 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:44.080 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:45.081 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:46.091 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:47.089 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:48.084 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:49.084 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:50.089 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:51.088 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:52.086 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:53.083 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:54.084 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:55.091 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:56.084 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:57.083 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:58.084 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:02:59.090 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:03:00.085 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:03:01.096 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:03:02.092 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:03:03.087 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:03:04.083 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:03:05.091 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:03:06.087 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:03:07.085 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:03:08.081 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 04:03:09.093 NONE  [38116] [MessageSaver_Service::test@34] ASDASDASDASDASD

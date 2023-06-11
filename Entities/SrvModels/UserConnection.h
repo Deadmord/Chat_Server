@@ -53,5 +53,6 @@ private:
     quint32 rating_likes;
     quint32 rating_dislikes;
     bool flood_limit = false;
+    quint16 nextBlockSize = 0;
 };
 

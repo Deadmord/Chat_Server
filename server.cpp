@@ -90,26 +90,26 @@ void Server::slotReadyRead()
         //        SendToClient(str);
         for (;;)
         {
-            if (nextBlockSize == 0)
-            {
-                qDebug() << "nextBlockSize = 0";
-                if (socket->bytesAvailable() < 2)
-                {
-                    qDebug() << "Data < 2, break";
-                    break;
-                }
-                in >> nextBlockSize;
-                qDebug() << "nextBlockSize = " << nextBlockSize;
-            }
-            if (socket->bytesAvailable() < nextBlockSize)
-            {
-                qDebug() << "Data not full, waiting...";
-                break;
-            }
+            //if (nextBlockSize == 0)
+            //{
+            //    qDebug() << "nextBlockSize = 0";
+            //    if (socket->bytesAvailable() < 2)
+            //    {
+            //        qDebug() << "Data < 2, break";
+            //        break;
+            //    }
+            //    in >> nextBlockSize;
+            //    qDebug() << "nextBlockSize = " << nextBlockSize;
+            //}
+            //if (socket->bytesAvailable() < nextBlockSize)
+            //{
+            //    qDebug() << "Data not full, waiting...";
+            //    break;
+            //}
             //очевидно что условие выше выводит из цикла for, но как мы попадаем сюда снова? получается in.status обновляет значение после выполнения строки ниже?
             Message msg;
             in >> msg.id >> msg.date_time >> msg.nickname >> msg.deleted >> msg.text;
-            nextBlockSize = 0;
+            //nextBlockSize = 0;
 
             //parce to User_Message----------------------------------
 

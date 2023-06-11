@@ -39,7 +39,9 @@ void UserConnection::sendJson(const QJsonObject& json)
     // we send the message to the socket in the exact same way we did in the client
     QDataStream socketStream(user_socket);
     socketStream.setVersion(QDataStream::Qt_6_5);
-    socketStream << jsonData;
+    socketStream << quint16(0) << jsonData;
+    socketStream.device()->seek(0);          //переходим в начало "данных"
+    socketStream << quint16(jsonData.size() - sizeof(quint16));
 }
 
 bool UserConnection::isFloodLimit() const { return flood_limit; }
@@ -53,7 +55,7 @@ void UserConnection::receiveJson()
     }
     else
     {
-        QTimer::singleShot(1000, [&]() { flood_limit = false; });
+        QTimer::singleShot(5000, [&]() { flood_limit = false; });
         flood_limit = true;
     }
     
@@ -63,34 +65,58 @@ void UserConnection::receiveJson()
     QDataStream socketStream(user_socket);
     // set the version so that programs compiled with different versions of Qt can agree on how to serialise
     socketStream.setVersion(QDataStream::Qt_6_5);
-    // start an infinite loop
-    for (;;) {
-        // we start a transaction so we can revert to the previous state in case we try to read more data than is available on the socket
-        socketStream.startTransaction();
-        // we try to read the JSON data
-        socketStream >> jsonData;
-        if (socketStream.commitTransaction()) {
-            // we successfully read some data
-            // we now need to make sure it's in fact a valid JSON
-            QJsonParseError parseError;
-            // we try to create a json document with the data we received
-            const QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &parseError);
-            if (parseError.error == QJsonParseError::NoError) {
-                // if the data was indeed valid JSON
-                if (jsonDoc.isObject()) // and is a JSON object
-                    emit jsonReceived(jsonDoc.object()); // send the message to the central server
-                else
+    if (socketStream.status() == QDataStream::Ok)
+    {
+        emit logMessage(debug, "read...");
+        // start an infinite loop
+        for (;;) {
+            if (nextBlockSize == 0)
+            {
+                if (user_socket->bytesAvailable() < 2)
+                {
+                    emit logMessage(debug, "Data < 2, break");
+                    break;
+                }
+                socketStream >> nextBlockSize;
+                emit logMessage(debug, "nextBlockSize = " + nextBlockSize);
+            }
+            if (user_socket->bytesAvailable() < nextBlockSize)
+            {
+                emit logMessage(debug, "Data not full, waiting...");
+                break;
+            }
+            // we start a transaction so we can revert to the previous state in case we try to read more data than is available on the socket
+            socketStream.startTransaction();
+            // we try to read the JSON data
+            socketStream >> jsonData;
+            if (socketStream.commitTransaction()) {
+                // we successfully read some data
+                // we now need to make sure it's in fact a valid JSON
+                QJsonParseError parseError;
+                // we try to create a json document with the data we received
+                const QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &parseError);
+                if (parseError.error == QJsonParseError::NoError) {
+                    // if the data was indeed valid JSON
+                    if (jsonDoc.isObject()) // and is a JSON object
+                        emit jsonReceived(jsonDoc.object()); // send the message to the central server
+                    else
+                        emit logMessage(error, QLatin1String("Invalid message: ") + QString::fromUtf8(jsonData)); //notify the server of invalid data
+                }
+                else {
                     emit logMessage(error, QLatin1String("Invalid message: ") + QString::fromUtf8(jsonData)); //notify the server of invalid data
+                }
+                // loop and try to read more JSONs if they are available
             }
             else {
-                emit logMessage(error, QLatin1String("Invalid message: ") + QString::fromUtf8(jsonData)); //notify the server of invalid data
+                // the read failed, the socket goes automatically back to the state it was in before the transaction started
+                // we just exit the loop and wait for more data to become available
+                break;
             }
-            // loop and try to read more JSONs if they are available
+            nextBlockSize = 0;
         }
-        else {
-            // the read failed, the socket goes automatically back to the state it was in before the transaction started
-            // we just exit the loop and wait for more data to become available
-            break;
-        }
+    }
+    else
+    {
+        emit logMessage(error, "DataStream error");
     }
 }
