@@ -6,16 +6,16 @@
 #include "DBService.h"
 #include <plog/Log.h> 
 #include <plog/Initializers/RollingFileInitializer.h>
+#include "RoomRepository.h"
+#include "UserRepository.h"
 
 int main(int argc, char* argv[])
 {
     plog::init(plog::debug, "log.txt", 1000000, 5);
-    PLOGD << "Server Application Start";
-
-    QCoreApplication a(argc, argv);
-    Server server;
-    server.startServer();
-    return a.exec();
+    //QCoreApplication a(argc, argv);
+    //Server server;
+    //server.startServer();
+    //return a.exec();
 }
 
 //Logger severity

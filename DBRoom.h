@@ -19,7 +19,7 @@ namespace DBEntity {
 
 	public:
 
-		explicit DBRoom(qint32 id_, QString name_, QString description_, qint32 topic_id_, bool is_private_, QString password_, bool is_deleted_);
+		explicit DBRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const bool& is_private_, const QString& password_, const bool& is_deleted_);
 	
 		qint32 getId() const;
 		void setId(const qint32& id_);

@@ -14,7 +14,7 @@ namespace DBEntity {
 
 	public:
 
-		explicit DBTopic(qint32 id_, QString name_);
+		explicit DBTopic(const qint32& id_, const QString& name_);
 
 		qint32 getId() const;
 		void setId(const qint32& id_);

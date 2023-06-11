@@ -85,6 +85,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="RoomRepository.cpp" />
+    <ClCompile Include="UserRepository.cpp" />
     <ClInclude Include="DBService.h" />
     <ClInclude Include="DBUser.h">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
@@ -105,12 +107,21 @@
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClInclude>
     <ClCompile Include="DBRoom.cpp" />
-    <ClCompile Include="DBService.cpp" />
+    <ClCompile Include="DBService.cpp">
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
+      <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
+      <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
+    </ClCompile>
     <ClCompile Include="DBTopic.cpp" />
     <ClCompile Include="DBUser.cpp" />
     <ClCompile Include="DB\JSONS\messages.cpp" />
+    <ClCompile Include="file_repository.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server.cpp" />
+    <ClInclude Include="file_repository.h" />
+    <QtMoc Include="UserRepository.h" />
+    <QtMoc Include="RoomRepository.h" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="DB\JSONS\messages.h" />
