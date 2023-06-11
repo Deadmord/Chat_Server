@@ -110,7 +110,7 @@ void asyncConsoleWin::processInputCommand(const QString& input)
 
 void asyncConsoleWin::logMessage(enum Severity log_lvl, const QString& msg)
 {
-    qDebug() << msg;
+    qDebug().noquote() << msg;
     switch (log_lvl)
     {
     case fatal:

@@ -6087,3 +6087,1172 @@
 2023-06-11 19:49:04.587 NONE  [8748] [MessageSaver_Service::test@34] ASDASDASDASDASD
 2023-06-11 19:49:05.394 ERROR [9332] [asyncConsoleWin::logMessage@120] Error from User111
 2023-06-11 19:49:05.394 INFO  [9332] [asyncConsoleWin::logMessage@126] User111 disconnected
+2023-06-11 22:49:59.340 DEBUG [46724] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 22:49:59.341 INFO  [46724] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 22:49:59.341 INFO  [46724] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 22:49:59.362 INFO  [46724] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 22:49:59.371 INFO  [46724] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 22:50:00.339 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:01.338 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:02.342 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:03.339 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:04.334 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:05.329 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:06.340 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:07.337 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:07.949 INFO  [46724] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 22:50:08.342 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:08.679 DEBUG [46724] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 22:50:08.679 DEBUG [46724] [asyncConsoleWin::logMessage@129] nextBlockSize = 37 byte. Available 41
+2023-06-11 22:50:08.679 INFO  [46724] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 22:50:08.680 DEBUG [46724] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-11 22:50:09.336 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:10.333 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:11.344 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:12.341 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:13.340 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:14.336 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:15.333 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:16.329 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:17.335 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:18.336 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:19.331 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:20.341 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:21.344 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:21.780 DEBUG [46724] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 22:50:21.780 DEBUG [46724] [asyncConsoleWin::logMessage@129] nextBlockSize = 52 byte. Available 52
+2023-06-11 22:50:21.781 INFO  [46724] [asyncConsoleWin::logMessage@126] JSON received {
+    "text": "qwerty",
+    "type": "message"
+}
+
+2023-06-11 22:50:22.332 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:23.343 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:24.334 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:25.335 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:26.344 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:27.338 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:28.340 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:29.333 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:30.332 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:31.340 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:32.334 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:33.332 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:34.344 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:35.335 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:36.340 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:37.333 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:38.330 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:39.339 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:40.340 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:41.333 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:42.343 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:43.340 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:44.333 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:45.340 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:46.333 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:47.330 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:48.342 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:49.341 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:50.335 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:51.347 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:52.339 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:53.338 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:54.332 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:55.331 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:56.342 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:57.341 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:58.338 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:50:59.347 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:51:00.344 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:51:01.331 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:51:01.833 ERROR [46724] [asyncConsoleWin::logMessage@120] Error from User111
+2023-06-11 22:51:01.833 INFO  [46724] [asyncConsoleWin::logMessage@126] User111 disconnected
+2023-06-11 22:51:02.342 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 22:51:03.337 NONE  [11048] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:06:02.813 DEBUG [1444] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:06:02.814 INFO  [1444] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:06:02.814 INFO  [1444] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:06:02.830 INFO  [1444] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:06:02.832 INFO  [1444] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:06:03.817 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:06:04.821 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:06:05.827 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:06:06.821 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:06:07.818 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:06:08.815 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:06:09.823 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:06:10.008 INFO  [1444] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:06:10.824 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:06:11.821 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:06:12.820 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:06:13.119 DEBUG [1444] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:06:13.119 DEBUG [1444] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:06:13.119 INFO  [1444] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:09:45.277 DEBUG [1444] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-11 23:09:45.279 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:45.853 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:46.849 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:47.846 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:48.859 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:49.855 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:50.848 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:51.847 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:52.856 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:53.849 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:54.849 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:55.687 DEBUG [1444] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:09:55.688 DEBUG [1444] [asyncConsoleWin::logMessage@129] nextBlockSize = 66 byte. Available 66
+2023-06-11 23:09:55.689 INFO  [1444] [asyncConsoleWin::logMessage@126] JSON received {
+    "text": "ыыыыыыыыыы",
+    "type": "message"
+}
+
+2023-06-11 23:09:55.856 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:56.854 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:57.848 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:58.856 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:09:59.847 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:00.858 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:01.855 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:02.856 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:03.850 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:04.849 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:05.846 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:06.853 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:07.848 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:08.850 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:09.853 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:10.851 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:11.852 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:12.846 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:13.847 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:14.857 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:10:15.114 ERROR [1444] [asyncConsoleWin::logMessage@120] Error from User111
+2023-06-11 23:10:15.114 INFO  [1444] [asyncConsoleWin::logMessage@126] User111 disconnected
+2023-06-11 23:10:15.859 NONE  [20320] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:44.475 DEBUG [30564] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:15:44.475 INFO  [30564] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:15:44.476 INFO  [30564] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:15:44.494 INFO  [30564] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:15:44.496 INFO  [30564] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:15:45.474 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:46.474 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:47.470 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:47.680 INFO  [30564] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:15:48.401 DEBUG [30564] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:15:48.401 DEBUG [30564] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:15:48.402 INFO  [30564] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:15:48.402 DEBUG [30564] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-11 23:15:48.472 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:49.475 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:50.485 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:51.480 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:52.476 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:53.475 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:54.486 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:55.480 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:56.477 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:57.478 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:58.485 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:15:59.473 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:00.484 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:01.479 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:02.481 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:03.477 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:04.475 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:05.485 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:06.480 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:07.473 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:08.473 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:09.471 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:10.478 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:11.473 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:12.477 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:13.429 DEBUG [30564] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:16:13.430 DEBUG [30564] [asyncConsoleWin::logMessage@129] nextBlockSize = 52 byte. Available 52
+2023-06-11 23:16:13.430 INFO  [30564] [asyncConsoleWin::logMessage@126] JSON received {
+    "text": "qwerty",
+    "type": "message"
+}
+
+2023-06-11 23:16:13.482 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:14.481 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:15.478 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:16.473 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:17.481 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:18.478 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:19.475 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:20.489 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:21.472 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:22.475 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:23.486 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:24.481 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:25.473 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:26.471 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:27.485 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:28.482 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:29.477 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:30.488 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:31.479 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:32.476 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:33.474 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:34.483 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:35.477 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:36.476 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:37.472 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:38.478 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:39.474 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:40.480 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:41.475 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:42.475 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:43.484 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:44.477 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:45.472 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:46.483 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:47.471 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:48.474 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:49.484 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:50.478 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:51.162 ERROR [30564] [asyncConsoleWin::logMessage@120] Error from User111
+2023-06-11 23:16:51.162 INFO  [30564] [asyncConsoleWin::logMessage@126] User111 disconnected
+2023-06-11 23:16:51.473 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:52.479 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:53.475 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:54.484 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:55.482 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:56.478 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:57.473 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:58.473 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:16:59.483 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:00.481 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:01.481 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:02.475 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:03.479 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:04.471 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:05.485 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:06.482 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:07.485 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:08.480 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:09.479 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:10.477 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:11.473 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:12.484 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:13.472 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:14.484 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:15.480 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:16.474 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:17.471 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:18.482 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:19.482 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:20.477 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:21.477 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:22.475 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:23.475 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:24.478 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:25.491 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:26.498 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:27.489 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:28.499 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:29.497 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:30.493 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:31.493 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:32.491 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:33.486 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:34.501 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:35.501 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:36.498 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:37.495 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:38.492 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:39.488 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:40.491 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:41.498 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:42.500 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:43.495 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:44.489 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:45.490 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:46.487 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:47.493 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:48.493 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:49.495 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:50.494 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:51.495 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:52.488 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:53.489 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:54.486 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:55.489 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:56.500 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:57.487 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:58.497 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:17:59.493 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:00.497 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:01.497 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:02.496 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:03.493 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:04.491 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:05.491 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:06.488 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:07.503 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:08.497 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:09.494 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:10.499 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:11.499 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:12.496 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:13.487 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:14.496 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:15.495 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:16.493 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:17.492 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:18.487 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:19.486 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:20.492 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:21.504 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:22.516 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:23.509 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:18:24.507 NONE  [50480] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:36.398 DEBUG [2176] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:20:36.400 INFO  [2176] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:20:36.402 INFO  [2176] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:20:36.431 INFO  [2176] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:20:36.436 INFO  [2176] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:20:37.395 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:38.395 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:39.393 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:39.519 INFO  [2176] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:20:40.259 DEBUG [2176] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:20:40.259 DEBUG [2176] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:20:40.259 INFO  [2176] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:20:46.802 DEBUG [2176] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-11 23:20:46.806 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:47.403 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:48.405 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:49.402 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:50.395 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:51.395 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:52.392 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:53.053 ERROR [2176] [asyncConsoleWin::logMessage@120] Error from User111
+2023-06-11 23:20:53.053 INFO  [2176] [asyncConsoleWin::logMessage@126] User111 disconnected
+2023-06-11 23:20:53.406 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:54.392 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:55.402 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:56.395 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:57.402 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:58.404 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:20:59.398 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:00.397 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:01.409 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:02.402 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:03.399 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:04.393 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:05.404 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:06.401 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:07.397 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:08.393 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:09.402 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:10.400 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:11.398 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:12.394 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:13.397 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:14.403 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:15.401 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:16.400 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:17.400 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:18.395 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:19.395 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:20.405 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:21.395 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:22.402 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:23.397 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:24.399 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:25.401 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:26.401 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:27.398 NONE  [32344] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:32.036 DEBUG [20548] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:21:32.036 INFO  [20548] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:21:32.036 INFO  [20548] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:21:32.052 INFO  [20548] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:21:32.055 INFO  [20548] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:21:33.039 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:34.034 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:35.045 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:35.301 INFO  [20548] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:21:35.982 DEBUG [20548] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:21:35.982 DEBUG [20548] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:21:35.982 INFO  [20548] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:21:51.118 DEBUG [20548] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-11 23:21:51.120 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:52.036 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:53.043 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:54.039 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:54.753 ERROR [20548] [asyncConsoleWin::logMessage@120] Error from User111
+2023-06-11 23:21:54.753 INFO  [20548] [asyncConsoleWin::logMessage@126] User111 disconnected
+2023-06-11 23:21:55.042 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:56.044 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:57.040 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:58.039 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:21:59.035 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:00.051 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:01.050 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:02.060 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:03.058 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:04.059 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:05.049 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:06.060 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:07.059 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:08.055 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:09.054 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:10.052 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:11.060 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:12.057 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:13.048 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:14.051 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:15.052 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:16.060 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:17.060 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:18.055 NONE  [24636] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:22.827 DEBUG [22560] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:22:22.828 INFO  [22560] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:22:22.828 INFO  [22560] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:22:22.843 INFO  [22560] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:22:22.845 INFO  [22560] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:22:23.822 NONE  [40820] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:24.826 NONE  [40820] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:25.824 NONE  [40820] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:22:25.845 INFO  [22560] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:22:26.478 DEBUG [22560] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:22:26.478 DEBUG [22560] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:22:26.478 INFO  [22560] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:23:23.687 DEBUG [52548] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:23:23.688 INFO  [52548] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:23:23.689 INFO  [52548] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:23:23.706 INFO  [52548] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:23:23.709 INFO  [52548] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:23:24.694 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:23:25.697 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:23:26.496 INFO  [52548] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:23:26.696 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:23:27.448 DEBUG [52548] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:23:27.448 DEBUG [52548] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:23:27.448 INFO  [52548] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:23:53.261 DEBUG [52548] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-11 23:23:53.261 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:23:53.695 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:23:54.693 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:23:55.701 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:23:56.695 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:23:57.312 DEBUG [52548] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:23:57.312 DEBUG [52548] [asyncConsoleWin::logMessage@129] nextBlockSize = 64 byte. Available 64
+2023-06-11 23:23:57.312 INFO  [52548] [asyncConsoleWin::logMessage@126] JSON received {
+    "text": "ssssssssssssssssss",
+    "type": "message"
+}
+
+2023-06-11 23:24:12.958 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:13.694 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:14.697 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:15.697 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:16.697 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:17.700 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:18.701 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:19.696 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:20.694 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:21.701 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:22.697 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:23.691 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:24.701 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:25.699 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:26.689 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:27.692 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:28.534 DEBUG [52548] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:24:28.534 DEBUG [52548] [asyncConsoleWin::logMessage@129] nextBlockSize = 59 byte. Available 59
+2023-06-11 23:24:28.535 INFO  [52548] [asyncConsoleWin::logMessage@126] JSON received {
+    "text": "sssssssssssss",
+    "type": "message"
+}
+
+2023-06-11 23:24:31.207 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:31.704 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:32.695 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:33.694 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:34.709 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:35.699 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:36.695 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:37.693 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:38.691 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:39.700 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:40.698 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:41.698 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:42.696 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:43.689 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:44.704 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:45.697 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:46.697 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:47.690 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:48.700 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:49.694 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:50.693 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:51.692 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:52.691 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:53.695 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:54.694 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:55.691 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:56.698 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:57.693 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:58.689 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:24:59.698 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:25:00.697 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:25:01.692 NONE  [3564] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:25:02.516 DEBUG [31308] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:25:02.517 INFO  [31308] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:25:02.518 INFO  [31308] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:25:02.534 INFO  [31308] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:25:02.536 INFO  [31308] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:25:03.518 NONE  [36732] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:27:47.272 DEBUG [52768] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:27:47.273 INFO  [52768] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:27:47.273 INFO  [52768] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:27:47.289 INFO  [52768] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:27:47.292 INFO  [52768] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:27:48.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:27:49.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:27:50.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:27:50.615 INFO  [52768] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:27:51.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:27:51.493 DEBUG [52768] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:27:51.493 DEBUG [52768] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:27:51.493 INFO  [52768] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:28:18.908 DEBUG [52768] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-11 23:28:18.909 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:19.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:20.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:21.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:22.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:23.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:24.267 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:25.272 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:26.272 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:27.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:28.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:28.459 DEBUG [52768] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:28:28.459 DEBUG [52768] [asyncConsoleWin::logMessage@129] nextBlockSize = 59 byte. Available 59
+2023-06-11 23:28:28.460 INFO  [52768] [asyncConsoleWin::logMessage@126] JSON received {
+    "text": "ddddddddddddd",
+    "type": "message"
+}
+
+2023-06-11 23:28:47.077 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:47.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:48.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:49.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:50.271 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:51.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:52.272 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:53.271 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:54.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:55.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:56.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:57.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:58.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:28:59.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:00.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:01.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:02.272 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:03.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:04.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:05.271 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:06.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:07.272 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:08.271 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:09.271 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:10.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:11.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:12.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:13.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:14.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:15.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:16.271 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:17.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:18.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:19.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:20.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:21.272 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:22.269 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:23.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:24.268 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:29:25.270 NONE  [43552] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:29.394 DEBUG [29868] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:39:29.395 INFO  [29868] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:39:29.396 INFO  [29868] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:39:29.412 INFO  [29868] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:39:29.414 INFO  [29868] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:39:30.404 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:31.401 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:32.397 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:33.396 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:34.395 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:35.398 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:36.394 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:37.393 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:38.395 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:39.401 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:40.400 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:41.115 INFO  [29868] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:39:41.394 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:39:41.894 DEBUG [29868] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:39:41.894 DEBUG [29868] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:39:41.894 INFO  [29868] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:40:08.342 DEBUG [29868] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-11 23:40:08.344 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:40:08.393 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:40:09.399 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:40:10.393 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:40:11.404 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:40:12.397 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:40:13.406 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:40:14.404 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:40:15.403 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:40:16.251 DEBUG [29868] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:40:16.251 DEBUG [29868] [asyncConsoleWin::logMessage@129] nextBlockSize = 62 byte. Available 62
+2023-06-11 23:40:16.252 INFO  [29868] [asyncConsoleWin::logMessage@126] JSON received {
+    "text": "uuuuuuuuuuuuuuuu",
+    "type": "message"
+}
+
+2023-06-11 23:40:18.920 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:40:19.403 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:40:20.401 NONE  [51688] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:40:20.898 ERROR [29868] [asyncConsoleWin::logMessage@120] Error from User111
+2023-06-11 23:40:20.899 INFO  [29868] [asyncConsoleWin::logMessage@126] User111 disconnected
+2023-06-11 23:43:21.350 DEBUG [9900] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:43:21.351 INFO  [9900] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:43:21.351 INFO  [9900] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:43:21.369 INFO  [9900] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:43:21.371 INFO  [9900] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:43:22.353 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:23.353 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:24.350 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:25.350 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:26.345 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:27.360 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:28.354 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:29.350 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:29.712 INFO  [9900] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:43:30.350 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:30.884 DEBUG [9900] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:43:30.884 DEBUG [9900] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:43:30.885 INFO  [9900] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:43:48.336 DEBUG [9900] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-11 23:43:48.338 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:48.348 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:49.345 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:50.365 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:51.370 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:52.369 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:53.366 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:54.367 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:55.370 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:56.367 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:57.370 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:58.370 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:43:59.369 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:00.362 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:01.369 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:02.368 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:03.364 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:04.363 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:05.372 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:06.367 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:07.368 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:08.367 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:09.369 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:10.370 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:11.368 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:11.611 ERROR [9900] [asyncConsoleWin::logMessage@120] Error from User111
+2023-06-11 23:44:11.611 INFO  [9900] [asyncConsoleWin::logMessage@126] User111 disconnected
+2023-06-11 23:44:12.365 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:44:13.361 NONE  [27032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:45:01.685 DEBUG [38524] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:45:01.686 INFO  [38524] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:45:01.686 INFO  [38524] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:45:01.704 INFO  [38524] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:45:01.706 INFO  [38524] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:45:02.674 NONE  [26592] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:45:03.679 NONE  [26592] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:45:04.680 NONE  [26592] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:45:05.676 NONE  [26592] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:45:06.078 INFO  [38524] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:45:06.683 NONE  [26592] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:45:06.714 DEBUG [38524] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:45:06.714 DEBUG [38524] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:45:06.714 INFO  [38524] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:56:17.662 DEBUG [47016] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:56:17.663 INFO  [47016] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:56:17.664 INFO  [47016] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:56:17.681 INFO  [47016] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:56:17.683 INFO  [47016] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:56:18.660 NONE  [46500] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:56:19.660 NONE  [46500] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:56:20.669 NONE  [46500] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:56:21.666 NONE  [46500] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:56:22.661 NONE  [46500] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:56:23.663 NONE  [46500] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:56:24.660 NONE  [46500] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:56:25.421 INFO  [47016] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:56:25.660 NONE  [46500] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:56:26.554 DEBUG [47016] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:56:26.554 DEBUG [47016] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:56:26.554 INFO  [47016] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:57:26.918 DEBUG [44088] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:57:26.920 INFO  [44088] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:57:26.921 INFO  [44088] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:57:26.938 INFO  [44088] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:57:26.941 INFO  [44088] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:57:27.911 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:28.916 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:29.924 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:30.236 INFO  [44088] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:57:30.934 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:31.050 DEBUG [44088] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:57:31.050 DEBUG [44088] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:57:31.050 INFO  [44088] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:57:42.295 DEBUG [44088] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-11 23:57:42.296 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:42.932 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:43.926 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:44.940 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:45.926 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:46.933 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:47.938 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:48.924 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:49.927 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:50.925 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:51.938 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:52.924 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:53.926 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:54.937 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:55.931 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:56.929 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:57.929 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:58.928 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:57:59.924 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:00.924 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:01.923 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:02.932 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:03.930 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:04.930 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:05.939 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:06.951 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:07.950 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:08.946 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:09.947 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:10.939 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:11.953 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:12.954 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:13.950 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:14.943 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:15.939 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:16.950 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:17.947 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:18.944 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:19.953 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:20.947 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:21.945 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:22.954 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:23.947 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:24.944 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:25.941 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:26.943 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:27.940 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:28.954 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:29.940 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:30.947 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:31.941 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:32.782 ERROR [44088] [asyncConsoleWin::logMessage@120] Error from User111
+2023-06-11 23:58:32.782 INFO  [44088] [asyncConsoleWin::logMessage@126] User111 disconnected
+2023-06-11 23:58:32.943 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:33.941 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:34.939 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:35.941 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:36.946 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:37.316 INFO  [44088] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:58:37.945 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:38.198 DEBUG [44088] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:58:38.198 DEBUG [44088] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:58:38.198 INFO  [44088] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-11 23:58:39.989 DEBUG [44088] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-11 23:58:39.990 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:40.956 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:41.958 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:42.964 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:43.956 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:44.688 DEBUG [44088] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:58:44.688 DEBUG [44088] [asyncConsoleWin::logMessage@129] nextBlockSize = 58 byte. Available 58
+2023-06-11 23:58:44.688 INFO  [44088] [asyncConsoleWin::logMessage@126] JSON received {
+    "text": "ffffffffffff",
+    "type": "message"
+}
+
+2023-06-11 23:58:49.979 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:50.957 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:51.967 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:52.962 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:53.960 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:54.969 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:55.964 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:56.966 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:57.959 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:58.964 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:58:59.959 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:00.955 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:01.968 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:02.966 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:03.956 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:04.964 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:05.960 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:06.491 ERROR [44088] [asyncConsoleWin::logMessage@120] Error from User111
+2023-06-11 23:59:06.496 INFO  [44088] [asyncConsoleWin::logMessage@126] User111 disconnected
+2023-06-11 23:59:06.956 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:07.965 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:08.966 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:09.957 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:10.955 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:11.960 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:12.965 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:13.963 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:14.959 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:15.971 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:16.957 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:17.959 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:18.962 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:19.958 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:20.956 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:21.965 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:22.958 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:23.959 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:24.956 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:25.958 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:26.958 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:27.963 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:28.956 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:29.957 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:30.955 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:31.960 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:32.967 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:33.958 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:34.957 NONE  [50212] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:36.984 DEBUG [40124] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-11 23:59:36.984 INFO  [40124] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-11 23:59:36.985 INFO  [40124] [MessageSaver_Service::start@24] Archivator started.
+2023-06-11 23:59:37.002 INFO  [40124] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-11 23:59:37.005 INFO  [40124] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-11 23:59:37.975 NONE  [49216] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:38.976 NONE  [49216] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:39.822 INFO  [40124] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-11 23:59:39.981 NONE  [49216] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:40.977 NONE  [49216] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-11 23:59:41.083 DEBUG [40124] [asyncConsoleWin::logMessage@129] read...
+2023-06-11 23:59:41.083 DEBUG [40124] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-11 23:59:45.572 INFO  [40124] [asyncConsoleWin::logMessage@126] JSON received {
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-12 00:02:51.880 DEBUG [48492] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-12 00:02:51.881 INFO  [48492] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-12 00:02:51.881 INFO  [48492] [MessageSaver_Service::start@24] Archivator started.
+2023-06-12 00:02:51.899 INFO  [48492] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-12 00:02:51.901 INFO  [48492] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-12 00:02:52.885 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:02:53.892 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:02:54.886 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:02:55.882 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:02:56.655 INFO  [48492] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-12 00:02:56.889 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:02:57.350 DEBUG [48492] [asyncConsoleWin::logMessage@129] read...
+2023-06-12 00:02:57.351 DEBUG [48492] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-12 00:02:59.459 INFO  [48492] [asyncConsoleWin::logMessage@126] JSON received 
+{
+    "type": "login",
+    "username": "User111"
+}
+
+2023-06-12 00:02:59.460 DEBUG [48492] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-12 00:02:59.462 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:02:59.891 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:00.888 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:01.885 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:02.881 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:03.878 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:04.880 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:05.883 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:06.882 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:07.890 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:08.887 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:09.879 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:10.891 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:11.888 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:12.880 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:13.878 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:14.894 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:15.889 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:16.880 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:17.889 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:18.886 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:19.887 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:20.883 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:21.878 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:22.876 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:23.888 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:24.093 ERROR [48492] [asyncConsoleWin::logMessage@120] Error from User111
+2023-06-12 00:03:24.093 INFO  [48492] [asyncConsoleWin::logMessage@126] User111 disconnected
+2023-06-12 00:03:24.882 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:25.892 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:26.889 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:27.888 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:28.879 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:29.879 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:30.882 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:31.877 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:32.891 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:33.890 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:34.883 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:35.882 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:36.893 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:37.879 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:38.896 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:39.903 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:40.904 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:41.894 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:42.892 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:43.907 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:44.901 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:45.897 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:46.893 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:47.905 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:48.903 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:49.896 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:50.897 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:51.893 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:52.907 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:53.904 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:54.903 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:55.910 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:56.914 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:57.922 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:58.921 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:03:59.917 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:00.915 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:01.910 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:02.923 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:03.918 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:04.914 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:05.913 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:06.918 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:07.922 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:08.920 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:09.915 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:10.918 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:11.921 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:12.911 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:13.912 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:14.923 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:15.908 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:16.913 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:17.910 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:18.923 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:19.921 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:20.922 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:21.912 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:22.911 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:23.909 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:24.923 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:25.922 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:26.919 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:27.916 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:28.911 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:29.907 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:30.922 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:31.918 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:32.916 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:33.913 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:34.912 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:35.922 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:36.918 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:37.919 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:38.915 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:39.910 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:40.920 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:41.917 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:42.914 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:43.910 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:44.917 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:45.917 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:46.911 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:47.923 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:48.923 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:49.917 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:50.915 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:51.917 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:52.913 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:53.922 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:54.911 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:55.914 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:56.915 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:57.913 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:58.914 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:04:59.911 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:00.914 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:01.909 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:02.926 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:03.920 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:04.915 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:05.910 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:06.908 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:07.917 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:08.909 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:09.915 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:10.912 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:11.913 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:12.910 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:13.919 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:14.914 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:15.911 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:16.923 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:17.919 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:18.917 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:19.908 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:20.922 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:21.923 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:22.907 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:23.919 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:24.913 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:25.908 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:26.911 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:27.922 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:28.910 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:29.911 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:30.921 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:31.915 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:32.915 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:33.915 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:34.914 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:35.915 NONE  [21080] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:40.541 DEBUG [51488] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-12 00:05:40.542 INFO  [51488] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-12 00:05:40.542 INFO  [51488] [MessageSaver_Service::start@24] Archivator started.
+2023-06-12 00:05:40.564 INFO  [51488] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-12 00:05:40.566 INFO  [51488] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-12 00:05:41.535 NONE  [43376] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:42.542 NONE  [43376] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:43.540 NONE  [43376] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:05:43.568 INFO  [51488] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-12 00:05:44.438 DEBUG [51488] [asyncConsoleWin::logMessage@129] read...
+2023-06-12 00:05:44.438 DEBUG [51488] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-12 00:05:48.288 INFO  [51488] [asyncConsoleWin::logMessage@126] JSON received 
+{"type":"login","username":"User111"}
+2023-06-12 00:06:08.659 DEBUG [21652] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-12 00:06:08.660 INFO  [21652] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-12 00:06:08.660 INFO  [21652] [MessageSaver_Service::start@24] Archivator started.
+2023-06-12 00:06:08.679 INFO  [21652] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-12 00:06:08.681 INFO  [21652] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-12 00:06:09.668 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:10.658 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:11.534 INFO  [21652] [asyncConsoleWin::logMessage@126] New client Connected
+2023-06-12 00:06:11.657 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:12.211 DEBUG [21652] [asyncConsoleWin::logMessage@129] read...
+2023-06-12 00:06:12.211 DEBUG [21652] [asyncConsoleWin::logMessage@129] nextBlockSize = 41 byte. Available 41
+2023-06-12 00:06:16.858 INFO  [21652] [asyncConsoleWin::logMessage@126] JSON received: {"type":"login","username":"User111"}
+2023-06-12 00:06:16.859 DEBUG [21652] [asyncConsoleWin::logMessage@129] Sending to User111 - {"success":true,"type":"login"}
+2023-06-12 00:06:16.863 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:17.663 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:18.671 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:19.669 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:20.660 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:21.662 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:22.671 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:23.670 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:24.664 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:25.660 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:26.666 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:27.661 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:28.658 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:29.669 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:30.665 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:31.661 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:32.668 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:33.661 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:34.660 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:35.668 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:36.663 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:37.670 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:38.671 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:39.668 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:40.664 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:41.663 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:42.668 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:43.665 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:44.661 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:45.660 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:46.662 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:47.664 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:48.662 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:49.665 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 00:06:49.691 ERROR [21652] [asyncConsoleWin::logMessage@120] Error from User111
+2023-06-12 00:06:49.691 INFO  [21652] [asyncConsoleWin::logMessage@126] User111 disconnected
+2023-06-12 00:06:50.668 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD

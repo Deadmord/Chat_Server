@@ -384,7 +384,7 @@ void Server::sendJson(UserConnection* destination, const QJsonObject& message)
 void Server::jsonReceived(UserConnection* sender, const QJsonObject& doc)
 {
     Q_ASSERT(sender);
-    emit logMessage(info, QLatin1String("JSON received ") + QString::fromUtf8(QJsonDocument(doc).toJson()));
+    emit logMessage(info, QLatin1String("JSON received: ") + QJsonDocument(doc).toJson(QJsonDocument::Compact));
     if (sender->getUserName().isEmpty())
         return jsonFromLoggedOut(sender, doc);
     jsonFromLoggedIn(sender, doc);
