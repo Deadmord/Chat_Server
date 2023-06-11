@@ -226,16 +226,16 @@ void Server::loadMsgHistory(const QString path)
     QFile msgFile;
 
     msgFile.setFileName(path);
-    if (msgFile.open(QIODevice::ReadOnly|QFile::Text))
+    if (msgFile.open(QIODevice::ReadOnly | QFile::Text))
     {
         //тот нужно блокировать обращение к ресурсу msgFile
-        msgHistory = QJsonDocument::fromJson(QByteArray(msgFile.readAll()),&jsonError);
+        msgHistory = QJsonDocument::fromJson(QByteArray(msgFile.readAll()), &jsonError);
         msgFile.close();
 
-        if(jsonError.errorString().toInt() == QJsonParseError::NoError)
+        if (jsonError.errorString().toInt() == QJsonParseError::NoError)
         {
             msgArray = QJsonValue(msgHistory.object().value("messanges")).toArray();
-            for (const auto &msgJson : msgArray)
+            for (const auto& msgJson : msgArray)
             {
                 Message msg { msgJson.toObject().value("id").toString(),
                             msgJson.toObject().value("roomId").toInt(),
@@ -266,7 +266,7 @@ void Server::uploadMsgHistory(const QString path)
     QFile msgFile;
 
     msgFile.setFileName(path);
-    if (msgFile.open(QIODevice::WriteOnly|QFile::Text))
+    if (msgFile.open(QIODevice::WriteOnly | QFile::Text))
     {
         msgArray = msgHistory.object().value("messanges").toArray();
 
@@ -286,7 +286,7 @@ void Server::uploadMsgHistory(const QString path)
             msgArray.append(msgJson);           //Тут нужно проверять есть ли такой элемент уже в массиве и вставлять если нет
         }
         msgHistory.setArray(msgArray);
-        msgFile.write("{\"messanges\":"+msgHistory.toJson()+"}");
+        msgFile.write("{\"messanges\":" + msgHistory.toJson() + "}");
     }
     else
     {

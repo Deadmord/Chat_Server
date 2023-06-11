@@ -2,6 +2,8 @@
 #define ROOMREPOSITORY_H
 
 #include "DBService.h"
+#include <QtConcurrent>
+#include <plog/Log.h> 
 
 namespace DBService {
 
@@ -12,6 +14,7 @@ namespace DBService {
 	private:
 		//DBConnection* a_dbConnection;
 		DBConnection a_dbConnection;
+
 	public:
 		//explicit RoomRepository(DBConnection* connection_);
 		explicit RoomRepository(const QString& connection_string_);

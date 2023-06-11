@@ -3,6 +3,9 @@
 
 #include "DBService.h"
 #include "DBUser.h"
+#include <QtConcurrent>
+#include <plog/Log.h> 
+#include <QCryptographicHash>
 
 namespace DBService {
 
@@ -20,7 +23,8 @@ namespace DBService {
 		~UserRepository();
 		QFuture<DBEntity::DBUser*> getUserByLogin(const QString& login_);
 		QFuture<bool> createUser(const DBEntity::DBUser& user_);
-		QFuture<bool> updateUser(const QString& login_, const QString& new_password_, const QString& new_userpic_path_);
+		QFuture<bool> updateUserPasswordUserpic(const QString& login_, const QString& new_password_, const QByteArray& new_userpic_);
+		QFuture<QPair<bool, qint32>> updateUserRating(const QString& login_, const qint32& rating_);
 	};
 }
 

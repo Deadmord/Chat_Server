@@ -98,6 +98,12 @@
     <ClCompile Include="Entities\SrvModels\UserConnection.cpp">
       <Filter>Entities Files\Srv Models</Filter>
     </ClCompile>
+    <ClCompile Include="DTOUser.cpp">
+      <Filter>Source Files\Classes\DTOHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="DTORoom.cpp">
+      <Filter>Source Files\Classes\DTOHelpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBUser.h">
@@ -140,6 +146,12 @@
     </QtMoc>
     <QtMoc Include="Entities\SrvModels\UserConnection.h">
       <Filter>Entities Files\Srv Models</Filter>
+    </QtMoc>
+    <QtMoc Include="DTOUser.h">
+      <Filter>Header Files\Classes\DTOHelpers</Filter>
+    </QtMoc>
+    <QtMoc Include="DTORoom.h">
+      <Filter>Header Files\Classes\DTOHelpers</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

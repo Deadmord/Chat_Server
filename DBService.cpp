@@ -1,10 +1,5 @@
 #include "DBService.h"
-#include "DBRoom.h"
-#include <QtSql>
-#include <QSqlQuery>
-#include <QString>
-#include <QtConcurrent>
-#include <plog/Log.h> 
+
 
 namespace DBService {
 
