@@ -33,8 +33,6 @@ public slots:
     void startServer();
     void stopServer();
     void incomingConnection(qintptr socketDescriptor) override;
-    void slotDisconnect();
-    void slotReadyRead();
 
 private slots:
 

@@ -63,73 +63,73 @@ void Server::incomingConnection(qintptr socketDescriptor)
     //SendToAllClients(createMessage("Server", "New connection! Hello!"));
 }
 
-//---------------old------------------
-void Server::slotDisconnect()
-{
-
-    socket = (QTcpSocket*)sender();
-    //socket->deleteLater();
-    sockets.removeOne(socket);
-    //Sockets.removeAll(socket);
-    qDebug() << "Disconnected. " << socket->socketDescriptor() << " Now users : " << sockets.size();
-    //лучше создать сервис который будет чистить вектор подключений периодически по таймеру
-}
-
-//---------------old------------------
-void Server::slotReadyRead()
-{
-    socket = (QTcpSocket*)sender();
-    QDataStream in(socket);
-    in.setVersion(QDataStream::Qt_6_5);
-    if (in.status() == QDataStream::Ok)
-    {
-        qDebug() << "read...";
-        //        QString str;
-        //        in >> str;
-        //        qDebug() << str;
-        //        SendToClient(str);
-        for (;;)
-        {
-            //if (nextBlockSize == 0)
-            //{
-            //    qDebug() << "nextBlockSize = 0";
-            //    if (socket->bytesAvailable() < 2)
-            //    {
-            //        qDebug() << "Data < 2, break";
-            //        break;
-            //    }
-            //    in >> nextBlockSize;
-            //    qDebug() << "nextBlockSize = " << nextBlockSize;
-            //}
-            //if (socket->bytesAvailable() < nextBlockSize)
-            //{
-            //    qDebug() << "Data not full, waiting...";
-            //    break;
-            //}
-            //очевидно что условие выше выводит из цикла for, но как мы попадаем сюда снова? получается in.status обновляет значение после выполнения строки ниже?
-            Message msg;
-            in >> msg.id >> msg.date_time >> msg.nickname >> msg.deleted >> msg.text;
-            //nextBlockSize = 0;
-
-            //parce to User_Message----------------------------------
-
-            messages.push_back(msg);    //implecetly
-
-            qDebug() << "The message: " << msg.text;
-            //SendToAllClients(msg);      //implecetly
-
-            //To archive messanges
-            uploadMsgHistory(msg_history_path);
-
-            break;
-        }
-
-    }
-    else
-    {
-        qDebug() << "DataStream error";
-    }
-}
+////---------------old------------------
+//void Server::slotDisconnect()
+//{
+//
+//    socket = (QTcpSocket*)sender();
+//    //socket->deleteLater();
+//    sockets.removeOne(socket);
+//    //Sockets.removeAll(socket);
+//    qDebug() << "Disconnected. " << socket->socketDescriptor() << " Now users : " << sockets.size();
+//    //лучше создать сервис который будет чистить вектор подключений периодически по таймеру
+//}
+//
+////---------------old------------------
+//void Server::slotReadyRead()
+//{
+//    socket = (QTcpSocket*)sender();
+//    QDataStream in(socket);
+//    in.setVersion(QDataStream::Qt_6_5);
+//    if (in.status() == QDataStream::Ok)
+//    {
+//        qDebug() << "read...";
+//        //        QString str;
+//        //        in >> str;
+//        //        qDebug() << str;
+//        //        SendToClient(str);
+//        for (;;)
+//        {
+//            //if (nextBlockSize == 0)
+//            //{
+//            //    qDebug() << "nextBlockSize = 0";
+//            //    if (socket->bytesAvailable() < 2)
+//            //    {
+//            //        qDebug() << "Data < 2, break";
+//            //        break;
+//            //    }
+//            //    in >> nextBlockSize;
+//            //    qDebug() << "nextBlockSize = " << nextBlockSize;
+//            //}
+//            //if (socket->bytesAvailable() < nextBlockSize)
+//            //{
+//            //    qDebug() << "Data not full, waiting...";
+//            //    break;
+//            //}
+//            //очевидно что условие выше выводит из цикла for, но как мы попадаем сюда снова? получается in.status обновляет значение после выполнения строки ниже?
+//            Message msg;
+//            in >> msg.id >> msg.date_time >> msg.nickname >> msg.deleted >> msg.text;
+//            //nextBlockSize = 0;
+//
+//            //parce to User_Message----------------------------------
+//
+//            messages.push_back(msg);    //implecetly
+//
+//            qDebug() << "The message: " << msg.text;
+//            //SendToAllClients(msg);      //implecetly
+//
+//            //To archive messanges
+//            uploadMsgHistory(msg_history_path);
+//
+//            break;
+//        }
+//
+//    }
+//    else
+//    {
+//        qDebug() << "DataStream error";
+//    }
+//}
 
 void Server::loadConfig(QString _path)
 {

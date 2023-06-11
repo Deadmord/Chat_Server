@@ -39,9 +39,7 @@ void UserConnection::sendJson(const QJsonObject& json)
     // we send the message to the socket in the exact same way we did in the client
     QDataStream socketStream(user_socket);
     socketStream.setVersion(QDataStream::Qt_6_5);
-    socketStream << quint16(0) << jsonData;
-    socketStream.device()->seek(0);          //переходим в начало "данных"
-    socketStream << quint16(jsonData.size() - sizeof(quint16));
+    socketStream << quint16(jsonData.size()) << jsonData;
 }
 
 bool UserConnection::isFloodLimit() const { return flood_limit; }
