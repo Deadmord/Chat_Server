@@ -60,6 +60,24 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutDir>$(SolutionDir)..\$(Platform)\$(Configuration)\$(ProjectName)</OutDir>
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\CPP-Final-Project\Chat_Server\MessageSaver_Service;C:\FinalProject\Chat_Server\MessageSaver_Service;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\CPP-Final-Project\Chat_Server\x64\Debug;C:\FinalProject\Chat_Server\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>MessageSaver_Service.lib;MessageSaver_Service.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\CPP-Final-Project\Chat_Server\MessageSaver_Service;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>C:\CPP-Final-Project\Chat_Server\x64\Debug;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>MessageSaver_Service.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -87,9 +105,7 @@
   <ItemGroup>
     <ClCompile Include="DTORoom.cpp" />
     <ClCompile Include="DTOUser.cpp" />
-    <ClCompile Include="Room.cpp" />
     <ClCompile Include="RoomRepository.cpp" />
-    <ClCompile Include="User.cpp" />
     <ClCompile Include="UserRepository.cpp" />
     <ClInclude Include="DBService.h" />
     <ClInclude Include="DBUser.h">
@@ -123,10 +139,9 @@
     <ClCompile Include="file_repository.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="server.cpp" />
-    <QtMoc Include="Room.h" />
-    <QtMoc Include="User.h" />
     <QtMoc Include="DTOUser.h" />
     <QtMoc Include="DTORoom.h" />
+    <ClInclude Include="entites.h" />
     <ClInclude Include="file_repository.h" />
     <QtMoc Include="UserRepository.h" />
     <QtMoc Include="RoomRepository.h" />

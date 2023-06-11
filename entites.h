@@ -29,7 +29,7 @@ struct room
     QString name;
     QVector<Message> messages;
     QSet<client> clients;
-    // Р”СЂСѓРіРёРµ РЅРµРѕР±С…РѕРґРёРјС‹Рµ РїРѕР»СЏ
+    // Другие необходимые поля
 };
 
 #endif // ENTITIES_H

@@ -51,14 +51,8 @@
     <Filter Include="Header Files\Classes\DTOHelpers">
       <UniqueIdentifier>{e3c569de-5ddc-49da-a25f-91e3bf117ca2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Classes\Entites">
-      <UniqueIdentifier>{d6982e38-600b-4bbf-80c1-686223abf7c4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Classes\DTOHelpers">
       <UniqueIdentifier>{fe1185f2-cd36-44f9-b831-585924f39f85}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Classes\Entites">
-      <UniqueIdentifier>{b535c94e-b807-4572-b805-15709d37fc90}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -95,12 +89,6 @@
     <ClCompile Include="UserRepository.cpp">
       <Filter>Source Files\Classes\DBRepositories</Filter>
     </ClCompile>
-    <ClCompile Include="User.cpp">
-      <Filter>Source Files\Classes\Entites</Filter>
-    </ClCompile>
-    <ClCompile Include="Room.cpp">
-      <Filter>Source Files\Classes\Entites</Filter>
-    </ClCompile>
     <ClCompile Include="DTOUser.cpp">
       <Filter>Source Files\Classes\DTOHelpers</Filter>
     </ClCompile>
@@ -127,6 +115,9 @@
     <ClInclude Include="file_repository.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="entites.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="server.h">
@@ -143,12 +134,6 @@
     </QtMoc>
     <QtMoc Include="DTOUser.h">
       <Filter>Header Files\Classes\DTOHelpers</Filter>
-    </QtMoc>
-    <QtMoc Include="User.h">
-      <Filter>Header Files\Classes\Entites</Filter>
-    </QtMoc>
-    <QtMoc Include="Room.h">
-      <Filter>Header Files\Classes\Entites</Filter>
     </QtMoc>
     <QtMoc Include="DTORoom.h">
       <Filter>Header Files\Classes\DTOHelpers</Filter>

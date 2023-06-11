@@ -8,7 +8,8 @@
 #include <plog/Initializers/RollingFileInitializer.h>
 #include "RoomRepository.h"
 #include "UserRepository.h"
-
+#include "DTOUser.h"
+#include "DTORoom.h"
 int main(int argc, char* argv[])
 {
     plog::init(plog::debug, "log.txt", 1000000, 5);
@@ -17,12 +18,19 @@ int main(int argc, char* argv[])
     //server.startServer();
     //return a.exec();
 
-    QByteArray arrayThis("from ldskgfjbdslfkjghadfighjdfkghdfkgdfh");
-
+    QByteArray arrayy("55554544");
+    //const char* data = "11111";
+    //QByteArray arrayThis = QByteArray::fromRawData(data, strlen(data));
     DBService::UserRepository userRepo("Driver={ODBC Driver 18 for SQL Server};Server=tcp:comp-zionet-server.database.windows.net,1433;Database=CPP_Chat_DB;Uid=Logika4417;Pwd=Fyyf1998;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;");
 
-    auto future = userRepo.updateUser("loginn", "", arrayThis);
-    qDebug() << "result: " << future.result();
+    //auto future = userRepo.updateUser("logginn", "", arrayy);
+    //qDebug() << "result: " << future.result();
+
+    //DBEntity::DBUser user("logginn", "mypassword", arrayThis, 0, false);
+
+    //auto future = userRepo.createUser(user);
+    //qDebug() << future.result();
+ 
 }
 
 //Logger severity

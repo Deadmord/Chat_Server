@@ -3,6 +3,11 @@
 
 #include <QtSql>
 #include "DBRoom.h"
+#include "DBRoom.h"
+#include <QSqlQuery>
+#include <QString>
+#include <QtConcurrent>
+#include <plog/Log.h> 
 
 namespace DBService {
 

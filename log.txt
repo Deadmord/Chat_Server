@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ﻿2023-06-05 13:22:42.488 INFO  [7768] [DBService::DBConnection::databaseConnectionOpen@24] connected to db.
 2023-06-05 13:22:47.776 INFO  [7768] [DBService::DBConnection::databaseConnectionClose@59] connection to db closed
 2023-06-05 13:54:46.871 INFO  [7980] [DBService::DBConnection::databaseConnectionOpen@24] connected to db.
@@ -85,3 +86,497 @@
 2023-06-07 19:26:06.750 INFO  [17920] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
 2023-06-07 19:26:06.918 INFO  [17920] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@126] User updated.
 2023-06-07 19:26:06.938 INFO  [17920] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+=======
+﻿2023-06-07 21:23:23.806 INFO  [12088] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-07 21:23:23.808 INFO  [12088] [MessageSaver_Service::start@24] Archivator started.
+2023-06-07 21:23:24.816 NONE  [36032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:25.812 NONE  [36032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:26.805 NONE  [36032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:27.804 NONE  [36032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:28.817 NONE  [36032] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.043 INFO  [35144] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-07 21:23:51.053 INFO  [35144] [MessageSaver_Service::start@24] Archivator started.
+2023-06-07 21:23:51.073 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.080 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.092 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.101 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.111 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.122 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.131 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.143 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.151 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.161 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.172 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.182 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.192 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.201 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.211 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.221 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.232 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.242 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.251 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.262 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.271 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.281 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.291 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.300 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.311 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.322 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.332 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.342 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.352 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.363 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.371 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.382 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.390 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.402 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.418 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.421 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.431 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.441 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.451 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.461 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.470 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.481 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.490 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.500 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.510 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.520 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.531 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.541 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.550 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.561 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.571 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.580 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.591 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.601 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.610 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.620 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.630 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.640 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.652 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.666 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.671 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.683 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.690 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.700 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.715 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.721 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.731 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.740 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.750 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.762 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.770 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.780 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.790 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.800 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.812 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.820 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.830 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.840 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.850 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.860 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.870 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.880 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.890 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.900 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.910 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.920 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.930 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.942 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.950 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.961 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.970 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.980 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:51.991 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.000 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.010 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.020 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.030 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.040 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.050 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.060 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.070 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.080 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.090 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.100 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.110 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.120 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.130 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.140 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.150 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.160 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.170 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.180 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.190 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.200 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.211 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.220 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.230 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.240 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.250 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.260 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.270 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.280 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.290 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.300 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.310 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.320 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.330 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.340 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.350 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.361 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.370 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.381 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.391 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.401 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.411 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.421 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.431 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.441 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.451 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.461 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.471 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.481 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.491 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.501 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.511 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.522 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.531 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.541 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.551 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.561 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.572 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.581 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.591 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.601 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.611 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.621 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.631 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.641 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.651 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.661 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.671 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.681 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.691 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.701 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.712 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.721 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.731 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.742 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.751 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.761 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.772 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.781 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.792 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.815 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.821 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.831 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.841 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.851 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.861 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.871 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.881 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.891 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.901 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.912 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.921 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.931 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.941 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.951 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.961 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.972 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.981 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:52.992 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.001 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.011 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.021 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.031 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.041 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.051 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.061 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.071 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.081 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.091 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.101 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.111 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.133 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.134 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.141 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.151 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.161 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.171 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.184 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.192 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.201 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.214 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.221 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.231 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.241 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.251 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.261 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.271 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.281 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.291 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.301 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.311 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.321 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.331 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.341 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.351 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.361 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.371 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.381 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.391 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.401 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.411 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.421 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.431 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.441 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.451 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.462 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.471 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.481 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.491 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.501 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.511 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.521 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.531 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.541 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.551 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.561 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.571 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.581 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.591 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.601 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.611 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.621 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.631 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.641 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.651 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.661 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.671 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.681 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.691 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.702 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.711 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.721 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.731 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.741 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.751 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.761 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.771 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.781 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.791 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.801 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.811 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.821 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.831 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.841 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.851 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.861 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.871 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.881 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.892 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.901 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.911 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.921 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.931 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 21:23:53.941 NONE  [8652] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 22:14:26.337 INFO  [17204] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-07 22:14:26.345 INFO  [17204] [MessageSaver_Service::start@24] Archivator started.
+2023-06-07 22:14:27.336 NONE  [13400] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 22:14:28.349 NONE  [13400] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:36.666 INFO  [17892] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-07 23:12:36.676 INFO  [17892] [MessageSaver_Service::start@24] Archivator started.
+2023-06-07 23:12:37.671 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:38.678 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:39.672 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:40.671 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:41.682 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:42.675 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:43.670 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:44.680 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:45.674 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:46.681 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:47.680 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:48.671 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:49.672 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:50.671 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-07 23:12:51.683 NONE  [15924] [MessageSaver_Service::test@34] ASDASDASDASDASD
+>>>>>>> Stashed changes
+2023-06-07 23:28:48.542 INFO  [14484] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 23:28:48.737 INFO  [14484] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@126] User updated.
+2023-06-07 23:28:48.772 INFO  [14484] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 23:32:37.047 INFO  [6532] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 23:33:40.087 INFO  [6532] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@126] User updated.
+2023-06-07 23:33:40.097 INFO  [6532] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 23:41:25.723 INFO  [1864] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 23:41:25.965 INFO  [1864] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@127] User updated.
+2023-06-07 23:41:25.978 INFO  [1864] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 23:41:48.256 INFO  [15516] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 23:41:48.449 INFO  [15516] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@127] User updated.
+2023-06-07 23:41:48.464 INFO  [15516] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 23:47:31.695 INFO  [18100] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 23:47:31.926 INFO  [18100] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@126] User updated.
+2023-06-07 23:47:31.935 INFO  [18100] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 23:52:57.858 INFO  [964] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 23:52:58.067 ERROR [964] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@134] Error updating a user.
+2023-06-07 23:52:58.077 INFO  [964] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 23:54:58.070 INFO  [23564] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 23:54:58.271 ERROR [23564] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@134] Error updating a user.
+2023-06-07 23:54:58.282 INFO  [23564] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 23:56:03.652 INFO  [2320] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 23:56:03.848 INFO  [2320] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@131] User updated.
+2023-06-07 23:56:03.866 INFO  [2320] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 23:56:51.144 INFO  [4916] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 23:56:51.330 INFO  [4916] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@131] User updated.
+2023-06-07 23:56:51.340 INFO  [4916] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 23:57:37.894 INFO  [21964] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-07 23:57:38.087 INFO  [21964] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@131] User updated.
+2023-06-07 23:57:38.095 INFO  [21964] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-07 23:57:51.167 INFO  [7824] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 00:01:18.621 INFO  [14112] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 00:01:18.841 INFO  [14112] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@131] User updated.
+2023-06-08 00:01:18.850 INFO  [14112] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 00:02:54.627 INFO  [23260] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 00:02:54.824 INFO  [23260] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@131] User updated.
+2023-06-08 00:02:54.838 INFO  [23260] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 00:05:43.545 INFO  [18608] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 00:05:43.783 INFO  [18608] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@131] User updated.
+2023-06-08 00:05:43.792 INFO  [18608] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 00:08:11.028 INFO  [5352] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 00:08:11.309 INFO  [5352] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@131] User updated.
+2023-06-08 00:08:11.318 INFO  [5352] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 00:10:49.398 INFO  [11616] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 00:10:49.602 ERROR [11616] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@134] Error updating a user.
+2023-06-08 00:10:49.619 INFO  [11616] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 00:11:59.481 INFO  [21764] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 00:11:59.722 INFO  [21764] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@130] User updated.
+2023-06-08 00:11:59.728 INFO  [21764] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 09:38:59.009 INFO  [10428] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 09:38:59.318 INFO  [10428] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@130] User updated.
+2023-06-08 09:38:59.331 INFO  [10428] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 09:42:05.092 INFO  [17112] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 09:42:05.326 INFO  [17112] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@130] User updated.
+2023-06-08 09:42:05.339 INFO  [17112] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 09:45:46.001 INFO  [10512] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 09:46:26.110 ERROR [10512] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@136] Error updating a user.
+2023-06-08 09:46:26.138 INFO  [10512] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 09:48:06.831 INFO  [23504] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 09:48:07.071 INFO  [23504] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@131] User updated.
+2023-06-08 09:48:07.082 INFO  [23504] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 09:54:54.933 INFO  [11592] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 09:54:55.209 INFO  [11592] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@131] User updated.
+2023-06-08 09:54:55.222 INFO  [11592] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 09:57:50.484 INFO  [23940] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 09:57:52.740 ERROR [23940] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@137] Error updating a user.
+2023-06-08 09:57:52.765 INFO  [23940] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 09:58:53.530 INFO  [19760] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 09:58:53.738 ERROR [19760] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@137] Error updating a user.
+2023-06-08 09:58:53.751 INFO  [19760] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 10:04:48.603 INFO  [23264] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 10:04:48.891 INFO  [23264] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@131] User updated.
+2023-06-08 10:04:48.927 INFO  [23264] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 10:12:32.669 INFO  [20124] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 10:12:32.918 INFO  [20124] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@131] User updated.
+2023-06-08 10:12:32.955 INFO  [20124] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 10:28:42.279 INFO  [11616] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 10:28:42.521 INFO  [11616] [DBService::UserRepository::createUser::<lambda_1>::operator ()@79] Created new User db entity with login: LOGINLOGIN
+2023-06-08 10:28:42.551 INFO  [11616] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 10:30:39.264 INFO  [4136] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 10:30:39.496 INFO  [4136] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@135] User updated.
+2023-06-08 10:30:39.546 INFO  [4136] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 17:59:30.788 INFO  [15700] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 17:59:31.681 INFO  [15700] [DBService::UserRepository::createUser::<lambda_1>::operator ()@76] Created new User db entity with login: logginn
+2023-06-08 17:59:31.720 INFO  [15700] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 18:01:33.118 INFO  [3060] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 18:01:34.268 INFO  [3060] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 18:02:47.715 INFO  [16188] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 18:02:47.968 INFO  [16188] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@132] User updated.
+2023-06-08 18:02:47.987 INFO  [16188] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 18:07:16.809 INFO  [12956] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 18:07:17.085 INFO  [12956] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@133] User updated.
+2023-06-08 18:07:17.122 INFO  [12956] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 18:09:36.120 INFO  [22980] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 18:09:36.369 INFO  [22980] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@133] User updated.
+2023-06-08 18:09:36.402 INFO  [22980] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 18:10:16.193 INFO  [18044] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 18:10:16.406 INFO  [18044] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@133] User updated.
+2023-06-08 18:10:16.423 INFO  [18044] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 18:10:53.660 INFO  [20368] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 18:10:53.896 INFO  [20368] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@133] User updated.
+2023-06-08 18:10:53.914 INFO  [20368] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 18:12:26.282 ERROR [6280] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@144] Cannot connect to the data base.
+2023-06-08 18:12:52.952 INFO  [12796] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 18:12:53.157 INFO  [12796] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@133] User updated.
+2023-06-08 18:12:53.172 INFO  [12796] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 18:15:18.059 INFO  [14252] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 18:15:18.262 INFO  [14252] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@133] User updated.
+2023-06-08 18:15:18.291 INFO  [14252] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 18:17:11.903 INFO  [11752] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 18:18:29.317 INFO  [3360] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 18:18:59.001 INFO  [3360] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@133] User updated.
+2023-06-08 18:18:59.032 INFO  [3360] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 18:22:55.468 INFO  [3256] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 18:22:55.717 INFO  [3256] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@133] User updated.
+2023-06-08 18:22:55.745 INFO  [3256] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 19:46:26.425 INFO  [12104] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 19:46:26.649 INFO  [12104] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@133] User updated.
+2023-06-08 19:46:26.672 INFO  [12104] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 19:47:16.683 INFO  [23412] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 19:47:16.921 INFO  [23412] [DBService::UserRepository::createUser::<lambda_1>::operator ()@76] Created new User db entity with login: logginn
+2023-06-08 19:47:16.930 INFO  [23412] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 19:47:58.682 INFO  [17980] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 19:47:58.882 ERROR [17980] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@138] Error updating a user.
+2023-06-08 19:47:58.897 INFO  [17980] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 19:50:50.056 INFO  [22292] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 19:50:50.252 ERROR [22292] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@138] Error updating a user.
+2023-06-08 19:50:50.277 INFO  [22292] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 19:54:03.608 INFO  [19468] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 19:54:03.792 ERROR [19468] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@138] Error updating a user.
+2023-06-08 19:54:03.799 INFO  [19468] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 19:55:26.692 INFO  [15964] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 19:55:26.888 ERROR [15964] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@188] Error updating a user.
+2023-06-08 19:55:26.905 INFO  [15964] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 19:56:31.013 INFO  [13420] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 19:56:31.209 INFO  [13420] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@185] User updated.
+2023-06-08 19:56:31.222 INFO  [13420] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 19:58:20.885 INFO  [2288] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 19:58:21.090 INFO  [2288] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@185] User updated.
+2023-06-08 19:58:21.102 INFO  [2288] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 20:01:16.080 INFO  [15296] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 20:01:16.280 INFO  [15296] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@187] User updated.
+2023-06-08 20:01:16.310 INFO  [15296] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 20:01:38.165 INFO  [22032] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 20:01:38.360 INFO  [22032] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@187] User updated.
+2023-06-08 20:01:38.369 INFO  [22032] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 20:02:03.760 INFO  [18076] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 20:02:03.960 INFO  [18076] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@187] User updated.
+2023-06-08 20:02:03.971 INFO  [18076] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 20:02:57.360 INFO  [24080] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 20:02:57.560 INFO  [24080] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@187] User updated.
+2023-06-08 20:02:57.573 INFO  [24080] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 20:03:26.160 INFO  [10644] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 20:03:26.358 INFO  [10644] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@187] User updated.
+2023-06-08 20:03:26.373 INFO  [10644] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 20:08:51.188 INFO  [23488] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 20:08:51.403 INFO  [23488] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@181] User updated.
+2023-06-08 20:08:51.411 INFO  [23488] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 20:09:46.347 INFO  [12116] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 20:09:46.548 INFO  [12116] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@181] User updated.
+2023-06-08 20:09:46.557 INFO  [12116] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-08 20:21:12.794 INFO  [19908] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-08 20:21:21.532 INFO  [19908] [DBService::UserRepository::updateUser::<lambda_1>::operator ()@130] User updated.
+2023-06-08 20:21:21.544 INFO  [19908] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-11 13:07:30.787 INFO  [12016] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-11 13:07:31.891 INFO  [12016] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-11 14:08:00.749 INFO  [9620] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-11 14:08:01.626 INFO  [9620] [DBService::UserRepository::updateUserRating::<lambda_1>::operator ()@172] User rating updated. New User 'logginn' rating: 50
+2023-06-11 14:08:01.635 INFO  [9620] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-11 14:09:27.521 INFO  [9292] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-11 14:09:28.389 INFO  [9292] [DBService::UserRepository::updateUserRating::<lambda_1>::operator ()@172] User rating updated. User 'logginn' new rating: 1
+2023-06-11 14:09:28.398 INFO  [9292] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.
+2023-06-11 14:20:16.188 INFO  [3388] [DBService::DBConnection::databaseConnectionOpen@23] connected to db.
+2023-06-11 14:20:17.027 INFO  [3388] [DBService::UserRepository::updateUserRating::<lambda_1>::operator ()@173] User rating updated. User 'logginn' new rating: 1
+2023-06-11 14:20:17.036 INFO  [3388] [DBService::DBConnection::databaseConnectionClose@37] connection to db closed.

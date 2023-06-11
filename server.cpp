@@ -1,7 +1,7 @@
 #include "server.h"
 
-Server::Server(){}
-Server::~Server(){}
+Server::Server() {}
+Server::~Server() {}
 
 void Server::startServer()
 {
@@ -151,7 +151,7 @@ void Server::loadConfig(QString _path)
     {
         qWarning("Couldn't open config file.");
     }
-    
+
 }
 
 void Server::openConnection()
@@ -180,18 +180,18 @@ void Server::loadMsgHistory(const QString path)
     QFile msgFile;
 
     msgFile.setFileName(path);
-    if (msgFile.open(QIODevice::ReadOnly|QFile::Text))
+    if (msgFile.open(QIODevice::ReadOnly | QFile::Text))
     {
         //тот нужно блокировать обращение к ресурсу msgFile
-        msgHistory = QJsonDocument::fromJson(QByteArray(msgFile.readAll()),&jsonError);
+        msgHistory = QJsonDocument::fromJson(QByteArray(msgFile.readAll()), &jsonError);
         msgFile.close();
 
-        if(jsonError.errorString().toInt() == QJsonParseError::NoError)
+        if (jsonError.errorString().toInt() == QJsonParseError::NoError)
         {
             msgArray = QJsonValue(msgHistory.object().value("messanges")).toArray();
-            for (const auto &msgJson : msgArray)
+            for (const auto& msgJson : msgArray)
             {
-                Message msg {msgJson.toObject().value("nickname").toString(),
+                Message msg{ msgJson.toObject().value("nickname").toString(),
                             msgJson.toObject().value("text").toString(),
                             QDateTime::fromString(msgJson.toObject().value("time").toString()),
                             msgJson.toObject().value("id").toString(),
@@ -217,24 +217,24 @@ void Server::uploadMsgHistory(const QString path)
     QFile msgFile;
 
     msgFile.setFileName(path);
-    if (msgFile.open(QIODevice::WriteOnly|QFile::Text))
+    if (msgFile.open(QIODevice::WriteOnly | QFile::Text))
     {
         msgArray = msgHistory.object().value("messanges").toArray();
 
-        for (const Message &msg : messages)
+        for (const Message& msg : messages)
         {
             QVariantMap map;
-            map.insert("nickname",msg.nickname);
-            map.insert("text",msg.text);
-            map.insert("time",msg.time);
-            map.insert("id",msg.id);
-            map.insert("deleted",msg.deleted);
+            map.insert("nickname", msg.nickname);
+            map.insert("text", msg.text);
+            map.insert("time", msg.time);
+            map.insert("id", msg.id);
+            map.insert("deleted", msg.deleted);
 
             QJsonObject msgJson = QJsonObject::fromVariantMap(map);
             msgArray.append(msgJson);           //Тут нужно проверять есть ли такой элемент уже в массиве и вставлять если нет
         }
         msgHistory.setArray(msgArray);
-        msgFile.write("{\"messanges\":"+msgHistory.toJson()+"}");
+        msgFile.write("{\"messanges\":" + msgHistory.toJson() + "}");
     }
     else
     {
@@ -244,7 +244,7 @@ void Server::uploadMsgHistory(const QString path)
 
 //----------------SendToClient-----------------
 
-void Server::SendToClient(const Message &msg, QTcpSocket *socket)
+void Server::SendToClient(const Message& msg, QTcpSocket* socket)
 {
     Data.clear();
     QDataStream out(&Data, QIODevice::WriteOnly);
@@ -256,17 +256,17 @@ void Server::SendToClient(const Message &msg, QTcpSocket *socket)
     socket->write(Data);
 }
 
-void Server::SendToClient(const QVector<Message> &msgs, QTcpSocket *socket)
+void Server::SendToClient(const QVector<Message>& msgs, QTcpSocket* socket)
 {
-    for (const Message &msg : msgs)
+    for (const Message& msg : msgs)
     {
-    Data.clear();
-    QDataStream out(&Data, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_6_5);
-    out << quint16(0) << msg.id << msg.time << msg.nickname << msg.deleted << msg.text; // преобразовали в stream
-    out.device()->seek(0);          //переходим в начало "данных"
-    out << quint16(Data.size() - sizeof(quint16));
-    socket->write(Data);
+        Data.clear();
+        QDataStream out(&Data, QIODevice::WriteOnly);
+        out.setVersion(QDataStream::Qt_6_5);
+        out << quint16(0) << msg.id << msg.time << msg.nickname << msg.deleted << msg.text; // преобразовали в stream
+        out.device()->seek(0);          //переходим в начало "данных"
+        out << quint16(Data.size() - sizeof(quint16));
+        socket->write(Data);
     }
 }
 
@@ -286,7 +286,7 @@ void Server::SendToClient(const QVector<Message> &msgs, QTcpSocket *socket)
 //    }
 //}
 
-void Server::SendToAllClients(const Message &msg)
+void Server::SendToAllClients(const Message& msg)
 {
     Data.clear();
     QDataStream out(&Data, QIODevice::WriteOnly);
@@ -296,7 +296,7 @@ void Server::SendToAllClients(const Message &msg)
     out.device()->seek(0);          //переходим в начало "данных"
     out << quint16(Data.size() - sizeof(quint16));
     //socket->write(Data);
-    for(int i(0); i < sockets.size(); i++)
+    for (int i(0); i < sockets.size(); i++)
     {
         sockets[i]->write(Data);
     }

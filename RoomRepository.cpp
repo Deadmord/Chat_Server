@@ -1,6 +1,4 @@
 #include "RoomRepository.h"
-#include <QtConcurrent>
-#include <plog/Log.h> 
 
 namespace DBService {
 

@@ -10,7 +10,7 @@
 #include <QFile>
 #include <QTime>
 #include <QUuid>
-#include "entities.h"
+#include "entites.h"
 
 const QString CONFIG_FILE_PATH = "./config.json";
 
