@@ -76,12 +76,11 @@ void UserConnection::receiveJson()
                     break;
                 }
                 socketStream >> nextBlockSize;
-                qDebug() << "nextBlockSize = " << nextBlockSize;
-                emit logMessage(debug, "nextBlockSize = " + nextBlockSize);
+                emit logMessage(debug, "nextBlockSize = " + QString::number(nextBlockSize) + " byte. Available " + QString::number(user_socket->bytesAvailable()));
             }
             if (user_socket->bytesAvailable() < nextBlockSize)
             {
-                emit logMessage(debug, "Data not full, waiting...");
+                emit logMessage(debug, "Data not full, waiting..." + QString::number(user_socket->bytesAvailable()) + " byte available");
                 break;
             }
             // we start a transaction so we can revert to the previous state in case we try to read more data than is available on the socket
