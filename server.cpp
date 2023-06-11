@@ -68,7 +68,7 @@ void Server::slotReadyRead()
                     break;
                 }
                 in >> nextBlockSize;
-                qDebug() << "nextBlockSize = " << nextBlockSize;
+                qDebug() << "nextBlockSize = " << nextBlockSize << ". Available " << socket->bytesAvailable();
             }
             if (socket->bytesAvailable() < nextBlockSize)
             {
