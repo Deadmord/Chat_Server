@@ -76,6 +76,7 @@ void UserConnection::receiveJson()
                     break;
                 }
                 socketStream >> nextBlockSize;
+                qDebug() << "nextBlockSize = " << nextBlockSize;
                 emit logMessage(debug, "nextBlockSize = " + nextBlockSize);
             }
             if (user_socket->bytesAvailable() < nextBlockSize)
@@ -111,6 +112,7 @@ void UserConnection::receiveJson()
                 break;
             }
             nextBlockSize = 0;
+            break;
         }
     }
     else
