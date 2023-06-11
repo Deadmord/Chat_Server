@@ -57,6 +57,18 @@
     <Filter Include="Entities Files\Enums">
       <UniqueIdentifier>{fe703e65-7622-436c-ba72-d99a4cbceb82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classes\DBRepositories">
+      <UniqueIdentifier>{f2f82fee-49c1-4032-9008-ff853ee18ab7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\DTOHelpers">
+      <UniqueIdentifier>{37cf4b0b-197b-451c-aa3f-052b5eb581ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classes\DBRepositories">
+      <UniqueIdentifier>{dcd0cfdb-f8f4-4c92-837d-8e13ae9fe31c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classes\DTOHelpers">
+      <UniqueIdentifier>{a44ca6cb-0427-4369-96d0-745af5410e7d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -98,10 +110,16 @@
     <ClCompile Include="Entities\SrvModels\UserConnection.cpp">
       <Filter>Entities Files\Srv Models</Filter>
     </ClCompile>
-    <ClCompile Include="DTOUser.cpp">
-      <Filter>Source Files\Classes\DTOHelpers</Filter>
+    <ClCompile Include="RoomRepository.cpp">
+      <Filter>Source Files\Classes\DBRepositories</Filter>
+    </ClCompile>
+    <ClCompile Include="UserRepository.cpp">
+      <Filter>Source Files\Classes\DBRepositories</Filter>
     </ClCompile>
     <ClCompile Include="DTORoom.cpp">
+      <Filter>Source Files\Classes\DTOHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="DTOUser.cpp">
       <Filter>Source Files\Classes\DTOHelpers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -127,6 +145,12 @@
     <ClInclude Include="Entities\Enums\Enums.h">
       <Filter>Entities Files\Enums</Filter>
     </ClInclude>
+    <ClInclude Include="DTORoom.h">
+      <Filter>Header Files\Classes\DTOHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="DTOUser.h">
+      <Filter>Header Files\Classes\DTOHelpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="server.h">
@@ -147,11 +171,11 @@
     <QtMoc Include="Entities\SrvModels\UserConnection.h">
       <Filter>Entities Files\Srv Models</Filter>
     </QtMoc>
-    <QtMoc Include="DTOUser.h">
-      <Filter>Header Files\Classes\DTOHelpers</Filter>
+    <QtMoc Include="RoomRepository.h">
+      <Filter>Header Files\Classes\DBRepositories</Filter>
     </QtMoc>
-    <QtMoc Include="DTORoom.h">
-      <Filter>Header Files\Classes\DTOHelpers</Filter>
+    <QtMoc Include="UserRepository.h">
+      <Filter>Header Files\Classes\DBRepositories</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
