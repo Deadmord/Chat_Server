@@ -26,9 +26,7 @@ LocalStorage_Service* LocalStorage_Service::getInstance() {
     return instance;
 }
 
-LocalStorage_Service::LocalStorage_Service(QObject* object_) : QObject(object_) {
-
-}
+LocalStorage_Service::LocalStorage_Service(QObject* object_) : QObject(object_) {}
 
 
 void LocalStorage_Service::saveAllMessages() {
