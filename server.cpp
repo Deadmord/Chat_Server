@@ -8,8 +8,6 @@ void Server::startServer()
     loadConfig(CONFIG_FILE_PATH);
     openConnection();
     loadRooms();
-    //определить функцию загрузки данных из истории
-    loadMsgHistory(msg_history_path);
     emit logMessage(info, "Server initialized");
 }
 
@@ -169,10 +167,10 @@ void Server::loadConfig(QString _path)
             else
                 qWarning() << "Error BlackListPath reading";
 
-            if (const QJsonValue v = config_file_doc["MessagesHistorySettings"]["Path"]; v.isString())
-                msg_history_path = v.toString();
-            else
-                qWarning() << "Error BlackListPath reading";
+            //if (const QJsonValue v = config_file_doc["MessagesHistorySettings"]["Path"]; v.isString())
+            //    msg_history_path = v.toString();
+            //else
+            //    qWarning() << "Error BlackListPath reading";
 
         }
         else
@@ -216,82 +214,6 @@ void Server::loadRooms()
 {
     //Load rooms from repository to vector<Room>
     //run loop to init all rooms
-}
-
-void Server::loadMsgHistory(const QString path)
-{
-    QJsonDocument msgHistory;
-    QJsonArray msgArray;
-    QJsonParseError jsonError;
-    QFile msgFile;
-
-    msgFile.setFileName(path);
-    if (msgFile.open(QIODevice::ReadOnly | QFile::Text))
-    {
-        //тот нужно блокировать обращение к ресурсу msgFile
-        msgHistory = QJsonDocument::fromJson(QByteArray(msgFile.readAll()), &jsonError);
-        msgFile.close();
-
-        if (jsonError.errorString().toInt() == QJsonParseError::NoError)
-        {
-            msgArray = QJsonValue(msgHistory.object().value("messanges")).toArray();
-            for (const auto& msgJson : msgArray)
-            {
-                Message msg { msgJson.toObject().value("id").toString(),
-                            msgJson.toObject().value("roomId").toInt(),
-                            QDateTime::fromString(msgJson.toObject().value("time").toString()),
-                            msgJson.toObject().value("nickname").toString(),
-                            msgJson.toObject().value("text").toString(),
-                            msgJson.toObject().value("mediaId").toString(),
-                            msgJson.toObject().value("parentId").toString(),
-                            msgJson.toObject().value("deleted").toBool() };
-                messages.push_back(msg);
-            }
-        }
-        else
-        {
-            qDebug() << "Error message history read: " << jsonError.error;
-        }
-    }
-    else
-    {
-        qDebug() << "File message history can't be open.";
-    }
-}
-
-void Server::uploadMsgHistory(const QString path)
-{
-    QJsonDocument msgHistory;
-    QJsonArray msgArray;
-    QFile msgFile;
-
-    msgFile.setFileName(path);
-    if (msgFile.open(QIODevice::WriteOnly | QFile::Text))
-    {
-        msgArray = msgHistory.object().value("messanges").toArray();
-
-        for (const User_Message &msg : messages)
-        {
-            QVariantMap map;
-            map.insert("id", msg.getId());
-            map.insert("roomId", msg.getRoomId());
-            map.insert("time", msg.getDateTime());
-            map.insert("nickname",msg.getNickname());
-            map.insert("text",msg.getText());
-            map.insert("mediaId", msg.getMedia());
-            map.insert("parentId", msg.getParentId());
-            map.insert("deleted",msg.isDeleted());
-
-            QJsonObject msgJson = QJsonObject::fromVariantMap(map);
-            msgArray.append(msgJson);           //Тут нужно проверять есть ли такой элемент уже в массиве и вставлять если нет
-        }
-        msgHistory.setArray(msgArray);
-        msgFile.write("{\"messanges\":" + msgHistory.toJson() + "}");
-    }
-    else
-    {
-        qDebug() << "File message history can't be open.";
-    }
 }
 
 //----------------SendToClient-----------------

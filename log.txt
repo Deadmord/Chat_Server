@@ -7256,3 +7256,8 @@
 2023-06-12 00:06:49.691 ERROR [21652] [asyncConsoleWin::logMessage@120] Error from User111
 2023-06-12 00:06:49.691 INFO  [21652] [asyncConsoleWin::logMessage@126] User111 disconnected
 2023-06-12 00:06:50.668 NONE  [18988] [MessageSaver_Service::test@34] ASDASDASDASDASD
+2023-06-12 19:12:44.549 DEBUG [48516] [startup_routine@53] Server application starting. Logging is enabled.
+2023-06-12 19:12:44.550 INFO  [48516] [MessageSaver_Service::start@13] Archivator instance is created.
+2023-06-12 19:12:44.561 INFO  [48516] [MessageSaver_Service::start@24] Archivator started.
+2023-06-12 19:12:44.576 INFO  [48516] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-12 19:12:44.576 INFO  [48516] [asyncConsoleWin::logMessage@126] Server initialized

@@ -7,6 +7,11 @@
 #include <QDebug>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonParseError>
+#include <QFile>
 
 #include "../../DBRoom.h"
 #include "../../Entities/Enums/Enums.h"
@@ -17,40 +22,45 @@
 class RoomController : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(QString name MEMBER name READ get_name WRITE set_name NOTIFY name_changed RESET reset_name)
+	Q_DISABLE_COPY(RoomController)
+	Q_PROPERTY(QString name MEMBER name READ getName WRITE setName NOTIFY nameChanged)
 
 public:
+	explicit RoomController(const quint32& id_, const QString& name_, const QString& description_, const quint32& topic_id_, const bool& is_private_, const QString& password_, bool is_deleted_, QObject* parent = nullptr);
+	~RoomController() override;
+
 	static void initializeList(const QVector<DBEntity::DBRoom>& rooms_list_);
 	static void createNew(const QVector<DBEntity::DBRoom>& roomsList, DBEntity::DBRoom new_room_);
 	static void deleteOne(const QVector<DBEntity::DBRoom>& roomsList, DBEntity::DBRoom deleted_room_);
 
-protected:
-	explicit RoomController(QObject* parent = nullptr);
-	~RoomController() override;
-	RoomController(const RoomController& other);
-	RoomController& operator = (const RoomController& other);
+	[[nodiscard]] quint32 getId() const;
+	[[nodiscard]] QString getName() const;
+	[[nodiscard]] QString getDescription() const;
+	[[nodiscard]] quint32 getTopicId() const;
+	[[nodiscard]] bool	  isPrivate() const;
+	[[nodiscard]] QString getPassword() const;		//TODO!!! It seems like, should be changed on "bool checkPassword" !!!
+	[[nodiscard]] bool	  isDeleted() const;
 
-public:
-	void initDir();
+	void setName(const QString& val);
+	void setDescription(const QString& val);
+	void setPrivate(bool val);
+	void setPassword(const QString& val);
+	void Delete();
 
-	[[nodiscard]] QString get_name() const { return name; }
-	void set_name(const QString& val)
-	{
-		name = val; emit name_changed(val);
-	}
-	void reset_name() { name.clear(); }
+signals:
+	void roomCreated(const RoomController* room);
+	void nameChanged(const QString& val);
+	void descriptionChanged(const QString& val);
+	void privateChanged(bool val);
+	void passwordChanged();
+	void roomDeleted();
 
-Q_SIGNALS:
-	void signal_1(int val);
-	void signal_1(QString str);
-	void name_changed(const QString& newText);
-
-public Q_SLOTS:
-
-	void on_signal_1(int val);
-	void on_signal_1(QString str);
+public slots:
+	void initRoom();
 
 private:
+	void loadMsgHistory(const QString path);
+	void uploadMsgHistory(const QString path);
 
 private:
 	quint32 id;
@@ -61,6 +71,7 @@ private:
 	QString password;
 	bool	is_deleted;
 
+	QString msg_history_path;   // = "./msg_history.json";
 	QVector<User_Message> messages;
 	QVector<UserConnection*> connected_users;
 };
