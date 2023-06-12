@@ -3,6 +3,10 @@
 #include <QObject>
 #include <QMutex>
 #include <QMap>
+#include <QDir>
+
+#include <plog/Log.h>
+
 #include "DB/JSONS/messages.h"
 
 class LocalStorage_Service :
@@ -22,9 +26,10 @@ public:
 
 signals:
     void messageRetrieved(QList<DBEntity::DBMessage*> message_);
+    void close();
+
 public slots:
-
-
-    //void getMessages(QDateTime from_, QDateTime to_, QUuid room_id_);
+    void addMessages(DBEntity::DBMessage* message_, QUuid room_id_);
     void saveAllMessages();
+    void safeExit();
 };

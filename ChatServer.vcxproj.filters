@@ -69,6 +69,15 @@
     <Filter Include="Header Files\Classes\DTOHelpers">
       <UniqueIdentifier>{a44ca6cb-0427-4369-96d0-745af5410e7d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Services">
+      <UniqueIdentifier>{c531b894-52d6-40a9-8988-2dc0d72f550b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services\MessageSaverService">
+      <UniqueIdentifier>{029e9118-a866-431c-a00d-e1a05b98636a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services\LocalStorageService">
+      <UniqueIdentifier>{29e78155-5c44-4262-a465-c77595a16d4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -122,11 +131,11 @@
     <ClCompile Include="DTOUser.cpp">
       <Filter>Source Files\Classes\DTOHelpers</Filter>
     </ClCompile>
-    <ClCompile Include="LocalStorage_Service.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MessageSaver_Service.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Services\MessageSaverService</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalStorage_Service.cpp">
+      <Filter>Services\LocalStorageService</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,11 +192,11 @@
     <QtMoc Include="UserRepository.h">
       <Filter>Header Files\Classes\DBRepositories</Filter>
     </QtMoc>
-    <QtMoc Include="LocalStorage_Service.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="MessageSaver_Service.h">
-      <Filter>Header Files</Filter>
+      <Filter>Services\MessageSaverService</Filter>
+    </QtMoc>
+    <QtMoc Include="LocalStorage_Service.h">
+      <Filter>Services\LocalStorageService</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
