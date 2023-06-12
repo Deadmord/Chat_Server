@@ -31,11 +31,12 @@ public:
 
     MessageSaver_Service(const MessageSaver_Service&) = delete;
     MessageSaver_Service& operator=(const MessageSaver_Service&) = delete;
-    static bool start(const double& minutes_);
+    static bool start(const float& minutes_);
 
 public slots:
 
     void test();
+    void safeExit();
 
 
 };

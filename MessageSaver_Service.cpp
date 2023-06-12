@@ -8,7 +8,7 @@ QThread* MessageSaver_Service::p_thread = nullptr;
 
 MessageSaver_Service::MessageSaver_Service(QObject* parent_) : QObject(parent_) {}
 
-bool MessageSaver_Service::start(const double& minutes_)
+bool MessageSaver_Service::start(const float& minutes_)
 {
 	if (!is_started) {
 		is_started = true;
@@ -35,6 +35,15 @@ bool MessageSaver_Service::start(const double& minutes_)
 		PLOGW << "Archivator was already started!!!";
 		return false;
 	}
+}
+
+void MessageSaver_Service::safeExit()
+{
+	p_timer->stop();
+	p_timer->deleteLater();
+	p_thread->quit();
+	p_thread->deleteLater();
+	p_instance->deleteLater();
 }
 
 void MessageSaver_Service::test() { PLOGN << "ASDASDASDASDASD"; };

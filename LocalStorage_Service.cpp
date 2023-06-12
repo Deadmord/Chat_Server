@@ -1,5 +1,5 @@
 #include "LocalStorage_Service.h"
-
+#include <qthread.h>
 
 LocalStorage_Service* LocalStorage_Service::instance = nullptr;
 QMutex LocalStorage_Service::mutex;
@@ -52,7 +52,7 @@ void LocalStorage_Service::safeExit()
 {
     saveAllMessages();
     instance->deleteLater();
-    PLOGE << "Local storage service safely closed";
+    PLOGI << "Local storage service safely closed";
 }
 
 
