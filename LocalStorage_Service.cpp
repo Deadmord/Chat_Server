@@ -52,6 +52,7 @@ void LocalStorage_Service::safeExit()
 {
     saveAllMessages();
     instance->deleteLater();
+    PLOGE << "Local storage service safely closed";
 }
 
 
