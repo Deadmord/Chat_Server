@@ -1,4 +1,6 @@
 #pragma once
+#ifndef LOCALSTORAGE_SERVICE_H
+#define LOCALSTORAGE_SERVICE_H
 
 #include <QObject>
 #include <QMutex>
@@ -33,3 +35,4 @@ public slots:
     void saveAllMessages();
     void safeExit();
 };
+#endif //LOCALSTORAGE_SERVICE_H

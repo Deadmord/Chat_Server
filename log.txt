@@ -1,64 +1,19 @@
-﻿2023-06-12 14:33:09.099 DEBUG [24872] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 14:33:09.108 INFO  [24872] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 14:33:09.111 INFO  [24872] [MessageSaver_Service::start@24] Archivator started.
-2023-06-12 14:33:11.089 INFO  [24872] [asyncConsoleWin::logMessage@126] Server start - OK
-2023-06-12 14:33:11.104 INFO  [24872] [asyncConsoleWin::logMessage@126] Server initialized
-2023-06-12 14:34:32.518 DEBUG [11620] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 14:34:32.524 INFO  [11620] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 14:34:32.525 INFO  [11620] [MessageSaver_Service::start@24] Archivator started.
-2023-06-12 14:34:49.565 INFO  [11620] [asyncConsoleWin::logMessage@126] Server start - OK
-2023-06-12 14:34:49.569 INFO  [11620] [asyncConsoleWin::logMessage@126] Server initialized
-2023-06-12 14:36:54.418 DEBUG [18460] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 14:36:54.424 INFO  [18460] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 14:36:54.425 INFO  [18460] [MessageSaver_Service::start@24] Archivator started.
-2023-06-12 14:37:00.380 INFO  [18460] [asyncConsoleWin::logMessage@126] Server start - OK
-2023-06-12 14:37:00.384 INFO  [18460] [asyncConsoleWin::logMessage@126] Server initialized
-2023-06-12 14:37:43.683 DEBUG [12952] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 14:37:43.688 INFO  [12952] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 14:37:43.690 INFO  [12952] [MessageSaver_Service::start@24] Archivator started.
-2023-06-12 14:37:45.710 INFO  [12952] [asyncConsoleWin::logMessage@126] Server start - OK
-2023-06-12 14:37:45.716 INFO  [12952] [asyncConsoleWin::logMessage@126] Server initialized
-2023-06-12 14:38:45.633 DEBUG [32732] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 14:38:45.634 INFO  [32732] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 14:38:45.636 INFO  [32732] [MessageSaver_Service::start@24] Archivator started.
-2023-06-12 14:38:47.767 INFO  [32732] [asyncConsoleWin::logMessage@126] Server start - OK
-2023-06-12 14:38:47.775 INFO  [32732] [asyncConsoleWin::logMessage@126] Server initialized
-2023-06-12 14:39:51.216 DEBUG [29016] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 14:39:51.217 INFO  [29016] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 14:39:51.219 INFO  [29016] [MessageSaver_Service::start@24] Archivator started.
-2023-06-12 14:39:52.460 INFO  [29016] [asyncConsoleWin::logMessage@126] Server start - OK
-2023-06-12 14:39:52.467 INFO  [29016] [asyncConsoleWin::logMessage@126] Server initialized
-2023-06-12 14:41:12.889 DEBUG [22820] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 14:41:12.891 INFO  [22820] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 14:41:12.893 INFO  [22820] [MessageSaver_Service::start@24] Archivator started.
-2023-06-12 14:41:15.482 INFO  [22820] [asyncConsoleWin::logMessage@126] Server start - OK
-2023-06-12 14:41:15.493 INFO  [22820] [asyncConsoleWin::logMessage@126] Server initialized
-2023-06-12 14:44:17.541 DEBUG [16284] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 14:44:17.542 INFO  [16284] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 14:46:04.699 DEBUG [28376] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 14:46:04.701 INFO  [28376] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 14:46:30.409 INFO  [28376] [MessageSaver_Service::start@24] Archivator started.
-2023-06-12 14:46:30.429 INFO  [28376] [asyncConsoleWin::logMessage@126] Server start - OK
-2023-06-12 14:46:30.433 INFO  [28376] [asyncConsoleWin::logMessage@126] Server initialized
-2023-06-12 14:47:46.368 DEBUG [33524] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 14:47:46.370 INFO  [33524] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 14:47:49.278 INFO  [33524] [MessageSaver_Service::start@24] Archivator started.
-2023-06-12 14:47:49.302 INFO  [33524] [asyncConsoleWin::logMessage@126] Server start - OK
-2023-06-12 14:47:49.307 INFO  [33524] [asyncConsoleWin::logMessage@126] Server initialized
-2023-06-12 14:52:44.645 DEBUG [31084] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 14:52:44.647 INFO  [31084] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 14:52:48.120 INFO  [31084] [MessageSaver_Service::start@24] Archivator started.
-2023-06-12 14:52:48.140 INFO  [31084] [asyncConsoleWin::logMessage@126] Server start - OK
-2023-06-12 14:52:48.144 INFO  [31084] [asyncConsoleWin::logMessage@126] Server initialized
-2023-06-12 15:01:17.920 DEBUG [29180] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 15:01:17.921 INFO  [29180] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 15:01:28.426 INFO  [29180] [MessageSaver_Service::start@24] Archivator started.
-2023-06-12 15:01:28.449 INFO  [29180] [asyncConsoleWin::logMessage@126] Server start - OK
-2023-06-12 15:01:28.459 INFO  [29180] [asyncConsoleWin::logMessage@126] Server initialized
-2023-06-12 15:41:41.301 DEBUG [26220] [startup_routine@54] Server application starting. Logging is enabled.
-2023-06-12 15:41:41.302 INFO  [26220] [MessageSaver_Service::start@13] Archivator instance is created.
-2023-06-12 15:41:44.432 INFO  [26220] [MessageSaver_Service::start@24] Archivator started.
-2023-06-12 15:41:44.487 INFO  [26220] [asyncConsoleWin::logMessage@126] Server start - OK
-2023-06-12 15:41:44.497 INFO  [26220] [asyncConsoleWin::logMessage@126] Server initialized
-2023-06-12 15:42:13.764 INFO  [26220] [LocalStorage_Service::saveAllMessages@53] Writing messages successfully
-2023-06-12 15:42:17.617 INFO  [26220] [LocalStorage_Service::saveAllMessages@58] message_storage is empty.
+﻿2023-06-12 23:07:47.936 ERROR [13072] [startup_routine@57] Console logging enabled
+2023-06-12 23:07:47.937 DEBUG [13072] [startup_routine@59] Server application starting. Logging is enabled.
+2023-06-12 23:07:47.938 INFO  [13072] [MessageSaver_Service::start@18] Archivator instance is created.
+2023-06-12 23:07:47.938 INFO  [13072] [MessageSaver_Service::start@30] Archivator service started.
+2023-06-12 23:07:47.962 INFO  [13072] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-12 23:07:47.967 INFO  [13072] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-12 23:07:50.931 INFO  [13072] [LocalStorage_Service::saveAllMessages@48] message_storage is empty.
+2023-06-12 23:07:53.929 INFO  [13072] [LocalStorage_Service::saveAllMessages@48] message_storage is empty.
+2023-06-12 23:07:56.930 INFO  [13072] [LocalStorage_Service::saveAllMessages@48] message_storage is empty.
+2023-06-12 23:10:24.356 FATAL [30464] [startup_routine@57] Console logging enabled
+2023-06-12 23:10:24.360 DEBUG [30464] [startup_routine@59] Server application starting. Logging is enabled.
+2023-06-12 23:10:24.360 INFO  [30464] [MessageSaver_Service::start@18] Archivator instance is created.
+2023-06-12 23:10:24.361 INFO  [30464] [MessageSaver_Service::start@30] Archivator service started.
+2023-06-12 23:10:24.388 INFO  [30464] [asyncConsoleWin::logMessage@126] Server start - OK
+2023-06-12 23:10:24.393 INFO  [30464] [asyncConsoleWin::logMessage@126] Server initialized
+2023-06-12 23:10:27.358 INFO  [30464] [LocalStorage_Service::saveAllMessages@48] message_storage is empty.
+2023-06-12 23:10:30.352 INFO  [30464] [LocalStorage_Service::saveAllMessages@48] message_storage is empty.
+2023-06-12 23:10:33.354 INFO  [30464] [LocalStorage_Service::saveAllMessages@48] message_storage is empty.
+2023-06-12 23:10:36.353 INFO  [30464] [LocalStorage_Service::saveAllMessages@48] message_storage is empty.

@@ -78,6 +78,9 @@
     <Filter Include="Services\LocalStorageService">
       <UniqueIdentifier>{29e78155-5c44-4262-a465-c77595a16d4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Services\RatingCount_Service">
+      <UniqueIdentifier>{e9cd5dfe-a830-4f6f-b7c1-e879e69c93a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -137,6 +140,9 @@
     <ClCompile Include="LocalStorage_Service.cpp">
       <Filter>Services\LocalStorageService</Filter>
     </ClCompile>
+    <ClCompile Include="RatingCounter_Service.cpp">
+      <Filter>Services\RatingCount_Service</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBUser.h">
@@ -165,6 +171,9 @@
     </ClInclude>
     <ClInclude Include="DTOUser.h">
       <Filter>Header Files\Classes\DTOHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="RatingCounter_Service.h">
+      <Filter>Services\RatingCount_Service</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
