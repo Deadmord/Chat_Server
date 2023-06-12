@@ -18,6 +18,7 @@
 #else
 
 #endif
+#include "LocalStorage_Service.h"
 
 
 Server server;  //create server instace
@@ -67,6 +68,7 @@ static void startup_routine()
     QTimer::singleShot(0, [&]()
         {
             MessageSaver_Service::start();
+            LocalStorage_Service::getInstance();
         });
     QTimer::singleShot(0, [&]()
         {

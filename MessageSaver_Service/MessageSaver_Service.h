@@ -6,6 +6,7 @@
 #include <plog/Log.h>
 #include <QTimer>
 #include <QThread>
+#include "../LocalStorage_Service.h"
 
 class MESSAGESAVER_SERVICE_EXPORT MessageSaver_Service : public QObject
 {

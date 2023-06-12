@@ -61,6 +61,7 @@ namespace DBEntity{
         [[nodiscard]] bool isDeleted() const;
 
         [[nodiscard]] const QMap<QUuid, bool> &getLikes() const;
+        [[nodiscard]] QJsonObject toJson() const;
 
     private:
         qint32 room_id{};
@@ -73,7 +74,6 @@ namespace DBEntity{
         bool deleted{false};
         QMap<QUuid, bool> likes;
 
-        [[nodiscard]] QJsonObject toJson() const;
         void fromJson(const QJsonObject &obj_);
     public:
 

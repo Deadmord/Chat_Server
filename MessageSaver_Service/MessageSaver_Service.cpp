@@ -18,7 +18,7 @@ bool MessageSaver_Service::start()
 		QTimer* timer = new QTimer();
 
 		service->moveToThread(thread);
-		connect(timer, &QTimer::timeout, service, &MessageSaver_Service::test);
+		connect(timer, &QTimer::timeout, LocalStorage_Service::getInstance(), &LocalStorage_Service::saveAllMessages);
 		timer->start(1000);
 		thread->start();
 		PLOGI << "Archivator started.";
