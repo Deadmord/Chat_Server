@@ -14,6 +14,8 @@
 #include <QPointer>
 #include "../../DBRoom.h"
 #include "../../file_repository.h"
+#include <plog/Log.h>
+#include <QObject>
 
 
 namespace DBEntity{
@@ -61,6 +63,9 @@ namespace DBEntity{
         [[nodiscard]] bool isDeleted() const;
 
         [[nodiscard]] const QMap<QUuid, bool> &getLikes() const;
+        [[nodiscard]] QJsonObject toJson() const;
+        //DBMessage(const DBMessage& _message);
+        DBMessage(DBMessage&& _message) = default;
 
     private:
         qint32 room_id{};
@@ -73,7 +78,6 @@ namespace DBEntity{
         bool deleted{false};
         QMap<QUuid, bool> likes;
 
-        [[nodiscard]] QJsonObject toJson() const;
         void fromJson(const QJsonObject &obj_);
     public:
 

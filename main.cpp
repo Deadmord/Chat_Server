@@ -11,13 +11,14 @@
 #include <plog/Initializers/RollingFileInitializer.h>
 #include "RoomRepository.h"
 #include "UserRepository.h"
-#include "MessageSaver_service/MessageSaver_Service.h"
+#include "MessageSaver_Service.h"
 
 #if defined (Q_OS_WIN)
 #include "Core/async_console_win.h"
 #else
 
 #endif
+#include "LocalStorage_Service.h"
 
 
 Server server;  //create server instace
@@ -49,7 +50,7 @@ static void startup_routine()
     qRegisterMetaType<RoomController>();
 
     plog::init(plog::debug, "log.txt", 1000000, 5);
-    initialize(plog::debug, plog::get());
+    
     PLOGD << "Server application starting. Logging is enabled.";
 
 

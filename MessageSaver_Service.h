@@ -1,13 +1,13 @@
 #pragma once
 #include <QString>
 #include <QObject>
-#include "messagesaver_service_global.h"
 #include <plog/Initializers/RollingFileInitializer.h>
 #include <plog/Log.h>
 #include <QTimer>
 #include <QThread>
+#include "LocalStorage_Service.h"
 
-class MESSAGESAVER_SERVICE_EXPORT MessageSaver_Service : public QObject
+class MessageSaver_Service : public QObject
 {
     Q_OBJECT
 private:
@@ -29,4 +29,3 @@ public slots:
 
 };
 
-extern void MESSAGESAVER_SERVICE_EXPORT initialize(plog::Severity severity, plog::IAppender * appender);
