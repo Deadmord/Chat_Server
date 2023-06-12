@@ -11,12 +11,13 @@ namespace DBEntity {
     private:
         QString a_login;
         QString a_password;
-        QString a_userpic_path;
-        qint32 a_rating;
+        //QString a_userpic_path;
+        QByteArray a_userpic;
+        quint32 a_rating;
         bool a_is_deleted;
 
     public:
-        explicit DBUser(QString login_, QString password_, QString userpic_path_, qint32 rating_, bool is_deleted_);
+        explicit DBUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_, const bool& is_deleted_);
 
         QString getLogin() const;
         void setLogin(const QString& login_);
@@ -24,11 +25,11 @@ namespace DBEntity {
         QString getPassword() const;
         void setPassword(const QString& password_);
 
-        QString getUserpicPath() const;
-        void setUserpicPath(const QString& userpic_path_);
+        QByteArray getUserpic() const;
+        void setUserpic(const QByteArray& userpic_);
 
-        qint32 getRating() const;
-        void setRating(const qint32& rating_);
+        quint32 getRating() const;
+        void setRating(const quint32& rating_);
 
         bool isDeleted() const;
         void setIsDeleted(const bool& deleted);

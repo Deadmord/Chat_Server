@@ -13,6 +13,9 @@
 #include <QUuid>
 #include <QPointer>
 #include "../../DBRoom.h"
+#include "../../file_repository.h"
+#include <plog/Log.h>
+#include <QObject>
 
 
 namespace DBEntity{
@@ -22,7 +25,7 @@ namespace DBEntity{
 //    };
 
 
-    class DBMessage : public QObject{
+    class DBMessage final : public QObject{
         Q_OBJECT
 
 
@@ -35,20 +38,19 @@ namespace DBEntity{
         Q_PROPERTY(QString text READ getText)
         Q_PROPERTY(QString media READ getMedia)
         Q_PROPERTY(bool deleted READ isDeleted WRITE setDeleted)
-        Q_PROPERTY(QHash<QUuid, bool> likes READ getLikes WRITE setLikes)
-    private:
-        QUuid id;
-    public:
-        void setDeleted(bool flag);
+        Q_PROPERTY(QMap<QUuid, bool> likes READ getLikes WRITE setLikes)
 
-        void setLikes(const QHash<QUuid, bool> &likes);
 
-    private:
+    	QUuid id;
         QDateTime date_time;
+        explicit DBMessage(QObject *parent_ = nullptr);
     public:
+    	void setDeleted(bool flag_);
+        void setLikes(const QMap<QUuid, bool> &likes_);
         [[nodiscard]] const QDateTime &getDateTime() const;
 
-       [[nodiscard]] qint32 getRoomId() const;
+
+        [[nodiscard]] qint32 getRoomId() const;
 
         [[nodiscard]] const QString &getLogin() const;
 
@@ -60,10 +62,13 @@ namespace DBEntity{
 
         [[nodiscard]] bool isDeleted() const;
 
-        [[nodiscard]] const QHash<QUuid, bool> &getLikes() const;
+        [[nodiscard]] const QMap<QUuid, bool> &getLikes() const;
+        [[nodiscard]] QJsonObject toJson() const;
+        //DBMessage(const DBMessage& _message);
+        DBMessage(DBMessage&& _message) = default;
 
     private:
-        qint32 room_id;
+        qint32 room_id{};
         QString login;
         QPointer<DBMessage> parent_id;
         QString text;
@@ -71,17 +76,17 @@ namespace DBEntity{
         //TODO: how to store media
         QString media;
         bool deleted{false};
-        QHash<QUuid, bool> likes;
+        QMap<QUuid, bool> likes;
 
-        [[nodiscard]] QJsonObject toJson() const;
+        void fromJson(const QJsonObject &obj_);
     public:
 
-        DBMessage(qint32 room_id_, const QString &login_, const QString &text_, const QString &media_);
+        DBMessage(qint32 room_id_, const QString &login_, const QString &text_, const QString &media_,const QObject* parent = nullptr);
         [[nodiscard]] const QUuid &getId() const;
        
-        static void writeMessage(const QString& file_name_, const DBEntity::DBMessage& message_) ;
-
-        static QList<DBMessage> readMessage(const QString& file_name_) ;
+        static void writeMessages(const QString& file_name_, const QList<DBEntity::DBMessage>& messages_) ;
+        static void writeMessage(const QString& file_name_,const DBEntity::DBMessage& messages_) ;
+        static QList<DBMessage*> readMessages(const QString& file_name_) ;
     };
 
 }
