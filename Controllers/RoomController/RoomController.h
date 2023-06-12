@@ -48,6 +48,7 @@ public:
 	void Delete();
 
 signals:
+
 	void roomCreated(const RoomController* room);
 	void nameChanged(const QString& val);
 	void descriptionChanged(const QString& val);
@@ -57,8 +58,12 @@ signals:
 
 public slots:
 	void initRoom();
+	void userEntry(UserConnection* user);
+	void jsonReceived(UserConnection* sender, const QJsonObject& doc);
 
 private:
+	void broadcastSend(const QJsonObject& message, UserConnection* exclude);
+	void sendJson(UserConnection* destination, const QJsonObject& message);
 	void loadMsgHistory(const QString path);
 	void uploadMsgHistory(const QString path);
 
@@ -71,7 +76,7 @@ private:
 	QString password;
 	bool	is_deleted;
 
-	QString msg_history_path;   // = "./msg_history.json";
+	QString msg_history_path = "./msg_history.json"; //get automaticly
 	QVector<User_Message> messages;
 	QVector<UserConnection*> connected_users;
 };

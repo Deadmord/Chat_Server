@@ -37,7 +37,7 @@ void Server::incomingConnection(qintptr socketDescriptor)
     connect(user_connection, &UserConnection::jsonReceived, this, std::bind(&Server::jsonReceived, this, user_connection, std::placeholders::_1));
     connect(user_connection, &UserConnection::logMessage, this, &Server::logMessage);
     connected_users.append(user_connection);
-    emit logMessage(info ,"New client Connected");
+    emit logMessage(info ,"New client Connected! Now users: " + QString::number(connected_users.size()));
 
     ////---------------old------------------
     ////socket = nextPendingConnection();     //return nullptr
@@ -212,8 +212,23 @@ void Server::disableUsers()
 
 void Server::loadRooms()
 {
-    //Load rooms from repository to vector<Room>
+    //Load rooms from repository to vector<Room>        ------------------!!!!!-----------------------
     //run loop to init all rooms
+
+    QVector<DBEntity::DBRoom> dbRooms =
+    {
+        DBEntity::DBRoom{1, "room1", "a_description", 11, false, "a_password", false },
+        DBEntity::DBRoom{2, "room2", "b_description", 12, true, "b_password", false },
+        DBEntity::DBRoom{3, "room3", "c_description", 13, false, "c_password", true }
+    };
+
+    for(DBEntity::DBRoom dbRoom: dbRooms)
+    {
+        RoomController* room = new RoomController(dbRoom.getId(), dbRoom.getName(), dbRoom.getDescription(), dbRoom.getTopicId(), dbRoom.isPrivate(), dbRoom.getPassword(), dbRoom.isDeleted(), this);
+        //connect();
+        rooms.append(room);
+        emit logMessage(info, "New room created! Now rooms: " + QString::number(rooms.size()));
+    }
 }
 
 //----------------SendToClient-----------------
@@ -276,6 +291,7 @@ void Server::loadRooms()
 //    }
 //}
 
+//---!!!---это от сюда убрать будет не нужно
 User_Message Server::createMessage(QString _nickname, QString _text)
 {
     Message msg;
@@ -287,6 +303,7 @@ User_Message Server::createMessage(QString _nickname, QString _text)
     //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
 }
 
+//---!!!---это от сюда убрать будет не нужно
 void Server::broadcastSend(const QJsonObject& message, UserConnection* exclude)
 {
     for (UserConnection* user : connected_users) {
@@ -297,6 +314,7 @@ void Server::broadcastSend(const QJsonObject& message, UserConnection* exclude)
     }
 }
 
+//---!!!---это от сюда убрать будет не нужно
 void Server::sendJson(UserConnection* destination, const QJsonObject& message)
 {
     Q_ASSERT(destination);
@@ -309,6 +327,9 @@ void Server::jsonReceived(UserConnection* sender, const QJsonObject& doc)
     emit logMessage(info, QLatin1String("JSON received: ") + QJsonDocument(doc).toJson(QJsonDocument::Compact));
     if (sender->getUserName().isEmpty())
         return jsonFromLoggedOut(sender, doc);
+    //-------------- проверять принадлежность комнате ------------------
+    // -----------------если принадлежит то отправлять сообщение в конкретную комнату---------------
+    //вместо этого
     jsonFromLoggedIn(sender, doc);
 }
 
@@ -321,7 +342,7 @@ void Server::userDisconnected(UserConnection* sender)
         disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
         disconnectedMessage[QStringLiteral("username")] = userName;
         broadcastSend(disconnectedMessage, nullptr);
-        emit logMessage(info, userName + QLatin1String(" disconnected"));
+        emit logMessage(info, userName + QLatin1String(" disconnected, users left: ") + QString::number(connected_users.size()));
     }
     sender->deleteLater();
 }
@@ -369,6 +390,7 @@ void Server::jsonFromLoggedOut(UserConnection* sender, const QJsonObject& docObj
     broadcastSend(connectedMessage, sender);
 }
 
+//---!!!---это от сюда убрать будет не нужно
 void Server::jsonFromLoggedIn(UserConnection* sender, const QJsonObject& docObj)
 {
     Q_ASSERT(sender);

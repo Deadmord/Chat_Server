@@ -67,7 +67,7 @@ private:
     //QTcpSocket* socket;
     //QVector <QTcpSocket*> sockets;
     QVector<UserConnection*> connected_users;
-
+    QVector<RoomController*> rooms;
     //переделать в QVector <User_Message*> messages и перенести в Room
     QVector <User_Message> messages;
 

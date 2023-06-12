@@ -1,4 +1,4 @@
-#include "RoomController.h"
+п»ї#include "RoomController.h"
 
 RoomController::RoomController(const quint32& id_, const QString& name_, const QString& description_, const quint32& topic_id_, const bool& is_private_, const QString& password_, bool is_deleted_, QObject* parent)
     : id(id_), name(name_), description(description_), topic_id(topic_id_), is_private(is_private_), password(password_), is_deleted(is_deleted_), QObject(parent)
@@ -29,6 +29,50 @@ void RoomController::setPrivate(bool val) { is_private = val; emit privateChange
 void RoomController::setPassword(const QString& val) { password = val; emit passwordChanged(); }
 void RoomController::Delete() { is_deleted = true; emit roomDeleted(); }
 
+void RoomController::userEntry(UserConnection* user)
+{
+    connected_users.append(user);
+}
+
+void RoomController::jsonReceived(UserConnection* sender, const QJsonObject& docObj)
+{
+    Q_ASSERT(sender);
+    const QJsonValue typeVal = docObj.value(QLatin1String("type"));
+    if (typeVal.isNull() || !typeVal.isString())
+        return;
+    if (typeVal.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) != 0)
+        return;
+    const QJsonValue textVal = docObj.value(QLatin1String("text"));
+    if (textVal.isNull() || !textVal.isString())
+        return;
+    const QString text = textVal.toString().trimmed();
+    if (text.isEmpty())
+        return;
+    QJsonObject message;
+    message[QStringLiteral("type")] = QStringLiteral("message");
+    message[QStringLiteral("text")] = text;
+    message[QStringLiteral("sender")] = sender->getUserName();
+    broadcastSend(message, sender);
+}
+
+//---!!!---СЌС‚Рѕ РѕС‚ СЃСЋРґР° СѓР±СЂР°С‚СЊ Р±СѓРґРµС‚ РЅРµ РЅСѓР¶РЅРѕ
+void RoomController::broadcastSend(const QJsonObject& message, UserConnection* exclude)
+{
+    for (UserConnection* user : connected_users) {
+        Q_ASSERT(user);
+        if (user == exclude)
+            continue;
+        sendJson(user, message);
+    }
+}
+
+//---!!!---СЌС‚Рѕ РѕС‚ СЃСЋРґР° СѓР±СЂР°С‚СЊ Р±СѓРґРµС‚ РЅРµ РЅСѓР¶РЅРѕ
+void RoomController::sendJson(UserConnection* destination, const QJsonObject& message)
+{
+    Q_ASSERT(destination);
+    destination->sendJson(message);
+}
+
 //-----------------------Load/Upload History--------------------------
 void RoomController::loadMsgHistory(const QString path)
 {
@@ -40,7 +84,7 @@ void RoomController::loadMsgHistory(const QString path)
     msgFile.setFileName(path);
     if (msgFile.open(QIODevice::ReadOnly | QFile::Text))
     {
-        //тот нужно блокировать обращение к ресурсу msgFile
+        //С‚РѕС‚ РЅСѓР¶РЅРѕ Р±Р»РѕРєРёСЂРѕРІР°С‚СЊ РѕР±СЂР°С‰РµРЅРёРµ Рє СЂРµСЃСѓСЂСЃСѓ msgFile
         msgHistory = QJsonDocument::fromJson(QByteArray(msgFile.readAll()), &jsonError);
         msgFile.close();
 
@@ -95,7 +139,7 @@ void RoomController::uploadMsgHistory(const QString path)
             map.insert("deleted", msg.isDeleted());
 
             QJsonObject msgJson = QJsonObject::fromVariantMap(map);
-            msgArray.append(msgJson);           //Тут нужно проверять есть ли такой элемент уже в массиве и вставлять если нет
+            msgArray.append(msgJson);           //РўСѓС‚ РЅСѓР¶РЅРѕ РїСЂРѕРІРµСЂСЏС‚СЊ РµСЃС‚СЊ Р»Рё С‚Р°РєРѕР№ СЌР»РµРјРµРЅС‚ СѓР¶Рµ РІ РјР°СЃСЃРёРІРµ Рё РІСЃС‚Р°РІР»СЏС‚СЊ РµСЃР»Рё РЅРµС‚
         }
         msgHistory.setArray(msgArray);
         msgFile.write("{\"messanges\":" + msgHistory.toJson() + "}");
