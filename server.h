@@ -66,9 +66,11 @@ private:
     QString black_list_path;
     QString msg_history_path;   // = "./msg_history.json";
 
-    QTcpSocket* socket;
-    QVector <QTcpSocket*> sockets;
+    //QTcpSocket* socket;
+    //QVector <QTcpSocket*> sockets;
     QVector<UserConnection*> connected_users;
+
+    //переделать в QVector <User_Message*> messages и перенести в Room
     QVector <User_Message> messages;
 
     QByteArray Data;
