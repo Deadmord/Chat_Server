@@ -8,8 +8,6 @@ void Server::startServer()
     loadConfig(CONFIG_FILE_PATH);
     openConnection();
     loadRooms();
-    //определить функцию загрузки данных из истории
-    loadMsgHistory(msg_history_path);
     emit logMessage(info, "Server initialized");
 }
 
@@ -39,7 +37,7 @@ void Server::incomingConnection(qintptr socketDescriptor)
     connect(user_connection, &UserConnection::jsonReceived, this, std::bind(&Server::jsonReceived, this, user_connection, std::placeholders::_1));
     connect(user_connection, &UserConnection::logMessage, this, &Server::logMessage);
     connected_users.append(user_connection);
-    emit logMessage(info ,"New client Connected");
+    emit logMessage(info ,"New client Connected! Now users: " + QString::number(connected_users.size()));
 
     ////---------------old------------------
     ////socket = nextPendingConnection();     //return nullptr
@@ -169,10 +167,10 @@ void Server::loadConfig(QString _path)
             else
                 qWarning() << "Error BlackListPath reading";
 
-            if (const QJsonValue v = config_file_doc["MessagesHistorySettings"]["Path"]; v.isString())
-                msg_history_path = v.toString();
-            else
-                qWarning() << "Error BlackListPath reading";
+            //if (const QJsonValue v = config_file_doc["MessagesHistorySettings"]["Path"]; v.isString())
+            //    msg_history_path = v.toString();
+            //else
+            //    qWarning() << "Error BlackListPath reading";
 
         }
         else
@@ -214,83 +212,22 @@ void Server::disableUsers()
 
 void Server::loadRooms()
 {
-    //Load rooms from repository to vector<Room>
+    //Load rooms from repository to vector<Room>        ------------------!!!!!-----------------------
     //run loop to init all rooms
-}
 
-void Server::loadMsgHistory(const QString path)
-{
-    QJsonDocument msgHistory;
-    QJsonArray msgArray;
-    QJsonParseError jsonError;
-    QFile msgFile;
-
-    msgFile.setFileName(path);
-    if (msgFile.open(QIODevice::ReadOnly | QFile::Text))
+    QVector<DBEntity::DBRoom> dbRooms =
     {
-        //тот нужно блокировать обращение к ресурсу msgFile
-        msgHistory = QJsonDocument::fromJson(QByteArray(msgFile.readAll()), &jsonError);
-        msgFile.close();
+        DBEntity::DBRoom{1, "room1", "a_description", 11, false, "a_password", false },
+        DBEntity::DBRoom{2, "room2", "b_description", 12, true, "b_password", false },
+        DBEntity::DBRoom{3, "room3", "c_description", 13, false, "c_password", true }
+    };
 
-        if (jsonError.errorString().toInt() == QJsonParseError::NoError)
-        {
-            msgArray = QJsonValue(msgHistory.object().value("messanges")).toArray();
-            for (const auto& msgJson : msgArray)
-            {
-                Message msg { msgJson.toObject().value("id").toString(),
-                            msgJson.toObject().value("roomId").toInt(),
-                            QDateTime::fromString(msgJson.toObject().value("time").toString()),
-                            msgJson.toObject().value("nickname").toString(),
-                            msgJson.toObject().value("text").toString(),
-                            msgJson.toObject().value("mediaId").toString(),
-                            msgJson.toObject().value("parentId").toString(),
-                            msgJson.toObject().value("deleted").toBool() };
-                messages.push_back(msg);
-            }
-        }
-        else
-        {
-            qDebug() << "Error message history read: " << jsonError.error;
-        }
-    }
-    else
+    for(DBEntity::DBRoom dbRoom: dbRooms)
     {
-        qDebug() << "File message history can't be open.";
-    }
-}
-
-void Server::uploadMsgHistory(const QString path)
-{
-    QJsonDocument msgHistory;
-    QJsonArray msgArray;
-    QFile msgFile;
-
-    msgFile.setFileName(path);
-    if (msgFile.open(QIODevice::WriteOnly | QFile::Text))
-    {
-        msgArray = msgHistory.object().value("messanges").toArray();
-
-        for (const User_Message &msg : messages)
-        {
-            QVariantMap map;
-            map.insert("id", msg.getId());
-            map.insert("roomId", msg.getRoomId());
-            map.insert("time", msg.getDateTime());
-            map.insert("nickname",msg.getNickname());
-            map.insert("text",msg.getText());
-            map.insert("mediaId", msg.getMedia());
-            map.insert("parentId", msg.getParentId());
-            map.insert("deleted",msg.isDeleted());
-
-            QJsonObject msgJson = QJsonObject::fromVariantMap(map);
-            msgArray.append(msgJson);           //Тут нужно проверять есть ли такой элемент уже в массиве и вставлять если нет
-        }
-        msgHistory.setArray(msgArray);
-        msgFile.write("{\"messanges\":" + msgHistory.toJson() + "}");
-    }
-    else
-    {
-        qDebug() << "File message history can't be open.";
+        RoomController* room = new RoomController(dbRoom.getId(), dbRoom.getName(), dbRoom.getDescription(), dbRoom.getTopicId(), dbRoom.isPrivate(), dbRoom.getPassword(), dbRoom.isDeleted(), this);
+        //connect();
+        rooms.append(room);
+        emit logMessage(info, "New room created! Now rooms: " + QString::number(rooms.size()));
     }
 }
 
@@ -354,6 +291,7 @@ void Server::uploadMsgHistory(const QString path)
 //    }
 //}
 
+//---!!!---это от сюда убрать будет не нужно
 User_Message Server::createMessage(QString _nickname, QString _text)
 {
     Message msg;
@@ -365,6 +303,7 @@ User_Message Server::createMessage(QString _nickname, QString _text)
     //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
 }
 
+//---!!!---это от сюда убрать будет не нужно
 void Server::broadcastSend(const QJsonObject& message, UserConnection* exclude)
 {
     for (UserConnection* user : connected_users) {
@@ -375,6 +314,7 @@ void Server::broadcastSend(const QJsonObject& message, UserConnection* exclude)
     }
 }
 
+//---!!!---это от сюда убрать будет не нужно
 void Server::sendJson(UserConnection* destination, const QJsonObject& message)
 {
     Q_ASSERT(destination);
@@ -384,9 +324,12 @@ void Server::sendJson(UserConnection* destination, const QJsonObject& message)
 void Server::jsonReceived(UserConnection* sender, const QJsonObject& doc)
 {
     Q_ASSERT(sender);
-    emit logMessage(info, QLatin1String("JSON received ") + QString::fromUtf8(QJsonDocument(doc).toJson()));
+    emit logMessage(info, QLatin1String("JSON received: ") + QJsonDocument(doc).toJson(QJsonDocument::Compact));
     if (sender->getUserName().isEmpty())
         return jsonFromLoggedOut(sender, doc);
+    //-------------- проверять принадлежность комнате ------------------
+    // -----------------если принадлежит то отправлять сообщение в конкретную комнату---------------
+    //вместо этого
     jsonFromLoggedIn(sender, doc);
 }
 
@@ -399,7 +342,7 @@ void Server::userDisconnected(UserConnection* sender)
         disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
         disconnectedMessage[QStringLiteral("username")] = userName;
         broadcastSend(disconnectedMessage, nullptr);
-        emit logMessage(info, userName + QLatin1String(" disconnected"));
+        emit logMessage(info, userName + QLatin1String(" disconnected, users left: ") + QString::number(connected_users.size()));
     }
     sender->deleteLater();
 }
@@ -447,6 +390,7 @@ void Server::jsonFromLoggedOut(UserConnection* sender, const QJsonObject& docObj
     broadcastSend(connectedMessage, sender);
 }
 
+//---!!!---это от сюда убрать будет не нужно
 void Server::jsonFromLoggedIn(UserConnection* sender, const QJsonObject& docObj)
 {
     Q_ASSERT(sender);

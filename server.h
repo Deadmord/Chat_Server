@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QVector>
@@ -46,8 +46,7 @@ private:
     void loadConfig(QString _path);
     void openConnection();
     void loadRooms();
-    void loadMsgHistory(const QString path);
-    void uploadMsgHistory(const QString path);
+
 
     //void SendToClient(const User_Message& msg, QTcpSocket* socket);
     //void SendToClient(const QVector<User_Message>& msgs, QTcpSocket* socket);
@@ -64,11 +63,12 @@ private:
     quint16 server_port;
     quint16 flood_limit;
     QString black_list_path;
-    QString msg_history_path;   // = "./msg_history.json";
 
-    QTcpSocket* socket;
-    QVector <QTcpSocket*> sockets;
+    //QTcpSocket* socket;
+    //QVector <QTcpSocket*> sockets;
     QVector<UserConnection*> connected_users;
+    QVector<RoomController*> rooms;
+    //переделать в QVector <User_Message*> messages и перенести в Room
     QVector <User_Message> messages;
 
     QByteArray Data;

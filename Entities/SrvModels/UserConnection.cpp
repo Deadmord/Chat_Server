@@ -36,10 +36,16 @@ void UserConnection::sendJson(const QJsonObject& json)
     const QByteArray jsonData = QJsonDocument(json).toJson(QJsonDocument::Compact);
     // we notify the central server we are about to send the message
     emit logMessage(debug,QLatin1String("Sending to ") + getUserName() + QLatin1String(" - ") + QString::fromUtf8(jsonData));
-    // we send the message to the socket in the exact same way we did in the client
-    QDataStream socketStream(user_socket);
+
+    QByteArray buffer;
+    buffer.clear();
+    // create a QDataStream for buffer operating 
+    QDataStream socketStream(&buffer, QIODevice::WriteOnly);
     socketStream.setVersion(QDataStream::Qt_6_5);
-    socketStream << quint16(jsonData.size()) << jsonData;
+    socketStream << quint16(0) << jsonData;
+    socketStream.device()->seek(0); //go to beginning data storage
+    socketStream << quint16(buffer.size() - sizeof(quint16));
+    user_socket->write(buffer);
 }
 
 bool UserConnection::isFloodLimit() const { return flood_limit; }
