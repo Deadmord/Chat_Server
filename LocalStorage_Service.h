@@ -4,9 +4,8 @@
 #include <QMutex>
 #include <QMap>
 #include "DB/JSONS/messages.h"
-#include "LocalStorage_Service_global.h"
 
-extern CHAT_SERVER_LOCALSTORAGE_SERVICE_EXPORT class LocalStorage_Service :
+class LocalStorage_Service :
     public QObject
 {
     Q_OBJECT
@@ -14,7 +13,7 @@ private:
     static LocalStorage_Service* instance;
     static QMutex mutex;
     explicit LocalStorage_Service(QObject* object_ = nullptr);
-    QMap<QUuid, QList<DBEntity::DBMessage*>> message_storage;
+    QMap<QUuid, QList<QSharedPointer<DBEntity::DBMessage>>> message_storage;
 
 public:
     static LocalStorage_Service* getInstance();

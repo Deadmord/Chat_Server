@@ -3,8 +3,6 @@
 //
 
 #include "messages.h"
-#include <plog/Log.h>
-#include <QObject>
 
 QJsonObject DBEntity::DBMessage::toJson() const {
     QJsonObject obj;
@@ -26,6 +24,20 @@ QJsonObject DBEntity::DBMessage::toJson() const {
 
     return obj;
 }
+
+//DBEntity::DBMessage::DBMessage(const DBMessage& _message) 
+//{
+//    id = _message.id;
+//    date_time = _message.date_time;
+//    room_id = _message.room_id;
+//    login = _message.login;
+//    parent_id = _message.parent_id;
+//    text = _message.text;
+//    media = _message.media;
+//    deleted = _message.deleted;
+//    likes = _message.likes;
+//}
+
 
 void DBEntity::DBMessage::fromJson(const QJsonObject &obj_) {
 

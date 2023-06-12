@@ -14,7 +14,14 @@ LocalStorage_Service* LocalStorage_Service::getInstance() {
         if (!instance)
         {
             instance = new LocalStorage_Service();
+
+            QList<QSharedPointer<DBEntity::DBMessage>> messag;
+            DBEntity::DBMessage c{ 123123, "asdasdas", "asdasdas", "asasdasd"};
+            messag.push_back(QSharedPointer<DBEntity::DBMessage>(new DBEntity::DBMessage(123123, "asdasdas", "asdasdas", "asasdasd"), &QObject::deleteLater));
+            instance->message_storage.insert(QUuid::createUuid(), messag);
+            
         }
+
     }
     return instance;
 }
@@ -23,20 +30,21 @@ LocalStorage_Service::LocalStorage_Service(QObject* object_) : QObject(object_) 
 
 }
 
+
 void LocalStorage_Service::saveAllMessages() {
 
-    if (!message_storage.empty()) 
+    if (!instance->message_storage.empty())
     {
         QMutexLocker locker(&mutex);
-        auto keys = message_storage.keys();
-        for(const auto &key: keys)
+        auto keys = instance->message_storage.keys();
+        for (const auto& key : keys)
         {
             QString current_time = QDateTime::currentDateTimeUtc().toString("yyyyMMdd_hhmm");
             QString file_name = "rooms/" + key.toString() + "/" + current_time + ".json";
             QDir().mkpath("rooms/" + key.toString());
             QJsonArray array;
-            for (const auto message : message_storage[key]) {
-                
+            for (const auto& message : message_storage.value(key)) {
+
                 array.append(message->toJson());
             }
             if (!FileRepository::writeJsonArr(file_name, array)) {
@@ -44,9 +52,10 @@ void LocalStorage_Service::saveAllMessages() {
             }
             PLOGI << "Writing messages successfully";
 
-            message_storage.remove(key);
+            instance->message_storage.remove(key);
         }
     }
+    else PLOGI << "message_storage is empty.";
 }
 
 //void LocalStorage_Service::saveMessages(const DBEntity::DBMessage& message_, const QUuid& room_id_) const {

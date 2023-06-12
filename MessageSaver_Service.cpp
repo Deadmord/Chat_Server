@@ -32,8 +32,3 @@ bool MessageSaver_Service::start()
 }
 
 void MessageSaver_Service::test() { PLOGN << "ASDASDASDASDASD"; };
-
-void MESSAGESAVER_SERVICE_EXPORT initialize(plog::Severity severity, plog::IAppender* appender)
-{
-	plog::init(severity, appender); // Initialize the shared library logger.
-}

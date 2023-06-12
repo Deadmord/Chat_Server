@@ -14,6 +14,8 @@
 #include <QPointer>
 #include "../../DBRoom.h"
 #include "../../file_repository.h"
+#include <plog/Log.h>
+#include <QObject>
 
 
 namespace DBEntity{
@@ -62,6 +64,8 @@ namespace DBEntity{
 
         [[nodiscard]] const QMap<QUuid, bool> &getLikes() const;
         [[nodiscard]] QJsonObject toJson() const;
+        //DBMessage(const DBMessage& _message);
+        DBMessage(DBMessage&& _message) = default;
 
     private:
         qint32 room_id{};

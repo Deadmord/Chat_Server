@@ -125,6 +125,9 @@
     <ClCompile Include="LocalStorage_Service.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MessageSaver_Service.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBUser.h">
@@ -154,9 +157,6 @@
     <ClInclude Include="DTOUser.h">
       <Filter>Header Files\Classes\DTOHelpers</Filter>
     </ClInclude>
-    <ClInclude Include="LocalStorage_Service_global.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="server.h">
@@ -184,6 +184,9 @@
       <Filter>Header Files\Classes\DBRepositories</Filter>
     </QtMoc>
     <QtMoc Include="LocalStorage_Service.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="MessageSaver_Service.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
