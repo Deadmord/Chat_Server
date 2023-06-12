@@ -97,7 +97,9 @@
     <ClCompile Include="Entities\SrvModels\UserConnection.cpp" />
     <ClCompile Include="LocalStorage_Service.cpp" />
     <ClCompile Include="MessageSaver_Service.cpp" />
+    <ClCompile Include="RatingCounter_Service.cpp" />
     <ClCompile Include="UserRepository.cpp" />
+    <ClInclude Include="RatingCounter_Service.h" />
     <QtMoc Include="MessageSaver_Service.h" />
     <QtMoc Include="LocalStorage_Service.h" />
     <QtMoc Include="UserRepository.h" />

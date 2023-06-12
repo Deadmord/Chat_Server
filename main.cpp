@@ -9,6 +9,8 @@
 
 #include <plog/Log.h> 
 #include <plog/Initializers/RollingFileInitializer.h>
+#include <plog/Appenders/ColorConsoleAppender.h>
+
 #include "RoomRepository.h"
 #include "UserRepository.h"
 #include "MessageSaver_Service.h"
@@ -49,7 +51,10 @@ static void startup_routine()
     // register some meta types
     qRegisterMetaType<RoomController>();
 
-    plog::init(plog::debug, "log.txt", 1000000, 5);
+    static plog::RollingFileAppender<plog::TxtFormatter> fileAppender("log.txt", 1000000, 5);
+    static plog::ColorConsoleAppender<plog::TxtFormatter> consoleAppender; 
+    plog::init(plog::debug, &consoleAppender).addAppender(&fileAppender);
+    PLOGD << "Console logging enabled";
     
     PLOGD << "Server application starting. Logging is enabled.";
 
@@ -67,7 +72,7 @@ static void startup_routine()
 #endif
     QTimer::singleShot(0, [&]()
         {
-            MessageSaver_Service::start();
+            MessageSaver_Service::start(0.05);
         });
     QTimer::singleShot(0, [&]()
         {
@@ -79,6 +84,7 @@ Q_COREAPP_STARTUP_FUNCTION(startup_routine)
 int main(int argc, char* argv[])
 {
     QCoreApplication a(argc, argv);
+
     return a.exec();
 }
 
