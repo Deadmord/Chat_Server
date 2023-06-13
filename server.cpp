@@ -291,7 +291,7 @@ void Server::loadRooms()
 //    }
 //}
 
-//---!!!---это от сюда убрать будет не нужно
+//---!!!---это от сюда убрать, будет не нужно
 User_Message Server::createMessage(QString _nickname, QString _text)
 {
     Message msg;
@@ -303,7 +303,7 @@ User_Message Server::createMessage(QString _nickname, QString _text)
     //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
 }
 
-//---!!!---это от сюда убрать будет не нужно
+//---!!!---это от сюда убрать, будет не нужно
 void Server::broadcastSend(const QJsonObject& message, UserConnection* exclude)
 {
     for (UserConnection* user : connected_users) {
@@ -314,7 +314,7 @@ void Server::broadcastSend(const QJsonObject& message, UserConnection* exclude)
     }
 }
 
-//---!!!---это от сюда убрать будет не нужно
+//---!!!---это от сюда убрать, будет не нужно
 void Server::sendJson(UserConnection* destination, const QJsonObject& message)
 {
     Q_ASSERT(destination);
@@ -330,7 +330,7 @@ void Server::jsonReceived(UserConnection* sender, const QJsonObject& doc)
     //-------------- проверять принадлежность комнате ------------------
     // -----------------если принадлежит то отправлять сообщение в конкретную комнату---------------
     //вместо этого
-    jsonFromLoggedIn(sender, doc);
+    jsonFromLoggedInCMD(sender, doc);
 }
 
 void Server::userDisconnected(UserConnection* sender)
@@ -390,8 +390,54 @@ void Server::jsonFromLoggedOut(UserConnection* sender, const QJsonObject& docObj
     broadcastSend(connectedMessage, sender);
 }
 
-//---!!!---это от сюда убрать будет не нужно
-void Server::jsonFromLoggedIn(UserConnection* sender, const QJsonObject& docObj)
+void Server::jsonFromLoggedInCMD(UserConnection* sender, const QJsonObject& docObj)
+{
+    Q_ASSERT(sender);
+    const QJsonValue typeVal = docObj.value(QLatin1String("type"));
+    if (typeVal.isNull() || !typeVal.isString())
+        return;
+    if (typeVal.toString().compare(QLatin1String("roomListReqest"), Qt::CaseInsensitive) == 0)
+    {
+
+    }
+    if (typeVal.toString().compare(QLatin1String("roomEntry"), Qt::CaseInsensitive) == 0)
+    {
+        const QJsonValue roomVal = docObj.value(QLatin1String("room"));
+        if (roomVal.isNull() || !roomVal.isDouble())
+            return;
+        const quint32 roomId = roomVal.toInt();
+        if (!roomId)
+            return;
+        //проверить что комната с таким номером вообще существует
+        sender->setRoomId(roomId);
+        //Отправить юзера в нужную комнату
+        //уже в комнате по сигналу вхождения юзера сделать рассылку
+    }
+    if (typeVal.toString().compare(QLatin1String("roomLeave"), Qt::CaseInsensitive) == 0)
+    {
+
+    }
+    if (typeVal.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) == 0)
+    {
+        const QJsonValue textVal = docObj.value(QLatin1String("text"));
+        if (textVal.isNull() || !textVal.isString())
+            return;
+        const QString text = textVal.toString().trimmed();
+        if (text.isEmpty())
+            return;
+        QJsonObject message;
+        message[QStringLiteral("type")] = QStringLiteral("message");
+        message[QStringLiteral("text")] = text;
+        message[QStringLiteral("sender")] = sender->getUserName();
+        broadcastSend(message, sender);
+        return;
+    }
+
+
+}
+
+//---!!!---это от сюда убрать, будет не нужно
+void Server::jsonFromLoggedInMSG(UserConnection* sender, const QJsonObject& docObj)
 {
     Q_ASSERT(sender);
     const QJsonValue typeVal = docObj.value(QLatin1String("type"));
