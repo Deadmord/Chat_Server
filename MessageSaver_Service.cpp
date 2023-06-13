@@ -1,5 +1,4 @@
 #include "MessageSaver_Service.h"
-#include "RatingCounter_Service.h"
 
 MessageSaver_Service* MessageSaver_Service::p_instance = nullptr;
 bool MessageSaver_Service::is_started = false;
@@ -26,7 +25,6 @@ bool MessageSaver_Service::start(const float& minutes_)
 
 		p_instance->moveToThread(p_thread);
 		connect(p_timer, &QTimer::timeout, LocalStorage_Service::getInstance(), &LocalStorage_Service::saveAllMessages);
-		connect(p_timer, &QTimer::timeout, RatingCounter_Service::getInstance(), &RatingCounter_Service::updateRating);
 		p_timer->start((int)timeout);
 		p_thread->start();
 		PLOGI << "Archivator service started.";

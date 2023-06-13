@@ -101,7 +101,6 @@
     <ClCompile Include="MessageSaver_Service.cpp" />
     <ClCompile Include="RatingCounter_Service.cpp" />
     <ClCompile Include="UserRepository.cpp" />
-    <QtMoc Include="RatingCounter_Service.h" />
     <ClInclude Include="RatingCounter_Service.h" />
     <ClInclude Include="SwearHelper.cpp" />
     <ClInclude Include="SwearHelper.h" />
