@@ -2,16 +2,15 @@
 //
 //namespace DTOHelper {
 //
-//	DTORoom::DTORoom() {};
+//	DTORoom::DTORoom(QObject* parent) : QObject(parent) {};
 //
-//	DBEntity::DBRoom DTORoom::convertToDBModel(const RoomController& rc_) {
-//		return DBEntity::DBRoom(rc_.getId(), rc_.get_name(), rc_.getDescrption(), rc_.getTopicId(), rc_.isPrivate(), rc_.getPassword(), rc_.isDeleted());
+//	QSharedPointer<DBEntity::DBRoom> DTORoom::convertToDBModel(const RoomController& rc_) {
+//		QSharedPointer<DBEntity::DBRoom> dbRoom = QSharedPointer<DBEntity::DBRoom>::create(rc_.getId(), rc_.getName(), rc_.getDescription(), rc_.getTopicId(), rc_.isPrivate(), rc_.getPassword(), rc_.isDeleted());
+//		return dbRoom;
 //	}
 //
-//	RoomController DTORoom::convertToEntity(const DBEntity::DBRoom& room_) {
-//		QVector<User_Message> empty_messages;
-//		QVector<UserConnection*> empty_connected_users;
-//		return RoomController(room_.getId(), room_.getName(), room_.getDescription(), room_.getTopicId(), room_.isPrivate(), room_.getPassword(), room_.isDeleted(), empty_messages, empty_connected_users);
+//	QSharedPointer<RoomController> DTORoom::convertToEntity(const DBEntity::DBRoom& room_) {
+//		QSharedPointer<RoomController> roomController = QSharedPointer<RoomController>::create(room_.getId(), room_.getName(), room_.getDescription(), room_.getTopicId(), room_.isPrivate(), room_.getPassword(), room_.isDeleted());
+//		return roomController;
 //	}
-//
 //}

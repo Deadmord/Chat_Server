@@ -5,7 +5,7 @@
 //#include <QObject>
 //#include "DBUser.h"
 //#include "User.h"
-//#include "entites.h"
+//#include "Entities/entities.h"
 //
 //namespace DTOHelper {
 //
@@ -14,11 +14,13 @@
 //		Q_OBJECT
 //
 //	public:
-//		DTOUser();
-//
-//		DBEntity::DBUser convertToDBModel(const User& user_);
-//		User convertToEntity(const DBEntity::DBUser& db_user_);
+//		DTOUser(QObject* parent = nullptr);
+//		static QSharedPointer<DBEntity::DBUser> convertToDBModel(const User& user_);
+//		static QSharedPointer<User> convertToEntity(const DBEntity::DBUser& db_user_);
 //	};
+//
 //}
+//
+//Q_DECLARE_METATYPE(DTOHelper::DTOUser)
 //
 //#endif
