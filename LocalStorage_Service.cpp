@@ -1,7 +1,7 @@
 #include "LocalStorage_Service.h"
 #include <qthread.h>
 
-LocalStorage_Service* LocalStorage_Service::instance = nullptr;
+LocalStorage_Service* LocalStorage_Service::p_instance = nullptr;
 QMutex LocalStorage_Service::mutex;
 QTimer* LocalStorage_Service::p_timer = nullptr;
 
@@ -40,7 +40,7 @@ LocalStorage_Service* LocalStorage_Service::getInstance(int minutes_) {
     if (!instance)
     {
         QMutexLocker locker(&mutex); 
-        if (!instance)
+        if (!p_instance)
         {
             instance = new LocalStorage_Service();
             p_timer = new QTimer();
@@ -51,7 +51,7 @@ LocalStorage_Service* LocalStorage_Service::getInstance(int minutes_) {
         }
 
     }
-    return instance;
+    return p_instance;
 }
 
 LocalStorage_Service::LocalStorage_Service(QObject* object_) : QObject(object_) {}
@@ -59,10 +59,10 @@ LocalStorage_Service::LocalStorage_Service(QObject* object_) : QObject(object_) 
 
 void LocalStorage_Service::saveAllMessages() {
 
-    if (!instance->message_storage.empty())
+    if (!p_instance->message_storage.empty())
     {
         QMutexLocker locker(&mutex);
-        auto keys = instance->message_storage.keys();
+        auto keys = message_storage.keys();
         for (const auto& key : keys)
         {
             QString current_time = QDateTime::currentDateTimeUtc().toString("yyyyMMdd_hhmm");
@@ -78,7 +78,7 @@ void LocalStorage_Service::saveAllMessages() {
             }
             PLOGI << "Writing messages successfully";
 
-            instance->message_storage.remove(key);
+            p_instance->message_storage.remove(key);
         }
     }
     else PLOGI << "message_storage is empty.";

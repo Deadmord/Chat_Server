@@ -33,9 +33,6 @@
     <Filter Include="Header Files\Classes\DBService">
       <UniqueIdentifier>{89cd9b24-3628-4b8a-a5c2-f738f47778a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Classes\DBService">
-      <UniqueIdentifier>{3e8a1ee4-7562-43ed-af56-472227306d04}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Classes\DBModels">
       <UniqueIdentifier>{2e162919-ee85-4653-a49c-2f70e9c8399e}</UniqueIdentifier>
     </Filter>
@@ -81,6 +78,9 @@
     <Filter Include="Services\RatingCount_Service">
       <UniqueIdentifier>{e9cd5dfe-a830-4f6f-b7c1-e879e69c93a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Services\DBService">
+      <UniqueIdentifier>{3e8a1ee4-7562-43ed-af56-472227306d04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -98,11 +98,8 @@
     <ClCompile Include="DBUser.cpp">
       <Filter>Source Files\Classes\DBModels</Filter>
     </ClCompile>
-    <ClCompile Include="DB\JSONS\messages.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DBService.cpp">
-      <Filter>Source Files\Classes\DBService</Filter>
+      <Filter>Services\DBService</Filter>
     </ClCompile>
     <ClCompile Include="DB\JSONS\messages.cpp">
       <Filter>Source Files</Filter>
@@ -139,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="RatingCounter_Service.cpp">
       <Filter>Services\RatingCount_Service</Filter>
+    </ClCompile>
+    <ClCompile Include="DB\JSONS\messages.cpp">
+      <Filter>Source Files\Classes\DBModels</Filter>
     </ClCompile>
     <ClCompile Include="FileRepository.cpp">
       <Filter>Source Files\Classes\DBRepositories</Filter>
@@ -206,6 +206,9 @@
     </QtMoc>
     <QtMoc Include="LocalStorage_Service.h">
       <Filter>Services\LocalStorageService</Filter>
+    </QtMoc>
+    <QtMoc Include="RatingCounter_Service.h">
+      <Filter>Services\RatingCount_Service</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
