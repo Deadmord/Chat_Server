@@ -81,6 +81,12 @@
     <Filter Include="Services\DBService">
       <UniqueIdentifier>{3e8a1ee4-7562-43ed-af56-472227306d04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classes\Helpers">
+      <UniqueIdentifier>{57824aa4-5aed-45af-8764-6a22bdca8177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classes\Helpers">
+      <UniqueIdentifier>{eb740dd8-40ab-4e23-8980-bd6a928d5ff5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -171,6 +177,12 @@
     </ClInclude>
     <ClInclude Include="FileRepository.h">
       <Filter>Header Files\Classes\DBRepositories</Filter>
+    </ClInclude>
+    <ClInclude Include="SwearHelper.cpp">
+      <Filter>Source Files\Classes\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="SwearHelper.h">
+      <Filter>Header Files\Classes\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

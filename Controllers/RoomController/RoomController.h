@@ -27,6 +27,7 @@ class RoomController : public QObject
 
 public:
 	explicit RoomController(const quint32& id_, const QString& name_, const QString& description_, const quint32& topic_id_, const bool& is_private_, const QString& password_, bool is_deleted_, QObject* parent = nullptr);
+	explicit RoomController(const quint32& id_, const QString& name_, const QString& description_, const quint32& topic_id_, const bool& is_private_, const QString& password_, const bool& is_deleted_);
 	~RoomController() override;
 
 	static void initializeList(const QVector<DBEntity::DBRoom>& rooms_list_);
