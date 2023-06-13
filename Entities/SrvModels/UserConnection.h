@@ -29,6 +29,8 @@ public:
     void setRatingLikes(const quint32& _rating_likes);
     quint32 getRatingDislikes() const;
     void setRatingDislikes(const quint32& _rating_dislikes);
+    quint32 getRoomId() const;
+    void setRoomId(const quint32& _room_id);
 
 signals:
     void jsonReceived(const QJsonObject& _json_doc);
@@ -52,7 +54,7 @@ private:
     QString userpic_id;
     quint32 rating_likes;
     quint32 rating_dislikes;
-
+    quint32 room_id;
     bool flood_limit = false;
     quint16 nextBlockSize = 0;
 };
