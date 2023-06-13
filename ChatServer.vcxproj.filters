@@ -169,9 +169,6 @@
     <ClInclude Include="DTOUser.h">
       <Filter>Header Files\Classes\DTOHelpers</Filter>
     </ClInclude>
-    <ClInclude Include="RatingCounter_Service.h">
-      <Filter>Services\RatingCount_Service</Filter>
-    </ClInclude>
     <ClInclude Include="FileRepository.h">
       <Filter>Header Files\Classes\DBRepositories</Filter>
     </ClInclude>
