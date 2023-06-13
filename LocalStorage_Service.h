@@ -16,7 +16,7 @@ class LocalStorage_Service :
 {
     Q_OBJECT
 private:
-    static LocalStorage_Service* instance;
+    static LocalStorage_Service* p_instance;
     static QMutex mutex;
     explicit LocalStorage_Service(QObject* object_ = nullptr);
     QMap<QUuid, QList<QSharedPointer<DBEntity::DBMessage>>> message_storage;
