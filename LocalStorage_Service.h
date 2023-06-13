@@ -20,6 +20,7 @@ private:
     static QMutex mutex;
     explicit LocalStorage_Service(QObject* object_ = nullptr);
     QMap<QUuid, QList<QSharedPointer<DBEntity::DBMessage>>> message_storage;
+    
 
 public:
     static LocalStorage_Service* getInstance();
@@ -32,6 +33,7 @@ signals:
 
 public slots:
     void addMessages(DBEntity::DBMessage* message_, QUuid room_id_);
+    void getMessages(const QDateTime& from_, const QDateTime& to_, const QUuid& room_id_);
     void saveAllMessages();
     void safeExit();
 };

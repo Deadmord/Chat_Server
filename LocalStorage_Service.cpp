@@ -63,3 +63,26 @@ void LocalStorage_Service::addMessages(DBEntity::DBMessage* message_, QUuid room
     }
     message_storage.value(room_id_).append(QSharedPointer<DBEntity::DBMessage>(message_, &QObject::deleteLater));
 }
+
+void LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const QUuid& room_id_) {
+    QMutexLocker locker(&mutex);
+    QList<DBEntity::DBMessage*> messages;
+    QDir directory("rooms/" + room_id_.toString());
+    QStringList all_files = directory.entryList(QDir::Files);
+
+    const QRegularExpression regex(R"((\d{8}_\d{4})\.json)"); // Regular expression to match file names like "20230102_1000.json"
+    
+    for (const QString& file_name : all_files)
+    {
+	    if (QRegularExpressionMatch match = regex.match(file_name); match.hasMatch())
+        {
+            QString date_string = match.captured(1);
+
+            if (QDateTime file_date_time = QDateTime::fromString(date_string, "yyyyMMdd_hhmm"); file_date_time >= from_ && file_date_time <= to_)
+            {
+                messages.append(DBEntity::DBMessage::readMessages(file_name));
+            }
+        }
+    }
+    emit messageRetrieved(messages);
+}

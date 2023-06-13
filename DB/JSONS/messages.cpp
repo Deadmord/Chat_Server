@@ -15,10 +15,10 @@ QJsonObject DBEntity::DBMessage::toJson() const {
     obj["media"] = media.isNull()?"":media;
     obj["deleted"] = deleted;
     QJsonObject json;
-    QMapIterator<QUuid, bool> i(likes);
+    QMapIterator<QString, bool> i(likes);
     while (i.hasNext()) {
         i.next();
-        json.insert(i.key().toString(), i.value());
+        json.insert(i.key(), i.value());
     }
     obj["likes"] = json;
 
@@ -54,7 +54,7 @@ void DBEntity::DBMessage::fromJson(const QJsonObject &obj_) {
     for (auto it =temp.constBegin(); it != temp.constEnd(); ++it)
     {
         
-        likes.insert(QUuid::fromString(it.key()) , it.value().toBool());
+        likes.insert(it.key() , it.value().toBool());
     }
 }
 
@@ -62,7 +62,7 @@ void DBEntity::DBMessage::setDeleted(const bool flag_) {
     DBMessage::deleted = flag_;
 }
 
-void DBEntity::DBMessage::setLikes(const QMap<QUuid, bool> &likes_) {
+void DBEntity::DBMessage::setLikes(const QMap<QString, bool> &likes_) {
     DBMessage::likes = likes_;
 }
 
@@ -142,7 +142,7 @@ bool DBEntity::DBMessage::isDeleted() const {
     return deleted;
 }
 
-const QMap<QUuid, bool> &DBEntity::DBMessage::getLikes() const {
+const QMap<QString, bool> &DBEntity::DBMessage::getLikes() const {
     return likes;
 }
 
