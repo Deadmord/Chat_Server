@@ -4,7 +4,7 @@
 #include <QString>
 #include <QObject>
 #include <QSet>
-#include "file_repository.h"
+#include "FileRepository.h"
 
 namespace Helper {
 
