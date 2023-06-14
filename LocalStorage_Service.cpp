@@ -1,5 +1,6 @@
 #include "LocalStorage_Service.h"
 #include <qthread.h>
+#include <QtConcurrent>
 
 QSharedPointer<LocalStorage_Service> LocalStorage_Service::shp_instance = nullptr;
 QMutex LocalStorage_Service::mutex;
@@ -63,23 +64,22 @@ void LocalStorage_Service::saveAllMessages() {
     {
         QMutexLocker locker(&mutex);
         auto keys = shp_instance->message_storage.keys();
-        for (const auto& key : keys)
-        {
-            QString current_time = QDateTime::currentDateTimeUtc().toString("yyyyMMdd_hhmm");
-            QString file_name = "rooms/" + QString::number(key) + "/" + current_time + ".json";
-            QDir().mkpath("rooms/" + QString::number(key));
-            QJsonArray array;
-            for (const auto& message : message_storage.value(key)) {
+        QtConcurrent::blockingMap(keys, [this](uint key) {
+                QString current_time = QDateTime::currentDateTimeUtc().toString("yyyyMMdd_hhmm");
+                QString file_name = "rooms/" + QString::number(key) + "/" + current_time + ".json";
+                QDir().mkpath("rooms/" + QString::number(key));
+                QJsonArray array;
+                for (const auto& message : message_storage.value(key)) {
 
-                array.append(message->toJson());
-            }
-            if (!FileRepository::writeJsonArr(file_name, array)) {
-                PLOGE << "Error writing to file";
-            }
-            PLOGI << "Writing messages successfully";
+                    array.append(message->toJson());
+                }
+                if (!FileRepository::writeJsonArr(file_name, array)) {
+                    PLOGE << "Error writing to file";
+                }
+                PLOGI << "Writing messages successfully";
 
-            shp_instance->message_storage.remove(key);
-        }
+                shp_instance->message_storage.remove(key);
+        });
     }
     else PLOGI << "message_storage is empty.";
 }
