@@ -12,6 +12,7 @@
 #include "MessageSaver_Service.h"
 #include "SwearHelper.h"
 
+
 #if defined (Q_OS_WIN)
 #include "Core/async_console_win.h"
 #else
@@ -62,14 +63,13 @@ static void startup_routine()
     asyncConsole = new asyncConsoleWin(qApp);
     QObject::connect(asyncConsole, &asyncConsoleWin::startServer, &server, &Server::startServer);
     QObject::connect(asyncConsole, &asyncConsoleWin::stopServer, &server, &Server::stopServer);
-    QObject::connect(&server, &Server::logMessage, asyncConsole, &asyncConsoleWin::logMessage);
 #else
     qDebug() << "AsyncConsoleWin can't be loaded! Curent OS doesnt support.";
     PLOGD << "AsyncConsoleWin can't be loaded! Curent OS doesnt support.";
 #endif
     QTimer::singleShot(0, [&]()
         {
-            //MessageSaver_Service::start(0.05);
+            MessageSaver_Service::start(0.05);
         });
     QTimer::singleShot(0, [&]()
         {

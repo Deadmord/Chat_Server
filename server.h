@@ -27,7 +27,7 @@ public:
     ~Server();
 
 signals:
-    void logMessage(enum Severity log_lvl, const QString& msg);
+    
 
 public slots:
     void startServer();
