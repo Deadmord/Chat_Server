@@ -5,7 +5,6 @@
 //#include <QObject>
 //#include "DBRoom.h"
 //#include "Room.h"
-//#include "Controllers/RoomController/RoomController.h"
 //
 //namespace DTOHelper {
 //
@@ -14,13 +13,11 @@
 //		Q_OBJECT
 //
 //	public:
+//		DTORoom();
 //
-//		DTORoom(QObject* parent = nullptr);
-//		static QSharedPointer<DBEntity::DBRoom> convertToDBModel(const RoomController& rc_);
-//		static QSharedPointer<RoomController> convertToEntity(const DBEntity::DBRoom& room_);
+//		DBEntity::DBRoom convertToDBModel(const RoomController& rc_);
+//		RoomController convertToEntity(const DBEntity::DBRoom& room_);
 //	};
 //}
-//
-//Q_DECLARE_METATYPE(DTOHelper::DTORoom)
 //
 //#endif 

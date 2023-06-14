@@ -24,10 +24,12 @@ struct Message
 
 struct User
 {
+    QString id;
     QString user_name;
     QString password;
-    QByteArray userpic;
-    qint32 rating;
+    QString userpic_id;
+    quint32 rating_likes;
+    quint32 rating_dislikes;
     QDateTime lastMessageTime;
 };
 
