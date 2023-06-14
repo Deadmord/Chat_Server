@@ -93,6 +93,9 @@
     <Filter Include="Services\MessageHistory_Service">
       <UniqueIdentifier>{ac7de0c8-3f92-4c9c-b66b-7048bf5d0747}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Controllers\Message Hub">
+      <UniqueIdentifier>{5a4580db-a3e6-46e9-a6b0-d32459067ec4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -167,6 +170,9 @@
     <ClCompile Include="MessageHistory_Service.cpp">
       <Filter>Services\MessageHistory_Service</Filter>
     </ClCompile>
+    <ClCompile Include="Controllers\MessageController\MessageController.cpp">
+      <Filter>Controllers\Message Hub</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBUser.h">
@@ -239,6 +245,9 @@
     </QtMoc>
     <QtMoc Include="MessageHistory_Service.h">
       <Filter>Services\MessageHistory_Service</Filter>
+    </QtMoc>
+    <QtMoc Include="Controllers\MessageController\MessageController.h">
+      <Filter>Controllers\Message Hub</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

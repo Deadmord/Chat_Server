@@ -94,6 +94,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Controllers\MessageController\MessageController.cpp" />
     <ClCompile Include="DTORoom.cpp" />
     <ClCompile Include="DTOUser.cpp" />
     <ClCompile Include="Entities\SrvModels\UserConnection.cpp" />
@@ -105,6 +106,7 @@
     <ClCompile Include="SrvRoom.cpp" />
     <ClCompile Include="SwearHelper.cpp" />
     <ClCompile Include="UserRepository.cpp" />
+    <QtMoc Include="Controllers\MessageController\MessageController.h" />
     <ClInclude Include="FileRepository.h" />
     <QtMoc Include="MessageHistory_Service.h" />
     <QtMoc Include="SrvRoom.h" />
