@@ -81,6 +81,12 @@
     <Filter Include="Services\RatingCount_Service">
       <UniqueIdentifier>{e9cd5dfe-a830-4f6f-b7c1-e879e69c93a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Classes\Helpers">
+      <UniqueIdentifier>{57824aa4-5aed-45af-8764-6a22bdca8177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classes\Helpers">
+      <UniqueIdentifier>{eb740dd8-40ab-4e23-8980-bd6a928d5ff5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -166,14 +172,11 @@
     <ClInclude Include="Entities\Enums\Enums.h">
       <Filter>Entities Files\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="DTORoom.h">
-      <Filter>Header Files\Classes\DTOHelpers</Filter>
+    <ClInclude Include="SwearHelper.cpp">
+      <Filter>Source Files\Classes\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="DTOUser.h">
-      <Filter>Header Files\Classes\DTOHelpers</Filter>
-    </ClInclude>
-    <ClInclude Include="RatingCounter_Service.h">
-      <Filter>Services\RatingCount_Service</Filter>
+    <ClInclude Include="SwearHelper.h">
+      <Filter>Header Files\Classes\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +209,15 @@
     </QtMoc>
     <QtMoc Include="LocalStorage_Service.h">
       <Filter>Services\LocalStorageService</Filter>
+    </QtMoc>
+    <QtMoc Include="DTORoom.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="DTOUser.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="RatingCounter_Service.h">
+      <Filter>Services\RatingCount_Service</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

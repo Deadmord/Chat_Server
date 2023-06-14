@@ -196,4 +196,41 @@ namespace DBService {
 			});
 	}
 
+	QFuture<qint32> UserRepository::getRatingByLogin(const QString& login_) {
+		return QtConcurrent::run([this, login_]() {
+			try
+			{
+				a_dbConnection.databaseConnectionOpen();
+				if (a_dbConnection.getDatabase().isOpen()) {
+					QSqlQuery query;
+					QString query_string = "SELECT rating from [user] WHERE login=:login";
+					query.prepare(query_string);
+					query.bindValue(":login", login_);
+
+					if (query.exec() && query.next()) {
+						qint32 rating = query.value("rating").toInt();
+						PLOG_INFO << "User '" << login_ << "' rating : " << rating;
+						a_dbConnection.databaseConnectionClose();
+						return rating;
+					}
+					else {
+						PLOG_ERROR << "Cannot get rating.";
+						a_dbConnection.databaseConnectionClose();
+						return -1;
+					}
+				}
+				else {
+					PLOG_ERROR << "Cannot connect to the data base.";
+					a_dbConnection.databaseConnectionClose();
+					return -1;
+				}
+			}
+			catch (const std::exception& exception)
+			{
+				PLOG_ERROR << "Exception in getRatingByLogin method: " << exception.what();
+				return -1;
+			}
+			});
+	}
+
 }

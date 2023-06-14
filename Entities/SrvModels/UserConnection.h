@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include <QTimer>
 #include "../Enums/Enums.h"
+#include "../../DBUser.h"
 
 class UserConnection : public QObject
 {
@@ -29,6 +30,8 @@ public:
     void setRatingLikes(const quint32& _rating_likes);
     quint32 getRatingDislikes() const;
     void setRatingDislikes(const quint32& _rating_dislikes);
+    quint32 getRoomId() const;
+    void setRoomId(const quint32& _room_id);
 
 signals:
     void jsonReceived(const QJsonObject& _json_doc);
@@ -46,13 +49,14 @@ private slots:
 
 private:
     QTcpSocket* user_socket;
+    QSharedPointer<DBEntity::DBUser> p_user;
     QString id;
     QString user_name;
     QString password;
     QString userpic_id;
     quint32 rating_likes;
     quint32 rating_dislikes;
-
+    quint32 room_id;
     bool flood_limit = false;
     quint16 nextBlockSize = 0;
 };

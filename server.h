@@ -27,7 +27,7 @@ public:
     ~Server();
 
 signals:
-    void logMessage(enum Severity log_lvl, const QString& msg);
+    
 
 public slots:
     void startServer();
@@ -54,7 +54,8 @@ private:
     //void SendToAllClients(const User_Message&msg);
 
     void jsonFromLoggedOut(UserConnection* sender, const QJsonObject& doc);
-    void jsonFromLoggedIn(UserConnection* sender, const QJsonObject& doc);
+    void jsonFromLoggedInMSG(UserConnection* sender, const QJsonObject& doc);      //Убрать в RoomController
+    void jsonFromLoggedInCMD(UserConnection* sender, const QJsonObject& doc);
     void sendJson(UserConnection* destination, const QJsonObject& message);
     User_Message createMessage(QString nickame, QString text);
 
