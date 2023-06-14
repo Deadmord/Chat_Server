@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QObject>
+#include "DTOUser.h"
 
 namespace DBEntity {
 
@@ -16,7 +17,8 @@ namespace DBEntity {
         bool a_is_deleted;
 
     public:
-        explicit DBUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_, const bool& is_deleted_);
+        DBUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_);
+        DBUser(const DTOModel::DTOUser& dtoUser_);
 
         QString getLogin() const;
         void setLogin(const QString& login_);

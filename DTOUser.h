@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "DBUser.h"
-#include "Entities/entities.h"
+#include <QSharedPointer>
 
 namespace DTOModel {
 
@@ -14,16 +14,22 @@ namespace DTOModel {
 	public:
 
 		DTOUser(QObject* parent = nullptr);
-		DTOUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_, const bool& is_deleted_);
+		DTOUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_);
+		DTOUser(const DBEntity::DBUser& db_user_);
 		~DTOUser();
 
 		QString getUsername() const;
 		void setUsername(const QString& username_);
 		QString getPassword() const;
-		void setPassword
+		void setPassword(const QString& password_);
+		QByteArray getUserpic() const;
+		void setUserpic(const QByteArray& userpic_);
+		quint32 getRating() const;
+		void setRating(const quint32& rating_);
+		bool isDeleted() const;
 
-		static QSharedPointer<DBEntity::DBUser> convertToDBModel(const User& user_);
-		static QSharedPointer<User> convertToEntity(const DBEntity::DBUser& db_user_);
+		static QSharedPointer<DBEntity::DBUser> convertToDBModel(const DTOUser& dtoUser_);
+		static QSharedPointer<DTOModel::DTOUser> convertToEntity(const DBEntity::DBUser& db_user_);
 
 	private:
 
@@ -34,7 +40,6 @@ namespace DTOModel {
 		bool a_is_deleted;
 
 	};
-
 }
 
 Q_DECLARE_METATYPE(DTOModel::DTOUser)

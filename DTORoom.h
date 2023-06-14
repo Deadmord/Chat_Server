@@ -16,8 +16,13 @@ namespace DTOModel {
 	public:
 
 		DTORoom(QObject* parent = nullptr);
+
 		static QSharedPointer<DBEntity::DBRoom> convertToDBModel(const RoomController& rc_);
 		static QSharedPointer<RoomController> convertToEntity(const DBEntity::DBRoom& room_);
+
+	private:
+		qint32 a_id;
+
 	};
 }
 

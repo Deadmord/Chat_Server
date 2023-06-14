@@ -3,10 +3,31 @@
 
 #include <QString>
 #include <QObject>
+#include "DTORoom.h"
 
 namespace DBEntity {
 
 	class DBRoom {
+
+	public:
+
+		DBRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const bool& is_private_, const QString& password_, const bool& is_deleted_);
+		DBRoom(const DTOModel::DTORoom& dto_room_);
+	
+		qint32 getId() const;
+		void setId(const qint32& id_);
+		QString getName() const;
+		void setName(const QString& name_);
+		QString getDescription() const;
+		void setDescription(const QString& description_);
+		qint32 getTopicId() const;
+		void setTopicId(const qint32& topic_id_);
+		bool isPrivate() const;
+		void setIsPrivate(const bool& is_private_);
+		QString getPassword() const;
+		void setPassword(const QString& password_);
+		bool isDeleted() const;
+		void setIsDeleted(const bool& deleted_);
 
 	private:
 		qint32 a_id;
@@ -17,30 +38,6 @@ namespace DBEntity {
 		QString a_password;
 		bool a_is_deleted;
 
-	public:
-
-		explicit DBRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const bool& is_private_, const QString& password_, const bool& is_deleted_);
-	
-		qint32 getId() const;
-		void setId(const qint32& id_);
-
-		QString getName() const;
-		void setName(const QString& name_);
-
-		QString getDescription() const;
-		void setDescription(const QString& description_);
-
-		qint32 getTopicId() const;
-		void setTopicId(const qint32& topic_id_);
-
-		bool isPrivate() const;
-		void setIsPrivate(const bool& is_private_);
-
-		QString getPassword() const;
-		void setPassword(const QString& password_);
-
-		bool isDeleted() const;
-		void setIsDeleted(const bool& deleted_);
 	};
 }
 #endif
