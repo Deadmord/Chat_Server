@@ -8,7 +8,7 @@ void Server::startServer()
     loadConfig(CONFIG_FILE_PATH);
     openConnection();
     loadRooms();
-    emit logMessage(info, "Server initialized");
+    PLOGI << "Server initialized";
 }
 
 void Server::stopServer()
@@ -16,28 +16,28 @@ void Server::stopServer()
     if (isListening()) {
         disableUsers();
         close();
-        emit logMessage(info, "Server stop - OK");
+        PLOGI << "Server stop - OK";
     }
     else
     {
-        qDebug() << "Server alrady spopped";
+        PLOGD << "Server alrady spopped";
     }
 }
 
 void Server::incomingConnection(qintptr socketDescriptor)
 {
-    UserConnection* user_connection = new UserConnection(this);
+    UserConnection* user_connection = new UserConnection();
     if (!user_connection->setSocketDescriptor(socketDescriptor)) {
         user_connection->deleteLater();         //if the socket descriptor could not be set, delete the socket
-        emit logMessage(error, "Socket descriptor could not be set");
+        PLOGE << "Socket descriptor could not be set";
         return;
     }
     connect(user_connection, &UserConnection::disconnectedFromClient, this, std::bind(&Server::userDisconnected, this, user_connection));
     connect(user_connection, &UserConnection::errorSignal, this, std::bind(&Server::userError, this, user_connection));
     connect(user_connection, &UserConnection::jsonReceived, this, std::bind(&Server::jsonReceived, this, user_connection, std::placeholders::_1));
-    connect(user_connection, &UserConnection::logMessage, this, &Server::logMessage);
+    
     connected_users.append(user_connection);
-    emit logMessage(info ,"New client Connected! Now users: " + QString::number(connected_users.size()));
+    PLOGI << "New client Connected! Now users: " + QString::number(connected_users.size());
 
     ////---------------old------------------
     ////socket = nextPendingConnection();     //return nullptr
@@ -190,16 +190,16 @@ void Server::openConnection()
     if (!this->isListening()) {
         if (this->listen(QHostAddress::Any, server_port))      //QHostAddress::Any, 5555
         {
-            emit logMessage(info, "Server start - OK");
+            PLOGD << "Server start - OK";
         }
         else
         {
-            emit logMessage(error, "Sever start - Error");
+            PLOGE << "Sever start - Error";
         }
     }
     else
     {
-        emit logMessage(debug, "Server alrady listen");
+        PLOGD << "Server is already listening";
     }
 }
 
@@ -227,7 +227,7 @@ void Server::loadRooms()
         RoomController* room = new RoomController(dbRoom.getId(), dbRoom.getName(), dbRoom.getDescription(), dbRoom.getTopicId(), dbRoom.isPrivate(), dbRoom.getPassword(), dbRoom.isDeleted(), this);
         //connect();
         rooms.append(room);
-        emit logMessage(info, "New room created! Now rooms: " + QString::number(rooms.size()));
+        PLOGI << "New room created! Now rooms: " + QString::number(rooms.size());
     }
 }
 
@@ -324,7 +324,7 @@ void Server::sendJson(UserConnection* destination, const QJsonObject& message)
 void Server::jsonReceived(UserConnection* sender, const QJsonObject& doc)
 {
     Q_ASSERT(sender);
-    emit logMessage(info, QLatin1String("JSON received: ") + QJsonDocument(doc).toJson(QJsonDocument::Compact));
+    PLOGI << QLatin1String("JSON received: ") + QJsonDocument(doc).toJson(QJsonDocument::Compact);
     if (sender->getUserName().isEmpty())
         return jsonFromLoggedOut(sender, doc);
     //-------------- проверять принадлежность комнате ------------------
@@ -342,7 +342,7 @@ void Server::userDisconnected(UserConnection* sender)
         disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
         disconnectedMessage[QStringLiteral("username")] = userName;
         broadcastSend(disconnectedMessage, nullptr);
-        emit logMessage(info, userName + QLatin1String(" disconnected, users left: ") + QString::number(connected_users.size()));
+        PLOGI << userName + QLatin1String(" disconnected, users left: ") + QString::number(connected_users.size());
     }
     sender->deleteLater();
 }
@@ -350,7 +350,7 @@ void Server::userDisconnected(UserConnection* sender)
 void Server::userError(UserConnection* sender)
 {
     Q_UNUSED(sender)
-        emit logMessage(error, QLatin1String("Error from ") + sender->getUserName());
+        PLOGE << QLatin1String("Error from ") + sender->getUserName();
 }
 
 void Server::jsonFromLoggedOut(UserConnection* sender, const QJsonObject& docObj)
