@@ -6,6 +6,7 @@
 #include <QMutex>
 #include <QString>
 #include <QMap>
+#include <QSharedPointer>
 
 #include <plog/Log.h>
 
@@ -16,7 +17,7 @@ class RatingCounter_Service :
 
 private:
 
-    static RatingCounter_Service* p_instance;
+    static QSharedPointer<RatingCounter_Service> shp_instance;
     static QMutex mutex;
     explicit RatingCounter_Service(QObject* parent = nullptr);
     QMap<QString, qint32> rating_storage;
