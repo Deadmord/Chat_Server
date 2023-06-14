@@ -50,7 +50,7 @@ void DBEntity::DBMessage::fromJson(const QJsonObject &obj_) {
     text = obj_.value("text").toString();
     media = obj_.value("media").toString();
     likes.clear();
-    auto temp = obj_.value("likes").toObject().toVariantMap();
+    const auto temp = obj_.value("likes").toObject().toVariantMap();
     for (auto it =temp.constBegin(); it != temp.constEnd(); ++it)
     {
         
@@ -96,12 +96,12 @@ QSet<QSharedPointer<DBEntity::DBMessage>> DBEntity::DBMessage::readMessages(cons
    FileRepository::readJsonArr(file_name_, array);
    QSet<QSharedPointer<DBMessage>> messages;
 
-   for(const auto & obj: array) {
+   for(const auto  obj: array) {
        if (obj.isObject())
        {
-           QJsonObject jsonObject = obj.toObject();
+           QJsonObject json_object = obj.toObject();
            QSharedPointer<DBMessage> message (new DBMessage, &QObject::deleteLater);
-           message->fromJson(jsonObject);
+           message->fromJson(json_object);
            messages.insert(message);
        }
        else

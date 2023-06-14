@@ -56,9 +56,9 @@ namespace DBService {
 					QSqlQuery query;
 					query.prepare(query_string_);
 
-					QString userPassword = user_.getPassword();
+					const QString user_password = user_.getPassword();
 					QCryptographicHash hash(QCryptographicHash::Sha256);
-					hash.addData(userPassword.toUtf8());
+					hash.addData(user_password.toUtf8());
 
 					query.bindValue(":login", user_.getLogin());
 					query.bindValue(":password", QString(hash.result().toHex()));

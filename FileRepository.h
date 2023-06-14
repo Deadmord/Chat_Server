@@ -8,6 +8,7 @@
 
 #include <QString>
 #include "DB/JSONS/messages.h"
+#include <plog/Log.h>
 
 class FileRepository {
 
@@ -18,8 +19,8 @@ public:
     FileRepository();
 
     static bool writeJsonArr(const QString &file_name_, const QJsonArray &data_);
-   static bool readJson(const QString& filePath, QJsonObject& jsonObject);
-   static bool readJsonArr(const QString& filePath, QJsonArray& jsonObject);
+   static bool readJson(const QString& file_path_, QJsonObject& json_object_);
+   static bool readJsonArr(const QString& file_path_, QJsonArray& json_object_);
 };
 
 

@@ -18,12 +18,12 @@
 
 const QString CONFIG_FILE_PATH = "./config.json";
 
-class Server : public QTcpServer
+class Server final : public QTcpServer
 {
     Q_OBJECT
     Q_DISABLE_COPY(Server)
 public:
-    explicit Server(QObject* parent = nullptr);
+    explicit Server(QObject* parent_ = nullptr);
     ~Server();
 
 signals:
@@ -32,18 +32,18 @@ signals:
 public slots:
     void startServer();
     void stopServer();
-    void incomingConnection(qintptr socketDescriptor) override;
+    void incomingConnection(qintptr socket_descriptor_) override;
 
 private slots:
 
-    void broadcastSend(const QJsonObject& message, UserConnection* exclude);
-    void jsonReceived(UserConnection* sender, const QJsonObject& doc);
-    void userDisconnected(UserConnection* sender);
-    void userError(UserConnection* sender);
+    void broadcastSend(const QJsonObject& message_, const UserConnection* exclude_);
+    void jsonReceived(UserConnection* sender_, const QJsonObject& doc_);
+    void userDisconnected(UserConnection* sender_);
+    void userError(const UserConnection* sender_);
 
 private: 
     void disableUsers();
-    void loadConfig(QString _path);
+    void loadConfig(const QString& path_);
     void openConnection();
     void loadRooms();
 
@@ -53,11 +53,11 @@ private:
     ////void SendToAllClients(const QString &str);
     //void SendToAllClients(const User_Message&msg);
 
-    void jsonFromLoggedOut(UserConnection* sender, const QJsonObject& doc);
-    void jsonFromLoggedInMSG(UserConnection* sender, const QJsonObject& doc);      //Убрать в RoomController
-    void jsonFromLoggedInCMD(UserConnection* sender, const QJsonObject& doc);
-    void sendJson(UserConnection* destination, const QJsonObject& message);
-    User_Message createMessage(QString nickame, QString text);
+    void jsonFromLoggedOut(UserConnection* sender_, const QJsonObject& doc_);
+    void jsonFromLoggedInMsg(const UserConnection* sender_, const QJsonObject& doc_obj_);      //Убрать в RoomController
+    void jsonFromLoggedInCmd(UserConnection* sender_, const QJsonObject& doc_obj_);
+    void sendJson(UserConnection* destination_, const QJsonObject& message_);
+    User_Message createMessage(const QString& nickname_, const QString& text_);
 
 private:
     QString server_address;
@@ -72,5 +72,5 @@ private:
     //переделать в QVector <User_Message*> messages и перенести в Room
     QVector <User_Message> messages;
 
-    QByteArray Data;
+    QByteArray data_;
 };
