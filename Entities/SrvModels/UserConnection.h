@@ -52,7 +52,6 @@ private slots:
 
 private:
     QTcpSocket* user_socket;
-    QSharedPointer<DBEntity::DBUser> p_user;
     QString id;
     QString user_name;
     QString password;

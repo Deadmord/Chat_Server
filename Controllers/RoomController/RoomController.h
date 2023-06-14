@@ -30,16 +30,6 @@ public:
 	~RoomController() override;
 
 	
-
-signals:
-
-	void roomCreated(const RoomController* room);
-	void nameChanged(const QString& val);
-	void descriptionChanged(const QString& val);
-	void privateChanged(bool val);
-	void passwordChanged();
-	void roomDeleted();
-
 public slots:
 	
 	void userEntry(QSharedPointer<SrvRoom> shp_room_, UserConnection* user);

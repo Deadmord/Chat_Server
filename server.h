@@ -48,12 +48,11 @@ private:
     void disableUsers();
     void loadConfig(const QString& path_);
     void openConnection();
-    void loadRooms();
 
 
     //void SendToClient(const User_Message& msg, QTcpSocket* socket);
     //void SendToClient(const QVector<User_Message>& msgs, QTcpSocket* socket);
-    ////void SendToAllClients(const QString &str);
+    //void SendToAllClients(const QString &str);
     //void SendToAllClients(const User_Message&msg);
 
     void jsonFromLoggedOut(UserConnection* sender_, const QJsonObject& doc_);
@@ -71,7 +70,6 @@ private:
     //QTcpSocket* socket;
     //QVector <QTcpSocket*> sockets;
     QVector<UserConnection*> connected_users;
-    QVector<RoomController*> rooms;
     //переделать в QVector <User_Message*> messages и перенести в Room
     QVector <User_Message> messages;
 
