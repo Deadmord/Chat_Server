@@ -16,7 +16,7 @@ namespace Helper {
 		static QSet<QString> getForbiddenWords();
 
 	public:
-		SwearHelper(QObject* parent = nullptr);
+		SwearHelper(QObject* parent_ = nullptr);
 		static bool checkForbiddenWords(const QString& text_);
 	};
 }

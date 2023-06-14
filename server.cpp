@@ -1,6 +1,6 @@
 #include "server.h"
 
-Server::Server(QObject* parent) : QTcpServer(parent) {}
+Server::Server(QObject* parent_) : QTcpServer(parent_) {}
 Server::~Server(){}
 
 void Server::startServer()
@@ -20,21 +20,28 @@ void Server::stopServer()
     }
     else
     {
-        PLOGD << "Server alrady spopped";
+        PLOGD << "Server already stopped";
     }
 }
 
-void Server::incomingConnection(qintptr socketDescriptor)
+void Server::incomingConnection(qintptr socket_descriptor_)
 {
     UserConnection* user_connection = new UserConnection();
-    if (!user_connection->setSocketDescriptor(socketDescriptor)) {
+    if (!user_connection->setSocketDescriptor(socket_descriptor_)) {
         user_connection->deleteLater();         //if the socket descriptor could not be set, delete the socket
         PLOGE << "Socket descriptor could not be set";
         return;
     }
-    connect(user_connection, &UserConnection::disconnectedFromClient, this, std::bind(&Server::userDisconnected, this, user_connection));
-    connect(user_connection, &UserConnection::errorSignal, this, std::bind(&Server::userError, this, user_connection));
-    connect(user_connection, &UserConnection::jsonReceived, this, std::bind(&Server::jsonReceived, this, user_connection, std::placeholders::_1));
+    connect(user_connection, &UserConnection::disconnectedFromClient, this, [this, user_connection]
+    {
+	    userDisconnected(user_connection);
+    });
+    connect(user_connection, &UserConnection::errorSignal, this,
+            [this, user_connection] { userError(user_connection); });
+    connect(user_connection, &UserConnection::jsonReceived, this, [this, user_connection](auto&& ph1_)
+    {
+	    jsonReceived(user_connection, std::forward<decltype(ph1_)>(ph1_));
+    });
     
     connected_users.append(user_connection);
     PLOGI << "New client Connected! Now users: " + QString::number(connected_users.size());
@@ -129,23 +136,21 @@ void Server::incomingConnection(qintptr socketDescriptor)
 //    }
 //}
 
-void Server::loadConfig(QString _path)
+void Server::loadConfig(const QString& path_)
 {
     QFile config_file;
-    QJsonDocument config_file_doc;
-    QJsonObject config_json;
-    QJsonParseError jsonError;
+    QJsonParseError json_error;
 
-    config_file.setFileName(_path);
+    config_file.setFileName(path_);
 
     if (config_file.open(QIODevice::ReadOnly | QFile::Text))
     {
-        config_file_doc = QJsonDocument::fromJson(QByteArray(config_file.readAll()), &jsonError);
+	    const QJsonDocument config_file_doc = QJsonDocument::fromJson(QByteArray(config_file.readAll()), &json_error);
         config_file.close();
 
-        if (jsonError.error == QJsonParseError::NoError)
+        if (json_error.error == QJsonParseError::NoError)
         {
-            config_json = config_file_doc.object();
+	        QJsonObject config_json = config_file_doc.object();
 
             if (const QJsonValue v = config_json["ServerAddress"]; v.isString())
                 server_address = v.toString();
@@ -175,7 +180,7 @@ void Server::loadConfig(QString _path)
         }
         else
         {
-            qWarning() << "Error config file read: " << jsonError.error;
+            qWarning() << "Error config file read: " << json_error.error;
         }
     }
     else
@@ -222,9 +227,9 @@ void Server::loadRooms()
         DBEntity::DBRoom{3, "room3", "c_description", 13, false, "c_password", true }
     };
 
-    for(DBEntity::DBRoom dbRoom: dbRooms)
+    for(const DBEntity::DBRoom& db_room: dbRooms)
     {
-        RoomController* room = new RoomController(dbRoom.getId(), dbRoom.getName(), dbRoom.getDescription(), dbRoom.getTopicId(), dbRoom.isPrivate(), dbRoom.getPassword(), dbRoom.isDeleted(), this);
+	    auto* room = new RoomController(db_room.getId(), db_room.getName(), db_room.getDescription(), db_room.getTopicId(), db_room.isPrivate(), db_room.getPassword(), db_room.isDeleted(), this);
         //connect();
         rooms.append(room);
         PLOGI << "New room created! Now rooms: " + QString::number(rooms.size());
@@ -292,11 +297,11 @@ void Server::loadRooms()
 //}
 
 //---!!!---это от сюда убрать, будет не нужно
-User_Message Server::createMessage(QString _nickname, QString _text)
+User_Message Server::createMessage(const QString& nickname_, const QString& text_)
 {
     Message msg;
-    msg.nickname = _nickname;
-    msg.text = _text;
+    msg.nickname = nickname_;
+    msg.text = text_;
     msg.room_id = 0;
     msg.deleted = false;
     return User_Message(msg);
@@ -304,39 +309,39 @@ User_Message Server::createMessage(QString _nickname, QString _text)
 }
 
 //---!!!---это от сюда убрать, будет не нужно
-void Server::broadcastSend(const QJsonObject& message, UserConnection* exclude)
+void Server::broadcastSend(const QJsonObject& message_, const UserConnection* exclude_)
 {
     for (UserConnection* user : connected_users) {
         Q_ASSERT(user);
-        if (user == exclude)
+        if (user == exclude_)
             continue;
-        sendJson(user, message);
+        sendJson(user, message_);
     }
 }
 
 //---!!!---это от сюда убрать, будет не нужно
-void Server::sendJson(UserConnection* destination, const QJsonObject& message)
+void Server::sendJson(UserConnection* destination_, const QJsonObject& message_)
 {
-    Q_ASSERT(destination);
-    destination->sendJson(message);
+    Q_ASSERT(destination_);
+    destination_->sendJson(message_);
 }
 
-void Server::jsonReceived(UserConnection* sender, const QJsonObject& doc)
+void Server::jsonReceived(UserConnection* sender_, const QJsonObject& doc_)
 {
-    Q_ASSERT(sender);
-    PLOGI << QLatin1String("JSON received: ") + QJsonDocument(doc).toJson(QJsonDocument::Compact);
-    if (sender->getUserName().isEmpty())
-        return jsonFromLoggedOut(sender, doc);
+    Q_ASSERT(sender_);
+    PLOGI << QLatin1String("JSON received: ") + QJsonDocument(doc_).toJson(QJsonDocument::Compact);
+    if (sender_->getUserName().isEmpty())
+        return jsonFromLoggedOut(sender_, doc_);
     //-------------- проверять принадлежность комнате ------------------
     // -----------------если принадлежит то отправлять сообщение в конкретную комнату---------------
     //вместо этого
-    jsonFromLoggedInCMD(sender, doc);
+    jsonFromLoggedInCmd(sender_, doc_);
 }
 
-void Server::userDisconnected(UserConnection* sender)
+void Server::userDisconnected(UserConnection* sender_)
 {
-    connected_users.removeAll(sender);
-    const QString userName = sender->getUserName();
+    connected_users.removeAll(sender_);
+    const QString userName = sender_->getUserName();
     if (!userName.isEmpty()) {
         QJsonObject disconnectedMessage;
         disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
@@ -344,92 +349,92 @@ void Server::userDisconnected(UserConnection* sender)
         broadcastSend(disconnectedMessage, nullptr);
         PLOGI << userName + QLatin1String(" disconnected, users left: ") + QString::number(connected_users.size());
     }
-    sender->deleteLater();
+    sender_->deleteLater();
 }
 
-void Server::userError(UserConnection* sender)
+void Server::userError(const UserConnection* sender_)
 {
-    Q_UNUSED(sender)
-        PLOGE << QLatin1String("Error from ") + sender->getUserName();
+    Q_UNUSED(sender_)
+        PLOGE << QLatin1String("Error from ") + sender_->getUserName();
 }
 
-void Server::jsonFromLoggedOut(UserConnection* sender, const QJsonObject& docObj)
+void Server::jsonFromLoggedOut(UserConnection* sender_, const QJsonObject& doc_obj_)
 {
-    Q_ASSERT(sender);
-    const QJsonValue typeVal = docObj.value(QLatin1String("type"));
-    if (typeVal.isNull() || !typeVal.isString())
+    Q_ASSERT(sender_);
+    const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
+    if (type_val.isNull() || !type_val.isString())
         return;
-    if (typeVal.toString().compare(QLatin1String("login"), Qt::CaseInsensitive) != 0)
+    if (type_val.toString().compare(QLatin1String("login"), Qt::CaseInsensitive) != 0)
         return;
-    const QJsonValue usernameVal = docObj.value(QLatin1String("username"));
-    if (usernameVal.isNull() || !usernameVal.isString())
+    const QJsonValue username_val = doc_obj_.value(QLatin1String("username"));
+    if (username_val.isNull() || !username_val.isString())
         return;
-    const QString newUserName = usernameVal.toString().simplified();
-    if (newUserName.isEmpty())
+    const QString new_user_name = username_val.toString().simplified();
+    if (new_user_name.isEmpty())
         return;
-    for (UserConnection* user : qAsConst(connected_users)) {    //Find duplicat username
-        if (user == sender)
+    for (const UserConnection* user : qAsConst(connected_users)) {    //Find duplicat username
+        if (user == sender_)
             continue;
-        if (user->getUserName().compare(newUserName, Qt::CaseInsensitive) == 0) {
+        if (user->getUserName().compare(new_user_name, Qt::CaseInsensitive) == 0) {
             QJsonObject message;
             message[QStringLiteral("type")] = QStringLiteral("login");
             message[QStringLiteral("success")] = false;
             message[QStringLiteral("reason")] = QStringLiteral("duplicate username");
-            sendJson(sender, message);
+            sendJson(sender_, message);
             return;
         }
     }
-    sender->setUserName(newUserName);
-    QJsonObject successMessage;
-    successMessage[QStringLiteral("type")] = QStringLiteral("login");
-    successMessage[QStringLiteral("success")] = true;
-    sendJson(sender, successMessage);
-    QJsonObject connectedMessage;
-    connectedMessage[QStringLiteral("type")] = QStringLiteral("newuser");
-    connectedMessage[QStringLiteral("username")] = newUserName;
-    broadcastSend(connectedMessage, sender);
+    sender_->setUserName(new_user_name);
+    QJsonObject success_message;
+    success_message[QStringLiteral("type")] = QStringLiteral("login");
+    success_message[QStringLiteral("success")] = true;
+    sendJson(sender_, success_message);
+    QJsonObject connected_message;
+    connected_message[QStringLiteral("type")] = QStringLiteral("newuser");
+    connected_message[QStringLiteral("username")] = new_user_name;
+    broadcastSend(connected_message, sender_);
 }
 
-void Server::jsonFromLoggedInCMD(UserConnection* sender, const QJsonObject& docObj)
+void Server::jsonFromLoggedInCmd(UserConnection* sender_, const QJsonObject& doc_obj_)
 {
-    Q_ASSERT(sender);
-    const QJsonValue typeVal = docObj.value(QLatin1String("type"));
-    if (typeVal.isNull() || !typeVal.isString())
+    Q_ASSERT(sender_);
+    const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
+    if (type_val.isNull() || !type_val.isString())
         return;
-    if (typeVal.toString().compare(QLatin1String("roomListReqest"), Qt::CaseInsensitive) == 0)
+    if (type_val.toString().compare(QLatin1String("roomListRequest"), Qt::CaseInsensitive) == 0)
     {
 
     }
-    if (typeVal.toString().compare(QLatin1String("roomEntry"), Qt::CaseInsensitive) == 0)
+    if (type_val.toString().compare(QLatin1String("roomEntry"), Qt::CaseInsensitive) == 0)
     {
-        const QJsonValue roomVal = docObj.value(QLatin1String("room"));
-        if (roomVal.isNull() || !roomVal.isDouble())
+        const QJsonValue room_val = doc_obj_.value(QLatin1String("room"));
+        if (room_val.isNull() || !room_val.isDouble())
             return;
-        const quint32 roomId = roomVal.toInt();
-        if (!roomId)
+        const quint32 room_id = room_val.toInt();
+        if (!room_id)
             return;
         //проверить что комната с таким номером вообще существует
-        sender->setRoomId(roomId);
+        sender_->setRoomId(room_id);
         //Отправить юзера в нужную комнату
         //уже в комнате по сигналу вхождения юзера сделать рассылку
     }
-    if (typeVal.toString().compare(QLatin1String("roomLeave"), Qt::CaseInsensitive) == 0)
+    if (type_val.toString().compare(QLatin1String("roomLeave"), Qt::CaseInsensitive) == 0)
     {
 
     }
-    if (typeVal.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) == 0)
+    if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) == 0)
     {
-        const QJsonValue textVal = docObj.value(QLatin1String("text"));
-        if (textVal.isNull() || !textVal.isString())
+        const QJsonValue text_val = doc_obj_.value(QLatin1String("text"));
+        if (text_val.isNull() || !text_val.isString())
             return;
-        const QString text = textVal.toString().trimmed();
+        const QString text = text_val.toString().trimmed();
         if (text.isEmpty())
             return;
         QJsonObject message;
         message[QStringLiteral("type")] = QStringLiteral("message");
         message[QStringLiteral("text")] = text;
-        message[QStringLiteral("sender")] = sender->getUserName();
-        broadcastSend(message, sender);
+        message[QStringLiteral("sender")] = sender_->getUserName();
+        broadcastSend(message, sender_);
         return;
     }
 
@@ -437,25 +442,25 @@ void Server::jsonFromLoggedInCMD(UserConnection* sender, const QJsonObject& docO
 }
 
 //---!!!---это от сюда убрать, будет не нужно
-void Server::jsonFromLoggedInMSG(UserConnection* sender, const QJsonObject& docObj)
+void Server::jsonFromLoggedInMsg(const UserConnection* sender_, const QJsonObject& doc_obj_)
 {
-    Q_ASSERT(sender);
-    const QJsonValue typeVal = docObj.value(QLatin1String("type"));
-    if (typeVal.isNull() || !typeVal.isString())
+    Q_ASSERT(sender_);
+    const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
+    if (type_val.isNull() || !type_val.isString())
         return;
-    if (typeVal.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) != 0)
+    if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) != 0)
         return;
-    const QJsonValue textVal = docObj.value(QLatin1String("text"));
-    if (textVal.isNull() || !textVal.isString())
+    const QJsonValue text_val = doc_obj_.value(QLatin1String("text"));
+    if (text_val.isNull() || !text_val.isString())
         return;
-    const QString text = textVal.toString().trimmed();
+    const QString text = text_val.toString().trimmed();
     if (text.isEmpty())
         return;
     QJsonObject message;
     message[QStringLiteral("type")] = QStringLiteral("message");
     message[QStringLiteral("text")] = text;
-    message[QStringLiteral("sender")] = sender->getUserName();
-    broadcastSend(message, sender);
+    message[QStringLiteral("sender")] = sender_->getUserName();
+    broadcastSend(message, sender_);
 }
 
 

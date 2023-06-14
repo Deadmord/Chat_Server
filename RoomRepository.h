@@ -18,9 +18,9 @@ namespace DBService {
 		RoomRepository(const QString& connection_string_);
 
 		~RoomRepository();
-		static QFuture<QList<DBEntity::DBRoom>> getAllRooms();
-		static QFuture<QList<DBEntity::DBRoom>> getAllActiveRooms();
-		static QFuture<qint32> createRoom(const DBEntity::DBRoom& room);
+		static QFuture<QList<QSharedPointer<DBEntity::DBRoom>>> getAllRooms();
+		static QFuture<QList<QSharedPointer<DBEntity::DBRoom>>> getAllActiveRooms();
+		static QFuture<qint32> createRoom(const DBEntity::DBRoom& room_);
 		static QFuture<bool> deleteRoom(const qint32& id_);
 	};
 }

@@ -4,7 +4,6 @@
 
 #include "FileRepository.h"
 
-#include <plog/Log.h>
 
 
 bool FileRepository::writeJsonArr(const QString &file_name_, const QJsonArray &data_) {
@@ -32,8 +31,8 @@ bool FileRepository::writeJsonArr(const QString &file_name_, const QJsonArray &d
     return true;
 }
 
-bool FileRepository::readJson(const QString &filePath, QJsonObject &jsonObject) {
-    QFile file(filePath);
+bool FileRepository::readJson(const QString &file_path_, QJsonObject &json_object_) {
+    QFile file(file_path_);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         PLOGE << "Failed to open file for reading:" << file.errorString();
@@ -51,12 +50,12 @@ bool FileRepository::readJson(const QString &filePath, QJsonObject &jsonObject) 
         return false;
     }
 
-    jsonObject = json_doc.object();
+    json_object_ = json_doc.object();
     return true;
 }
 
-bool FileRepository::readJsonArr(const QString &filePath, QJsonArray &jsonObject) {
-    QFile file(filePath);
+bool FileRepository::readJsonArr(const QString &file_path_, QJsonArray &json_object_) {
+    QFile file(file_path_);
     if (!file.exists()) {
     	PLOGE<< "File not found" << Qt::endl;
         return false;
@@ -78,9 +77,9 @@ bool FileRepository::readJsonArr(const QString &filePath, QJsonArray &jsonObject
         return false;
     }
 
-    jsonObject = json_doc.array();
+    json_object_ = json_doc.array();
     return true;
 }
 
-FileRepository::FileRepository() {}
+FileRepository::FileRepository() = default;
 

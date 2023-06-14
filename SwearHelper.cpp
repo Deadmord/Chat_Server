@@ -2,20 +2,19 @@
 
 namespace Helper {
 
-	SwearHelper::SwearHelper(QObject* parent) : QObject(parent) {};
+	SwearHelper::SwearHelper(QObject* parent_) : QObject(parent_) {};
 
 	QSet<QString> SwearHelper::getForbiddenWords() {
-		QSet<QString> forbiddenWords;
-		QString filePath = "C:/CPP-Final-Project/Chat_Server/rooms/forbidden_words/forbidden_words.json";
-		QJsonObject jsonObject;
+		QSet<QString> forbidden_words;
+		const QString file_path = "C:/CPP-Final-Project/Chat_Server/rooms/forbidden_words/forbidden_words.json";
 
-		if (FileRepository::readJson(filePath, jsonObject)) {
-			if (jsonObject.contains("forbidden_words") && jsonObject["forbidden_words"].isArray()) {
-				QJsonArray forbiddenWordsArray = jsonObject["forbidden_words"].toArray();
-				for (const QJsonValue& value : forbiddenWordsArray) {
+		if (QJsonObject json_object; FileRepository::readJson(file_path, json_object)) {
+			if (json_object.contains("forbidden_words") && json_object["forbidden_words"].isArray()) {
+				QJsonArray forbidden_words_array = json_object["forbidden_words"].toArray();
+				for (const QJsonValue value : forbidden_words_array) {
 					if (value.isString()) {
-						QString forbiddenWord = value.toString();
-						forbiddenWords.insert(forbiddenWord);
+						QString forbidden_word = value.toString();
+						forbidden_words.insert(forbidden_word);
 					}
 				}
 			}
@@ -23,16 +22,16 @@ namespace Helper {
 		else {
 			PLOG_ERROR << "Cannot open JSON forbidden_words";
 		}
-		return forbiddenWords;
+		return forbidden_words;
 	}
 
 	bool SwearHelper::checkForbiddenWords(const QString& text_) {
-		QSet<QString> forbiddenWords = getForbiddenWords();
+		QSet<QString> forbidden_words = getForbiddenWords();
 		QStringList list = text_.split(" ");
 
 		for (QString& word : list) {
 			word = word.replace(QRegularExpression("[^a-zA-Z]"), "");
-			for (const QString& forbidden : forbiddenWords) {
+			for (const QString& forbidden : forbidden_words) {
 				if (word == forbidden) {
 					return true;
 				}
