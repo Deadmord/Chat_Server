@@ -39,7 +39,7 @@ signals:
 
 public slots:
    
-    void addMessages(DBEntity::DBMessage* shp_message_, quint32 room_id_);
+    void addMessages(User_Message* shp_message_, quint32 room_id_);
     void getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_);
     void saveAllMessages();
     void deleteMessages();

@@ -32,6 +32,7 @@ namespace DBEntity{
         QDateTime date_time;
         explicit DBMessage(QObject *parent_ = nullptr);
     public:
+        //explicit DBMessage(User_Message* message, QObject* parent_ = nullptr);
     	void setDeleted(bool flag_);
         void setLikes(const QMap<QString, bool> &likes_);
         [[nodiscard]] const QUuid& getId() const;
