@@ -3,16 +3,13 @@
 
 #include <QString>
 #include <QObject>
-#include "DTORoom.h"
 
 namespace DBEntity {
 
 	class DBRoom {
 
 	public:
-
-		DBRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const bool& is_private_, const QString& password_, const bool& is_deleted_);
-		DBRoom(const DTOModel::DTORoom& dto_room_);
+		explicit DBRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const bool& is_private_, const QString& password_, const bool is_deleted_ = false);
 	
 		qint32 getId() const;
 		void setId(const qint32& id_);

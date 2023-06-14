@@ -2,8 +2,8 @@
 #define DTOUSER_H
 
 #include <QObject>
-#include "DBUser.h"
 #include <QSharedPointer>
+#include "DBUser.h"
 
 namespace DTOModel {
 
@@ -14,8 +14,7 @@ namespace DTOModel {
 	public:
 
 		DTOUser(QObject* parent = nullptr);
-		DTOUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_);
-		DTOUser(const DBEntity::DBUser& db_user_);
+		DTOUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_, bool is_deleteed_ = false);
 		~DTOUser();
 
 		QString getUsername() const;
@@ -27,9 +26,10 @@ namespace DTOModel {
 		quint32 getRating() const;
 		void setRating(const quint32& rating_);
 		bool isDeleted() const;
+		void setIsDeleted(const bool& is_deleted_);
 
-		static QSharedPointer<DBEntity::DBUser> convertToDBModel(const DTOUser& dtoUser_);
-		static QSharedPointer<DTOModel::DTOUser> convertToEntity(const DBEntity::DBUser& db_user_);
+		static QSharedPointer<DTOModel::DTOUser> createDTOUser(const DBEntity::DBUser& db_user_);
+		static QSharedPointer<DBEntity::DBUser> createDBUser(const DTOModel::DTOUser& dto_user_);
 
 	private:
 
