@@ -2,12 +2,12 @@
 
 namespace DBService {
 
-	//UserRepository::UserRepository(DBConnection* connection_) : a_dbConnection(connection_) {}
-	UserRepository::UserRepository(const QString& connection_string_) : a_dbConnection(connection_string_) {}
+	DBConnection UserRepository::a_dbConnection("Driver={ODBC Driver 18 for SQL Server};Server=tcp:comp-zionet-server.database.windows.net,1433;Database=CPP_Chat_DB;Uid=Logika4417;Pwd=Fyyf1998;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;");
+	UserRepository::UserRepository(const QString& connection_string_) { a_dbConnection.setConnectionString(connection_string_); }
 	UserRepository::~UserRepository(){}
 
 	QFuture<DBEntity::DBUser*> UserRepository::getUserByLogin(const QString& login_) {
-		return QtConcurrent::run([this, query_string_ = "SELECT * FROM [user] WHERE login=:login;", login_]() {
+		return QtConcurrent::run([query_string_ = "SELECT * FROM [user] WHERE login=:login;", login_]() {
 			try
 			{
 				a_dbConnection.databaseConnectionOpen();
@@ -20,10 +20,8 @@ namespace DBService {
 						QString login = query.value("login").toString();
 						QString password = query.value("password").toString();
 						QByteArray userpicc = query.value("userpic").toByteArray();
-						//QString userpic = query.value("userpic").toString();
 						qint32 rating = query.value("rating").toInt();
 						bool is_deleted = query.value("is_deleted").toBool();
-						//QByteArray userpicData = userpic.toUtf8();
 						a_dbConnection.databaseConnectionClose();
 						DBEntity::DBUser* user = new DBEntity::DBUser(login, password, userpicc, rating, is_deleted);
 						return user;
@@ -49,7 +47,7 @@ namespace DBService {
 	}
 
 	QFuture<bool> UserRepository::createUser(const DBEntity::DBUser& user_) {
-		return QtConcurrent::run([this, query_string_ = "INSERT INTO [user] (login, password, userpic, rating, is_deleted) VALUES (:login, :password, :userpic, :rating, :is_deleted)", user_]() {
+		return QtConcurrent::run([query_string_ = "INSERT INTO [user] (login, password, userpic, rating, is_deleted) VALUES (:login, :password, :userpic, :rating, :is_deleted)", user_]() {
 			try
 			{
 				a_dbConnection.databaseConnectionOpen();
@@ -65,7 +63,6 @@ namespace DBService {
 					query.bindValue(":login", user_.getLogin());
 					query.bindValue(":password", QString(hash.result().toHex()));
 					query.bindValue(":userpic", QVariant(user_.getUserpic()));
-					//query.bindValue(":rating", user_.getRating());
 					query.bindValue(":rating", 0);
 					query.bindValue(":is_deleted", false);
 
@@ -95,7 +92,7 @@ namespace DBService {
 	}
 
 	QFuture<bool> UserRepository::updateUserPasswordUserpic(const QString& login_, const QString& new_password_, const QByteArray& new_userpic_) {
-		return QtConcurrent::run([this, login_, new_password_, new_userpic_]() {
+		return QtConcurrent::run([login_, new_password_, new_userpic_]() {
 			try {
 				a_dbConnection.databaseConnectionOpen();
 				if (a_dbConnection.getDatabase().isOpen()) {
@@ -147,7 +144,7 @@ namespace DBService {
 	}
 
 	QFuture<QPair<bool, qint32>> UserRepository::updateUserRating(const QString& login_, const qint32& rating_) {
-		return QtConcurrent::run([this, login_, rating_]() {
+		return QtConcurrent::run([login_, rating_]() {
 			try
 			{
 				a_dbConnection.databaseConnectionOpen();
@@ -197,7 +194,7 @@ namespace DBService {
 	}
 
 	QFuture<qint32> UserRepository::getRatingByLogin(const QString& login_) {
-		return QtConcurrent::run([this, login_]() {
+		return QtConcurrent::run([login_]() {
 			try
 			{
 				a_dbConnection.databaseConnectionOpen();

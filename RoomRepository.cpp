@@ -2,12 +2,12 @@
 
 namespace DBService {
 
-	//RoomRepository::RoomRepository(DBConnection* connection_) : a_dbConnection(connection_) {}
-	RoomRepository::RoomRepository(const QString& connection_string_) : a_dbConnection(connection_string_) {}
+	DBConnection RoomRepository::a_dbConnection("Driver={ODBC Driver 18 for SQL Server};Server=tcp:comp-zionet-server.database.windows.net,1433;Database=CPP_Chat_DB;Uid=Logika4417;Pwd=Fyyf1998;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;");
+	RoomRepository::RoomRepository(const QString& connection_string_) { a_dbConnection.setConnectionString(connection_string_); }
 	RoomRepository::~RoomRepository() {}
 
 	QFuture<QList<DBEntity::DBRoom>> RoomRepository::getAllRooms() {
-		return QtConcurrent::run([this, query_string_ = "SELECT * from room;"]() {
+		return QtConcurrent::run([query_string_ = "SELECT * from room;"]() {
 			QList<DBEntity::DBRoom> roomList;
 			try
 			{
@@ -59,7 +59,7 @@ namespace DBService {
 	}
 
 	QFuture<QList<DBEntity::DBRoom>> RoomRepository::getAllActiveRooms() {
-		return QtConcurrent::run([this, query_string_ = "SELECT * from room WHERE is_deleted=0;"]() {
+		return QtConcurrent::run([query_string_ = "SELECT * from room WHERE is_deleted=0;"]() {
 			QList<DBEntity::DBRoom> roomList;
 			try
 			{
@@ -109,7 +109,7 @@ namespace DBService {
 	}
 
 	QFuture<qint32> RoomRepository::createRoom( const DBEntity::DBRoom& room_) {
-		return QtConcurrent::run([this, query_string_ = "INSERT INTO room (name, description, topic_id, is_private, password, is_deleted) VALUES (:name, :description, :topic_id, :is_private, :password, :is_deleted)", room_]() {
+		return QtConcurrent::run([query_string_ = "INSERT INTO room (name, description, topic_id, is_private, password, is_deleted) VALUES (:name, :description, :topic_id, :is_private, :password, :is_deleted)", room_]() {
 			try
 			{
 				a_dbConnection.databaseConnectionOpen();
@@ -152,7 +152,7 @@ namespace DBService {
 	}
 
 	QFuture<bool> RoomRepository::deleteRoom(const qint32& id_) {
-		return QtConcurrent::run([this, query_string_ = "UPDATE room SET is_deleted=:is_deleted WHERE id=:id", id_]() {
+		return QtConcurrent::run([query_string_ = "UPDATE room SET is_deleted=:is_deleted WHERE id=:id", id_]() {
 			try
 			{
 				a_dbConnection.databaseConnectionOpen();

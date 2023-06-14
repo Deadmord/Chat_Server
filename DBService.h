@@ -14,22 +14,18 @@ namespace DBService {
 	class DBConnection {
 
 	private:
-		QSqlDatabase a_database;
-		QString a_connection_string;
+		static QSqlDatabase a_database;
+		static QString a_connection_string;
 
 	public:
-		explicit DBConnection(const QString& connection_string_);
+		DBConnection(const QString& connection_string_);
 		//~DBConnection();
 
-		QSqlDatabase getDatabase() const;
-		QString getConnectionString() const;
-		void setConnectionString(const QString& connection_string_);
-		void databaseConnectionOpen();
-		void databaseConnectionOpenAsync();
-		void databaseConnectionClose();
-		void databaseConnectionCloseAsync();
-		//QSqlQueryModel* databaseQuery(const QString& query_string_);
-		void databaseQueryFull(const QString& query_string_);
+		static QSqlDatabase getDatabase();
+		static QString getConnectionString() ;
+		static void setConnectionString(const QString& connection_string_);
+		static void databaseConnectionOpen();
+		static void databaseConnectionClose();
 	};
 }
 

@@ -3,6 +3,7 @@
 namespace DTOHelper {
 
 	DTOUser::DTOUser(QObject* parent) : QObject(parent) {};
+	DTOUser::~DTOUser() {}
 
 	QSharedPointer<DBEntity::DBUser> DTOUser::convertToDBModel(const User& user_) {
 		QSharedPointer<DBEntity::DBUser> dbUser = QSharedPointer<DBEntity::DBUser>::create(user_.user_name, user_.password, user_.userpic, user_.rating, false);

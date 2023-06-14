@@ -4,16 +4,13 @@
 #include "server.h"
 #include "Controllers/RoomController/RoomController.h"
 #include "Entities/Enums/Enums.h"
-#include "DBRoom.h"
-#include "DBService.h"
 
 #include <plog/Log.h> 
 #include <plog/Initializers/RollingFileInitializer.h>
 #include <plog/Appenders/ColorConsoleAppender.h>
 
-#include "RoomRepository.h"
-#include "UserRepository.h"
 #include "MessageSaver_Service.h"
+#include "SwearHelper.h"
 
 #if defined (Q_OS_WIN)
 #include "Core/async_console_win.h"
@@ -86,6 +83,7 @@ int main(int argc, char* argv[])
     QCoreApplication a(argc, argv);
 
     return a.exec();
+
 }
 
 
@@ -95,7 +93,7 @@ int main(int argc, char* argv[])
 //    none = 0,
 //    fatal = 1,
 //    error = 2,
-//    warning = 3,
+//    warning = 3,..
 //    info = 4,
 //    debug = 5,
 //    verbose = 6
