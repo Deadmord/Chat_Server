@@ -103,7 +103,6 @@
     <ClCompile Include="SwearHelper.cpp" />
     <ClCompile Include="UserRepository.cpp" />
     <QtMoc Include="RatingCounter_Service.h" />
-    <ClInclude Include="SwearHelper.cpp" />
     <QtMoc Include="SwearHelper.h" />
     <QtMoc Include="MessageSaver_Service.h" />
     <QtMoc Include="LocalStorage_Service.h" />
@@ -112,7 +111,6 @@
     <QtMoc Include="Entities\SrvModels\UserConnection.h" />
     <QtMoc Include="DTORoom.h" />
     <QtMoc Include="DTOUser.h" />
-    <ClInclude Include="RatingCounter_Service.h" />
     <ClInclude Include="Entities\Enums\Enums.h" />
     <ClInclude Include="file_repository.h" />
     <QtMoc Include="Controllers\RoomController\RoomController.h" />
