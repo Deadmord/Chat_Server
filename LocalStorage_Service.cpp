@@ -3,13 +3,14 @@
 
 LocalStorage_Service* LocalStorage_Service::instance = nullptr;
 QMutex LocalStorage_Service::mutex;
+QTimer* LocalStorage_Service::p_timer = nullptr;
 
 QList<QString> LocalStorage_Service::searchForFiles(
 	const QDateTime& from_, const QDateTime& to_,
-	const DBEntity::DBRoom& room_)
+	const quint32& room_)
 {
     QList<QString> file_names;
-    QDir directory("rooms/" + room_.getId());
+    QDir directory("rooms/" + QString::number(room_));
     QStringList all_files = directory.entryList(QDir::Files);
     bool is_empty = true;
     const QRegularExpression regex(R"((\d{8}_\d{4})\.json)"); // Regular expression to match file names like "20230102_1000.json"
@@ -65,8 +66,8 @@ void LocalStorage_Service::saveAllMessages() {
         for (const auto& key : keys)
         {
             QString current_time = QDateTime::currentDateTimeUtc().toString("yyyyMMdd_hhmm");
-            QString file_name = "rooms/" + key.toString() + "/" + current_time + ".json";
-            QDir().mkpath("rooms/" + key.toString());
+            QString file_name = "rooms/" + QString::number(key) + "/" + current_time + ".json";
+            QDir().mkpath("rooms/" + QString::number(key));
             QJsonArray array;
             for (const auto& message : message_storage.value(key)) {
 
@@ -99,7 +100,7 @@ void LocalStorage_Service::safeExit()
 }
 
 
-void LocalStorage_Service::addMessages(DBEntity::DBMessage* message_, QUuid room_id_) {
+void LocalStorage_Service::addMessages(DBEntity::DBMessage* message_, quint32 room_id_) {
     if (!message_storage.contains(room_id_)) {
         QList<QSharedPointer<DBEntity::DBMessage>> new_room_history;
         message_storage.insert(room_id_, new_room_history);
@@ -111,7 +112,7 @@ void LocalStorage_Service::addMessages(DBEntity::DBMessage* message_, QUuid room
     message_storage.value(room_id_).append(QSharedPointer<DBEntity::DBMessage>(message_, &QObject::deleteLater));
 }
 
-void LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const DBEntity::DBRoom& room_) {
+void LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_) {
     QSet<QSharedPointer<DBEntity::DBMessage>> messages;
     QMutexLocker locker(&mutex);
 	auto files = searchForFiles(from_, to_, room_);

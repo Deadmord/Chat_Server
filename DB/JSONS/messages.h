@@ -36,8 +36,6 @@ namespace DBEntity{
         void setLikes(const QMap<QString, bool> &likes_);
         [[nodiscard]] const QUuid& getId() const;
         [[nodiscard]] const QDateTime &getDateTime() const;
-
-
         [[nodiscard]] qint32 getRoomId() const;
 
         [[nodiscard]] const QString &getLogin() const;

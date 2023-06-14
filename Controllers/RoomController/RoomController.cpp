@@ -94,7 +94,7 @@ void RoomController::loadMsgHistory(const QString path)
             for (const auto& msgJson : msgArray)
             {
                 Message msg{ msgJson.toObject().value("id").toString(),
-                            msgJson.toObject().value("roomId").toInt(),
+                           static_cast<quint32>(msgJson.toObject().value("roomId").toInt()),
                             QDateTime::fromString(msgJson.toObject().value("time").toString()),
                             msgJson.toObject().value("nickname").toString(),
                             msgJson.toObject().value("text").toString(),
