@@ -8,8 +8,8 @@ RoomController::RoomController(const quint32& id_, const QString& name_, const Q
     connect(this, &RoomController::roomCreated, this, &RoomController::initRoom);
 }
 
-RoomController::RoomController(const quint32& id_, const QString& name_, const QString& description_, const quint32& topic_id_, const bool& is_private_, const QString& password_, const bool& is_deleted_)
-    : id(id_), name(name_), description(description_), topic_id(topic_id_), is_private(is_private_), password(password_), is_deleted(is_deleted_), messages(QVector<User_Message>{}), connected_users(QVector<UserConnection*>{}) {};
+//RoomController::RoomController(const quint32& id_, const QString& name_, const QString& description_, const quint32& topic_id_, const bool& is_private_, const QString& password_, const bool& is_deleted_)
+//    : id(id_), name(name_), description(description_), topic_id(topic_id_), is_private(is_private_), password(password_), is_deleted(is_deleted_), messages(QVector<User_Message>{}), connected_users(QVector<UserConnection*>{}) {};
 
 RoomController::~RoomController() = default;
 
