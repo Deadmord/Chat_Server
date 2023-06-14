@@ -13,7 +13,7 @@
 #include <QUuid>
 #include <QPointer>
 #include "../../DBRoom.h"
-#include "../../file_repository.h"
+#include "../../FileRepository.h"
 #include <plog/Log.h>
 #include <QObject>
 
@@ -73,7 +73,7 @@ namespace DBEntity{
 
         static void writeMessages(const QString& file_name_, const QList<DBEntity::DBMessage>& messages_) ;
         static void writeMessage(const QString& file_name_,const DBEntity::DBMessage& messages_) ;
-        static QList<DBMessage*> readMessages(const QString& file_name_) ;
+        static QSet<QSharedPointer<DBEntity::DBMessage>> readMessages(const QString& file_name_) ;
     };
 
 }

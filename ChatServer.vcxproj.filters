@@ -116,9 +116,6 @@
     <ClCompile Include="Core\async_console_win.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="file_repository.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\SrvModels\UserConnection.cpp">
       <Filter>Entities Files\Srv Models</Filter>
     </ClCompile>
@@ -143,6 +140,9 @@
     <ClCompile Include="RatingCounter_Service.cpp">
       <Filter>Services\RatingCount_Service</Filter>
     </ClCompile>
+    <ClCompile Include="FileRepository.cpp">
+      <Filter>Source Files\Classes\DBRepositories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBUser.h">
@@ -160,9 +160,6 @@
     <ClInclude Include="Entities\entities.h">
       <Filter>Entities Files</Filter>
     </ClInclude>
-    <ClInclude Include="file_repository.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Entities\Enums\Enums.h">
       <Filter>Entities Files\Enums</Filter>
     </ClInclude>
@@ -174,6 +171,9 @@
     </ClInclude>
     <ClInclude Include="RatingCounter_Service.h">
       <Filter>Services\RatingCount_Service</Filter>
+    </ClInclude>
+    <ClInclude Include="FileRepository.h">
+      <Filter>Header Files\Classes\DBRepositories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,14 +4,49 @@
 LocalStorage_Service* LocalStorage_Service::instance = nullptr;
 QMutex LocalStorage_Service::mutex;
 
-LocalStorage_Service* LocalStorage_Service::getInstance() {
+QList<QString> LocalStorage_Service::searchForFiles(
+	const QDateTime& from_, const QDateTime& to_,
+	const DBEntity::DBRoom& room_)
+{
+    QList<QString> file_names;
+    QDir directory("rooms/" + room_.getId());
+    QStringList all_files = directory.entryList(QDir::Files);
+    bool is_empty = true;
+    const QRegularExpression regex(R"((\d{8}_\d{4})\.json)"); // Regular expression to match file names like "20230102_1000.json"
+
+    for (const QString& file_name : all_files)
+    {
+        if (QRegularExpressionMatch match = regex.match(file_name); match.hasMatch())
+        {
+            QString date_string = match.captured(1);
+
+            if (QDateTime file_date_time = QDateTime::fromString(date_string, "yyyyMMdd_hhmm"); file_date_time >= from_ && file_date_time <= to_)
+            {
+                file_names.append(file_name);
+                is_empty = false;
+            }
+        }
+    }
+    if (is_empty)
+    {
+        PLOGW << "No messages for this date was retrieved from database";
+    }
+    return file_names;
+
+}
+
+LocalStorage_Service* LocalStorage_Service::getInstance(int minutes_) {
     if (!instance)
     {
         QMutexLocker locker(&mutex); 
         if (!instance)
         {
             instance = new LocalStorage_Service();
+            p_timer = new QTimer();
+            int timeout = minutes_ == 0? 5*60000 : minutes_ * 60000;
             connect(instance, &close, instance, &safeExit);
+            connect(p_timer, &QTimer::timeout, instance, &LocalStorage_Service::deleteMessages);
+            p_timer->start(timeout);
         }
 
     }
@@ -48,9 +83,17 @@ void LocalStorage_Service::saveAllMessages() {
     else PLOGI << "message_storage is empty.";
 }
 
+void LocalStorage_Service::deleteMessages()
+{
+    current_messages.clear();
+}
+
+
 void LocalStorage_Service::safeExit()
 {
     saveAllMessages();
+    p_timer->stop();
+    p_timer->deleteLater();
     instance->deleteLater();
     PLOGI << "Local storage service safely closed";
 }
@@ -61,28 +104,39 @@ void LocalStorage_Service::addMessages(DBEntity::DBMessage* message_, QUuid room
         QList<QSharedPointer<DBEntity::DBMessage>> new_room_history;
         message_storage.insert(room_id_, new_room_history);
     }
+    if(!current_messages.contains(room_id_))
+    {
+	    
+    }
     message_storage.value(room_id_).append(QSharedPointer<DBEntity::DBMessage>(message_, &QObject::deleteLater));
 }
 
-void LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const QUuid& room_id_) {
+void LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const DBEntity::DBRoom& room_) {
+    QSet<QSharedPointer<DBEntity::DBMessage>> messages;
     QMutexLocker locker(&mutex);
-    QList<DBEntity::DBMessage*> messages;
-    QDir directory("rooms/" + room_id_.toString());
-    QStringList all_files = directory.entryList(QDir::Files);
-
-    const QRegularExpression regex(R"((\d{8}_\d{4})\.json)"); // Regular expression to match file names like "20230102_1000.json"
-    
-    for (const QString& file_name : all_files)
+	auto files = searchForFiles(from_, to_, room_);
+	foreach(const auto& file,files)
+	{
+		messages.unite(DBEntity::DBMessage::readMessages(file));
+	}
+	
+    if (current_messages.contains(room_))
     {
-	    if (QRegularExpressionMatch match = regex.match(file_name); match.hasMatch())
-        {
-            QString date_string = match.captured(1);
-
-            if (QDateTime file_date_time = QDateTime::fromString(date_string, "yyyyMMdd_hhmm"); file_date_time >= from_ && file_date_time <= to_)
-            {
-                messages.append(DBEntity::DBMessage::readMessages(file_name));
-            }
-        }
+    	foreach(const auto& message, current_messages.value(room_))
+	    {
+		    if(auto date = message->getDateTime(); date>= from_ && date <= to_)
+		    {
+                messages.insert(message);
+		    }
+	    }
+        current_messages[room_].unite(messages);
     }
-    emit messageRetrieved(messages);
+    else
+    {
+        current_messages.insert(room_, messages);
+    }
+    
+    emit messageRetrieved(QList(messages.begin(), messages.end()));
+    
+
 }

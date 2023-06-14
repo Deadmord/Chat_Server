@@ -97,10 +97,12 @@
     <ClCompile Include="DTORoom.cpp" />
     <ClCompile Include="DTOUser.cpp" />
     <ClCompile Include="Entities\SrvModels\UserConnection.cpp" />
+    <ClCompile Include="FileRepository.cpp" />
     <ClCompile Include="LocalStorage_Service.cpp" />
     <ClCompile Include="MessageSaver_Service.cpp" />
     <ClCompile Include="RatingCounter_Service.cpp" />
     <ClCompile Include="UserRepository.cpp" />
+    <ClInclude Include="FileRepository.h" />
     <ClInclude Include="RatingCounter_Service.h" />
     <QtMoc Include="MessageSaver_Service.h" />
     <QtMoc Include="LocalStorage_Service.h" />
@@ -110,7 +112,6 @@
     <ClInclude Include="DTORoom.h" />
     <ClInclude Include="DTOUser.h" />
     <ClInclude Include="Entities\Enums\Enums.h" />
-    <ClInclude Include="file_repository.h" />
     <QtMoc Include="Controllers\RoomController\RoomController.h" />
     <QtMoc Include="Core\async_console_win.h" />
     <ClInclude Include="DBService.h" />
@@ -145,7 +146,6 @@
     <ClCompile Include="DBUser.cpp" />
     <ClCompile Include="DB\JSONS\messages.cpp" />
     <ClCompile Include="Entities\SrvModels\Message.cpp" />
-    <ClCompile Include="file_repository.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RoomRepository.cpp" />
     <ClCompile Include="server.cpp" />

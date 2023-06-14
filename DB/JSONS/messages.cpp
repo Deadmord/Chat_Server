@@ -90,19 +90,19 @@ void DBEntity::DBMessage::writeMessage(const QString& file_name_,const DBEntity:
     PLOGI << "Writing message successfully";
 }
 
-QList<DBEntity::DBMessage*> DBEntity::DBMessage::readMessages(const QString& file_name_)
+QSet<QSharedPointer<DBEntity::DBMessage>> DBEntity::DBMessage::readMessages(const QString& file_name_)
 {
     QJsonArray array;
    FileRepository::readJsonArr(file_name_, array);
-   QList<DBMessage*> messages;
+   QSet<QSharedPointer<DBMessage>> messages;
 
    for(const auto & obj: array) {
        if (obj.isObject())
        {
            QJsonObject jsonObject = obj.toObject();
-           auto* message = new DBMessage;
+           QSharedPointer<DBMessage> message (new DBMessage, &QObject::deleteLater);
            message->fromJson(jsonObject);
-           messages.append(message);
+           messages.insert(message);
        }
        else
        {
