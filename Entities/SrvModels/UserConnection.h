@@ -6,6 +6,9 @@
 #include <QJsonParseError>
 #include <QJsonObject>
 #include <QTimer>
+
+#include <plog/Log.h>
+
 #include "../Enums/Enums.h"
 #include "../../DBUser.h"
 
@@ -13,6 +16,7 @@ class UserConnection : public QObject
 {
     Q_OBJECT
     Q_DISABLE_COPY(UserConnection)
+
 public:
     explicit UserConnection(QObject* parent = nullptr);
 
@@ -37,7 +41,6 @@ signals:
     void jsonReceived(const QJsonObject& _json_doc);
     void disconnectedFromClient();
     void errorSignal();
-    void logMessage(enum Severity log_lvl, const QString& msg);
 
 public slots:
     void disconnectFromClient();

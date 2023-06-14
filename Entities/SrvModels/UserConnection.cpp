@@ -45,7 +45,7 @@ void UserConnection::sendJson(const QJsonObject& json)
     // to its UTF-8 encoded version. We use QJsonDocument::Compact to save bandwidth
     const QByteArray jsonData = QJsonDocument(json).toJson(QJsonDocument::Compact);
     // we notify the central server we are about to send the message
-    emit logMessage(debug,QLatin1String("Sending to ") + getUserName() + QLatin1String(" - ") + QString::fromUtf8(jsonData));
+    PLOGD << QLatin1String("Sending to ") + getUserName() + QLatin1String(" - ") + QString::fromUtf8(jsonData);
 
     QByteArray buffer;
     buffer.clear();
@@ -65,7 +65,7 @@ void UserConnection::receiveJson()
     //implementation of flood protection mechanism
     if(isFloodLimit())
     {
-        emit logMessage(debug, QLatin1String("flood protection, wait...")); //notify the server of invalid data
+        PLOGD << QLatin1String("flood protection, wait..."); //notify the server of invalid data
     }
     else
     {
@@ -81,22 +81,22 @@ void UserConnection::receiveJson()
     socketStream.setVersion(QDataStream::Qt_6_5);
     if (socketStream.status() == QDataStream::Ok)
     {
-        emit logMessage(debug, "read...");
+        PLOGD << "read...";
         // start an infinite loop
         for (;;) {
             if (nextBlockSize == 0)
             {
                 if (user_socket->bytesAvailable() < 2)
                 {
-                    emit logMessage(debug, "Data < 2, break");
+                    PLOGD << "Data < 2, break";
                     break;
                 }
                 socketStream >> nextBlockSize;
-                emit logMessage(debug, "nextBlockSize = " + QString::number(nextBlockSize) + " byte. Available " + QString::number(user_socket->bytesAvailable()));
+                PLOGD << "nextBlockSize = " + QString::number(nextBlockSize) + " byte. Available " + QString::number(user_socket->bytesAvailable());
             }
             if (user_socket->bytesAvailable() < nextBlockSize)
             {
-                emit logMessage(debug, "Data not full, waiting..." + QString::number(user_socket->bytesAvailable()) + " byte available");
+                PLOGD << "Data not full, waiting..." + QString::number(user_socket->bytesAvailable()) + " byte available";
                 break;
             }
             // we start a transaction so we can revert to the previous state in case we try to read more data than is available on the socket
@@ -114,10 +114,10 @@ void UserConnection::receiveJson()
                     if (jsonDoc.isObject()) // and is a JSON object
                         emit jsonReceived(jsonDoc.object()); // send the message to the central server
                     else
-                        emit logMessage(error, QLatin1String("Invalid message: ") + QString::fromUtf8(jsonData)); //notify the server of invalid data
+                        PLOGE << QLatin1String("Invalid message: ") + QString::fromUtf8(jsonData); //notify the server of invalid data
                 }
                 else {
-                    emit logMessage(error, QLatin1String("Invalid message: ") + QString::fromUtf8(jsonData)); //notify the server of invalid data
+                    PLOGE << QLatin1String("Invalid message: ") + QString::fromUtf8(jsonData); //notify the server of invalid data
                 }
                 // loop and try to read more JSONs if they are available
             }
@@ -132,7 +132,7 @@ void UserConnection::receiveJson()
     }
     else
     {
-        emit logMessage(error, "DataStream error");
+        PLOGE << "DataStream error";
     }
 }
 

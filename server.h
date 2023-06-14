@@ -10,7 +10,9 @@
 #include <QTime>
 #include <QUuid>
 #include <QTimer>
+
 #include <plog/Log.h>
+
 #include "Entities/entities.h"
 #include "Entities/Enums/Enums.h"
 #include "Entities/SrvModels/Message.h"
