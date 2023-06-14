@@ -3,6 +3,7 @@
 #define MESSAGEHISTORY_SERVICE_H
 #include <qobject.h>
 #include "SrvRoom.h"
+#include "DBRoom.h"
 
 
 class RoomStorage_Service : public QObject
@@ -11,10 +12,16 @@ class RoomStorage_Service : public QObject
 
 public:
 
-    static RoomStorage_Service* getInstance();
+    [[nodiscard]] bool is_started();
+    void make_started();
+
+    [[nodiscard]] static RoomStorage_Service* getInstance();
+
     static void init();
-    QList<QSharedPointer<SrvRoom>> getRooms();
-    QSharedPointer<SrvRoom> getRoom(qint32 room_id_);
+
+
+    [[nodiscard]] QList<QSharedPointer<SrvRoom>> getRooms();
+    [[nodiscard]] QSharedPointer<SrvRoom> getRoom(qint32 room_id_);
 
 public slots:
 
@@ -25,14 +32,15 @@ public slots:
        
 private:
 
+    
+
     explicit RoomStorage_Service(QObject* parent_ = nullptr);
     static QSharedPointer<RoomStorage_Service> shp_instance;
     void downloadRoomsFromDB();
     void uploadRoomToDB(QSharedPointer<SrvRoom> new_room_);
 
-
-    QSet<QSharedPointer<SrvRoom>> rooms_set;
-    
+    QMap<qint32, QSharedPointer<SrvRoom>> rooms_set;
+    bool started;
     
 
 };

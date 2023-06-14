@@ -164,7 +164,7 @@
     <ClCompile Include="SrvRoom.cpp">
       <Filter>Entities Files\Srv Models</Filter>
     </ClCompile>
-    <ClCompile Include="MessageHistory_Service.cpp">
+    <ClCompile Include="RoomStorage_Service.cpp">
       <Filter>Services\MessageHistory_Service</Filter>
     </ClCompile>
   </ItemGroup>
@@ -237,7 +237,7 @@
     <QtMoc Include="SrvRoom.h">
       <Filter>Entities Files\Srv Models</Filter>
     </QtMoc>
-    <QtMoc Include="MessageHistory_Service.h">
+    <QtMoc Include="RoomStorage_Service.h">
       <Filter>Services\MessageHistory_Service</Filter>
     </QtMoc>
   </ItemGroup>

@@ -4,17 +4,25 @@
 
 #include <qtypes.h>
 #include <qmetatype.h>
+#include <QSharedPointer>
 
 
 #include "Entities/SrvModels/Message.h"
 #include "Entities/SrvModels/UserConnection.h"
+
+namespace DBEntity {
+
+	class DBRoom;
+}
+
 
 class SrvRoom : public QObject
 {
 	Q_OBJECT
 
 public:
-	explicit SrvRoom(const quint32& id_, const QString& name_, const QString& description_, const quint32& topic_id_, const bool& is_private_, const QString& password_, bool is_deleted_, QObject* parent = nullptr);
+	//explicit SrvRoom(const QSharedPointer<DTOHelper::DTORoom> cshp_dto_room_, QObject* parent = nullptr);
+	explicit SrvRoom(QSharedPointer<DBEntity::DBRoom> cshp_db_room_, QObject* p_parent_ = nullptr);
 	~SrvRoom() = default;
 
 	[[nodiscard]] quint32 getId() const;
@@ -32,6 +40,7 @@ public:
 	//static void createNew(const QVector<DBEntity::DBRoom>& roomsList, DBEntity::DBRoom new_room_);
 	//static void deleteOne(const QVector<DBEntity::DBRoom>& roomsList, DBEntity::DBRoom deleted_room_);
 
+	void addMessage(User_Message* p_message_);
 	void setName(const QString& val);
 	void setDescription(const QString& val);
 	void setPrivate(bool val);
@@ -50,7 +59,6 @@ signals:
 public slots:
 
 	void initRoom();
-	void addMessage(const User_Message& message_);
 	void connectUser(UserConnection* user);
 
 private:

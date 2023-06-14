@@ -163,4 +163,8 @@ DBEntity::DBMessage::DBMessage(const qint32 room_id_, const QString &login_, con
     {}
 
 
+    //TODO: заглушка парсера
+    //DBEntity::DBMessage::DBMessage(User_Message* message, QObject* parent_) : QObject(parent_) { ; }
+
+
 
