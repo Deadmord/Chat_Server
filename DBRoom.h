@@ -1,8 +1,11 @@
+#pragma once
 #ifndef DBROOM_H
 #define DBROOM_H
 
 #include <QString>
 #include <QObject>
+
+#include "SrvRoom.h"
 
 namespace DBEntity {
 
@@ -20,7 +23,8 @@ namespace DBEntity {
 	public:
 
 		explicit DBRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const bool& is_private_, const QString& password_, const bool& is_deleted_);
-	
+		explicit DBRoom(QSharedPointer<SrvRoom> cshp_srv_room_);
+
 		qint32 getId() const;
 		void setId(const qint32& id_);
 

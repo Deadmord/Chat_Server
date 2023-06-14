@@ -13,7 +13,7 @@ bool MessageSaver_Service::start(const float& minutes_)
 	if (!is_started) {
 		is_started = true;
 
-		if (!shp_instance) {
+		if (shp_instance == nullptr) {
 			shp_instance = QSharedPointer<MessageSaver_Service>(new MessageSaver_Service(), &QObject::deleteLater);
 			PLOGI << "Archivator instance is created.";
 		}

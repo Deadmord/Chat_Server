@@ -100,16 +100,17 @@ void LocalStorage_Service::safeExit()
 }
 
 
-void LocalStorage_Service::addMessages(DBEntity::DBMessage* message_, quint32 room_id_) {
-    if (!message_storage.contains(room_id_)) {
-        QList<QSharedPointer<DBEntity::DBMessage>> new_room_history;
-        message_storage.insert(room_id_, new_room_history);
-    }
-    if(!current_messages.contains(room_id_))
-    {
-	    
-    }
-    message_storage.value(room_id_).append(QSharedPointer<DBEntity::DBMessage>(message_, &QObject::deleteLater));
+void LocalStorage_Service::addMessages(User_Message* message_, quint32 room_id_) {
+    //if (!message_storage.contains(room_id_)) {
+    //    QList<QSharedPointer<DBEntity::DBMessage>> new_room_history;
+    //    message_storage.insert(room_id_, new_room_history);
+    //}
+    //if(!current_messages.contains(room_id_))
+    //{
+	   // 
+    //}
+    ////new DBEntity::DBMessage(message_) - заглушка
+    //message_storage.value(room_id_).append(QSharedPointer<DBEntity::DBMessage>(new DBEntity::DBMessage(message_), &QObject::deleteLater));
 }
 
 void LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_) {

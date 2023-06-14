@@ -1,5 +1,18 @@
 #include "SrvRoom.h"
 
+#include "DBRoom.h"
+
+SrvRoom::SrvRoom(QSharedPointer<DBEntity::DBRoom> cshp_db_room_, QObject* p_parent_) :
+    id(cshp_db_room_->getId()),
+    name(cshp_db_room_->getName()),
+    description(cshp_db_room_->getDescription()),
+    topic_id(cshp_db_room_->getTopicId()),
+    is_private(cshp_db_room_->isPrivate()),
+    password(cshp_db_room_->getPassword()),
+    is_deleted(cshp_db_room_->isDeleted()),
+    QObject(p_parent_)
+{}
+
 quint32 SrvRoom::getId() const { return id; }
 QString SrvRoom::getName() const { return name; }
 QString SrvRoom::getDescription() const { return description; }
@@ -7,6 +20,12 @@ quint32 SrvRoom::getTopicId() const { return topic_id; }
 bool SrvRoom::isPrivate() const { return is_private; }
 QString SrvRoom::getPassword() const { return password; }
 bool SrvRoom::isDeleted() const { return is_deleted; }
+
+void SrvRoom::addMessage(User_Message* p_message_)
+{
+    messages.append(p_message_);
+}
+
 void SrvRoom::setName(const QString& val) { name = val; emit nameChanged(val); }
 void SrvRoom::setDescription(const QString& val) { description = val; emit descriptionChanged(val); }
 void SrvRoom::setPrivate(bool val) { is_private = val; emit privateChanged(val); }
@@ -23,9 +42,7 @@ QList<User_Message*> SrvRoom::getMessages(const QDateTime& from_, const QDateTim
     return QList<User_Message*>();
 }
 
-void SrvRoom::addMessage(const User_Message& message_)
-{
-}
+
 
 void SrvRoom::connectUser(UserConnection* user)
 {
