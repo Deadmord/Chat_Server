@@ -29,16 +29,6 @@ void UserConnection::setUserName(const QString& userName)
     user_name = userName;
 }
 
-quint32 UserConnection::getRoomId() const
-{
-    return room_id;
-}
-
-void UserConnection::setRoomId(const quint32& _room_id)
-{
-    room_id = _room_id;
-}
-
 void UserConnection::sendJson(const QJsonObject& json)
 {
     // we crate a temporary QJsonDocument forom the object and then convert it
@@ -135,4 +125,3 @@ void UserConnection::receiveJson()
         emit logMessage(error, "DataStream error");
     }
 }
-

@@ -25,7 +25,6 @@ namespace DBService {
 		QFuture<bool> createUser(const DBEntity::DBUser& user_);
 		QFuture<bool> updateUserPasswordUserpic(const QString& login_, const QString& new_password_, const QByteArray& new_userpic_);
 		QFuture<QPair<bool, qint32>> updateUserRating(const QString& login_, const qint32& rating_);
-		QFuture<qint32> getRatingByLogin(const QString& login_);
 	};
 }
 
