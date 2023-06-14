@@ -1,23 +1,23 @@
 #include "RatingCounter_Service.h"
 
-RatingCounter_Service* RatingCounter_Service::p_instance = nullptr;
+QSharedPointer<RatingCounter_Service> RatingCounter_Service::shp_instance = nullptr;
 QMutex RatingCounter_Service::mutex;
 
 RatingCounter_Service::RatingCounter_Service(QObject* parent_) : QObject(parent_) {}
 
 RatingCounter_Service* RatingCounter_Service::getInstance()
 {
-    if (!p_instance)
+    if (!shp_instance)
     {
         QMutexLocker locker(&mutex);
-        if (!p_instance)
+        if (!shp_instance)
         {
-            p_instance = new RatingCounter_Service();
+            shp_instance = QSharedPointer<RatingCounter_Service>(new RatingCounter_Service(), &QObject::deleteLater);
             //connect(p_instance, &close, p_instance, &safeExit);
         }
 
     }
-    return p_instance;
+    return shp_instance.get();
 }
 
 void RatingCounter_Service::updateRating()
@@ -32,7 +32,7 @@ void RatingCounter_Service::updateRating()
             //UserRepository::updateRating(key, temp_rating);
             PLOGI << "Update rating succesfully";
 
-            p_instance->rating_storage.remove(key);
+            shp_instance->rating_storage.remove(key);
         }
     }
     else PLOGI << "Rating storage is empty.";

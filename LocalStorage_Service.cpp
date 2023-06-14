@@ -1,9 +1,9 @@
 #include "LocalStorage_Service.h"
 #include <qthread.h>
 
-LocalStorage_Service* LocalStorage_Service::instance = nullptr;
+QSharedPointer<LocalStorage_Service> LocalStorage_Service::shp_instance = nullptr;
 QMutex LocalStorage_Service::mutex;
-QTimer* LocalStorage_Service::p_timer = nullptr;
+QSharedPointer<QTimer> LocalStorage_Service::shp_timer = nullptr;
 
 QList<QString> LocalStorage_Service::searchForFiles(
 	const QDateTime& from_, const QDateTime& to_,
@@ -37,21 +37,21 @@ QList<QString> LocalStorage_Service::searchForFiles(
 }
 
 LocalStorage_Service* LocalStorage_Service::getInstance(int minutes_) {
-    if (!instance)
+    if (!shp_instance)
     {
         QMutexLocker locker(&mutex); 
-        if (!instance)
+        if (!shp_instance)
         {
-            instance = new LocalStorage_Service();
-            p_timer = new QTimer();
+            shp_instance = QSharedPointer<LocalStorage_Service>(new LocalStorage_Service(), &QObject::deleteLater);
+            shp_timer = QSharedPointer<QTimer>(new QTimer(), &QObject::deleteLater);
             int timeout = minutes_ == 0? 5*60000 : minutes_ * 60000;
-            connect(instance, &close, instance, &safeExit);
-            connect(p_timer, &QTimer::timeout, instance, &LocalStorage_Service::deleteMessages);
-            p_timer->start(timeout);
+            connect(shp_instance.get(), &close, shp_instance.get(), &safeExit);
+            connect(shp_timer.get(), &QTimer::timeout, shp_instance.get(), &LocalStorage_Service::deleteMessages);
+            shp_timer->start(timeout);
         }
 
     }
-    return instance;
+    return shp_instance.get();
 }
 
 LocalStorage_Service::LocalStorage_Service(QObject* object_) : QObject(object_) {}
@@ -59,10 +59,10 @@ LocalStorage_Service::LocalStorage_Service(QObject* object_) : QObject(object_) 
 
 void LocalStorage_Service::saveAllMessages() {
 
-    if (!instance->message_storage.empty())
+    if (!shp_instance->message_storage.empty())
     {
         QMutexLocker locker(&mutex);
-        auto keys = instance->message_storage.keys();
+        auto keys = shp_instance->message_storage.keys();
         for (const auto& key : keys)
         {
             QString current_time = QDateTime::currentDateTimeUtc().toString("yyyyMMdd_hhmm");
@@ -78,7 +78,7 @@ void LocalStorage_Service::saveAllMessages() {
             }
             PLOGI << "Writing messages successfully";
 
-            instance->message_storage.remove(key);
+            shp_instance->message_storage.remove(key);
         }
     }
     else PLOGI << "message_storage is empty.";
@@ -93,9 +93,9 @@ void LocalStorage_Service::deleteMessages()
 void LocalStorage_Service::safeExit()
 {
     saveAllMessages();
-    p_timer->stop();
-    p_timer->deleteLater();
-    instance->deleteLater();
+    shp_timer->stop();
+    shp_timer->deleteLater();
+    shp_instance->deleteLater();
     PLOGI << "Local storage service safely closed";
 }
 

@@ -22,10 +22,10 @@ private:
 
     explicit MessageSaver_Service(QObject* parent_ = nullptr);
 
-    static MessageSaver_Service* p_instance;
+    static QSharedPointer<MessageSaver_Service> shp_instance;
     static bool is_started;
-    static QTimer* p_timer;
-    static QThread* p_thread;
+    static QSharedPointer<QTimer> shp_timer;
+    static QSharedPointer<QThread> shp_thread;
 
 
 public:

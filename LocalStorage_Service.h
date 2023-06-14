@@ -18,13 +18,13 @@ class LocalStorage_Service:
 {
     Q_OBJECT
 private:
-    static LocalStorage_Service* instance;
+    static QSharedPointer<LocalStorage_Service> shp_instance;
     static QMutex mutex;
     explicit LocalStorage_Service(QObject* object_ = nullptr);
     QMap<quint32, QList<QSharedPointer<DBEntity::DBMessage>>> message_storage;
     //TODO: do dtorooms
-    QMap < quint32, QSet < QSharedPointer < DBEntity::DBMessage >> > current_messages;
-    static QTimer* p_timer;
+    QMap < quint32, QSet<QSharedPointer<DBEntity::DBMessage>>> current_messages;
+    static QSharedPointer<QTimer> shp_timer;
     QList<QString> searchForFiles(const QDateTime& from_, const QDateTime& to_,
                                   const quint32& room_);
 
@@ -34,12 +34,12 @@ public:
     LocalStorage_Service(const LocalStorage_Service&) = delete;
 
 signals:
-    void messageRetrieved(QList<QSharedPointer<DBEntity::DBMessage>> message_);
+    void messageRetrieved(QList<QSharedPointer<DBEntity::DBMessage>> messages_);
     void close();
 
 public slots:
    
-    void addMessages(DBEntity::DBMessage* message_, quint32 room_id_);
+    void addMessages(DBEntity::DBMessage* shp_message_, quint32 room_id_);
     void getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_);
     void saveAllMessages();
     void deleteMessages();
