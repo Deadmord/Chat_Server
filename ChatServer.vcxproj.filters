@@ -181,6 +181,9 @@
     <ClInclude Include="Entities\Enums\Enums.h">
       <Filter>Entities Files\Enums</Filter>
     </ClInclude>
+    <ClInclude Include="SwearHelper.cpp">
+      <Filter>Source Files\Classes\Helpers</Filter>
+    </ClInclude>
     <ClInclude Include="DTORoom.h">
       <Filter>Header Files\Classes\DTOHelpers</Filter>
     </ClInclude>
