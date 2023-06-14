@@ -149,6 +149,9 @@
     <ClCompile Include="RatingCounter_Service.cpp">
       <Filter>Services\RatingCount_Service</Filter>
     </ClCompile>
+    <ClCompile Include="SwearHelper.cpp">
+      <Filter>Source Files\Classes\Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBUser.h">
@@ -180,9 +183,6 @@
     </ClInclude>
     <ClInclude Include="RatingCounter_Service.h">
       <Filter>Services\RatingCount_Service</Filter>
-    </ClInclude>
-    <ClInclude Include="SwearHelper.cpp">
-      <Filter>Source Files\Classes\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="SwearHelper.h">
       <Filter>Header Files\Classes\Helpers</Filter>

@@ -36,4 +36,3 @@ struct Topic
     quint32 id;
     QString name;
 };
-

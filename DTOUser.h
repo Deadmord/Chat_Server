@@ -1,10 +1,8 @@
 #ifndef DTOUSER_H
 #define DTOUSER_H
 
-#include <QString>
 #include <QObject>
 #include "DBUser.h"
-#include "User.h"
 #include "Entities/entities.h"
 
 namespace DTOHelper {
@@ -15,6 +13,7 @@ namespace DTOHelper {
 
 	public:
 		DTOUser(QObject* parent = nullptr);
+		~DTOUser();
 		static QSharedPointer<DBEntity::DBUser> convertToDBModel(const User& user_);
 		static QSharedPointer<User> convertToEntity(const DBEntity::DBUser& db_user_);
 	};
