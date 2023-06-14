@@ -10,9 +10,9 @@ QList<QSharedPointer<SrvRoom>> RoomStorage_Service::getRooms()
     return QList<QSharedPointer<SrvRoom>>();
 }
 
-QList<QSharedPointer<SrvRoom>> RoomStorage_Service::getRoom(qint32 room_id_)
+QSharedPointer<SrvRoom> RoomStorage_Service::getRoom(qint32 room_id_)
 {
-    return QList<QSharedPointer<SrvRoom>>();
+    return QSharedPointer<SrvRoom>();
 }
 
 void RoomStorage_Service::createRoom(QSharedPointer<SrvRoom> new_room_)
