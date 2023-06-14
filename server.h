@@ -17,6 +17,7 @@
 #include "Entities/Enums/Enums.h"
 #include "Entities/SrvModels/Message.h"
 #include "Controllers/RoomController/RoomController.h"
+#include "MessageHistory_Service.h"
 
 const QString CONFIG_FILE_PATH = "./config.json";
 

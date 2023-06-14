@@ -90,6 +90,9 @@
     <Filter Include="Header Files\Classes\Helpers">
       <UniqueIdentifier>{eb740dd8-40ab-4e23-8980-bd6a928d5ff5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Services\MessageHistory_Service">
+      <UniqueIdentifier>{ac7de0c8-3f92-4c9c-b66b-7048bf5d0747}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -125,9 +128,6 @@
     <ClCompile Include="Core\async_console_win.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="file_repository.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\SrvModels\UserConnection.cpp">
       <Filter>Entities Files\Srv Models</Filter>
     </ClCompile>
@@ -161,6 +161,12 @@
     <ClCompile Include="SwearHelper.cpp">
       <Filter>Source Files\Classes\Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="SrvRoom.cpp">
+      <Filter>Entities Files\Srv Models</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageHistory_Service.cpp">
+      <Filter>Services\MessageHistory_Service</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBUser.h">
@@ -181,20 +187,14 @@
     <ClInclude Include="Entities\Enums\Enums.h">
       <Filter>Entities Files\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="SwearHelper.cpp">
-      <Filter>Source Files\Classes\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="DTORoom.h">
-      <Filter>Header Files\Classes\DTOHelpers</Filter>
-    </ClInclude>
-    <ClInclude Include="DTOUser.h">
-      <Filter>Header Files\Classes\DTOHelpers</Filter>
-    </ClInclude>
     <ClInclude Include="FileRepository.h">
       <Filter>Header Files\Classes\DBRepositories</Filter>
     </ClInclude>
-    <ClInclude Include="SwearHelper.h">
-      <Filter>Header Files\Classes\Helpers</Filter>
+    <ClInclude Include="DTOUser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DTORoom.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -228,14 +228,17 @@
     <QtMoc Include="LocalStorage_Service.h">
       <Filter>Services\LocalStorageService</Filter>
     </QtMoc>
-    <QtMoc Include="DTORoom.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="DTOUser.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="RatingCounter_Service.h">
       <Filter>Services\RatingCount_Service</Filter>
+    </QtMoc>
+    <QtMoc Include="SwearHelper.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SrvRoom.h">
+      <Filter>Entities Files\Srv Models</Filter>
+    </QtMoc>
+    <QtMoc Include="MessageHistory_Service.h">
+      <Filter>Services\MessageHistory_Service</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

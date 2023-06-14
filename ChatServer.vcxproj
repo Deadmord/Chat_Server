@@ -99,11 +99,15 @@
     <ClCompile Include="Entities\SrvModels\UserConnection.cpp" />
     <ClCompile Include="FileRepository.cpp" />
     <ClCompile Include="LocalStorage_Service.cpp" />
+    <ClCompile Include="MessageHistory_Service.cpp" />
     <ClCompile Include="MessageSaver_Service.cpp" />
     <ClCompile Include="RatingCounter_Service.cpp" />
+    <ClCompile Include="SrvRoom.cpp" />
     <ClCompile Include="SwearHelper.cpp" />
     <ClCompile Include="UserRepository.cpp" />
     <ClInclude Include="FileRepository.h" />
+    <QtMoc Include="MessageHistory_Service.h" />
+    <QtMoc Include="SrvRoom.h" />
     <QtMoc Include="RatingCounter_Service.h" />
     <QtMoc Include="SwearHelper.h" />
     <QtMoc Include="MessageSaver_Service.h" />
@@ -111,8 +115,8 @@
     <QtMoc Include="UserRepository.h" />
     <QtMoc Include="RoomRepository.h" />
     <QtMoc Include="Entities\SrvModels\UserConnection.h" />
-    <QtMoc Include="DTORoom.h" />
-    <QtMoc Include="DTOUser.h" />
+    <ClInclude Include="DTORoom.h" />
+    <ClInclude Include="DTOUser.h" />
     <ClInclude Include="Entities\Enums\Enums.h" />
     <QtMoc Include="Controllers\RoomController\RoomController.h" />
     <QtMoc Include="Core\async_console_win.h" />
