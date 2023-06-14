@@ -69,7 +69,7 @@ static void startup_routine()
 #endif
     QTimer::singleShot(0, [&]()
         {
-            //MessageSaver_Service::start(0.05);
+            MessageSaver_Service::start(0.05);
         });
     QTimer::singleShot(0, [&]()
         {

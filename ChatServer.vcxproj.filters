@@ -231,6 +231,9 @@
     <QtMoc Include="DTOUser.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="RatingCounter_Service.h">
+      <Filter>Services\RatingCount_Service</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
