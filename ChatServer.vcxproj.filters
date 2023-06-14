@@ -172,9 +172,6 @@
     <ClInclude Include="Entities\Enums\Enums.h">
       <Filter>Entities Files\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="RatingCounter_Service.h">
-      <Filter>Services\RatingCount_Service</Filter>
-    </ClInclude>
     <ClInclude Include="SwearHelper.cpp">
       <Filter>Source Files\Classes\Helpers</Filter>
     </ClInclude>
@@ -218,6 +215,9 @@
     </QtMoc>
     <QtMoc Include="DTOUser.h">
       <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="RatingCounter_Service.h">
+      <Filter>Services\RatingCount_Service</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
