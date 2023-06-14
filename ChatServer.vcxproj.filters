@@ -60,14 +60,8 @@
     <Filter Include="Source Files\Classes\DBRepositories">
       <UniqueIdentifier>{f2f82fee-49c1-4032-9008-ff853ee18ab7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Classes\DTOHelpers">
-      <UniqueIdentifier>{37cf4b0b-197b-451c-aa3f-052b5eb581ee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Classes\DBRepositories">
       <UniqueIdentifier>{dcd0cfdb-f8f4-4c92-837d-8e13ae9fe31c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Classes\DTOHelpers">
-      <UniqueIdentifier>{a44ca6cb-0427-4369-96d0-745af5410e7d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Services">
       <UniqueIdentifier>{c531b894-52d6-40a9-8988-2dc0d72f550b}</UniqueIdentifier>
@@ -89,6 +83,12 @@
     </Filter>
     <Filter Include="Header Files\Classes\Helpers">
       <UniqueIdentifier>{eb740dd8-40ab-4e23-8980-bd6a928d5ff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes\DTOModels">
+      <UniqueIdentifier>{37cf4b0b-197b-451c-aa3f-052b5eb581ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Classes\DTOModels">
+      <UniqueIdentifier>{a44ca6cb-0427-4369-96d0-745af5410e7d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -125,9 +125,6 @@
     <ClCompile Include="Core\async_console_win.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="file_repository.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Entities\SrvModels\UserConnection.cpp">
       <Filter>Entities Files\Srv Models</Filter>
     </ClCompile>
@@ -138,10 +135,10 @@
       <Filter>Source Files\Classes\DBRepositories</Filter>
     </ClCompile>
     <ClCompile Include="DTORoom.cpp">
-      <Filter>Source Files\Classes\DTOHelpers</Filter>
+      <Filter>Source Files\Classes\DTOModels</Filter>
     </ClCompile>
     <ClCompile Include="DTOUser.cpp">
-      <Filter>Source Files\Classes\DTOHelpers</Filter>
+      <Filter>Source Files\Classes\DTOModels</Filter>
     </ClCompile>
     <ClCompile Include="MessageSaver_Service.cpp">
       <Filter>Services\MessageSaverService</Filter>
@@ -181,20 +178,8 @@
     <ClInclude Include="Entities\Enums\Enums.h">
       <Filter>Entities Files\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="SwearHelper.cpp">
-      <Filter>Source Files\Classes\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="DTORoom.h">
-      <Filter>Header Files\Classes\DTOHelpers</Filter>
-    </ClInclude>
-    <ClInclude Include="DTOUser.h">
-      <Filter>Header Files\Classes\DTOHelpers</Filter>
-    </ClInclude>
     <ClInclude Include="FileRepository.h">
       <Filter>Header Files\Classes\DBRepositories</Filter>
-    </ClInclude>
-    <ClInclude Include="SwearHelper.h">
-      <Filter>Header Files\Classes\Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -228,14 +213,17 @@
     <QtMoc Include="LocalStorage_Service.h">
       <Filter>Services\LocalStorageService</Filter>
     </QtMoc>
-    <QtMoc Include="DTORoom.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="DTOUser.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="RatingCounter_Service.h">
       <Filter>Services\RatingCount_Service</Filter>
+    </QtMoc>
+    <QtMoc Include="SwearHelper.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="DTORoom.h">
+      <Filter>Header Files\Classes\DTOModels</Filter>
+    </QtMoc>
+    <QtMoc Include="DTOUser.h">
+      <Filter>Header Files\Classes\DTOModels</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

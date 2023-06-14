@@ -1,6 +1,6 @@
 #include "DTOUser.h"
 
-namespace DTOHelper {
+namespace DTOModel {
 
 	DTOUser::DTOUser(QObject* parent) : QObject(parent) {};
 	DTOUser::~DTOUser() {}

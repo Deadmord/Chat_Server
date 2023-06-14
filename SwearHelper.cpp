@@ -6,7 +6,7 @@ namespace Helper {
 
 	QSet<QString> SwearHelper::getForbiddenWords() {
 		QSet<QString> forbiddenWords;
-		QString filePath = "C:/CPP-Final-Project/Chat_Server/rooms/forbidden_words/forbidden_words.json";
+		QString filePath = "rooms/forbidden_words/forbidden_words.json";
 		QJsonObject jsonObject;
 
 		if (FileRepository::readJson(filePath, jsonObject)) {

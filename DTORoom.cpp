@@ -1,6 +1,6 @@
 #include "DTORoom.h"
 
-namespace DTOHelper {
+namespace DTOModel {
 
 	DTORoom::DTORoom(QObject* parent) : QObject(parent) {};
 

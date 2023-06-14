@@ -11,7 +11,6 @@ namespace DBEntity {
     private:
         QString a_login;
         QString a_password;
-        //QString a_userpic_path;
         QByteArray a_userpic;
         quint32 a_rating;
         bool a_is_deleted;

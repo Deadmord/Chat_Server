@@ -6,7 +6,7 @@ namespace DBService {
 	UserRepository::UserRepository(const QString& connection_string_) { a_dbConnection.setConnectionString(connection_string_); }
 	UserRepository::~UserRepository(){}
 
-	QFuture<DBEntity::DBUser*> UserRepository::getUserByLogin(const QString& login_) {
+	QFuture<QSharedPointer<DBEntity::DBUser>> UserRepository::getUserByLogin(const QString& login_) {
 		return QtConcurrent::run([query_string_ = "SELECT * FROM [user] WHERE login=:login;", login_]() {
 			try
 			{
@@ -23,25 +23,25 @@ namespace DBService {
 						qint32 rating = query.value("rating").toInt();
 						bool is_deleted = query.value("is_deleted").toBool();
 						a_dbConnection.databaseConnectionClose();
-						DBEntity::DBUser* user = new DBEntity::DBUser(login, password, userpicc, rating, is_deleted);
-						return user;
+						QSharedPointer<DBEntity::DBUser> shp_user = QSharedPointer<DBEntity::DBUser>::create(login, password, userpicc, rating, is_deleted);
+						return shp_user;
 					}
 					else {
 						PLOG_ERROR << "Cannot get user by login: " << login_;
 						a_dbConnection.databaseConnectionClose();
-						return static_cast<DBEntity::DBUser*>(nullptr);
+						return static_cast<QSharedPointer<DBEntity::DBUser>>(nullptr);
 					}
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the data base.";
 					a_dbConnection.databaseConnectionClose();
-					return static_cast<DBEntity::DBUser*>(nullptr);
+					return static_cast<QSharedPointer<DBEntity::DBUser>>(nullptr);
 				}
 			}
 			catch (const std::exception& exception)
 			{
 				PLOG_ERROR << "Exception in getUserByLogin method: " << exception.what();
-				return static_cast<DBEntity::DBUser*>(nullptr);
+				return static_cast<QSharedPointer<DBEntity::DBUser>>(nullptr);
 			}
 			});
 	}

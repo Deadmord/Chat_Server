@@ -7,7 +7,7 @@
 #include "Room.h"
 #include "Controllers/RoomController/RoomController.h"
 
-namespace DTOHelper {
+namespace DTOModel {
 
 	class DTORoom : public QObject {
 
@@ -21,6 +21,6 @@ namespace DTOHelper {
 	};
 }
 
-Q_DECLARE_METATYPE(DTOHelper::DTORoom)
+Q_DECLARE_METATYPE(DTOModel::DTORoom)
 
 #endif 
