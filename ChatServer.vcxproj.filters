@@ -158,6 +158,9 @@
     <ClCompile Include="FileRepository.cpp">
       <Filter>Source Files\Classes\DBRepositories</Filter>
     </ClCompile>
+    <ClCompile Include="SwearHelper.cpp">
+      <Filter>Source Files\Classes\Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBUser.h">
@@ -186,9 +189,6 @@
     </ClInclude>
     <ClInclude Include="FileRepository.h">
       <Filter>Header Files\Classes\DBRepositories</Filter>
-    </ClInclude>
-    <ClInclude Include="SwearHelper.cpp">
-      <Filter>Source Files\Classes\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="SwearHelper.h">
       <Filter>Header Files\Classes\Helpers</Filter>

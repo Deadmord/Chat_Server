@@ -101,6 +101,7 @@
     <ClCompile Include="LocalStorage_Service.cpp" />
     <ClCompile Include="MessageSaver_Service.cpp" />
     <ClCompile Include="RatingCounter_Service.cpp" />
+    <ClCompile Include="SwearHelper.cpp" />
     <ClCompile Include="UserRepository.cpp" />
     <ClInclude Include="FileRepository.h" />
     <QtMoc Include="RatingCounter_Service.h" />
@@ -111,8 +112,9 @@
     <QtMoc Include="UserRepository.h" />
     <QtMoc Include="RoomRepository.h" />
     <QtMoc Include="Entities\SrvModels\UserConnection.h" />
-    <ClInclude Include="DTORoom.h" />
-    <ClInclude Include="DTOUser.h" />
+    <QtMoc Include="DTORoom.h" />
+    <QtMoc Include="DTOUser.h" />
+    <ClInclude Include="RatingCounter_Service.h" />
     <ClInclude Include="Entities\Enums\Enums.h" />
     <QtMoc Include="Controllers\RoomController\RoomController.h" />
     <QtMoc Include="Core\async_console_win.h" />

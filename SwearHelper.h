@@ -3,12 +3,17 @@
 
 #include <QString>
 #include <QObject>
+#include <QSet>
+#include "file_repository.h"
 
 namespace Helper {
 
 	class SwearHelper : public QObject {
 		
 		Q_OBJECT
+
+	private:
+		static QSet<QString> getForbiddenWords();
 
 	public:
 		SwearHelper(QObject* parent = nullptr);
