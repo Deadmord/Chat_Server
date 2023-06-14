@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include <QTimer>
 #include "../Enums/Enums.h"
+#include "../../DBUser.h"
 
 class UserConnection : public QObject
 {
@@ -48,6 +49,7 @@ private slots:
 
 private:
     QTcpSocket* user_socket;
+    QSharedPointer<DBEntity::DBUser> p_user;
     QString id;
     QString user_name;
     QString password;

@@ -109,8 +109,8 @@
     <QtMoc Include="UserRepository.h" />
     <QtMoc Include="RoomRepository.h" />
     <QtMoc Include="Entities\SrvModels\UserConnection.h" />
-    <ClInclude Include="DTORoom.h" />
-    <ClInclude Include="DTOUser.h" />
+    <QtMoc Include="DTORoom.h" />
+    <QtMoc Include="DTOUser.h" />
     <ClInclude Include="Entities\Enums\Enums.h" />
     <ClInclude Include="file_repository.h" />
     <QtMoc Include="Controllers\RoomController\RoomController.h" />
