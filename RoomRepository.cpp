@@ -58,8 +58,8 @@ namespace DBService {
 			});
 	}
 
-	QFuture<QList<QSharedPointer<DBEntity::DBRoom>>> RoomRepository::getAllActiveRooms() {
-		return QtConcurrent::run([query_string_ = "SELECT * from room WHERE is_deleted=0;"]() {
+	QList<QSharedPointer<DBEntity::DBRoom>> RoomRepository::getAllActiveRooms() {
+			auto query_string_ = "SELECT * from room WHERE is_deleted=0;";
 			QList<QSharedPointer<DBEntity::DBRoom>> room_list;
 			try
 			{
@@ -105,7 +105,7 @@ namespace DBService {
 				PLOG_ERROR << "Exception in getAllActiveRooms method: " << exception.what();
 			}
 			return room_list;
-			});
+			
 	}
 
 	QFuture<qint32> RoomRepository::createRoom( const DBEntity::DBRoom& room_) {

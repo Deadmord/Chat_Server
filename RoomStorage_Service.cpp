@@ -30,8 +30,7 @@ void RoomStorage_Service::init()
     if (getInstance()->is_started()) {
 
         getInstance()->make_started();
-
-
+        
         shp_instance->downloadRoomsFromDB();
     }
 }
@@ -77,17 +76,35 @@ void RoomStorage_Service::addConnecntedUserToRoom(qint32 room_id_, UserConnectio
 
 RoomStorage_Service::RoomStorage_Service(QObject* parent_) : QObject(parent_) {}
 
+//void RoomStorage_Service::getRoomsSet() {};
+
 void RoomStorage_Service::downloadRoomsFromDB()
 {
-    auto future = DBService::RoomRepository::getAllActiveRooms();
 
-    future.waitForFinished();
+    QtConcurrent::run([this]() {
 
-    QList<QSharedPointer<DBEntity::DBRoom>> dbrooms = future.result();
+        auto dbrooms = DBService::RoomRepository::getAllActiveRooms();
+        for(auto& room : dbrooms) {
+            rooms_set.insert(room->getId(), QSharedPointer<SrvRoom>(new SrvRoom(room), &QObject::deleteLater));
+        }
+        PLOGD << "Rooms uploaded";
 
-    auto result =  QtConcurrent::map(dbrooms, [dbrooms, this] (QSharedPointer<DBEntity::DBRoom> shp_room_) {
-            rooms_set.insert(shp_room_->getId(), QSharedPointer<SrvRoom>(new SrvRoom(shp_room_), &QObject::deleteLater));
     });
+
+
+
+    //auto dbrooms = QSharedPointer<QList<QSharedPointer<DBEntity::DBRoom>>>::create(qMove(future.result()));
+    //auto futurew = QtConcurrent::run([](auto dbrooms) -> decltype(rooms_set) {
+    //    decltype(rooms_set) cash;
+    //    for (auto& shp : *dbrooms) {
+    //        cash.insert(shp->getId(), QSharedPointer<SrvRoom>(new SrvRoom(shp)));
+    //        }
+
+    //    return cash;
+    //    }, dbrooms);
+
+    //auto future_watcher = new QFutureWatcher<decltype(rooms_set)>();
+
 
 }
 

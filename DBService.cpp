@@ -20,6 +20,7 @@ namespace DBService {
 			if (a_database.open()) {
 				PLOG_INFO << "connected to db.";
 			}
+			else PLOGE << a_database.lastError().databaseText();
 		}
 		catch (const std::exception& exception)
 		{
