@@ -24,8 +24,6 @@ public:
     [[nodiscard]] QSharedPointer<SrvRoom> getRoom(qint32 room_id_);
 
 public slots:
-
-
     void createRoom(QSharedPointer<SrvRoom> new_room_);
     void addMessageToRoom(qint32 room_id_, User_Message* message_);
     void addConnecntedUserToRoom(qint32 room_id_, UserConnection* user_);

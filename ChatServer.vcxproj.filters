@@ -90,6 +90,9 @@
     <Filter Include="Header Files\Classes\DTOModels">
       <UniqueIdentifier>{a44ca6cb-0427-4369-96d0-745af5410e7d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Controllers\Message Controller">
+      <UniqueIdentifier>{5a4580db-a3e6-46e9-a6b0-d32459067ec4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -164,6 +167,9 @@
     <ClCompile Include="RoomStorage_Service.cpp">
       <Filter>Services\MessageHistory_Service</Filter>
     </ClCompile>
+    <ClCompile Include="Controllers\MessageController\MessageController.cpp">
+      <Filter>Controllers\Message Controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBUser.h">
@@ -230,6 +236,9 @@
     </QtMoc>
     <QtMoc Include="DTOUser.h">
       <Filter>Header Files\Classes\DTOModels</Filter>
+    </QtMoc>
+    <QtMoc Include="Controllers\MessageController\MessageController.h">
+      <Filter>Controllers\Message Controller</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
