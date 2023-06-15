@@ -1,4 +1,5 @@
 #include "RoomStorage_Service.h"
+#include <functional>
 
 QSharedPointer<RoomStorage_Service> RoomStorage_Service::shp_instance = nullptr;
 
@@ -28,8 +29,10 @@ void RoomStorage_Service::init()
     if (getInstance()->is_started()) {
 
         getInstance()->make_started();
-        
+       
         shp_instance->downloadRoomsFromDB();
+
+        shp_instance->getMessages(1, QDateTime::currentDateTime().addDays(-1), QDateTime::currentDateTime());
     }
 }
 
@@ -90,12 +93,25 @@ QSharedPointer<User_Message> RoomStorage_Service::fromDBMessageToUserMessage(con
 
 QList<QSharedPointer<User_Message>> RoomStorage_Service::getMessages(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_)
 {
-
+    
     QSet<QSharedPointer<User_Message>> messages;
     if (rooms_storage.contains(room_id_))
     {
-        getMessagesFromDB(room_id_, from_, to_);
-        getMessagesFromLocalStorage(room_id_, from_, to_);
+        QList<std::function<void(const quint32&, const QDateTime&, const QDateTime&)>> delegates;
+
+        delegates.append([this](const quint32& room_id_, const QDateTime& from_, const QDateTime& to_) {
+            getMessagesFromLocalStorage(room_id_, from_, to_);
+            });
+
+        delegates.append([this](const quint32& room_id_, const QDateTime& from_, const QDateTime& to_) {
+            getMessagesFromDB(room_id_, from_, to_);
+            });
+
+        QtConcurrent::blockingMap(delegates, [&](std::function<void(const quint32&, const QDateTime&, const QDateTime&)> delegate) {
+            delegate(room_id_, from_, to_);
+            PLOGF << "DRATUTY!!!";
+            });
+
         foreach(const auto & message, rooms_storage[room_id_]->getMessages())
         {
             if (auto date = message->getDateTime(); date >= from_ && date <= to_)
