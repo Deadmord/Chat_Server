@@ -2,20 +2,19 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QVector>
-#include <QJsonObject>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonParseError>
-#include <QFile>
+//#include <QJsonObject>
+//#include <QJsonDocument>
+//#include <QJsonArray>
+//#include <QJsonParseError>
+//#include <QFile>
 #include <QTime>
-#include <QUuid>
+//#include <QUuid>
 #include <QTimer>
 
 #include <plog/Log.h>
 
 #include "Entities/entities.h"
 #include "Entities/Enums/Enums.h"
-#include "Entities/SrvModels/Message.h"
 #include "Controllers/RoomController/RoomController.h"
 #include "Controllers/MessageController/MessageController.h"
 #include "MessageHistory_Service.h"
@@ -32,12 +31,14 @@ public:
     ~Server();
 
 signals:
-    
+    void jsonReceived(UserConnection* sender_, const QJsonObject& doc_);
+    void broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> room_, const UserConnection* exclude_);
 
 public slots:
     void startServer();
     void stopServer();
     void incomingConnection(qintptr socket_descriptor_) override;
+    QList<UserConnection*> getUsersList() const;                          //TODO remove from rerver with connected_users prop.
 
 private slots:
     void userDisconnected(UserConnection* sender_);
@@ -54,9 +55,9 @@ private:
     quint16 flood_limit;
     QString black_list_path;
 
-    QVector<UserConnection*> connected_users;
+    QList<UserConnection*> connected_users;
     //переделать в QVector <User_Message*> messages и перенести в Room
-    QVector <User_Message> messages;
+    QList <User_Message> messages;
 
     QByteArray data_;
 };

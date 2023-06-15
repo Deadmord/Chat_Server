@@ -5,6 +5,10 @@
 #include <QJsonArray>
 #include <QJsonParseError>
 #include <QFile>
+#include "../../SrvRoom.h"
+#include "../../Entities/SrvModels/Message.h"
+#include "../../Entities/SrvModels/UserConnection.h"
+
 class MessageController : public QObject
 {
 	Q_OBJECT
@@ -12,6 +16,11 @@ class MessageController : public QObject
 
 public:
 	static MessageController* instance(QObject* parent);
+
+public slots:
+
+	void broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> room_, const UserConnection* exclude_);
+	void jsonReceived(UserConnection* sender_, const QJsonObject& doc_);
 
 private:
 	explicit MessageController(QObject* parent_ = nullptr);
@@ -25,11 +34,6 @@ private:
 
 private:
 	static QSharedPointer<MessageController> shp_instance;
-
-private slots:
-
-	void broadcastSend(const QJsonObject& message_, const UserConnection* exclude_);
-	void jsonReceived(UserConnection* sender_, const QJsonObject& doc_);
 
 
 
