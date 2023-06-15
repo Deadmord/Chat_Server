@@ -17,7 +17,7 @@ namespace DTOModel {
 	quint32 DTOUser::getRating() const { return a_rating; }
 	void DTOUser::setRating(const quint32& rating_) { a_rating = rating_; }
 	bool DTOUser::isDeleted() const { return a_is_deleted; }
-	void DTOUser::setIsDeleted(const bool& is_deleted_) { a_is_deleted - is_deleted_; }
+	void DTOUser::setIsDeleted(const bool& is_deleted_) { a_is_deleted = is_deleted_; }
 
 	QSharedPointer<DTOModel::DTOUser> DTOUser::createDTOUser(const DBEntity::DBUser& db_user_) {
 		QSharedPointer<DTOModel::DTOUser> dto_room = QSharedPointer<DTOModel::DTOUser>::create(db_user_.getLogin(), db_user_.getPassword(), db_user_.getUserpic(), db_user_.getRating());

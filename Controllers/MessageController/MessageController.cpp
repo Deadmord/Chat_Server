@@ -1,25 +1,23 @@
 ﻿#include "MessageController.h"
 
-
 MessageController::MessageController(QObject* object_) : QObject(object_) {}
 
 MessageController::~MessageController() {}
 
-//MessageController* MessageController::getInstance(QObject* parent)
-//{
-//    if (!shp_instance)
-//    {
-//        shp_instance = QSharedPointer<MessageController>(new MessageController(parent), &QObject::deleteLater);
-//        //connect(p_instance, &close, p_instance, &safeExit);
-//    }
-//    return shp_instance.get();
-//}
-
-MessageController* MessageController::instance(QObject* parent)
+QSharedPointer<MessageController> MessageController::instance()
 {
-    static MessageController inst(parent);
-    return &inst;
+    if (!shp_instance)
+    {
+        shp_instance = QSharedPointer<MessageController>(new MessageController());
+    }
+    return shp_instance;
 }
+
+//MessageController* MessageController::instance(QObject* parent)
+//{
+//    static MessageController inst(parent);
+//    return &inst;
+//}
 
 User_Message MessageController::createMessage(const QString& nickname_, const QString& text_)
 {
@@ -143,7 +141,6 @@ void MessageController::jsonFromLoggedInCmd(UserConnection* sender_, const QJson
 
 }
 
-//---!!!---это от сюда убрать, будет не нужно
 void MessageController::jsonFromLoggedInMsg(const UserConnection* sender_, const QJsonObject& doc_obj_)
 {
     Q_ASSERT(sender_);

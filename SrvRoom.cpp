@@ -1,4 +1,4 @@
-#include "SrvRoom.h"
+п»ї#include "SrvRoom.h"
 
 #include "DBRoom.h"
 
@@ -66,7 +66,7 @@ void SrvRoom::initRoom() {
     //msgFile.setFileName(path);
     //if (msgFile.open(QIODevice::ReadOnly | QFile::Text))
     //{
-    //    //тот нужно блокировать обращение к ресурсу msgFile
+    //    //С‚РѕС‚ РЅСѓР¶РЅРѕ Р±Р»РѕРєРёСЂРѕРІР°С‚СЊ РѕР±СЂР°С‰РµРЅРёРµ Рє СЂРµСЃСѓСЂСЃСѓ msgFile
     //    msgHistory = QJsonDocument::fromJson(QByteArray(msgFile.readAll()), &jsonError);
     //    msgFile.close();
 
