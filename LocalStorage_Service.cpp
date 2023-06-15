@@ -64,12 +64,12 @@ void LocalStorage_Service::saveAllMessages() {
     {
         QMutexLocker locker(&mutex);
         auto keys = shp_instance->message_storage.keys();
-        QtConcurrent::blockingMap(keys, [this](uint key) {
+        QtConcurrent::blockingMap(keys, [this](const quint32 key_) {
                 QString current_time = QDateTime::currentDateTimeUtc().toString("yyyyMMdd_hhmm");
-                QString file_name = "rooms/" + QString::number(key) + "/" + current_time + ".json";
-                QDir().mkpath("rooms/" + QString::number(key));
+                QString file_name = "rooms/" + QString::number(key_) + "/" + current_time + ".json";
+                QDir().mkpath("rooms/" + QString::number(key_));
                 QJsonArray array;
-                for (const auto& message : message_storage.value(key)) {
+                for (const auto& message : message_storage.value(key_)) {
 
                     array.append(message->toJson());
                 }
@@ -78,7 +78,7 @@ void LocalStorage_Service::saveAllMessages() {
                 }
                 PLOGI << "Writing messages successfully";
 
-                shp_instance->message_storage.remove(key);
+                shp_instance->message_storage.remove(key_);
         });
     }
     else PLOGI << "message_storage is empty.";
@@ -116,28 +116,49 @@ void LocalStorage_Service::addMessages(User_Message* message_, quint32 room_id_)
 void LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_) {
     QSet<QSharedPointer<DBEntity::DBMessage>> messages;
     QMutexLocker locker(&mutex);
-	auto files = searchForFiles(from_, to_, room_);
-	foreach(const auto& file,files)
-	{
-		messages.unite(DBEntity::DBMessage::readMessages(file));
-	}
+
+    const QDir directory("rooms/" + QString::number(room_));
+    QStringList all_files = directory.entryList(QDir::Files);
+    bool is_empty = true;
+    const QRegularExpression regex(R"((\d{8}_\d{4})\.json)"); // Regular expression to match file names like "20230102_1000.json"
+    auto future_read_files = QtConcurrent::map(all_files, [this, &regex, &messages, &is_empty, &from_, &to_](const QString& file_name_) {
+
+        if (const QRegularExpressionMatch match = regex.match(file_name_); match.hasMatch())
+        {
+            const QString date_string = match.captured(1);
+
+            if (const QDateTime file_date_time = QDateTime::fromString(date_string, "yyyyMMdd_hhmm"); file_date_time >= from_ && file_date_time <= to_)
+            {
+                messages.unite(DBEntity::DBMessage::readMessages(file_name_));
+                is_empty = false;
+            }
+        }
+          
+    });
+ 
 	
     if (current_messages.contains(room_))
     {
-    	foreach(const auto& message, current_messages.value(room_))
-	    {
-		    if(auto date = message->getDateTime(); date>= from_ && date <= to_)
-		    {
-                messages.insert(message);
-		    }
-	    }
+        auto future_read_map= QtConcurrent::map(current_messages.value(room_), [this, &messages, &from_, &to_](const auto& message_) {
+
+            if (auto date = message_->getDateTime(); date >= from_ && date <= to_)
+            {
+                messages.insert(message_);
+            }
+        });
+        future_read_map.waitForFinished();
+        future_read_files.waitForFinished();
         current_messages[room_].unite(messages);
     }
     else
     {
+        future_read_files.waitForFinished();
         current_messages.insert(room_, messages);
     }
-    
+     if (is_empty)
+    {
+        PLOGW << "No messages for this date was retrieved from database";
+    }
     emit messageRetrieved(QList(messages.begin(), messages.end()));
     
 
