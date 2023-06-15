@@ -73,7 +73,7 @@ void MessageController::jsonFromLoggedOut(UserConnection* sender_, const QJsonOb
     const QString new_user_name = username_val.toString().simplified();
     if (new_user_name.isEmpty())
         return;
-    for (const UserConnection* user : qAsConst(server.getUsersList())) {    //Find duplicat username
+    for (const UserConnection* user : QList<UserConnection*>{}) {    //Find duplicat username //qAsConst(server.getUsersList()))
         if (user == sender_)
             continue;
         if (user->getUserName().compare(new_user_name, Qt::CaseInsensitive) == 0) {
@@ -93,7 +93,7 @@ void MessageController::jsonFromLoggedOut(UserConnection* sender_, const QJsonOb
     QJsonObject connected_message;
     connected_message[QStringLiteral("type")] = QStringLiteral("newuser");
     connected_message[QStringLiteral("username")] = new_user_name;
-    broadcastSend(connected_message, sender_);
+    broadcastSend(connected_message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
 }
 
 void MessageController::jsonFromLoggedInCmd(UserConnection* sender_, const QJsonObject& doc_obj_)
@@ -135,7 +135,7 @@ void MessageController::jsonFromLoggedInCmd(UserConnection* sender_, const QJson
         message[QStringLiteral("type")] = QStringLiteral("message");
         message[QStringLiteral("text")] = text;
         message[QStringLiteral("sender")] = sender_->getUserName();
-        broadcastSend(message, sender_);
+        broadcastSend(message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
         return;
     }
 
@@ -161,5 +161,5 @@ void MessageController::jsonFromLoggedInMsg(const UserConnection* sender_, const
     message[QStringLiteral("type")] = QStringLiteral("message");
     message[QStringLiteral("text")] = text;
     message[QStringLiteral("sender")] = sender_->getUserName();
-    broadcastSend(message, sender_);
+    broadcastSend(message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
 }

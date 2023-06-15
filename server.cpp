@@ -35,8 +35,8 @@ void Server::incomingConnection(qintptr socket_descriptor_)
     connect(user_connection, &UserConnection::disconnectedFromClient, this, std::bind(&Server::userDisconnected, this, user_connection));
     connect(user_connection, &UserConnection::errorSignal, this, std::bind(&Server::userError, this, user_connection));
     connect(user_connection, &UserConnection::jsonReceived, this, std::bind(&Server::jsonReceived, this, user_connection, std::placeholders::_1));  //it become to signal now
-    connect(user_connection, &UserConnection::jsonReceived, MessageController::instance(this), std::bind(&MessageController::jsonReceived, this, user_connection, std::placeholders::_1));  //connect with MessageController (это нужно перенести в MessageController)
-    connect(this, &Server::broadcastSend, MessageController::instance(this), &MessageController::broadcastSend); //это нужно перенести в MessageController
+    //connect(user_connection, &UserConnection::jsonReceived, MessageController::instance(this), std::bind(&MessageController::jsonReceived, this, user_connection, std::placeholders::_1));  //connect with MessageController (это нужно перенести в MessageController)
+    //connect(this, &Server::broadcastSend, MessageController::instance(this), &MessageController::broadcastSend); //это нужно перенести в MessageController
 
     connected_users.append(user_connection);
     PLOGI << "New client Connected! Now users: " + QString::number(connected_users.size());
