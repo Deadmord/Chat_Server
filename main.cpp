@@ -16,7 +16,6 @@
 #include "DTOUser.h"
 #include "DBRoom.h"
 #include "DBUser.h"
-#include "RoomRepository.h"
 
 #if defined (Q_OS_WIN)
 #include "Core/async_console_win.h"
@@ -85,13 +84,10 @@ Q_COREAPP_STARTUP_FUNCTION(startup_routine)
 
 int main(int argc, char* argv[])
 {
-    //QCoreApplication a(argc, argv);
+    QCoreApplication a(argc, argv);
 
-    //return a.exec();
-    auto future = DBService::RoomRepository::getAllRooms();
-    for(auto room : future.result()) {
-        qDebug() << room.getId();
-    }
+    return a.exec();
+
 }
 
 
