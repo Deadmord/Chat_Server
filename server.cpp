@@ -7,7 +7,7 @@ void Server::startServer()
 {
     loadConfig(CONFIG_FILE_PATH);
     openConnection();
-    RoomStorage_Service::init();
+    //RoomStorage_Service::init();
     PLOGI << "Server initialized";
 }
 
