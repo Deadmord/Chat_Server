@@ -21,9 +21,14 @@ bool SrvRoom::isPrivate() const { return is_private; }
 QString SrvRoom::getPassword() const { return password; }
 bool SrvRoom::isDeleted() const { return is_deleted; }
 
-void SrvRoom::addMessage(User_Message* p_message_)
+void SrvRoom::addMessage(QSharedPointer<User_Message> p_message_)
 {
-    messages.append(p_message_);
+    messages.insert(p_message_);
+}
+
+QSet<QSharedPointer<User_Message>> SrvRoom::getMessages()
+{
+    return messages;
 }
 
 void SrvRoom::setName(const QString& val) { name = val; emit nameChanged(val); }

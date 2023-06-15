@@ -113,32 +113,21 @@ void LocalStorage_Service::addMessages(User_Message* message_, quint32 room_id_)
     //message_storage.value(room_id_).append(QSharedPointer<DBEntity::DBMessage>(new DBEntity::DBMessage(message_), &QObject::deleteLater));
 }
 
-void LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_) {
+QSet<QSharedPointer<DBEntity::DBMessage>> LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_) {
     QSet<QSharedPointer<DBEntity::DBMessage>> messages;
     QMutexLocker locker(&mutex);
-	auto files = searchForFiles(from_, to_, room_);
-	foreach(const auto& file,files)
-	{
-		messages.unite(DBEntity::DBMessage::readMessages(file));
-	}
 	
-    if (current_messages.contains(room_))
+    if (message_storage.contains(room_))
     {
-    	foreach(const auto& message, current_messages.value(room_))
+    	foreach(const auto& message, message_storage.value(room_))
 	    {
 		    if(auto date = message->getDateTime(); date>= from_ && date <= to_)
 		    {
                 messages.insert(message);
 		    }
 	    }
-        current_messages[room_].unite(messages);
+        
     }
-    else
-    {
-        current_messages.insert(room_, messages);
-    }
-    
-    emit messageRetrieved(QList(messages.begin(), messages.end()));
-    
 
+    return messages;
 }
