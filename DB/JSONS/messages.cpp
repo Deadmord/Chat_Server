@@ -1,4 +1,4 @@
-//
+п»ї//
 // Created by Admin on 5/24/2023.
 //
 
@@ -163,7 +163,7 @@ DBEntity::DBMessage::DBMessage(const qint32 room_id_, const QString &login_, con
     {}
 
 
-    //TODO: заглушка парсера
+    //TODO: Р·Р°РіР»СѓС€РєР° РїР°СЂСЃРµСЂР°
     //DBEntity::DBMessage::DBMessage(User_Message* message, QObject* parent_) : QObject(parent_) { ; }
 
 

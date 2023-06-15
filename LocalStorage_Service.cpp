@@ -1,4 +1,4 @@
-#include "LocalStorage_Service.h"
+п»ї#include "LocalStorage_Service.h"
 #include <qthread.h>
 #include <QtConcurrent>
 
@@ -109,7 +109,7 @@ void LocalStorage_Service::addMessages(User_Message* message_, quint32 room_id_)
     //{
 	   // 
     //}
-    ////new DBEntity::DBMessage(message_) - заглушка
+    ////new DBEntity::DBMessage(message_) - Р·Р°РіР»СѓС€РєР°
     //message_storage.value(room_id_).append(QSharedPointer<DBEntity::DBMessage>(new DBEntity::DBMessage(message_), &QObject::deleteLater));
 }
 
