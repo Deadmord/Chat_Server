@@ -58,6 +58,7 @@ private:
     bool started;
     
 signals:
+
     void messageRetrieved(QList<QSharedPointer<SrvRoom>>);
 
 };
