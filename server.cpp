@@ -7,7 +7,7 @@ void Server::startServer()
 {
     loadConfig(CONFIG_FILE_PATH);
     openConnection();
-    //RoomStorage_Service::init();
+    RoomStorage_Service::init();
     PLOGI << "Server initialized";
 }
 
@@ -40,102 +40,12 @@ void Server::incomingConnection(qintptr socket_descriptor_)
 
     connected_users.append(user_connection);
     PLOGI << "New client Connected! Now users: " + QString::number(connected_users.size());
-
-
-    ////---------------old------------------
-    ////socket = nextPendingConnection();     //return nullptr
-    //socket = new QTcpSocket(this);
-    //socket->setSocketDescriptor(socketDescriptor);
-    //connect(socket, &QTcpSocket::readyRead, this, &Server::slotReadyRead);      //сигнально слотовые соединения, как работают?
-    //connect(socket, &QTcpSocket::disconnected, this, &Server::slotDisconnect);
-    ////connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
-
-    ////тут отправлять по новому соединению запрос данных клиента
-    ////после возврата и получения данных
-    ////записывать их как пару в vector сокетов
-
-    //sockets.push_back(socket);
-
-    //qDebug() << "new client connected" << socketDescriptor << " Now users : " << sockets.size();
-
-    ////Send msg history to the client
-    //SendToClient(messages, socket);
-
-    //SendToAllClients(createMessage("Server", "New connection! Hello!"));
 }
 
 QList<UserConnection*> Server::getUsersList() const
 {
     return connected_users;
 }
-
-////---------------old------------------
-//void Server::slotDisconnect()
-//{
-//
-//    socket = (QTcpSocket*)sender();
-//    //socket->deleteLater();
-//    sockets.removeOne(socket);
-//    //Sockets.removeAll(socket);
-//    qDebug() << "Disconnected. " << socket->socketDescriptor() << " Now users : " << sockets.size();
-//    //лучше создать сервис который будет чистить вектор подключений периодически по таймеру
-//}
-//
-////---------------old------------------
-//void Server::slotReadyRead()
-//{
-//    socket = (QTcpSocket*)sender();
-//    QDataStream in(socket);
-//    in.setVersion(QDataStream::Qt_6_5);
-//    if (in.status() == QDataStream::Ok)
-//    {
-//        qDebug() << "read...";
-//        //        QString str;
-//        //        in >> str;
-//        //        qDebug() << str;
-//        //        SendToClient(str);
-//        for (;;)
-//        {
-//            //if (nextBlockSize == 0)
-//            //{
-//            //    qDebug() << "nextBlockSize = 0";
-//            //    if (socket->bytesAvailable() < 2)
-//            //    {
-//            //        qDebug() << "Data < 2, break";
-//            //        break;
-//            //    }
-//            //    in >> nextBlockSize;
-//            //    qDebug() << "nextBlockSize = " << nextBlockSize;
-//            //}
-//            //if (socket->bytesAvailable() < nextBlockSize)
-//            //{
-//            //    qDebug() << "Data not full, waiting...";
-//            //    break;
-//            //}
-//            //очевидно что условие выше выводит из цикла for, но как мы попадаем сюда снова? получается in.status обновляет значение после выполнения строки ниже?
-//            Message msg;
-//            in >> msg.id >> msg.date_time >> msg.nickname >> msg.deleted >> msg.text;
-//            //nextBlockSize = 0;
-//
-//            //parce to User_Message----------------------------------
-//
-//            messages.push_back(msg);    //implecetly
-//
-//            qDebug() << "The message: " << msg.text;
-//            //SendToAllClients(msg);      //implecetly
-//
-//            //To archive messanges
-//            uploadMsgHistory(msg_history_path);
-//
-//            break;
-//        }
-//
-//    }
-//    else
-//    {
-//        qDebug() << "DataStream error";
-//    }
-//}
 
 void Server::loadConfig(const QString& path_)
 {
@@ -235,66 +145,6 @@ void Server::disableUsers()
 //    //    rooms.append(room);
 //    //    PLOGI << "New room created! Now rooms: " + QString::number(rooms.size());
 //    //}
-//}
-
-//----------------SendToClient-----------------
-
-//void Server::SendToClient(const User_Message &msg, QTcpSocket *socket)
-//{
-//    Data.clear();
-//    QDataStream out(&Data, QIODevice::WriteOnly);
-//    out.setVersion(QDataStream::Qt_6_5);
-//
-//    out << quint16(0) << msg.getId() << msg.getDateTime() << msg.getNickname() << msg.isDeleted() << msg.getText(); // преобразовали в stream
-//    out.device()->seek(0);          //переходим в начало "данных"
-//    out << quint16(Data.size() - sizeof(quint16));
-//    socket->write(Data);
-//}
-//
-//void Server::SendToClient(const QVector<User_Message> &msgs, QTcpSocket *socket)
-//{
-//    for (const User_Message& msg : msgs)
-//    {
-//    Data.clear();
-//    QDataStream out(&Data, QIODevice::WriteOnly);
-//    out.setVersion(QDataStream::Qt_6_5);
-//    out << quint16(0) << msg.getId() << msg.getDateTime() << msg.getNickname() << msg.isDeleted() << msg.getText(); // преобразовали в stream
-//    out.device()->seek(0);          //переходим в начало "данных"
-//    out << quint16(Data.size() - sizeof(quint16));
-//    socket->write(Data);
-//    }
-//}
-
-//void Server::SendToAllClients(const QString &str)
-//{
-//    Data.clear();
-//    QDataStream out(&Data, QIODevice::WriteOnly);
-//    out.setVersion(QDataStream::Qt_6_5);
-//    Message msg { "Server", str, QDateTime::currentTime(), QUuid::createUuid().toString(), false};
-//    out << quint16(0) << msg.id << msg.time << msg.nickname << msg.deleted << msg.text; // преобразовали в stream
-//    out.device()->seek(0);          //переходим в начало "данных"
-//    out << quint16(Data.size() - sizeof(quint16));
-//    //socket->write(Data);
-//    for(int i(0); i < Sockets.size(); i++)
-//    {
-//        Sockets[i]->write(Data);
-//    }
-//}
-
-//void Server::SendToAllClients(const User_Message &msg)
-//{
-//    Data.clear();
-//    QDataStream out(&Data, QIODevice::WriteOnly);
-//    out.setVersion(QDataStream::Qt_6_5);
-//
-//    out << quint16(0) << msg.getId() << msg.getDateTime() << msg.getNickname() << msg.isDeleted() << msg.getText(); // преобразовали в stream
-//    out.device()->seek(0);          //переходим в начало "данных"
-//    out << quint16(Data.size() - sizeof(quint16));
-//    //socket->write(Data);
-//    for(int i(0); i < sockets.size(); i++)
-//    {
-//        sockets[i]->write(Data);
-//    }
 //}
 
 void Server::userDisconnected(UserConnection* sender_)
