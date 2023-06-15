@@ -13,7 +13,7 @@ namespace DBEntity {
 
 	public:
 
-		explicit DBRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const bool& is_private_, const QString& password_, const bool& is_deleted_);
+		explicit DBRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const bool& is_private_, const QString& password_, const bool& is_deleted_ = false);
 		explicit DBRoom(QSharedPointer<SrvRoom> cshp_srv_room_);
 
 		qint32 getId() const;

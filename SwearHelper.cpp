@@ -5,8 +5,8 @@ namespace Helper {
 	SwearHelper::SwearHelper(QObject* parent_) : QObject(parent_) {};
 
 	QSet<QString> SwearHelper::getForbiddenWords() {
-		QSet<QString> forbiddenWords;
-		QString filePath = "rooms/forbidden_words/forbidden_words.json";
+		QSet<QString> forbidden_words;
+		QString file_path = "rooms/forbidden_words/forbidden_words.json";
 		QJsonObject jsonObject;
 
 		if (QJsonObject json_object; FileRepository::readJson(file_path, json_object)) {

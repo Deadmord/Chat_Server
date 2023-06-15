@@ -2,7 +2,7 @@
 
 namespace DBEntity {
 
-    DBUser::DBUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_, const bool is_deleted_)
+    DBUser::DBUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_, const bool& is_deleted_)
         : a_login(login_), a_password(password_), a_userpic(userpic_), a_rating(rating_), a_is_deleted(is_deleted_) {}
 
     QString DBUser::getLogin() const { return this->a_login; }

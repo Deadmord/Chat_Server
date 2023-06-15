@@ -9,7 +9,7 @@ namespace DBEntity {
     class DBUser {
 
     public:
-        explicit DBUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_, const bool is_deleted_ = false);
+        explicit DBUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_, const bool& is_deleted_ = false);
 
         QString getLogin() const;
         void setLogin(const QString& login_);
