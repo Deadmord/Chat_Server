@@ -26,6 +26,7 @@ namespace DBService {
 		static void setConnectionString(const QString& connection_string_);
 		static void databaseConnectionOpen();
 		static void databaseConnectionClose();
+
 	};
 }
 

@@ -19,7 +19,7 @@ namespace DBService {
 	public:
 		UserRepository(const QString& connection_string_);
 		~UserRepository();
-		static QFuture<DBEntity::DBUser*> getUserByLogin(const QString& login_);
+		static QFuture<QSharedPointer<DBEntity::DBUser>> getUserByLogin(const QString& login_);
 		static QFuture<bool> createUser(const DBEntity::DBUser& user_);
 		static QFuture<bool> updateUserPasswordUserpic(const QString& login_, const QString& new_password_, const QByteArray& new_userpic_);
 		static QFuture<QPair<bool, qint32>> updateUserRating(const QString& login_, const qint32& rating_);

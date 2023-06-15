@@ -12,6 +12,10 @@
 #include "MessageSaver_Service.h"
 #include "SwearHelper.h"
 
+#include"DTORoom.h"
+#include "DTOUser.h"
+#include "DBRoom.h"
+#include "DBUser.h"
 
 #if defined (Q_OS_WIN)
 #include "Core/async_console_win.h"
