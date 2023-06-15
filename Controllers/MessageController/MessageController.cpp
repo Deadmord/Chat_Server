@@ -1,4 +1,5 @@
-#include "MessageController.h"
+п»ї#include "MessageController.h"
+
 
 MessageController::MessageController(QObject* object_) : QObject(object_) {}
 
@@ -53,9 +54,9 @@ void MessageController::jsonReceived(UserConnection* sender_, const QJsonObject&
     PLOGI << QLatin1String("JSON received: ") + QJsonDocument(doc_).toJson(QJsonDocument::Compact);
     if (sender_->getUserName().isEmpty())
         return jsonFromLoggedOut(sender_, doc_);
-    //-------------- проверять принадлежность комнате ------------------
-    // -----------------если принадлежит то отправлять сообщение в конкретную комнату---------------
-    //вместо этого
+    //-------------- РїСЂРѕРІРµСЂСЏС‚СЊ РїСЂРёРЅР°РґР»РµР¶РЅРѕСЃС‚СЊ РєРѕРјРЅР°С‚Рµ ------------------
+    // -----------------РµСЃР»Рё РїСЂРёРЅР°РґР»РµР¶РёС‚ С‚Рѕ РѕС‚РїСЂР°РІР»СЏС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ РІ РєРѕРЅРєСЂРµС‚РЅСѓСЋ РєРѕРјРЅР°С‚Сѓ---------------
+    //РІРјРµСЃС‚Рѕ СЌС‚РѕРіРѕ
     jsonFromLoggedInCmd(sender_, doc_);
 }
 
@@ -114,10 +115,10 @@ void MessageController::jsonFromLoggedInCmd(UserConnection* sender_, const QJson
         const quint32 room_id = room_val.toInt();
         if (!room_id)
             return;
-        //проверить что комната с таким номером вообще существует
+        //РїСЂРѕРІРµСЂРёС‚СЊ С‡С‚Рѕ РєРѕРјРЅР°С‚Р° СЃ С‚Р°РєРёРј РЅРѕРјРµСЂРѕРј РІРѕРѕР±С‰Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
         sender_->setRoomId(room_id);
-        //Отправить юзера в нужную комнату
-        //уже в комнате по сигналу вхождения юзера сделать рассылку
+        //РћС‚РїСЂР°РІРёС‚СЊ СЋР·РµСЂР° РІ РЅСѓР¶РЅСѓСЋ РєРѕРјРЅР°С‚Сѓ
+        //СѓР¶Рµ РІ РєРѕРјРЅР°С‚Рµ РїРѕ СЃРёРіРЅР°Р»Сѓ РІС…РѕР¶РґРµРЅРёСЏ СЋР·РµСЂР° СЃРґРµР»Р°С‚СЊ СЂР°СЃСЃС‹Р»РєСѓ
     }
     if (type_val.toString().compare(QLatin1String("roomLeave"), Qt::CaseInsensitive) == 0)
     {
@@ -142,7 +143,7 @@ void MessageController::jsonFromLoggedInCmd(UserConnection* sender_, const QJson
 
 }
 
-//---!!!---это от сюда убрать, будет не нужно
+//---!!!---СЌС‚Рѕ РѕС‚ СЃСЋРґР° СѓР±СЂР°С‚СЊ, Р±СѓРґРµС‚ РЅРµ РЅСѓР¶РЅРѕ
 void MessageController::jsonFromLoggedInMsg(const UserConnection* sender_, const QJsonObject& doc_obj_)
 {
     Q_ASSERT(sender_);

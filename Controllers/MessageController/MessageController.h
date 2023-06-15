@@ -8,7 +8,7 @@
 #include "../../SrvRoom.h"
 #include "../../Entities/SrvModels/Message.h"
 #include "../../Entities/SrvModels/UserConnection.h"
-#include "../../MessageHistory_Service.h"
+#include "../../RoomStorage_Service.h"
 
 class MessageController : public QObject
 {
