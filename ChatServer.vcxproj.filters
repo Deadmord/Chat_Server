@@ -190,11 +190,11 @@
     <ClInclude Include="FileRepository.h">
       <Filter>Header Files\Classes\DBRepositories</Filter>
     </ClInclude>
-    <ClInclude Include="DTOUser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DTORoom.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Classes\DTOHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="DTOUser.h">
+      <Filter>Header Files\Classes\DTOHelpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -231,14 +231,14 @@
     <QtMoc Include="RatingCounter_Service.h">
       <Filter>Services\RatingCount_Service</Filter>
     </QtMoc>
-    <QtMoc Include="SwearHelper.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="SrvRoom.h">
       <Filter>Entities Files\Srv Models</Filter>
     </QtMoc>
     <QtMoc Include="RoomStorage_Service.h">
       <Filter>Services\MessageHistory_Service</Filter>
+    </QtMoc>
+    <QtMoc Include="SwearHelper.h">
+      <Filter>Header Files\Classes\Helpers</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
