@@ -39,7 +39,7 @@ private:
     
 
     explicit RoomStorage_Service(QObject* parent_ = nullptr);
-    static QSharedPointer<RoomStorage_Service> shp_instance;
+    static inline QSharedPointer<RoomStorage_Service> shp_instance = nullptr;
 
     static QSharedPointer<DBEntity::DBMessage> fromUserMessageToDBMessage(const QSharedPointer<User_Message> shp_user_message_);
     static QSharedPointer<User_Message> fromDBMessageToUserMessage(const QSharedPointer<DBEntity::DBMessage> shp_user_message_);
