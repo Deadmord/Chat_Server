@@ -52,10 +52,6 @@ void SrvRoom::initRoom() {
 
 }
 
-
-
-
-
 //void SrvRoom::loadMsgHistory(QDateTime from_, QDateTime to_)
 //{
     //QJsonDocument msgHistory;
