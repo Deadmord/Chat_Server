@@ -79,15 +79,15 @@ RoomStorage_Service::RoomStorage_Service(QObject* parent_) : QObject(parent_) {}
 
 void RoomStorage_Service::downloadRoomsFromDB()
 {
-    auto future = DBService::RoomRepository::getAllActiveRooms();
+    //auto future = DBService::RoomRepository::getAllActiveRooms();
 
-    future.waitForFinished();
+    //future.waitForFinished();
 
-    QList<QSharedPointer<DBEntity::DBRoom>> dbrooms = future.result();
+    //QList<QSharedPointer<DBEntity::DBRoom>> dbrooms = future.result();
 
-    auto result =  QtConcurrent::map(dbrooms, [dbrooms, this] (QSharedPointer<DBEntity::DBRoom> shp_room_) {
-            rooms_set.insert(shp_room_->getId(), QSharedPointer<SrvRoom>(new SrvRoom(shp_room_), &QObject::deleteLater));
-    });
+    //auto result =  QtConcurrent::map(dbrooms, [dbrooms, this] (QSharedPointer<DBEntity::DBRoom> shp_room_) {
+    //    rooms_set.insert(shp_room_->getId(), QSharedPointer<SrvRoom>(new SrvRoom(shp_room_), &QObject::deleteLater));
+    //});
 
 }
 
