@@ -109,57 +109,25 @@ void LocalStorage_Service::addMessages(User_Message* message_, quint32 room_id_)
     //{
 	   // 
     //}
-    ////new DBEntity::DBMessage(message_) - заглушка
+    ////new DBEntity::DBMessage(message_) - ��������
     //message_storage.value(room_id_).append(QSharedPointer<DBEntity::DBMessage>(new DBEntity::DBMessage(message_), &QObject::deleteLater));
 }
 
-void LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_) {
+QSet<QSharedPointer<DBEntity::DBMessage>> LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_) {
     QSet<QSharedPointer<DBEntity::DBMessage>> messages;
     QMutexLocker locker(&mutex);
-
-    const QDir directory("rooms/" + QString::number(room_));
-    QStringList all_files = directory.entryList(QDir::Files);
-    bool is_empty = true;
-    const QRegularExpression regex(R"((\d{8}_\d{4})\.json)"); // Regular expression to match file names like "20230102_1000.json"
-    auto future_read_files = QtConcurrent::map(all_files, [this, &regex, &messages, &is_empty, &from_, &to_](const QString& file_name_) {
-
-        if (const QRegularExpressionMatch match = regex.match(file_name_); match.hasMatch())
-        {
-            const QString date_string = match.captured(1);
-
-            if (const QDateTime file_date_time = QDateTime::fromString(date_string, "yyyyMMdd_hhmm"); file_date_time >= from_ && file_date_time <= to_)
-            {
-                messages.unite(DBEntity::DBMessage::readMessages(file_name_));
-                is_empty = false;
-            }
-        }
-          
-    });
- 
 	
-    if (current_messages.contains(room_))
+    if (message_storage.contains(room_))
     {
-        auto future_read_map= QtConcurrent::map(current_messages.value(room_), [this, &messages, &from_, &to_](const auto& message_) {
+    	foreach(const auto& message, message_storage.value(room_))
+	    {
+		    if(auto date = message->getDateTime(); date>= from_ && date <= to_)
+		    {
+                messages.insert(message);
+		    }
+	    }
+        
+    }
 
-            if (auto date = message_->getDateTime(); date >= from_ && date <= to_)
-            {
-                messages.insert(message_);
-            }
-        });
-        future_read_map.waitForFinished();
-        future_read_files.waitForFinished();
-        current_messages[room_].unite(messages);
-    }
-    else
-    {
-        future_read_files.waitForFinished();
-        current_messages.insert(room_, messages);
-    }
-     if (is_empty)
-    {
-        PLOGW << "No messages for this date was retrieved from database";
-    }
-    emit messageRetrieved(QList(messages.begin(), messages.end()));
-    
-
+    return messages;
 }

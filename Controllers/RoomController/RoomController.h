@@ -26,6 +26,7 @@ class RoomController : public QObject
 	Q_DISABLE_COPY(RoomController)
 
 public:
+
 	explicit RoomController(QObject* parent = nullptr);
 	~RoomController() override;
 
@@ -36,6 +37,7 @@ public slots:
 	void jsonReceived(QSharedPointer<SrvRoom> shp_room_, UserConnection* sender, const QJsonObject& doc);
 
 private:
+
 	void broadcastSend(QSharedPointer<SrvRoom> shp_room_, const QJsonObject& message, UserConnection* exclude);
 	void sendJson(UserConnection* destination, const QJsonObject& message);
 	

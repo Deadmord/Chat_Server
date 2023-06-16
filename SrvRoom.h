@@ -40,7 +40,10 @@ public:
 	//static void createNew(const QVector<DBEntity::DBRoom>& roomsList, DBEntity::DBRoom new_room_);
 	//static void deleteOne(const QVector<DBEntity::DBRoom>& roomsList, DBEntity::DBRoom deleted_room_);
 
-	void addMessage(User_Message* p_message_);
+
+	void addMessages(QSet<QSharedPointer<User_Message>> messages_);
+	void addMessage(QSharedPointer<User_Message> p_message_);
+	QSet<QSharedPointer<User_Message>> getMessages();
 	void setName(const QString& val);
 	void setDescription(const QString& val);
 	void setPrivate(bool val);
@@ -70,8 +73,7 @@ private:
 	QString password;
 	bool	is_deleted;
 
-	QString msg_history_path = "./msg_history.json"; //get automaticly
-	QList<User_Message*> messages;
+	QSet<QSharedPointer<User_Message>> messages;
 	QList<UserConnection*> connected_users;
 };
 

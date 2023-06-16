@@ -81,11 +81,14 @@
     <Filter Include="Source Files\Classes\Helpers">
       <UniqueIdentifier>{57824aa4-5aed-45af-8764-6a22bdca8177}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Classes\Helpers">
-      <UniqueIdentifier>{eb740dd8-40ab-4e23-8980-bd6a928d5ff5}</UniqueIdentifier>
+    <Filter Include="Services\MessageHistory_Service">
+      <UniqueIdentifier>{ac7de0c8-3f92-4c9c-b66b-7048bf5d0747}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Classes\DTOModels">
       <UniqueIdentifier>{37cf4b0b-197b-451c-aa3f-052b5eb581ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Helpers">
+      <UniqueIdentifier>{eb740dd8-40ab-4e23-8980-bd6a928d5ff5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Classes\DTOModels">
       <UniqueIdentifier>{a44ca6cb-0427-4369-96d0-745af5410e7d}</UniqueIdentifier>
@@ -231,9 +234,6 @@
     <QtMoc Include="RatingCounter_Service.h">
       <Filter>Services\RatingCount_Service</Filter>
     </QtMoc>
-    <QtMoc Include="SwearHelper.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="DTORoom.h">
       <Filter>Header Files\Classes\DTOModels</Filter>
     </QtMoc>
@@ -248,6 +248,9 @@
     </QtMoc>
     <QtMoc Include="RoomStorage_Service.h">
       <Filter>Services\RoomStorageService</Filter>
+    </QtMoc>
+    <QtMoc Include="SwearHelper.h">
+      <Filter>Header Files\Helpers</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
