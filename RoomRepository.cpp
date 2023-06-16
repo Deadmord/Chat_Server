@@ -117,9 +117,10 @@ namespace DBService {
 		return QtConcurrent::run([query_string_ = "SELECT r.*, t.name AS topic_name FROM room r JOIN topic t ON r.topic_id = t.id WHERE r.id=:id;", &room_id_]() {
 			try
 			{
-				a_dbConnection.databaseConnectionOpen();
-				if (a_dbConnection.getDatabase().isOpen()) {
-					QSqlQuery query;
+				auto connection = DBService::DBConnection_Service::getConnection();
+
+				if (connection->getDatabase()->isOpen()) {
+					QSqlQuery query(*connection->getDatabase());
 					query.prepare(query_string_);
 					query.bindValue(":id", room_id_);
 
@@ -131,19 +132,16 @@ namespace DBService {
 						bool is_private = query.value("is_private").toBool();
 						QString password = query.value("password").toString();
 						bool is_deleted = query.value("is_deleted").toBool();
-						a_dbConnection.databaseConnectionClose();
 						QSharedPointer<DBEntity::DBRoom> shp_room = QSharedPointer<DBEntity::DBRoom>::create(room_id_, name, description, topic_id, topic_name, is_private, password);
 						return shp_room;;
 					}
 					else {
 						PLOG_ERROR << "Cannot get rom by id: " << room_id_;
-						a_dbConnection.databaseConnectionClose();
 						return static_cast<QSharedPointer<DBEntity::DBRoom>>(nullptr);
 					}
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the data base.";
-					a_dbConnection.databaseConnectionClose();
 					return static_cast<QSharedPointer<DBEntity::DBRoom>>(nullptr);
 				}
 			}
