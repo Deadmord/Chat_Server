@@ -4,7 +4,7 @@
 #include <qobject.h>
 #include "SrvRoom.h"
 #include "DBRoom.h"
-#include <QSharedPointer>
+
 
 class RoomStorage_Service : public QObject
 {
