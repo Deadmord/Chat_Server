@@ -118,6 +118,9 @@
     <Filter Include="Services\RatingCounterService">
       <UniqueIdentifier>{e9cd5dfe-a830-4f6f-b7c1-e879e69c93a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Services\MediaSaverService">
+      <UniqueIdentifier>{e9be6c54-7a1d-4490-838c-9614184adb6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MessageSaver_Service.cpp">
