@@ -34,16 +34,17 @@ public:
 	
 public slots:
 	
-	void userEntry(QSharedPointer<SrvRoom> shp_room_, SrvUser* user);
+	void userEntry(const quint32& room_id, QSharedPointer<SrvUser> user_);
 	void jsonReceived(QSharedPointer<SrvRoom> shp_room_, SrvUser* sender, const QJsonObject& doc);
 
 private:
 
-	void broadcastSend(QSharedPointer<SrvRoom> shp_room_, const QJsonObject& message, SrvUser* exclude);
-	void sendJson(SrvUser* destination, const QJsonObject& message);
+	void broadcastSend(quint32& room_id_, const QJsonObject& message, const QSharedPointer<SrvUser>&);
+	void sendJson(const QSharedPointer<SrvUser>& destination, const QJsonObject& message);
 	
-private:
-	inline static QSharedPointer<RoomController> shp_instance{};
+
+	static inline QSharedPointer<RoomController> shp_instance = nullptr;
+
 };
 
 Q_DECLARE_METATYPE(RoomController)
