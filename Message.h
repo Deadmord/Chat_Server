@@ -66,7 +66,7 @@ private:
     QString _parent_id;
     //QUuid _parent_id;
     bool _deleted {false};
-    QHash<QUuid, bool> _likes;
+    QMap<QUuid, bool> _likes;
 
 };
 Q_DECLARE_METATYPE(User_Message)
