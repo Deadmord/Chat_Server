@@ -1,4 +1,4 @@
-#include "UserController.h"
+п»ї#include "UserController.h"
 
 UserController::UserController(QObject* object_) : QObject(object_) {}
 
@@ -11,22 +11,22 @@ QSharedPointer<UserController> UserController::instance()
         shp_instance = QSharedPointer<UserController>(new UserController());
     }
 
-    connect(shp_instance.get(), &UserController::broadcastSend, MessageController::instance().get(), &MessageController::broadcastSend); //это нужно перенести в MessageController
+    connect(shp_instance.get(), &UserController::broadcastSend, MessageController::instance().get(), &MessageController::broadcastSend); //СЌС‚Рѕ РЅСѓР¶РЅРѕ РїРµСЂРµРЅРµСЃС‚Рё РІ MessageController
 
     return shp_instance;
 }
 
 void UserController::addConnection(qintptr socket_descriptor_)
 {
-    UserConnection* user_connection = new UserConnection();
+    SrvUser* user_connection = new SrvUser();
     if (!user_connection->setSocketDescriptor(socket_descriptor_)) {
         user_connection->deleteLater();         //if the socket descriptor could not be set, delete the socket
         PLOGE << "Socket descriptor could not be set";
         return;
     }
-    connect(user_connection, &UserConnection::disconnectedFromClient, this, std::bind(&UserController::userDisconnected, this, user_connection));
-    connect(user_connection, &UserConnection::errorSignal, this, std::bind(&UserController::userError, this, user_connection));
-    connect(user_connection, &UserConnection::jsonReceived, MessageController::instance().get(), std::bind(&MessageController::jsonReceived, MessageController::instance().get(), user_connection, std::placeholders::_1));  //connect with MessageController (это нужно перенести в MessageController)
+    connect(user_connection, &SrvUser::disconnectedFromClient, this, std::bind(&UserController::userDisconnected, this, user_connection));
+    connect(user_connection, &SrvUser::errorSignal, this, std::bind(&UserController::userError, this, user_connection));
+    connect(user_connection, &SrvUser::jsonReceived, MessageController::instance().get(), std::bind(&MessageController::jsonReceived, MessageController::instance().get(), user_connection, std::placeholders::_1));  //connect with MessageController (СЌС‚Рѕ РЅСѓР¶РЅРѕ РїРµСЂРµРЅРµСЃС‚Рё РІ MessageController)
 
     connected_users.append(user_connection);
     PLOGI << "New client Connected! Now users: " + QString::number(connected_users.size());
@@ -34,12 +34,12 @@ void UserController::addConnection(qintptr socket_descriptor_)
 
 void UserController::disableUsers()
 {
-    for (UserConnection* user : connected_users) {
+    for (SrvUser* user : connected_users) {
         user->disconnectFromClient();
     }
 }
 
-void UserController::userDisconnected(UserConnection* sender_)
+void UserController::userDisconnected(SrvUser* sender_)
 {
     connected_users.removeAll(sender_);
     const QString userName = sender_->getUserName();
@@ -53,7 +53,7 @@ void UserController::userDisconnected(UserConnection* sender_)
     sender_->deleteLater();
 }
 
-void UserController::userError(const UserConnection* sender_)
+void UserController::userError(const SrvUser* sender_)
 {
     Q_UNUSED(sender_)
         PLOGE << QLatin1String("Error from ") + sender_->getUserName();
@@ -61,7 +61,7 @@ void UserController::userError(const UserConnection* sender_)
 
 
 
-QList<UserConnection*> UserController::getUsersList() const
+QList<SrvUser*> UserController::getUsersList() const
 {
     return connected_users;
 }

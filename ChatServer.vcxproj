@@ -109,12 +109,12 @@
     <ClCompile Include="RatingCounter_Service.cpp" />
     <ClCompile Include="SrvRoom.cpp" />
     <ClCompile Include="SwearHelper.cpp" />
-    <ClCompile Include="UserConnection.cpp" />
+    <ClCompile Include="SrvUser.cpp" />
     <ClCompile Include="UserController.cpp" />
     <ClCompile Include="UserRepository.cpp" />
     <QtMoc Include="MediaSaver_Service.h" />
     <QtMoc Include="UserController.h" />
-    <QtMoc Include="UserConnection.h" />
+    <QtMoc Include="SrvUser.h" />
     <QtMoc Include="Message.h" />
     <QtMoc Include="DBMessage.h" />
     <QtMoc Include="AsyncConsoleWin.h" />

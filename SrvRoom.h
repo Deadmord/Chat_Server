@@ -8,7 +8,7 @@
 
 
 #include "Message.h"
-#include "UserConnection.h"
+#include "SrvUser.h"
 
 namespace DBEntity {
 
@@ -34,7 +34,7 @@ public:
 	[[nodiscard]] QString getPassword() const;		//TODO!!! It seems like, should be changed on "bool checkPassword" !!!
 	[[nodiscard]] bool isDeleted() const;
 	[[nodiscard]] bool isPrivate() const;
-	[[nodiscard]] QList<UserConnection*> getConnectedUsers() const;
+	[[nodiscard]] QList<SrvUser*> getConnectedUsers() const;
 	[[nodiscard]] QList<User_Message*> getMessages(const QDateTime& from_, const QDateTime& to_) const;
 
 
@@ -64,7 +64,7 @@ signals:
 public slots:
 
 	void initRoom();
-	void connectUser(UserConnection* user);
+	void connectUser(SrvUser* user);
 
 private:
 	quint32 id;
@@ -77,7 +77,7 @@ private:
 	bool	is_deleted;
 
 	QSet<QSharedPointer<User_Message>> messages;
-	QList<UserConnection*> connected_users;
+	QList<SrvUser*> connected_users;
 };
 
 #endif //SRVROOM_H

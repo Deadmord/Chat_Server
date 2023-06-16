@@ -16,7 +16,7 @@
 #include "DBRoom.h"
 #include "Enums.h"
 #include "Message.h"
-#include "UserConnection.h"
+#include "SrvUser.h"
 #include "SrvRoom.h" 
 
 
@@ -33,13 +33,13 @@ public:
 	
 public slots:
 	
-	void userEntry(QSharedPointer<SrvRoom> shp_room_, UserConnection* user);
-	void jsonReceived(QSharedPointer<SrvRoom> shp_room_, UserConnection* sender, const QJsonObject& doc);
+	void userEntry(QSharedPointer<SrvRoom> shp_room_, SrvUser* user);
+	void jsonReceived(QSharedPointer<SrvRoom> shp_room_, SrvUser* sender, const QJsonObject& doc);
 
 private:
 
-	void broadcastSend(QSharedPointer<SrvRoom> shp_room_, const QJsonObject& message, UserConnection* exclude);
-	void sendJson(UserConnection* destination, const QJsonObject& message);
+	void broadcastSend(QSharedPointer<SrvRoom> shp_room_, const QJsonObject& message, SrvUser* exclude);
+	void sendJson(SrvUser* destination, const QJsonObject& message);
 	
 
 

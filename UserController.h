@@ -20,20 +20,20 @@ private:
 
 
 signals:
-	void jsonReceived(UserConnection* sender_, const QJsonObject& doc_);
-	void broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> room_, const UserConnection* exclude_);
+	void jsonReceived(SrvUser* sender_, const QJsonObject& doc_);
+	void broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> room_, const SrvUser* exclude_);
 
 public slots:
 	void addConnection(qintptr socket_descriptor_);
 	void disableUsers();
-	QList<UserConnection*> getUsersList() const;                          //TODO remove from rerver with connected_users prop.
+	QList<SrvUser*> getUsersList() const;                          //TODO remove from rerver with connected_users prop.
 
 private slots:
-	void userDisconnected(UserConnection* sender_);
-	void userError(const UserConnection* sender_);
+	void userDisconnected(SrvUser* sender_);
+	void userError(const SrvUser* sender_);
 
 private:
 	inline static QSharedPointer<UserController> shp_instance{};
-	QList<UserConnection*> connected_users;
+	QList<SrvUser*> connected_users;
 };
 

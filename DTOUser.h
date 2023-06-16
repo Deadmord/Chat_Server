@@ -5,7 +5,7 @@
 #include <QSharedPointer>
 #include <QTcpSocket>
 #include "DBUser.h"
-#include "UserConnection.h"
+#include "SrvUser.h"
 namespace DTOModel {
 
 	class DTOUser : public QObject {
@@ -30,11 +30,11 @@ namespace DTOModel {
 		//static QSharedPointer<DTOModel::DTOUser> createDTOUser(const DBEntity::DBUser& db_user_);
 		//static QSharedPointer<DBEntity::DBUser> createDBUser(const DTOModel::DTOUser& dto_user_);
 
-		static QSharedPointer<UserConnection> createUserConnectionFromDB(const DBEntity::DBUser& db_user_);
-		static QSharedPointer<DBEntity::DBUser> createDBUser(const UserConnection& user_connection_);
+		static QSharedPointer<SrvUser> createSrvUserFromDB(const DBEntity::DBUser& db_user_);
+		static QSharedPointer<DBEntity::DBUser> createDBUser(const SrvUser& user_connection_);
 
-		static QSharedPointer<DTOModel::DTOUser> createDTOUser(const UserConnection& user_connection_);
-		static QSharedPointer<UserConnection> createUserConnectionFromDTO(const DTOModel::DTOUser& dto_user_);
+		static QSharedPointer<DTOModel::DTOUser> createDTOUser(const SrvUser& user_connection_);
+		static QSharedPointer<SrvUser> createSrvUserFromDTO(const DTOModel::DTOUser& dto_user_);
 
 	private:
 

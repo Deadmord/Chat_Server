@@ -101,7 +101,7 @@ void RoomStorage_Service::addMessageToRoom(qint32 room_id_, User_Message* messag
 
 RoomStorage_Service::RoomStorage_Service(QObject* parent_) : QObject(parent_) {};
 
-void RoomStorage_Service::addConnecntedUserToRoom(qint32 room_id_, UserConnection* user_)
+void RoomStorage_Service::addConnecntedUserToRoom(qint32 room_id_, SrvUser* user_)
 {
 }
 

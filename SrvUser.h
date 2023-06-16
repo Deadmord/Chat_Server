@@ -12,14 +12,14 @@
 #include "Enums.h"
 #include "DBUser.h"
 
-class UserConnection : public QObject
+class SrvUser : public QObject
 {
     Q_OBJECT
-    Q_DISABLE_COPY(UserConnection)
+    Q_DISABLE_COPY(SrvUser)
 
 public:
-    explicit UserConnection(QObject* parent = nullptr);
-    //UserConnection(const QTcpSocket)
+    explicit SrvUser(QObject* parent = nullptr);
+    //SrvUser(const QTcpSocket)
     virtual bool setSocketDescriptor(qintptr _socket_descriptor);
 
     QString getId() const;
