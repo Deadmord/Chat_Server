@@ -13,11 +13,11 @@
 #include <QJsonParseError>
 #include <QFile>
 
-#include "../../DBRoom.h"
-#include "../../Entities/Enums/Enums.h"
-#include "../../Entities/SrvModels/Message.h"
-#include "../../Entities/SrvModels/UserConnection.h"
-#include "../../SrvRoom.h" 
+#include "DBRoom.h"
+#include "Enums.h"
+#include "Message.h"
+#include "UserConnection.h"
+#include "SrvRoom.h" 
 
 
 class RoomController : public QObject

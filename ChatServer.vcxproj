@@ -94,20 +94,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Controllers\MessageController\MessageController.cpp" />
+    <ClCompile Include="AsyncConsoleWin.cpp" />
     <ClCompile Include="DTORoom.cpp" />
     <ClCompile Include="DTOUser.cpp" />
-    <ClCompile Include="Entities\SrvModels\UserConnection.cpp" />
     <ClCompile Include="FileRepository.cpp" />
     <ClCompile Include="LocalStorage_Service.cpp" />
+    <ClCompile Include="Message.cpp" />
+    <ClCompile Include="MessageController.cpp" />
+    <ClCompile Include="DBMessage.cpp" />
+    <ClCompile Include="RoomController.cpp" />
     <ClCompile Include="RoomStorage_Service.cpp" />
     <ClCompile Include="MessageSaver_Service.cpp" />
     <ClCompile Include="RatingCounter_Service.cpp" />
     <ClCompile Include="SrvRoom.cpp" />
     <ClCompile Include="SwearHelper.cpp" />
+    <ClCompile Include="UserConnection.cpp" />
     <ClCompile Include="UserRepository.cpp" />
-    <QtMoc Include="Controllers\MessageController\MessageController.h" />
+    <QtMoc Include="UserConnection.h" />
+    <QtMoc Include="Message.h" />
+    <QtMoc Include="DBMessage.h" />
+    <QtMoc Include="AsyncConsoleWin.h" />
+    <ClInclude Include="entities.h" />
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="FileRepository.h" />
+    <QtMoc Include="RoomController.h" />
+    <QtMoc Include="MessageController.h" />
     <QtMoc Include="RoomStorage_Service.h" />
     <QtMoc Include="SrvRoom.h" />
     <QtMoc Include="RatingCounter_Service.h" />
@@ -116,12 +127,8 @@
     <QtMoc Include="LocalStorage_Service.h" />
     <QtMoc Include="UserRepository.h" />
     <QtMoc Include="RoomRepository.h" />
-    <QtMoc Include="Entities\SrvModels\UserConnection.h" />
     <QtMoc Include="DTORoom.h" />
     <QtMoc Include="DTOUser.h" />
-    <ClInclude Include="Entities\Enums\Enums.h" />
-    <QtMoc Include="Controllers\RoomController\RoomController.h" />
-    <QtMoc Include="Core\async_console_win.h" />
     <ClInclude Include="DBService.h" />
     <ClInclude Include="DBUser.h">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
@@ -141,8 +148,6 @@
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClInclude>
-    <ClCompile Include="Controllers\RoomController\RoomController.cpp" />
-    <ClCompile Include="Core\async_console_win.cpp" />
     <ClCompile Include="DBRoom.cpp" />
     <ClCompile Include="DBService.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
@@ -152,16 +157,11 @@
     </ClCompile>
     <ClCompile Include="DBTopic.cpp" />
     <ClCompile Include="DBUser.cpp" />
-    <ClCompile Include="DB\JSONS\messages.cpp" />
-    <ClCompile Include="Entities\SrvModels\Message.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RoomRepository.cpp" />
     <ClCompile Include="server.cpp" />
-    <ClInclude Include="Entities\entities.h" />
-    <QtMoc Include="Entities\SrvModels\Message.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="DB\JSONS\messages.h" />
     <QtMoc Include="server.h" />
   </ItemGroup>
   <ItemGroup>

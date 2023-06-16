@@ -9,8 +9,8 @@
 
 #include <plog/Log.h>
 
-#include "../Enums/Enums.h"
-#include "../../DBUser.h"
+#include "Enums.h"
+#include "DBUser.h"
 
 class UserConnection : public QObject
 {

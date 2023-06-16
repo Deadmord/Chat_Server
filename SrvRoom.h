@@ -7,8 +7,8 @@
 #include <QSharedPointer>
 
 
-#include "Entities/SrvModels/Message.h"
-#include "Entities/SrvModels/UserConnection.h"
+#include "Message.h"
+#include "UserConnection.h"
 
 namespace DBEntity {
 

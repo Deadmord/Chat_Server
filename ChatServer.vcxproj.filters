@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>qml;cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>qrc;rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -21,30 +13,6 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
-    <Filter Include="Entities Files">
-      <UniqueIdentifier>{9abff8b5-facc-4714-ae82-c2ecddb745c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Classes">
-      <UniqueIdentifier>{bffde79e-6b5e-4f59-84c0-3d2e089e2aa4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Classes">
-      <UniqueIdentifier>{5ccea9e3-6ad2-4942-aa6c-0a0d82c847f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Classes\DBService">
-      <UniqueIdentifier>{89cd9b24-3628-4b8a-a5c2-f738f47778a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Classes\DBService">
-      <UniqueIdentifier>{3e8a1ee4-7562-43ed-af56-472227306d04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Classes\DBModels">
-      <UniqueIdentifier>{2e162919-ee85-4653-a49c-2f70e9c8399e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Classes\DBModels">
-      <UniqueIdentifier>{65349e25-2c3b-4575-8e86-8f972c918d3c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entities Files\Srv Models">
-      <UniqueIdentifier>{4ff468a1-183e-440e-9dc3-6b125a9d4581}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Controllers">
       <UniqueIdentifier>{8af448a0-2054-4be3-a2a6-357c6506ee2d}</UniqueIdentifier>
     </Filter>
@@ -53,15 +21,6 @@
     </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{ba0d413b-4939-47d8-86cb-a47b8e6072dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entities Files\Enums">
-      <UniqueIdentifier>{fe703e65-7622-436c-ba72-d99a4cbceb82}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Classes\DBRepositories">
-      <UniqueIdentifier>{f2f82fee-49c1-4032-9008-ff853ee18ab7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Classes\DBRepositories">
-      <UniqueIdentifier>{dcd0cfdb-f8f4-4c92-837d-8e13ae9fe31c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Services">
       <UniqueIdentifier>{c531b894-52d6-40a9-8988-2dc0d72f550b}</UniqueIdentifier>
@@ -72,26 +31,8 @@
     <Filter Include="Services\LocalStorageService">
       <UniqueIdentifier>{29e78155-5c44-4262-a465-c77595a16d4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Services\RatingCount_Service">
-      <UniqueIdentifier>{e9cd5dfe-a830-4f6f-b7c1-e879e69c93a9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Services\DBService">
       <UniqueIdentifier>{3e8a1ee4-7562-43ed-af56-472227306d04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Classes\Helpers">
-      <UniqueIdentifier>{57824aa4-5aed-45af-8764-6a22bdca8177}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Services\MessageHistory_Service">
-      <UniqueIdentifier>{ac7de0c8-3f92-4c9c-b66b-7048bf5d0747}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Classes\DTOModels">
-      <UniqueIdentifier>{37cf4b0b-197b-451c-aa3f-052b5eb581ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Helpers">
-      <UniqueIdentifier>{eb740dd8-40ab-4e23-8980-bd6a928d5ff5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Classes\DTOModels">
-      <UniqueIdentifier>{a44ca6cb-0427-4369-96d0-745af5410e7d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Controllers\Message Controller">
       <UniqueIdentifier>{5a4580db-a3e6-46e9-a6b0-d32459067ec4}</UniqueIdentifier>
@@ -99,55 +40,88 @@
     <Filter Include="Services\RoomStorageService">
       <UniqueIdentifier>{cd9478d5-be03-4143-b9e9-21dc4dc588a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{9abff8b5-facc-4714-ae82-c2ecddb745c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enums">
+      <UniqueIdentifier>{fe703e65-7622-436c-ba72-d99a4cbceb82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models">
+      <UniqueIdentifier>{fd7db658-db2d-4160-9229-5bbc45d17f1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\Srv Models">
+      <UniqueIdentifier>{4ff468a1-183e-440e-9dc3-6b125a9d4581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\Srv Models\SrvRoom">
+      <UniqueIdentifier>{f2bc99d9-7ca3-4f5f-a566-34d456360178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\Srv Models\SrvUser">
+      <UniqueIdentifier>{f49b3560-8847-45f0-8781-79101c3d0e6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\Srv Models\SrvMessage">
+      <UniqueIdentifier>{907628e9-b793-4316-81a4-974b49da6cd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controllers\UserController">
+      <UniqueIdentifier>{d83d5ba2-996e-4b23-b90d-a528c1d04cc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controllers\MediaController">
+      <UniqueIdentifier>{8e09e75d-1816-4301-8a7b-6a11efb64e14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\DBModels">
+      <UniqueIdentifier>{2e162919-ee85-4653-a49c-2f70e9c8399e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\DBModels\DBRoom">
+      <UniqueIdentifier>{3967d99f-7fb0-420b-bf6f-a76fe6c1ca3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\DBModels\DBTopic">
+      <UniqueIdentifier>{d64085f8-ddb8-47d1-b87f-be7897edc2dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\DBModels\DBUser">
+      <UniqueIdentifier>{4ac3d244-a54c-468e-8491-2871303a9d88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\DBModels\DBMessage">
+      <UniqueIdentifier>{1d62cf13-27f9-421f-bcc6-0969417a2023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{99b4081a-04f5-43fd-ac8b-675c1ac1bed2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers\DBRepositories">
+      <UniqueIdentifier>{f2f82fee-49c1-4032-9008-ff853ee18ab7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers\DBRepositories\FileRepository">
+      <UniqueIdentifier>{ebc1ee6c-5564-4ceb-894b-9dd394607d13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers\DBRepositories\RoomRepository">
+      <UniqueIdentifier>{abb5f363-7c34-44ae-afa6-213476d09843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers\DBRepositories\UserRepository">
+      <UniqueIdentifier>{4daf2729-f2a8-437c-9c89-b34db63cdc66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\DTOModels">
+      <UniqueIdentifier>{a44ca6cb-0427-4369-96d0-745af5410e7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\DTOModels\DTORoom">
+      <UniqueIdentifier>{674a18a3-67e4-4a60-901a-71408ba27ca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\DTOModels\DTOUser">
+      <UniqueIdentifier>{687d7734-0388-4a10-93cb-06c933d48725}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Models\DTOModels\DTOMessage">
+      <UniqueIdentifier>{398cbb5a-dd9a-4dcf-86e0-2da9bf7868d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers\SwearHelper">
+      <UniqueIdentifier>{09ae57c9-f5f8-47d6-ad53-62f7a33661b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Console">
+      <UniqueIdentifier>{1fbf3ce7-1f1e-424b-a863-f7d9e1fc659c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Services\RatingCounterService">
+      <UniqueIdentifier>{e9cd5dfe-a830-4f6f-b7c1-e879e69c93a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="server.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DBRoom.cpp">
-      <Filter>Source Files\Classes\DBModels</Filter>
-    </ClCompile>
-    <ClCompile Include="DBTopic.cpp">
-      <Filter>Source Files\Classes\DBModels</Filter>
-    </ClCompile>
-    <ClCompile Include="DBUser.cpp">
-      <Filter>Source Files\Classes\DBModels</Filter>
-    </ClCompile>
     <ClCompile Include="DB\JSONS\messages.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DBService.cpp">
-      <Filter>Source Files\Classes\DBService</Filter>
-    </ClCompile>
-    <ClCompile Include="DB\JSONS\messages.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Entities\SrvModels\Message.cpp">
-      <Filter>Entities Files\Srv Models</Filter>
-    </ClCompile>
-    <ClCompile Include="Controllers\RoomController\RoomController.cpp">
-      <Filter>Controllers\Room Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\async_console_win.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Entities\SrvModels\UserConnection.cpp">
-      <Filter>Entities Files\Srv Models</Filter>
-    </ClCompile>
-    <ClCompile Include="RoomRepository.cpp">
-      <Filter>Source Files\Classes\DBRepositories</Filter>
-    </ClCompile>
-    <ClCompile Include="UserRepository.cpp">
-      <Filter>Source Files\Classes\DBRepositories</Filter>
-    </ClCompile>
-    <ClCompile Include="DTORoom.cpp">
-      <Filter>Source Files\Classes\DTOModels</Filter>
-    </ClCompile>
-    <ClCompile Include="DTOUser.cpp">
-      <Filter>Source Files\Classes\DTOModels</Filter>
     </ClCompile>
     <ClCompile Include="MessageSaver_Service.cpp">
       <Filter>Services\MessageSaverService</Filter>
@@ -156,75 +130,96 @@
       <Filter>Services\LocalStorageService</Filter>
     </ClCompile>
     <ClCompile Include="RatingCounter_Service.cpp">
-      <Filter>Services\RatingCount_Service</Filter>
+      <Filter>Services\RatingCounterService</Filter>
     </ClCompile>
     <ClCompile Include="DB\JSONS\messages.cpp">
       <Filter>Source Files\Classes\DBModels</Filter>
     </ClCompile>
-    <ClCompile Include="FileRepository.cpp">
-      <Filter>Source Files\Classes\DBRepositories</Filter>
-    </ClCompile>
-    <ClCompile Include="SwearHelper.cpp">
-      <Filter>Source Files\Classes\Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="SrvRoom.cpp">
-      <Filter>Entities Files\Srv Models</Filter>
-    </ClCompile>
-    <ClCompile Include="Controllers\MessageController\MessageController.cpp">
-      <Filter>Controllers\Message Controller</Filter>
-    </ClCompile>
     <ClCompile Include="RoomStorage_Service.cpp">
       <Filter>Services\RoomStorageService</Filter>
     </ClCompile>
+    <ClCompile Include="SrvRoom.cpp">
+      <Filter>Entities\Models\Srv Models\SrvRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="DBRoom.cpp">
+      <Filter>Entities\Models\DBModels\DBRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="DBTopic.cpp">
+      <Filter>Entities\Models\DBModels\DBTopic</Filter>
+    </ClCompile>
+    <ClCompile Include="DBUser.cpp">
+      <Filter>Entities\Models\DBModels\DBUser</Filter>
+    </ClCompile>
+    <ClCompile Include="DBService.cpp">
+      <Filter>Services\DBService</Filter>
+    </ClCompile>
+    <ClCompile Include="FileRepository.cpp">
+      <Filter>Helpers\DBRepositories\FileRepository</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomRepository.cpp">
+      <Filter>Helpers\DBRepositories\RoomRepository</Filter>
+    </ClCompile>
+    <ClCompile Include="UserRepository.cpp">
+      <Filter>Helpers\DBRepositories\UserRepository</Filter>
+    </ClCompile>
+    <ClCompile Include="DTORoom.cpp">
+      <Filter>Entities\Models\DTOModels\DTORoom</Filter>
+    </ClCompile>
+    <ClCompile Include="DTOUser.cpp">
+      <Filter>Entities\Models\DTOModels\DTOUser</Filter>
+    </ClCompile>
+    <ClCompile Include="SwearHelper.cpp">
+      <Filter>Helpers\SwearHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="server.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageController.cpp">
+      <Filter>Controllers\Message Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomController.cpp">
+      <Filter>Controllers\Room Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="AsyncConsoleWin.cpp">
+      <Filter>Core\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="DBMessage.cpp">
+      <Filter>Entities\Models\DBModels\DBMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="Message.cpp">
+      <Filter>Entities\Models\Srv Models\SrvMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="UserConnection.cpp">
+      <Filter>Entities\Models\Srv Models\SrvUser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DBUser.h">
-      <Filter>Header Files\Classes\DBModels</Filter>
-    </ClInclude>
     <ClInclude Include="DBRoom.h">
-      <Filter>Header Files\Classes\DBModels</Filter>
+      <Filter>Entities\Models\DBModels\DBRoom</Filter>
     </ClInclude>
     <ClInclude Include="DBTopic.h">
-      <Filter>Header Files\Classes\DBModels</Filter>
+      <Filter>Entities\Models\DBModels\DBTopic</Filter>
+    </ClInclude>
+    <ClInclude Include="DBUser.h">
+      <Filter>Entities\Models\DBModels\DBUser</Filter>
     </ClInclude>
     <ClInclude Include="DBService.h">
-      <Filter>Header Files\Classes\DBService</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities\entities.h">
-      <Filter>Entities Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Entities\Enums\Enums.h">
-      <Filter>Entities Files\Enums</Filter>
+      <Filter>Services\DBService</Filter>
     </ClInclude>
     <ClInclude Include="FileRepository.h">
-      <Filter>Header Files\Classes\DBRepositories</Filter>
+      <Filter>Helpers\DBRepositories\FileRepository</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Entities\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="entities.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="server.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="DB\JSONS\messages.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Controllers\RoomController\RoomController.h">
-      <Filter>Controllers\Room Controller</Filter>
-    </QtMoc>
-    <QtMoc Include="Entities\SrvModels\Message.h">
-      <Filter>Entities Files\Srv Models</Filter>
-    </QtMoc>
-    <QtMoc Include="Core\async_console_win.h">
-      <Filter>Core</Filter>
-    </QtMoc>
-    <QtMoc Include="Entities\SrvModels\UserConnection.h">
-      <Filter>Entities Files\Srv Models</Filter>
-    </QtMoc>
-    <QtMoc Include="RoomRepository.h">
-      <Filter>Header Files\Classes\DBRepositories</Filter>
-    </QtMoc>
-    <QtMoc Include="UserRepository.h">
-      <Filter>Header Files\Classes\DBRepositories</Filter>
-    </QtMoc>
     <QtMoc Include="MessageSaver_Service.h">
       <Filter>Services\MessageSaverService</Filter>
     </QtMoc>
@@ -232,25 +227,49 @@
       <Filter>Services\LocalStorageService</Filter>
     </QtMoc>
     <QtMoc Include="RatingCounter_Service.h">
-      <Filter>Services\RatingCount_Service</Filter>
-    </QtMoc>
-    <QtMoc Include="DTORoom.h">
-      <Filter>Header Files\Classes\DTOModels</Filter>
-    </QtMoc>
-    <QtMoc Include="DTOUser.h">
-      <Filter>Header Files\Classes\DTOModels</Filter>
-    </QtMoc>
-    <QtMoc Include="Controllers\MessageController\MessageController.h">
-      <Filter>Controllers\Message Controller</Filter>
-    </QtMoc>
-    <QtMoc Include="SrvRoom.h">
-      <Filter>Entities Files\Srv Models</Filter>
+      <Filter>Services\RatingCounterService</Filter>
     </QtMoc>
     <QtMoc Include="RoomStorage_Service.h">
       <Filter>Services\RoomStorageService</Filter>
     </QtMoc>
+    <QtMoc Include="SrvRoom.h">
+      <Filter>Entities\Models\Srv Models\SrvRoom</Filter>
+    </QtMoc>
+    <QtMoc Include="RoomRepository.h">
+      <Filter>Helpers\DBRepositories\RoomRepository</Filter>
+    </QtMoc>
+    <QtMoc Include="UserRepository.h">
+      <Filter>Helpers\DBRepositories\UserRepository</Filter>
+    </QtMoc>
+    <QtMoc Include="DTORoom.h">
+      <Filter>Entities\Models\DTOModels\DTORoom</Filter>
+    </QtMoc>
+    <QtMoc Include="DTOUser.h">
+      <Filter>Entities\Models\DTOModels\DTOUser</Filter>
+    </QtMoc>
     <QtMoc Include="SwearHelper.h">
-      <Filter>Header Files\Helpers</Filter>
+      <Filter>Helpers\SwearHelper</Filter>
+    </QtMoc>
+    <QtMoc Include="server.h">
+      <Filter>Core</Filter>
+    </QtMoc>
+    <QtMoc Include="MessageController.h">
+      <Filter>Controllers\Message Controller</Filter>
+    </QtMoc>
+    <QtMoc Include="RoomController.h">
+      <Filter>Controllers\Room Controller</Filter>
+    </QtMoc>
+    <QtMoc Include="AsyncConsoleWin.h">
+      <Filter>Core\Console</Filter>
+    </QtMoc>
+    <QtMoc Include="DBMessage.h">
+      <Filter>Entities\Models\DBModels\DBMessage</Filter>
+    </QtMoc>
+    <QtMoc Include="Message.h">
+      <Filter>Entities\Models\Srv Models\SrvMessage</Filter>
+    </QtMoc>
+    <QtMoc Include="UserConnection.h">
+      <Filter>Entities\Models\Srv Models\SrvUser</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

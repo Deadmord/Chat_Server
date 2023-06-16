@@ -10,8 +10,8 @@
 #include <plog/Log.h>
 #include <QTimer>
 
-#include "DB/JSONS/messages.h"
-#include "Entities/SrvModels/Message.h"
+#include "DBMessage.h"
+#include "Message.h"
 
 class LocalStorage_Service:
     public QObject

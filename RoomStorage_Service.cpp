@@ -103,7 +103,7 @@ void RoomStorage_Service::addMessageToRoom(qint32 room_id_, User_Message* messag
     else PLOGE << "Room doesn't exist id: " + room_id_;
 }
 
-inline RoomStorage_Service::RoomStorage_Service(QObject* parent_) : QObject(parent_) {};
+RoomStorage_Service::RoomStorage_Service(QObject* parent_) : QObject(parent_) {};
 
 void RoomStorage_Service::addConnecntedUserToRoom(qint32 room_id_, UserConnection* user_)
 {
