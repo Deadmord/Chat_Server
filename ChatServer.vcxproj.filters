@@ -120,9 +120,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DB\JSONS\messages.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MessageSaver_Service.cpp">
       <Filter>Services\MessageSaverService</Filter>
     </ClCompile>
@@ -194,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="UserConnection.cpp">
       <Filter>Entities\Models\Srv Models\SrvUser</Filter>
+    </ClCompile>
+    <ClCompile Include="UserController.cpp">
+      <Filter>Controllers\UserController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +270,9 @@
     </QtMoc>
     <QtMoc Include="UserConnection.h">
       <Filter>Entities\Models\Srv Models\SrvUser</Filter>
+    </QtMoc>
+    <QtMoc Include="UserController.h">
+      <Filter>Controllers\UserController</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

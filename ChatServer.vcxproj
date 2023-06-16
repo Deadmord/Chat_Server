@@ -109,7 +109,9 @@
     <ClCompile Include="SrvRoom.cpp" />
     <ClCompile Include="SwearHelper.cpp" />
     <ClCompile Include="UserConnection.cpp" />
+    <ClCompile Include="UserController.cpp" />
     <ClCompile Include="UserRepository.cpp" />
+    <QtMoc Include="UserController.h" />
     <QtMoc Include="UserConnection.h" />
     <QtMoc Include="Message.h" />
     <QtMoc Include="DBMessage.h" />

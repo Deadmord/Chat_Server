@@ -15,6 +15,7 @@
 
 #include "entities.h"
 #include "Enums.h"
+#include "UserController.h"
 #include "RoomController.h"
 #include "MessageController.h"
 #include "RoomStorage_Service.h"
@@ -31,21 +32,16 @@ public:
     ~Server();
 
 signals:
-    void jsonReceived(UserConnection* sender_, const QJsonObject& doc_);
-    void broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> room_, const UserConnection* exclude_);
+    void serverStarted();
+    void serverStopped();
+    void incomingConnection(qintptr socket_descriptor_);
 
 public slots:
     void startServer();
     void stopServer();
-    void incomingConnection(qintptr socket_descriptor_) override;
-    QList<UserConnection*> getUsersList() const;                          //TODO remove from rerver with connected_users prop.
-
-private slots:
-    void userDisconnected(UserConnection* sender_);
-    void userError(const UserConnection* sender_);
+    //void incomingConnection(qintptr socket_descriptor_) override;
 
 private: 
-    void disableUsers();
     void loadConfig(const QString& path_);
     void openConnection();
 
@@ -55,7 +51,6 @@ private:
     quint16 flood_limit;
     QString black_list_path;
 
-    QList<UserConnection*> connected_users;
     //переделать в QVector <User_Message*> messages и перенести в Room
     QList <User_Message> messages;
 
