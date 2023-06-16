@@ -13,7 +13,7 @@ User_Message::User_Message(const Message& msg_sruct_, QObject* parent_)
 }
 
 
-User_Message::User_Message(const QString& id_, const quint32& room_id_, const QDateTime& date_time_, const QString& nickname_, const QString& text_, const QString& media_id_, const QString& parent_id_, const bool& deleted_, const QHash<QUuid, bool>& likes_, QObject* parent_)
+User_Message::User_Message(const QString& id_, const quint32& room_id_, const QDateTime& date_time_, const QString& nickname_, const QString& text_, const QString& media_id_, const QString& parent_id_, const bool& deleted_, const QMap<QUuid, bool>& likes_, QObject* parent_)
 	: _id(id_), _room_id(room_id_), _date_time(date_time_), _nickname(nickname_), _text(text_), _media_id(media_id_), _parent_id(parent_id_), _deleted(deleted_), _likes(likes_), QObject(parent_)
 {}
 
@@ -73,7 +73,7 @@ const QString& User_Message::getMedia() const {
 	return _media_id;
 }
 
-const QHash<QUuid, bool>& User_Message::getLikes() const {
+const QMap<QUuid, bool>& User_Message::getLikes() const {
 	return _likes;
 }
 
@@ -89,7 +89,7 @@ void User_Message::setDeleted(bool flag) {
 	_deleted = flag;
 }
 
-void User_Message::setLikes(const QHash<QUuid, bool>& likes) {
+void User_Message::setLikes(const QMap<QUuid, bool>& likes) {
 	_likes = likes;
 }
 

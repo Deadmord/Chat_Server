@@ -14,7 +14,7 @@ struct Message
     QString     media_id{};
     QString     parent_id{};
     bool        deleted{};
-    QHash<QUuid, bool> likes{};
+    QMap<QUuid, bool> likes{};
 
     //
     //    void generateId() {

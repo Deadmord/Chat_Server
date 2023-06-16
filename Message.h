@@ -17,7 +17,7 @@ class User_Message : public QObject
     Q_PROPERTY(QString nickname READ getNickname)
     Q_PROPERTY(QString text READ getText)
     Q_PROPERTY(QString media READ getMedia)
-    Q_PROPERTY(QHash<QUuid, bool> likes READ getLikes WRITE setLikes)
+    Q_PROPERTY(QMap<QUuid, bool> likes READ getLikes WRITE setLikes)
     Q_PROPERTY(QString parent_id READ getParentId)
     Q_PROPERTY(bool deleted READ isDeleted WRITE setDeleted)
 
@@ -25,7 +25,7 @@ class User_Message : public QObject
 public:
     explicit User_Message(QObject* parent_ = nullptr);
     User_Message(const Message& msg_sruct_, QObject* parent_ = nullptr);
-    User_Message(const QString& id_, const quint32& room_id_, const QDateTime& date_time_, const QString& nickname_, const QString& text_, const QString& media_id_ = nullptr, const QString& parent_id_ = nullptr, const bool& deleted_ = false, const QHash<QUuid, bool>& likes_ = {}, QObject* parent_ = nullptr);
+    User_Message(const QString& id_, const quint32& room_id_, const QDateTime& date_time_, const QString& nickname_, const QString& text_, const QString& media_id_ = nullptr, const QString& parent_id_ = nullptr, const bool& deleted_ = false, const QMap<QUuid, bool>& likes_ = {}, QObject* parent_ = nullptr);
     ~User_Message() override;
     User_Message(const User_Message& other);
     User_Message& operator = (const User_Message& other);
@@ -46,11 +46,11 @@ public:
 
     [[nodiscard]] bool isDeleted() const;
 
-    [[nodiscard]] const QHash<QUuid, bool>& getLikes() const;
+    [[nodiscard]] const QMap<QUuid, bool>& getLikes() const;
 
     void setDeleted(bool flag);
 
-    void setLikes(const QHash<QUuid, bool>& likes);
+    void setLikes(const QMap<QUuid, bool>& likes);
 
 private:
     [[nodiscard]] QString generateId();
