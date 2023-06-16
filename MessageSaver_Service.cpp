@@ -24,8 +24,8 @@ bool MessageSaver_Service::start(const float& minutes_)
 		shp_timer = QSharedPointer<QTimer>(new QTimer(), &QObject::deleteLater);
 
 		shp_instance->moveToThread(shp_thread.get());
-		connect(shp_timer.get(), &QTimer::timeout, LocalStorage_Service::getInstance(), &LocalStorage_Service::saveAllMessages);
-		connect(shp_timer.get(), &QTimer::timeout, RatingCounter_Service::getInstance(), &RatingCounter_Service::updateRating);
+		connect(shp_timer.get(), &QTimer::timeout, LocalStorage_Service::getInstance().get(), &LocalStorage_Service::saveAllMessages);
+		connect(shp_timer.get(), &QTimer::timeout, RatingCounter_Service::getInstance().get(), &RatingCounter_Service::updateRating);
 		shp_timer->start((int)timeout);
 		shp_thread->start();
 		PLOGI << "Archivator service started.";

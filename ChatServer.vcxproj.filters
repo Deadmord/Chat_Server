@@ -132,9 +132,6 @@
     <ClCompile Include="RatingCounter_Service.cpp">
       <Filter>Services\RatingCounterService</Filter>
     </ClCompile>
-    <ClCompile Include="DB\JSONS\messages.cpp">
-      <Filter>Source Files\Classes\DBModels</Filter>
-    </ClCompile>
     <ClCompile Include="RoomStorage_Service.cpp">
       <Filter>Services\RoomStorageService</Filter>
     </ClCompile>
@@ -197,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="UserController.cpp">
       <Filter>Controllers\UserController</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaSaver_Service.cpp">
+      <Filter>Services\MediaSaverService</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -276,6 +276,9 @@
     </QtMoc>
     <QtMoc Include="UserController.h">
       <Filter>Controllers\UserController</Filter>
+    </QtMoc>
+    <QtMoc Include="MediaSaver_Service.h">
+      <Filter>Services\MediaSaverService</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
