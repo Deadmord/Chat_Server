@@ -23,12 +23,14 @@ class SrvRoom : public QObject
 public:
 	//explicit SrvRoom(const QSharedPointer<DTOHelper::DTORoom> cshp_dto_room_, QObject* parent = nullptr);
 	explicit SrvRoom(QSharedPointer<DBEntity::DBRoom> cshp_db_room_, QObject* p_parent_ = nullptr);
+	explicit SrvRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const QString& topic_name_, const bool& is_private_, const QString& password_, const bool& is_deleted_);
 	~SrvRoom() = default;
 
 	[[nodiscard]] quint32 getId() const;
 	[[nodiscard]] QString getName() const;
 	[[nodiscard]] QString getDescription() const;
 	[[nodiscard]] quint32 getTopicId() const;
+	[[nodiscard]] QString getTopicName() const;
 	[[nodiscard]] QString getPassword() const;		//TODO!!! It seems like, should be changed on "bool checkPassword" !!!
 	[[nodiscard]] bool isDeleted() const;
 	[[nodiscard]] bool isPrivate() const;
@@ -68,7 +70,8 @@ private:
 	quint32 id;
 	QString name;
 	QString description;
-	quint32	topic_id;
+	qint32	topic_id;
+	QString topic_name;
 	bool	is_private;
 	QString password;
 	bool	is_deleted;
