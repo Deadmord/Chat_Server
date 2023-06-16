@@ -13,10 +13,10 @@
 
 #include <plog/Log.h>
 
-#include "Entities/entities.h"
-#include "Entities/Enums/Enums.h"
-#include "Controllers/RoomController/RoomController.h"
-#include "Controllers/MessageController/MessageController.h"
+#include "entities.h"
+#include "Enums.h"
+#include "RoomController.h"
+#include "MessageController.h"
 #include "RoomStorage_Service.h"
 
 

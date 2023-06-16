@@ -6,19 +6,19 @@
 #include <QDebug>
 #include <QTimer>
 #include <plog/Log.h>
-#include "../server.h"
+#include "server.h"
 
 #if defined (Q_OS_WIN)
 #   include <windows.h>  
 #   include <QWinEventNotifier>
 
-class asyncConsoleWin  : public QObject
+class AsyncConsoleWin  : public QObject
 {
 	Q_OBJECT
 
 public:
-	asyncConsoleWin(QObject *parent);
-	~asyncConsoleWin() override = default;
+	AsyncConsoleWin(QObject *parent);
+	~AsyncConsoleWin() override = default;
 
 signals:
 	void startServer();

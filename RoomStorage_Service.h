@@ -4,7 +4,7 @@
 #include <qobject.h>
 #include "SrvRoom.h"
 #include "DBRoom.h"
-#include "DB/JSONS/messages.h"
+#include "DBMessage.h"
 #include "RoomRepository.h"
 #include "LocalStorage_Service.h"
 

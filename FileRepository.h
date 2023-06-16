@@ -7,7 +7,7 @@
 
 
 #include <QString>
-#include "DB/JSONS/messages.h"
+#include "DBMessage.h"
 #include <plog/Log.h>
 
 class FileRepository {

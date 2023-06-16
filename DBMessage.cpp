@@ -2,7 +2,7 @@
 // Created by Admin on 5/24/2023.
 //
 
-#include "messages.h"
+#include "DBMessage.h"
 
 QJsonObject DBEntity::DBMessage::toJson() const {
     QJsonObject obj;

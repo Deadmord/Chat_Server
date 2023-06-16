@@ -2,8 +2,8 @@
 #include <iostream>
 
 #include "server.h"
-#include "Controllers/RoomController/RoomController.h"
-#include "Entities/Enums/Enums.h"
+#include "RoomController.h"
+#include "Enums.h"
 
 #include <plog/Log.h> 
 #include <plog/Initializers/RollingFileInitializer.h>
@@ -17,14 +17,14 @@
 #include "DBUser.h"
 
 #if defined (Q_OS_WIN)
-#include "Core/async_console_win.h"
+#include "AsyncConsoleWin.h"
 #else
 
 #endif
 
 
 Server server;  //create server instace
-asyncConsoleWin* asyncConsole;
+AsyncConsoleWin* asyncConsole;
 
 static void shutdown_routine()
 {
@@ -62,9 +62,9 @@ static void startup_routine()
 
 #if defined (Q_OS_WIN)
     //(void)new asyncConsoleWin(qApp);
-    asyncConsole = new asyncConsoleWin(qApp);
-    QObject::connect(asyncConsole, &asyncConsoleWin::startServer, &server, &Server::startServer);
-    QObject::connect(asyncConsole, &asyncConsoleWin::stopServer, &server, &Server::stopServer);
+    asyncConsole = new AsyncConsoleWin(qApp);
+    QObject::connect(asyncConsole, &AsyncConsoleWin::startServer, &server, &Server::startServer);
+    QObject::connect(asyncConsole, &AsyncConsoleWin::stopServer, &server, &Server::stopServer);
 #else
     qDebug() << "AsyncConsoleWin can't be loaded! Curent OS doesnt support.";
     PLOGD << "AsyncConsoleWin can't be loaded! Curent OS doesnt support.";

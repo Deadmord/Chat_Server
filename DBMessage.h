@@ -12,8 +12,8 @@
 #include <QTime>
 #include <QUuid>
 #include <QPointer>
-#include "../../DBRoom.h"
-#include "../../FileRepository.h"
+#include "DBRoom.h"
+#include "FileRepository.h"
 #include <plog/Log.h>
 #include <QObject>
 

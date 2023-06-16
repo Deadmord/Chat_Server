@@ -5,10 +5,10 @@
 #include <QJsonArray>
 #include <QJsonParseError>
 #include <QFile>
-#include "../../SrvRoom.h"
-#include "../../Entities/SrvModels/Message.h"
-#include "../../Entities/SrvModels/UserConnection.h"
-#include "../../RoomStorage_Service.h"
+#include "SrvRoom.h"
+#include "Message.h"
+#include "UserConnection.h"
+#include "RoomStorage_Service.h"
 
 class MessageController : public QObject
 {
