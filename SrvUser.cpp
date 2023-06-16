@@ -1,53 +1,53 @@
-﻿#include "UserConnection.h"
-UserConnection::UserConnection(QObject* parent) : QObject(parent) , user_socket(new QTcpSocket(this))
+﻿#include "SrvUser.h"
+SrvUser::SrvUser(QObject* parent) : QObject(parent) , user_socket(new QTcpSocket(this))
 {
     // connect readyRead() to the slot that will take care of reading the data in
-    connect(user_socket, &QTcpSocket::readyRead, this, &UserConnection::receiveJson);
+    connect(user_socket, &QTcpSocket::readyRead, this, &SrvUser::receiveJson);
     // forward the disconnected and error signals coming from the socket
-    connect(user_socket, &QTcpSocket::disconnected, this, &UserConnection::disconnectedFromClient);
-    connect(user_socket, &QAbstractSocket::errorOccurred, this, &UserConnection::errorSignal);
+    connect(user_socket, &QTcpSocket::disconnected, this, &SrvUser::disconnectedFromClient);
+    connect(user_socket, &QAbstractSocket::errorOccurred, this, &SrvUser::errorSignal);
 }
 
-bool UserConnection::setSocketDescriptor(qintptr socketDescriptor)
+bool SrvUser::setSocketDescriptor(qintptr socketDescriptor)
 {
     return user_socket->setSocketDescriptor(socketDescriptor);
 }
 
-void UserConnection::disconnectFromClient()
+void SrvUser::disconnectFromClient()
 {
     user_socket->disconnectFromHost();
     //-----------------сделать рефакторинг тут и в сервере-------------------------------
 }
 
-QString UserConnection::getUserName() const
+QString SrvUser::getUserName() const
 {
     return user_name;
 }
 
-void UserConnection::setUserName(const QString& userName)
+void SrvUser::setUserName(const QString& userName)
 {
     user_name = userName;
 }
 
-quint32 UserConnection::getRoomId() const
+quint32 SrvUser::getRoomId() const
 {
     return room_id;
 }
 
-void UserConnection::setRoomId(const quint32& _room_id)
+void SrvUser::setRoomId(const quint32& _room_id)
 {
     room_id = _room_id;
 }
 
-bool UserConnection::isFloodLimit() const { return flood_limit; }
+bool SrvUser::isFloodLimit() const { return flood_limit; }
 
-void UserConnection::setFloodLimit()
+void SrvUser::setFloodLimit()
 {
     QTimer::singleShot(5000, [&]() { flood_limit = false; });
     flood_limit = true;
 }
 
-void UserConnection::sendJson(const QJsonObject& json)
+void SrvUser::sendJson(const QJsonObject& json)
 {
     // we crate a temporary QJsonDocument forom the object and then convert it
     // to its UTF-8 encoded version. We use QJsonDocument::Compact to save bandwidth
@@ -66,7 +66,7 @@ void UserConnection::sendJson(const QJsonObject& json)
     user_socket->write(buffer);
 }
 
-void UserConnection::receiveJson()
+void SrvUser::receiveJson()
 {
     // prepare a container to hold the UTF-8 encoded JSON we receive from the socket
     QByteArray jsonData;

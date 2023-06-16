@@ -189,7 +189,7 @@
     <ClCompile Include="Message.cpp">
       <Filter>Entities\Models\Srv Models\SrvMessage</Filter>
     </ClCompile>
-    <ClCompile Include="UserConnection.cpp">
+    <ClCompile Include="SrvUser.cpp">
       <Filter>Entities\Models\Srv Models\SrvUser</Filter>
     </ClCompile>
     <ClCompile Include="UserController.cpp">
@@ -271,7 +271,7 @@
     <QtMoc Include="Message.h">
       <Filter>Entities\Models\Srv Models\SrvMessage</Filter>
     </QtMoc>
-    <QtMoc Include="UserConnection.h">
+    <QtMoc Include="SrvUser.h">
       <Filter>Entities\Models\Srv Models\SrvUser</Filter>
     </QtMoc>
     <QtMoc Include="UserController.h">

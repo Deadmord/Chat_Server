@@ -28,7 +28,7 @@ namespace DTOModel {
 	//	return dto_room;
 	//}
 	/////////////////////////////////////////////////////
-	//QSharedPointer<UserConnection> DTOUser::createUserConnectionFromDB(const DBEntity::DBUser& db_user_) {
-	//	QSharedPointer<UserConnection> user_connection = QSharedPointer<UserConnection>::create()
+	//QSharedPointer<SrvUser> DTOUser::createSrvUserFromDB(const DBEntity::DBUser& db_user_) {
+	//	QSharedPointer<SrvUser> user_connection = QSharedPointer<SrvUser>::create()
 	//}
 }

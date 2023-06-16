@@ -30,7 +30,7 @@ public slots:
     void createRoom(QSharedPointer<SrvRoom> new_room_);
     void addMessageToRoom(qint32 room_id_, User_Message* message_);
     void addMessagesToRoom(qint32 room_id_, QSet<QSharedPointer<User_Message>> messages_);
-    void addConnecntedUserToRoom(qint32 room_id_, UserConnection* user_);
+    void addConnecntedUserToRoom(qint32 room_id_, SrvUser* user_);
        
 private:
 

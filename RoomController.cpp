@@ -11,13 +11,13 @@ RoomController::~RoomController() = default;
 //    loadMsgHistory(msg_history_path);
 //}
 
-void RoomController::userEntry(QSharedPointer<SrvRoom> shp_room_, UserConnection* user)
+void RoomController::userEntry(QSharedPointer<SrvRoom> shp_room_, SrvUser* user)
 {
     shp_room_->getConnectedUsers().append(user);
 }
 
 //---!!!---это от сюда нужно убрать
-void RoomController::jsonReceived(QSharedPointer<SrvRoom> shp_room_, UserConnection* sender, const QJsonObject& docObj)
+void RoomController::jsonReceived(QSharedPointer<SrvRoom> shp_room_, SrvUser* sender, const QJsonObject& docObj)
 {
     Q_ASSERT(sender);
     const QJsonValue typeVal = docObj.value(QLatin1String("type"));
@@ -39,9 +39,9 @@ void RoomController::jsonReceived(QSharedPointer<SrvRoom> shp_room_, UserConnect
 }
 
 //---!!!---это от сюда нужно убрать
-void RoomController::broadcastSend(QSharedPointer<SrvRoom> shp_room_, const QJsonObject& message, UserConnection* exclude)
+void RoomController::broadcastSend(QSharedPointer<SrvRoom> shp_room_, const QJsonObject& message, SrvUser* exclude)
 {
-    for (UserConnection* user : shp_room_->getConnectedUsers()) {
+    for (SrvUser* user : shp_room_->getConnectedUsers()) {
         Q_ASSERT(user);
         if (user == exclude)
             continue;
@@ -50,7 +50,7 @@ void RoomController::broadcastSend(QSharedPointer<SrvRoom> shp_room_, const QJso
 }
 
 //---!!!---это от сюда нужно убрать
-void RoomController::sendJson(UserConnection* destination, const QJsonObject& message)
+void RoomController::sendJson(SrvUser* destination, const QJsonObject& message)
 {
     Q_ASSERT(destination);
     destination->sendJson(message);

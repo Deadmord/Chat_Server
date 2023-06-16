@@ -30,9 +30,9 @@ User_Message MessageController::createMessage(const QString& nickname_, const QS
     //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
 }
 
-void MessageController::broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> shp_room_, const UserConnection* exclude_)
+void MessageController::broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> shp_room_, const SrvUser* exclude_)
 {
-    for (UserConnection* user : shp_room_->getConnectedUsers()) {
+    for (SrvUser* user : shp_room_->getConnectedUsers()) {
         Q_ASSERT(user);
         if (user == exclude_)
             continue;
@@ -40,13 +40,13 @@ void MessageController::broadcastSend(const QJsonObject& message_, const QShared
     }
 }
 
-void MessageController::sendJson(UserConnection* destination_, const QJsonObject& message_)
+void MessageController::sendJson(SrvUser* destination_, const QJsonObject& message_)
 {
     Q_ASSERT(destination_);
     destination_->sendJson(message_);
 }
 
-void MessageController::jsonReceived(UserConnection* sender_, const QJsonObject& doc_)
+void MessageController::jsonReceived(SrvUser* sender_, const QJsonObject& doc_)
 {
     Q_ASSERT(sender_);
     PLOGI << QLatin1String("JSON received: ") + QJsonDocument(doc_).toJson(QJsonDocument::Compact);
@@ -58,7 +58,7 @@ void MessageController::jsonReceived(UserConnection* sender_, const QJsonObject&
     jsonFromLoggedInCmd(sender_, doc_);
 }
 
-void MessageController::jsonFromLoggedOut(UserConnection* sender_, const QJsonObject& doc_obj_)
+void MessageController::jsonFromLoggedOut(SrvUser* sender_, const QJsonObject& doc_obj_)
 {
     Q_ASSERT(sender_);
     const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
@@ -72,7 +72,7 @@ void MessageController::jsonFromLoggedOut(UserConnection* sender_, const QJsonOb
     const QString new_user_name = username_val.toString().simplified();
     if (new_user_name.isEmpty())
         return;
-    for (const UserConnection* user : QList<UserConnection*>{}) {    //Find duplicat username //qAsConst(server.getUsersList()))
+    for (const SrvUser* user : QList<SrvUser*>{}) {    //Find duplicat username //qAsConst(server.getUsersList()))
         if (user == sender_)
             continue;
         if (user->getUserName().compare(new_user_name, Qt::CaseInsensitive) == 0) {
@@ -95,7 +95,7 @@ void MessageController::jsonFromLoggedOut(UserConnection* sender_, const QJsonOb
     broadcastSend(connected_message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
 }
 
-void MessageController::jsonFromLoggedInCmd(UserConnection* sender_, const QJsonObject& doc_obj_)
+void MessageController::jsonFromLoggedInCmd(SrvUser* sender_, const QJsonObject& doc_obj_)
 {
     Q_ASSERT(sender_);
     const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
@@ -150,7 +150,7 @@ void MessageController::jsonFromLoggedInCmd(UserConnection* sender_, const QJson
 
 }
 
-void MessageController::jsonFromLoggedInMsg(const UserConnection* sender_, const QJsonObject& doc_obj_)
+void MessageController::jsonFromLoggedInMsg(const SrvUser* sender_, const QJsonObject& doc_obj_)
 {
     Q_ASSERT(sender_);
     const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));

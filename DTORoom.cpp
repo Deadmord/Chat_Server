@@ -7,7 +7,7 @@ namespace DTOModel {
 		: id(id_), name(name_), description(description_), topic_id(topic_id_),topic_name(topic_name_), is_private(is_private_), password(password_), is_deleted(is_deleted_), messages(), connected_users() 
 	{
 		messages = QSet<QSharedPointer<User_Message>>();
-		connected_users = QList<UserConnection*>();
+		connected_users = QList<SrvUser*>();
 	};
 
 	DTORoom::~DTORoom() {};
@@ -30,8 +30,8 @@ namespace DTOModel {
 	void DTORoom::setIsDeleted(const bool& deleted_) { this->is_deleted = deleted_; }
 	QSet<QSharedPointer<User_Message>> DTORoom::getMessages() const { return messages; }
 	void DTORoom::setMessages(QSharedPointer<User_Message> shp_user_message_) { messages.insert(shp_user_message_); }
-	QList<UserConnection*> DTORoom::getConnectedUsers() const { return connected_users; }
-	void DTORoom::setConnectedUsers(UserConnection* connected_user_) { connected_users.append(connected_user_); }
+	QList<SrvUser*> DTORoom::getConnectedUsers() const { return connected_users; }
+	void DTORoom::setConnectedUsers(SrvUser* connected_user_) { connected_users.append(connected_user_); }
 
 	QSharedPointer<DTOModel::DTORoom> DTORoom::createDTORoomFromSrv(const SrvRoom& srv_room) {
 		QSharedPointer<DTOModel::DTORoom> shp_dto_room = QSharedPointer<DTOModel::DTORoom>::create(

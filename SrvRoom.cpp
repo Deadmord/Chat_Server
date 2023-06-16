@@ -41,9 +41,9 @@ void SrvRoom::setPrivate(bool val) { is_private = val; emit privateChanged(val);
 void SrvRoom::setPassword(const QString& val) { password = val; emit passwordChanged(); }
 void SrvRoom::Delete() { is_deleted = true; emit roomDeleted(); }
 
-QList<UserConnection*> SrvRoom::getConnectedUsers() const
+QList<SrvUser*> SrvRoom::getConnectedUsers() const
 {
-    return QList<UserConnection*>();
+    return QList<SrvUser*>();
 }
 
 QList<User_Message*> SrvRoom::getMessages(const QDateTime& from_, const QDateTime& to_) const
@@ -53,7 +53,7 @@ QList<User_Message*> SrvRoom::getMessages(const QDateTime& from_, const QDateTim
 
 
 
-void SrvRoom::connectUser(UserConnection* user)
+void SrvRoom::connectUser(SrvUser* user)
 {
 }
 

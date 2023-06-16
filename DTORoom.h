@@ -37,8 +37,8 @@ namespace DTOModel {
 		void setIsDeleted(const bool& is_deleted);
 		QSet<QSharedPointer<User_Message>> getMessages() const;
 		void setMessages(QSharedPointer<User_Message> shp_user_message_);
-		QList<UserConnection*> getConnectedUsers() const;
-		void setConnectedUsers(UserConnection* connected_user_);
+		QList<SrvUser*> getConnectedUsers() const;
+		void setConnectedUsers(SrvUser* connected_user_);
 
 		static QSharedPointer<DTOModel::DTORoom> createDTORoomFromSrv(const SrvRoom& srv_room);
 		static QSharedPointer<SrvRoom> createSrvRoomFromDTO(const DTOModel::DTORoom& dto_model);
@@ -57,7 +57,7 @@ namespace DTOModel {
 		bool is_deleted;
 
 		QSet<QSharedPointer<User_Message>> messages;
-		QList<UserConnection*> connected_users;
+		QList<SrvUser*> connected_users;
 	};
 }
 
