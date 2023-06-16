@@ -27,7 +27,7 @@ void RoomController::userEntry(const quint32& room_id, QSharedPointer<SrvUser> u
 }
 
 //---!!!---это от сюда нужно убрать
-void RoomController::jsonReceived(QSharedPointer<SrvRoom> shp_room_, SrvUser* sender, const QJsonObject& docObj)
+void RoomController::jsonReceived(QSharedPointer<SrvRoom> shp_room_, QSharedPointer<SrvUser> sender, const QJsonObject& docObj)
 {
     //Q_ASSERT(sender);
     //const QJsonValue typeVal = docObj.value(QLatin1String("type"));
