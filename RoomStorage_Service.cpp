@@ -159,18 +159,16 @@ QList<QString> RoomStorage_Service::searchForFiles(const QDateTime& from_, const
 
 void RoomStorage_Service::getMessagesFromLocalStorage(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_)
 {
-    QSet<QSharedPointer<DBEntity::DBMessage>> messages;
+    QSet<QSharedPointer<User_Message>> messages;
 
-    auto files = searchForFiles(from_, to_, room_id_);
-
-    foreach(const auto & file, files)
+    foreach(const auto  room, rooms_storage[room_id_]->getMessages(from_, to_))
     {
-        messages.unite(LocalStorage_Service::getInstance()->getMessages(from_, to_, room_id_));
+        messages.insert(QSharedPointer<User_Message>(room));
     }
 
     foreach(const auto & message, messages) {
 
-        rooms_storage[room_id_]->addMessage(fromDBMessageToUserMessage(message));
+        rooms_storage[room_id_]->addMessage(message);
 
     }
 }
