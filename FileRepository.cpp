@@ -9,7 +9,7 @@
 bool FileRepository::writeJsonArr(const QString &file_name_, const QJsonArray &data_) {
     QFile file(file_name_);
     if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        PLOGE<< "File cannot be opened" << Qt::endl;
+        PLOGE << "File cannot be opened";
         return false;
     }
     const QByteArray content = file.readAll();
@@ -57,7 +57,7 @@ bool FileRepository::readJson(const QString &file_path_, QJsonObject &json_objec
 bool FileRepository::readJsonArr(const QString &file_path_, QJsonArray &json_object_) {
     QFile file(file_path_);
     if (!file.exists()) {
-    	PLOGE<< "File not found" << Qt::endl;
+    	PLOGE<< "File not found";
         return false;
     }
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))

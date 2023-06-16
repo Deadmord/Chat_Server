@@ -2,7 +2,7 @@
 
 namespace DBService {
 
-	DBConnection RoomRepository::a_dbConnection("Driver={ODBC Driver 18 for SQL Server};Server=tcp:comp-zionet-server.database.windows.net,1433;Database=CPP_Chat_DB;Uid=Logika4417;Pwd=Fyyf1998;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;");
+	DBConnection_Service RoomRepository::a_dbConnection("Driver={ODBC Driver 18 for SQL Server};Server=tcp:comp-zionet-server.database.windows.net,1433;Database=CPP_Chat_DB;Uid=Logika4417;Pwd=Fyyf1998;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;", 0);
 	RoomRepository::RoomRepository(const QString& connection_string_) { a_dbConnection.setConnectionString(connection_string_); }
 	RoomRepository::~RoomRepository() {}
 
@@ -11,11 +11,11 @@ namespace DBService {
 			QList<QSharedPointer<DBEntity::DBRoom>> room_list;
 			try
 			{
-				a_dbConnection.databaseConnectionOpen();
+				auto connection = DBService::DBConnection_Service::getConnection();
 
-				if (a_dbConnection.getDatabase().isOpen()) {
+				if (connection->getDatabase()->isOpen()) {
 					QSqlQueryModel query_model;
-					query_model.setQuery(query_string_);
+					query_model.setQuery(query_string_, *connection->getDatabase());
 
 					if (query_model.lastError().isValid()) {
 						PLOG_ERROR << "Query error: " << query_model.lastError().text();
@@ -36,8 +36,6 @@ namespace DBService {
 						room_list.append(shp_room);
 					}
 
-					a_dbConnection.databaseConnectionClose();
-
 					if (!room_list.isEmpty()) {
 						return room_list;
 					}
@@ -46,27 +44,35 @@ namespace DBService {
 					}
 				}
 				else {
-					PLOG_ERROR << "Cannot connect to the data base.";
-					a_dbConnection.databaseConnectionClose();
+					PLOG_ERROR << "Cannot connect to the database.";
 				}
 			}
 			catch (const std::exception& exception)
 			{
 				PLOG_ERROR << "Exception in getAllRooms method: " << exception.what();
 			}
+
 			return room_list;
 			});
 	}
+
+
+
+
+
+
+
 
 	QList<QSharedPointer<DBEntity::DBRoom>> RoomRepository::getAllActiveRooms() {
 			auto query_string_ = "SELECT * from room WHERE is_deleted=0;";
 			QList<QSharedPointer<DBEntity::DBRoom>> room_list;
 			try
 			{
-				a_dbConnection.databaseConnectionOpen();
-				if (a_dbConnection.getDatabase().isOpen()) {
+				auto connection = DBService::DBConnection_Service::getConnection();
+
+				if (connection->getDatabase()->isOpen()) {
 					QSqlQueryModel query_model;
-					query_model.setQuery(query_string_);
+					query_model.setQuery(query_string_, *connection->getDatabase());
 
 					if (query_model.lastError().isValid()) {
 						PLOG_ERROR << "Query error: " << query_model.lastError().text();
@@ -86,8 +92,6 @@ namespace DBService {
 						auto shp_room = QSharedPointer<DBEntity::DBRoom>(new DBEntity::DBRoom (id, name, description, topic_id, is_private, password, is_deleted));
 						room_list.append(shp_room);
 					}
-
-					a_dbConnection.databaseConnectionClose();
 
 					if (!room_list.isEmpty()) {
 						return room_list;
@@ -112,10 +116,10 @@ namespace DBService {
 		return QtConcurrent::run([query_string_ = "INSERT INTO room (name, description, topic_id, is_private, password, is_deleted) VALUES (:name, :description, :topic_id, :is_private, :password, :is_deleted)", &room_]() {
 			try
 			{
-				a_dbConnection.databaseConnectionOpen();
-				if (a_dbConnection.getDatabase().isOpen()) {
+				auto connection = DBService::DBConnection_Service::getConnection();
+				if (connection->getDatabase()->isOpen()) {
 
-					QSqlQuery query;
+					QSqlQuery query(*connection->getDatabase());
 					query.prepare(query_string_);
 
 					query.bindValue(":name", room_.getName());
@@ -128,18 +132,15 @@ namespace DBService {
 					if (query.exec()) {
 						qint32 id = query.lastInsertId().toInt();
 						PLOG_INFO << "ID of a new Room db entity: " << id;
-						a_dbConnection.databaseConnectionClose();
 						return id;
 					}
 					else {
 						PLOG_ERROR << "Error adding a new Room db entity.";
-						a_dbConnection.databaseConnectionClose();
 						return -1;
 					}
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the data base.";
-					a_dbConnection.databaseConnectionClose();
 					return -1;
 				}
 			}
@@ -155,10 +156,10 @@ namespace DBService {
 		return QtConcurrent::run([query_string_ = "UPDATE room SET is_deleted=:is_deleted WHERE id=:id", id_]() {
 			try
 			{
-				a_dbConnection.databaseConnectionOpen();
-				if (a_dbConnection.getDatabase().isOpen()) {
+				auto connection = DBService::DBConnection_Service::getConnection();
+				if (connection->getDatabase()->isOpen()) {
 
-					QSqlQuery query;
+					QSqlQuery query(*connection->getDatabase());
 					query.prepare(query_string_);
 
 					query.bindValue(":id", id_);
@@ -166,18 +167,15 @@ namespace DBService {
 
 					if (query.exec()) {
 						PLOG_INFO << "Room with ID: " << id_ << " was deleted successfully.";
-						a_dbConnection.databaseConnectionClose();
 						return true;
 					}
 					else {
 						PLOG_ERROR << "Room with ID: " << id_ << " was not deleted.";
-						a_dbConnection.databaseConnectionClose();
 						return false;
 					}
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the data base.";
-					a_dbConnection.databaseConnectionClose();
 					return false;
 				}
 			}

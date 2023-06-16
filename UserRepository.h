@@ -1,7 +1,7 @@
 #ifndef USERREPOSITORY_H
 #define USERREPOSITORY_H
 
-#include "DBService.h"
+#include "DBConncetion_Service.h"
 #include "DBUser.h"
 #include <QtConcurrent>
 #include <plog/Log.h> 
@@ -14,7 +14,7 @@ namespace DBService {
 		Q_OBJECT
 
 	private:
-		static DBConnection a_dbConnection;
+		static DBConnection_Service a_dbConnection;
 
 	public:
 		UserRepository(const QString& connection_string_);

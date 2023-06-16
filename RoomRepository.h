@@ -1,7 +1,7 @@
 #ifndef ROOMREPOSITORY_H
 #define ROOMREPOSITORY_H
 
-#include "DBService.h"
+#include "DBConncetion_Service.h"
 #include <QtConcurrent>
 #include <plog/Log.h> 
 
@@ -12,7 +12,7 @@ namespace DBService {
 		Q_OBJECT
 
 	private:
-		static DBConnection a_dbConnection;
+		static DBConnection_Service a_dbConnection;
 
 	public:
 

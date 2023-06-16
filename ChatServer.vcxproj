@@ -129,7 +129,7 @@
     <QtMoc Include="RoomRepository.h" />
     <QtMoc Include="DTORoom.h" />
     <QtMoc Include="DTOUser.h" />
-    <ClInclude Include="DBService.h" />
+    <ClInclude Include="DBConncetion_Service.h" />
     <ClInclude Include="DBUser.h">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
@@ -149,7 +149,7 @@
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClInclude>
     <ClCompile Include="DBRoom.cpp" />
-    <ClCompile Include="DBService.cpp">
+    <ClCompile Include="DBConncetion_Service.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>

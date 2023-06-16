@@ -120,9 +120,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DB\JSONS\messages.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MessageSaver_Service.cpp">
       <Filter>Services\MessageSaverService</Filter>
     </ClCompile>
@@ -150,7 +147,7 @@
     <ClCompile Include="DBUser.cpp">
       <Filter>Entities\Models\DBModels\DBUser</Filter>
     </ClCompile>
-    <ClCompile Include="DBService.cpp">
+    <ClCompile Include="DBConncetion_Service.cpp">
       <Filter>Services\DBService</Filter>
     </ClCompile>
     <ClCompile Include="FileRepository.cpp">
@@ -206,7 +203,7 @@
     <ClInclude Include="DBUser.h">
       <Filter>Entities\Models\DBModels\DBUser</Filter>
     </ClInclude>
-    <ClInclude Include="DBService.h">
+    <ClInclude Include="DBConncetion_Service.h">
       <Filter>Services\DBService</Filter>
     </ClInclude>
     <ClInclude Include="FileRepository.h">
