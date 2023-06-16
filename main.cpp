@@ -82,13 +82,9 @@ Q_COREAPP_STARTUP_FUNCTION(startup_routine)
 
 int main(int argc, char* argv[])
 {
-    //QCoreApplication a(argc, argv);
+    QCoreApplication a(argc, argv);
 
-    //return a.exec();
-
-
-    auto future = DBService::RoomRepository::getRoomById(8);
-    qDebug() << future.result()->getTopicName();
+    return a.exec();
 
 }
 
