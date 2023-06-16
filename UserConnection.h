@@ -36,6 +36,9 @@ public:
     void setRatingDislikes(const quint32& _rating_dislikes);
     quint32 getRoomId() const;
     void setRoomId(const quint32& _room_id);
+    bool isFloodLimit() const;
+    void setFloodLimit();
+
 
 signals:
     void jsonReceived(const QJsonObject& _json_doc);
@@ -48,7 +51,6 @@ public slots:
 
 private slots:
     void receiveJson();
-    bool isFloodLimit() const;
 
 private:
     QTcpSocket* user_socket;

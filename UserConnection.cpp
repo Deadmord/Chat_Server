@@ -41,6 +41,12 @@ void UserConnection::setRoomId(const quint32& _room_id)
 
 bool UserConnection::isFloodLimit() const { return flood_limit; }
 
+void UserConnection::setFloodLimit()
+{
+    QTimer::singleShot(5000, [&]() { flood_limit = false; });
+    flood_limit = true;
+}
+
 void UserConnection::sendJson(const QJsonObject& json)
 {
     // we crate a temporary QJsonDocument forom the object and then convert it
@@ -62,19 +68,6 @@ void UserConnection::sendJson(const QJsonObject& json)
 
 void UserConnection::receiveJson()
 {
-    //implementation of flood protection mechanism
-    if(isFloodLimit())
-    {
-        PLOGD << QLatin1String("flood protection, wait..."); //notify the server of invalid data
-        QDataStream socketStream(user_socket);
-        socketStream.abortTransaction();
-    }
-    else
-    {
-        QTimer::singleShot(5000, [&]() { flood_limit = false; });
-        flood_limit = true;
-    }
-    
     // prepare a container to hold the UTF-8 encoded JSON we receive from the socket
     QByteArray jsonData;
     // create a QDataStream operating on the socket

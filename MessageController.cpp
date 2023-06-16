@@ -124,10 +124,19 @@ void MessageController::jsonFromLoggedInCmd(UserConnection* sender_, const QJson
     }
     if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) == 0)
     {
+
+        
+
         const QJsonValue text_val = doc_obj_.value(QLatin1String("text"));
         if (text_val.isNull() || !text_val.isString())
             return;
         const QString text = text_val.toString().trimmed();
+        if (sender_->isFloodLimit())                                //implementation of flood protection mechanism
+        {
+            PLOGD << "flood protection, wait...";    //notify the server of invalid data
+            return;
+        }
+        sender_->setFloodLimit();
         if (text.isEmpty())
             return;
         QJsonObject message;
