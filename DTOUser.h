@@ -3,7 +3,9 @@
 
 #include <QObject>
 #include <QSharedPointer>
+#include <QTcpSocket>
 #include "DBUser.h"
+#include "Entities/SrvModels/UserConnection.h"
 
 namespace DTOModel {
 
@@ -14,7 +16,7 @@ namespace DTOModel {
 	public:
 
 		DTOUser(QObject* parent = nullptr);
-		DTOUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_, bool is_deleteed_ = false);
+		DTOUser(const QString& login_, const QString& password_, const QByteArray& userpic_, const quint32& rating_);
 		~DTOUser();
 
 		QString getUsername() const;
@@ -25,19 +27,25 @@ namespace DTOModel {
 		void setUserpic(const QByteArray& userpic_);
 		quint32 getRating() const;
 		void setRating(const quint32& rating_);
-		bool isDeleted() const;
-		void setIsDeleted(const bool& is_deleted_);
 
-		static QSharedPointer<DTOModel::DTOUser> createDTOUser(const DBEntity::DBUser& db_user_);
-		static QSharedPointer<DBEntity::DBUser> createDBUser(const DTOModel::DTOUser& dto_user_);
+		//static QSharedPointer<DTOModel::DTOUser> createDTOUser(const DBEntity::DBUser& db_user_);
+		//static QSharedPointer<DBEntity::DBUser> createDBUser(const DTOModel::DTOUser& dto_user_);
+
+		static QSharedPointer<UserConnection> createUserConnectionFromDB(const DBEntity::DBUser& db_user_);
+		static QSharedPointer<DBEntity::DBUser> createDBUser(const UserConnection& user_connection_);
+
+		static QSharedPointer<DTOModel::DTOUser> createDTOUser(const UserConnection& user_connection_);
+		static QSharedPointer<UserConnection> createUserConnectionFromDTO(const DTOModel::DTOUser& dto_user_);
 
 	private:
 
+		QTcpSocket* user_socket;
 		QString a_username;
 		QString a_password;
 		QByteArray a_userpic;
 		quint32 a_rating;
-		bool a_is_deleted;
+		qint32 a_room_id;
+		quint16 nextBlockSize = 0;
 
 	};
 }
