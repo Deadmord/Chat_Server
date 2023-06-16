@@ -1,6 +1,9 @@
 #include "server.h"
 
-Server::Server(QObject* parent_) : QTcpServer(parent_) {}
+Server::Server(QObject* parent_) : QTcpServer(parent_) 
+{
+    connect(this, &Server::incomingConnection, UserController::instance().get(), &UserController::addConnection);
+}
 Server::~Server(){}
 
 void Server::startServer()
@@ -14,9 +17,9 @@ void Server::startServer()
 void Server::stopServer()
 {
     if (isListening()) {
-        disableUsers();
         close();
         PLOGI << "Server stop - OK";
+        emit serverStopped();
     }
     else
     {
@@ -24,28 +27,23 @@ void Server::stopServer()
     }
 }
 
-void Server::incomingConnection(qintptr socket_descriptor_)
-{
-    UserConnection* user_connection = new UserConnection();
-    if (!user_connection->setSocketDescriptor(socket_descriptor_)) {
-        user_connection->deleteLater();         //if the socket descriptor could not be set, delete the socket
-        PLOGE << "Socket descriptor could not be set";
-        return;
-    }
-    connect(user_connection, &UserConnection::disconnectedFromClient, this, std::bind(&Server::userDisconnected, this, user_connection));
-    connect(user_connection, &UserConnection::errorSignal, this, std::bind(&Server::userError, this, user_connection));
-    connect(user_connection, &UserConnection::jsonReceived, this, std::bind(&Server::jsonReceived, this, user_connection, std::placeholders::_1));  //it become to signal now
-    connect(user_connection, &UserConnection::jsonReceived, MessageController::instance().get(), std::bind(&MessageController::jsonReceived, MessageController::instance().get(), user_connection, std::placeholders::_1));  //connect with MessageController (это нужно перенести в MessageController)
-    connect(this, &Server::broadcastSend, MessageController::instance().get(), &MessageController::broadcastSend); //это нужно перенести в MessageController
-
-    connected_users.append(user_connection);
-    PLOGI << "New client Connected! Now users: " + QString::number(connected_users.size());
-}
-
-QList<UserConnection*> Server::getUsersList() const
-{
-    return connected_users;
-}
+//void Server::incomingConnection(qintptr socket_descriptor_)
+//{
+//    UserConnection* user_connection = new UserConnection();
+//    if (!user_connection->setSocketDescriptor(socket_descriptor_)) {
+//        user_connection->deleteLater();         //if the socket descriptor could not be set, delete the socket
+//        PLOGE << "Socket descriptor could not be set";
+//        return;
+//    }
+//    connect(user_connection, &UserConnection::disconnectedFromClient, this, std::bind(&Server::userDisconnected, this, user_connection));
+//    connect(user_connection, &UserConnection::errorSignal, this, std::bind(&Server::userError, this, user_connection));
+//    connect(user_connection, &UserConnection::jsonReceived, this, std::bind(&Server::jsonReceived, this, user_connection, std::placeholders::_1));  //it become to signal now
+//    connect(user_connection, &UserConnection::jsonReceived, MessageController::instance().get(), std::bind(&MessageController::jsonReceived, MessageController::instance().get(), user_connection, std::placeholders::_1));  //connect with MessageController (это нужно перенести в MessageController)
+//    connect(this, &Server::broadcastSend, MessageController::instance().get(), &MessageController::broadcastSend); //это нужно перенести в MessageController
+//
+//    connected_users.append(user_connection);
+//    PLOGI << "New client Connected! Now users: " + QString::number(connected_users.size());
+//}
 
 void Server::loadConfig(const QString& path_)
 {
@@ -107,6 +105,7 @@ void Server::openConnection()
         if (this->listen(QHostAddress::Any, server_port))      //QHostAddress::Any, 5555
         {
             PLOGD << "Server start - OK";
+            emit serverStarted();
         }
         else
         {
@@ -116,13 +115,6 @@ void Server::openConnection()
     else
     {
         PLOGD << "Server is already listening";
-    }
-}
-
-void Server::disableUsers()
-{
-    for (UserConnection* user : connected_users) {
-        user->disconnectFromClient();
     }
 }
 
@@ -146,25 +138,5 @@ void Server::disableUsers()
 //    //    PLOGI << "New room created! Now rooms: " + QString::number(rooms.size());
 //    //}
 //}
-
-void Server::userDisconnected(UserConnection* sender_)
-{
-    connected_users.removeAll(sender_);
-    const QString userName = sender_->getUserName();
-    if (!userName.isEmpty()) {
-        QJsonObject disconnectedMessage;
-        disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
-        disconnectedMessage[QStringLiteral("username")] = userName;
-        broadcastSend(disconnectedMessage, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), nullptr);
-        PLOGI << userName + QLatin1String(" disconnected, users left: ") + QString::number(connected_users.size());
-    }
-    sender_->deleteLater();
-}
-
-void Server::userError(const UserConnection* sender_)
-{
-    Q_UNUSED(sender_)
-        PLOGE << QLatin1String("Error from ") + sender_->getUserName();
-}
 
 
