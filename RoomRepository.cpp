@@ -7,7 +7,7 @@ namespace DBService {
 	RoomRepository::~RoomRepository() {}
 
 	QFuture<QList<QSharedPointer<DBEntity::DBRoom>>> RoomRepository::getAllRooms() {
-		return QtConcurrent::run([query_string_ = "SELECT * from room;"]() {
+		return QtConcurrent::run([query_string_ = "SELECT r.*, t.name AS topic_name FROM room r JOIN topic t ON r.topic_id=t.id;"]() {
 			QList<QSharedPointer<DBEntity::DBRoom>> room_list;
 			try
 			{
@@ -28,11 +28,12 @@ namespace DBService {
 						QString name = query_model.record(i).value("name").toString();
 						QString description = query_model.record(i).value("description").toString();
 						qint32 topic_id = query_model.record(i).value("topic_id").toInt();
+						QString topic_name = query_model.record(i).value("topic_name").toString();
 						bool is_private = query_model.record(i).value("is_private").toBool();
 						QString password = query_model.record(i).value("password").toString();
 						bool is_deleted = query_model.record(i).value("is_deleted").toBool();
 
-						auto shp_room = QSharedPointer<DBEntity::DBRoom>(new DBEntity::DBRoom(id, name, description, topic_id, is_private, password, is_deleted));
+						auto shp_room = QSharedPointer<DBEntity::DBRoom>(new DBEntity::DBRoom(id, name, description, topic_id, topic_name, is_private, password, is_deleted));
 						room_list.append(shp_room);
 					}
 
@@ -59,7 +60,7 @@ namespace DBService {
 	}
 
 	QList<QSharedPointer<DBEntity::DBRoom>> RoomRepository::getAllActiveRooms() {
-			auto query_string_ = "SELECT * from room WHERE is_deleted=0;";
+			auto query_string_ = "SELECT r.*, t.name AS topic_name FROM room r JOIN topic t ON r.topic_id=t.id WHERE r.is_deleted=0;";
 			QList<QSharedPointer<DBEntity::DBRoom>> room_list;
 			try
 			{
@@ -79,11 +80,12 @@ namespace DBService {
 						QString name = query_model.record(i).value("name").toString();
 						QString description = query_model.record(i).value("description").toString();
 						qint32 topic_id = query_model.record(i).value("topic_id").toInt();
+						QString topic_name = query_model.record(i).value("topic_name").toString();
 						bool is_private = query_model.record(i).value("is_private").toBool();
 						QString password = query_model.record(i).value("password").toString();
 						bool is_deleted = query_model.record(i).value("is_deleted").toBool();
 
-						auto shp_room = QSharedPointer<DBEntity::DBRoom>(new DBEntity::DBRoom (id, name, description, topic_id, is_private, password, is_deleted));
+						auto shp_room = QSharedPointer<DBEntity::DBRoom>(new DBEntity::DBRoom (id, name, description, topic_id, topic_name, is_private, password, is_deleted));
 						room_list.append(shp_room);
 					}
 
@@ -105,7 +107,48 @@ namespace DBService {
 				PLOG_ERROR << "Exception in getAllActiveRooms method: " << exception.what();
 			}
 			return room_list;
-			
+	}
+
+	QFuture<QSharedPointer<DBEntity::DBRoom>> RoomRepository::getRoomById(const qint32& room_id_) {
+		return QtConcurrent::run([query_string_ = "SELECT r.*, t.name AS topic_name FROM room r JOIN topic t ON r.topic_id = t.id WHERE r.id=:id;", &room_id_]() {
+			try
+			{
+				a_dbConnection.databaseConnectionOpen();
+				if (a_dbConnection.getDatabase().isOpen()) {
+					QSqlQuery query;
+					query.prepare(query_string_);
+					query.bindValue(":id", room_id_);
+
+					if (query.exec() && query.next()) {
+						QString name = query.value("name").toString();
+						QString description = query.value("description").toString();
+						qint32 topic_id = query.value("topic_id").toInt();
+						QString topic_name = query.value("topic_name").toString();
+						bool is_private = query.value("is_private").toBool();
+						QString password = query.value("password").toString();
+						bool is_deleted = query.value("is_deleted").toBool();
+						a_dbConnection.databaseConnectionClose();
+						QSharedPointer<DBEntity::DBRoom> shp_room = QSharedPointer<DBEntity::DBRoom>::create(room_id_, name, description, topic_id, topic_name, is_private, password);
+						return shp_room;;
+					}
+					else {
+						PLOG_ERROR << "Cannot get rom by id: " << room_id_;
+						a_dbConnection.databaseConnectionClose();
+						return static_cast<QSharedPointer<DBEntity::DBRoom>>(nullptr);
+					}
+				}
+				else {
+					PLOG_ERROR << "Cannot connect to the data base.";
+					a_dbConnection.databaseConnectionClose();
+					return static_cast<QSharedPointer<DBEntity::DBRoom>>(nullptr);
+				}
+			}
+			catch (const std::exception& exception)
+			{
+				PLOG_ERROR << "Exception in getRoomById method: " << exception.what();
+				return static_cast<QSharedPointer<DBEntity::DBRoom>>(nullptr);
+			}
+			});
 	}
 
 	QFuture<qint32> RoomRepository::createRoom( const DBEntity::DBRoom& room_) {

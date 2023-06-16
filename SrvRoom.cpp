@@ -13,10 +13,14 @@ SrvRoom::SrvRoom(QSharedPointer<DBEntity::DBRoom> cshp_db_room_, QObject* p_pare
     QObject(p_parent_)
 {}
 
+SrvRoom::SrvRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const QString& topic_name_, const bool& is_private_, const QString& password_, const bool& is_deleted_)
+    : id(id_), name(name_), description(description_), topic_id(topic_id_), topic_name(topic_name_), is_private(is_private_), password(password_), is_deleted(is_deleted_), messages(), connected_users() {}
+
 quint32 SrvRoom::getId() const { return id; }
 QString SrvRoom::getName() const { return name; }
 QString SrvRoom::getDescription() const { return description; }
 quint32 SrvRoom::getTopicId() const { return topic_id; }
+QString SrvRoom::getTopicName() const { return topic_name; }
 bool SrvRoom::isPrivate() const { return is_private; }
 QString SrvRoom::getPassword() const { return password; }
 bool SrvRoom::isDeleted() const { return is_deleted; }

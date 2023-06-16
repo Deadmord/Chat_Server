@@ -6,6 +6,7 @@
 #include <QObject>
 
 #include "SrvRoom.h"
+#include "DBTopic.h"
 
 namespace DBEntity {
 
@@ -13,7 +14,7 @@ namespace DBEntity {
 
 	public:
 
-		explicit DBRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const bool& is_private_, const QString& password_, const bool& is_deleted_ = false);
+		explicit DBRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const QString& topic_name_, const bool& is_private_, const QString& password_, const bool& is_deleted_ = false);
 		explicit DBRoom(QSharedPointer<SrvRoom> cshp_srv_room_);
 
 		qint32 getId() const;
@@ -24,6 +25,8 @@ namespace DBEntity {
 		void setDescription(const QString& description_);
 		qint32 getTopicId() const;
 		void setTopicId(const qint32& topic_id_);
+		QString getTopicName() const;
+		void setTopicName(const QString& name_);
 		bool isPrivate() const;
 		void setIsPrivate(const bool& is_private_);
 		QString getPassword() const;
@@ -35,7 +38,7 @@ namespace DBEntity {
 		qint32 a_id;
 		QString a_name;
 		QString a_description;
-		qint32 a_topic_id;
+		DBEntity::DBTopic a_topic;
 		bool a_is_private;
 		QString a_password;
 		bool a_is_deleted;

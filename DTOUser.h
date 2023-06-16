@@ -5,8 +5,7 @@
 #include <QSharedPointer>
 #include <QTcpSocket>
 #include "DBUser.h"
-#include "Entities/SrvModels/UserConnection.h"
-
+#include "UserConnection.h"
 namespace DTOModel {
 
 	class DTOUser : public QObject {
