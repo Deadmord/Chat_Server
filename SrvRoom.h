@@ -5,6 +5,7 @@
 #include <qtypes.h>
 #include <qmetatype.h>
 #include <QSharedPointer>
+#include <QtConcurrent>
 
 
 #include "Message.h"
@@ -34,8 +35,10 @@ public:
 	[[nodiscard]] QString getPassword() const;		//TODO!!! It seems like, should be changed on "bool checkPassword" !!!
 	[[nodiscard]] bool isDeleted() const;
 	[[nodiscard]] bool isPrivate() const;
-	[[nodiscard]] QList<UserConnection*> getConnectedUsers() const;
-	[[nodiscard]] QList<User_Message*> getMessages(const QDateTime& from_, const QDateTime& to_) const;
+	[[nodiscard]] QSet<QSharedPointer<UserConnection>> getConnectedUsers() const;
+	[[nodiscard]] QSet<QSharedPointer<User_Message>> getMessages() const;
+	[[nodiscard]] QSet<QSharedPointer<User_Message>> getMessages(const QDateTime& from_, const QDateTime& to_) const;
+	
 
 
 	//static void initializeList(const QVector<DBEntity::DBRoom>& rooms_list_);
@@ -43,9 +46,8 @@ public:
 	//static void deleteOne(const QVector<DBEntity::DBRoom>& roomsList, DBEntity::DBRoom deleted_room_);
 
 
-	void addMessages(QSet<QSharedPointer<User_Message>> messages_);
-	void addMessage(QSharedPointer<User_Message> p_message_);
-	QSet<QSharedPointer<User_Message>> getMessages();
+	void addMessages(const QSet<QSharedPointer<User_Message>>& messages_);
+	void addMessage(const QSharedPointer<User_Message>& p_message_);
 	void setName(const QString& val);
 	void setDescription(const QString& val);
 	void setPrivate(bool val);
@@ -63,8 +65,7 @@ signals:
 
 public slots:
 
-	void initRoom();
-	void connectUser(UserConnection* user);
+	void connectUser(const QSharedPointer<UserConnection>& shp_user_);
 
 private:
 	quint32 id;
@@ -77,7 +78,7 @@ private:
 	bool	is_deleted;
 
 	QSet<QSharedPointer<User_Message>> messages;
-	QList<UserConnection*> connected_users;
+	QSet<QSharedPointer<UserConnection>> connected_users;
 };
 
 #endif //SRVROOM_H

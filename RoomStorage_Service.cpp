@@ -2,7 +2,7 @@
 
 void RoomStorage_Service::init()
 {
-    if (getInstance()->is_started()) {
+    if (!getInstance()->is_started()) {
 
         getInstance()->make_started();
 
@@ -32,7 +32,7 @@ void RoomStorage_Service::downloadRoomsFromDB()
         }
         PLOGD << "Rooms uploaded";
 
-        });
+    });
 
     //auto dbrooms = QSharedPointer<QList<QSharedPointer<DBEntity::DBRoom>>>::create(qMove(future.result()));
     //auto futurew = QtConcurrent::run([](auto dbrooms) -> decltype(rooms_set) {
@@ -64,7 +64,7 @@ QList<QSharedPointer<SrvRoom>> RoomStorage_Service::getRooms()
     return rooms_storage.values();
 }
 
-QSharedPointer<SrvRoom> RoomStorage_Service::getRoom(qint32 room_id_)
+QSharedPointer<SrvRoom> RoomStorage_Service::getRoom(const qint32& room_id_)
 {
     if (rooms_storage.contains(room_id_)) {
         return rooms_storage.value(room_id_);
@@ -72,14 +72,14 @@ QSharedPointer<SrvRoom> RoomStorage_Service::getRoom(qint32 room_id_)
     else return nullptr;
 }
 
-void RoomStorage_Service::uploadRoomToDB(QSharedPointer<SrvRoom> new_room_)
+void RoomStorage_Service::uploadRoomToDB(const QSharedPointer<SrvRoom>& shp_new_room_) const 
 {
-    if (new_room_ != nullptr) {
-        QtConcurrent::run(DBService::RoomRepository::createRoom, DBEntity::DBRoom(new_room_));
+    if (shp_new_room_ != nullptr) {
+        QtConcurrent::run(DBService::RoomRepository::createRoom, DBEntity::DBRoom(shp_new_room_));
     }
 }
 
-void RoomStorage_Service::createRoom(QSharedPointer<SrvRoom> shp_new_room_)
+void RoomStorage_Service::createRoom(const QSharedPointer<SrvRoom>& shp_new_room_)
 {
     if (!rooms_storage.contains(shp_new_room_->getId())) {
         rooms_storage.insert(shp_new_room_->getId(), shp_new_room_);
@@ -89,24 +89,33 @@ void RoomStorage_Service::createRoom(QSharedPointer<SrvRoom> shp_new_room_)
     else PLOGE << "Room already exist! " + shp_new_room_->getName();
 }
 
-void RoomStorage_Service::addMessageToRoom(qint32 room_id_, User_Message* message_)
+void RoomStorage_Service::addMessageToRoom(const qint32& room_id_, const QSharedPointer<User_Message>& message_)
 {
     Q_ASSERT(rooms_storage.contains(room_id_));
     if (rooms_storage.contains(room_id_)) {
-        rooms_storage.value(room_id_)->addMessage(QSharedPointer<User_Message>(message_));
-        LocalStorage_Service::getInstance()->addMessages(message_, room_id_);
+        rooms_storage.value(room_id_)->addMessage(message_);
+        LocalStorage_Service::getInstance()->addMessage(message_, room_id_);
     }
-    else PLOGE << "Room doesn't exist id: " + room_id_;
+    else PLOGE << "Room doesn't exist. Id: " + room_id_;
 }
 
 RoomStorage_Service::RoomStorage_Service(QObject* parent_) : QObject(parent_) {};
 
-void RoomStorage_Service::addConnecntedUserToRoom(qint32 room_id_, UserConnection* user_)
+void RoomStorage_Service::addConnecntedUserToRoom(const qint32& room_id_, const QSharedPointer<UserConnection>& shp_user_)
 {
+    if (rooms_storage.contains(room_id_)) {
+        rooms_storage.value(room_id_)->connectUser(shp_user_);
+    }
+    else PLOGE << "Room doesn't exist. Id: " + room_id_;
 }
 
-void RoomStorage_Service::addMessagesToRoom(qint32 room_id_, QSet<QSharedPointer<User_Message>> messages_)
+void RoomStorage_Service::addMessagesToRoom(const qint32& room_id_, const QSet<QSharedPointer<User_Message>>& messages_)
 {
+    if (rooms_storage.contains(room_id_)) {
+        rooms_storage.value(room_id_)->addMessages(messages_);
+    }
+    else PLOGE << "Room doesn't exist. Id: " + room_id_;
+
 }
 
 void RoomStorage_Service::getMessagesFromDB(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_)
@@ -169,12 +178,12 @@ void RoomStorage_Service::getMessagesFromLocalStorage(const quint32& room_id_, c
     }
 }
 
-QSharedPointer<DBEntity::DBMessage> RoomStorage_Service::fromUserMessageToDBMessage(const QSharedPointer<User_Message> shp_user_message_)
+QSharedPointer<DBEntity::DBMessage> RoomStorage_Service::fromUserMessageToDBMessage(const QSharedPointer<User_Message>& shp_user_message_)
 {
     return QSharedPointer<DBEntity::DBMessage>();
 }
 
-QSharedPointer<User_Message> RoomStorage_Service::fromDBMessageToUserMessage(const QSharedPointer<DBEntity::DBMessage> shp_user_message_)
+QSharedPointer<User_Message> RoomStorage_Service::fromDBMessageToUserMessage(const QSharedPointer<DBEntity::DBMessage>& shp_user_message_)
 {
     return QSharedPointer<User_Message>();
 }
@@ -200,13 +209,7 @@ QList<QSharedPointer<User_Message>> RoomStorage_Service::getMessages(const quint
             PLOGF << "DRATUTY!!!";
             });
 
-        foreach(const auto & message, rooms_storage[room_id_]->getMessages())
-        {
-            if (auto date = message->getDateTime(); date >= from_ && date <= to_)
-            {
-                messages.insert(message);
-            }
-        }
+        rooms_storage[room_id_]->getMessages(from_, to_);
 
     }
     else

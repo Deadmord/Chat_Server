@@ -25,14 +25,19 @@ bool SrvRoom::isPrivate() const { return is_private; }
 QString SrvRoom::getPassword() const { return password; }
 bool SrvRoom::isDeleted() const { return is_deleted; }
 
-void SrvRoom::addMessage(QSharedPointer<User_Message> p_message_)
+void SrvRoom::addMessage(const QSharedPointer<User_Message>& p_message_)
 {
     messages.insert(p_message_);
 }
 
-QSet<QSharedPointer<User_Message>> SrvRoom::getMessages()
+QSet<QSharedPointer<User_Message>> SrvRoom::getMessages() const
 {
     return messages;
+}
+
+void SrvRoom::addMessages(const QSet<QSharedPointer<User_Message>>& messages_)
+{
+    messages.unite(messages_);
 }
 
 void SrvRoom::setName(const QString& val) { name = val; emit nameChanged(val); }
@@ -41,63 +46,30 @@ void SrvRoom::setPrivate(bool val) { is_private = val; emit privateChanged(val);
 void SrvRoom::setPassword(const QString& val) { password = val; emit passwordChanged(); }
 void SrvRoom::Delete() { is_deleted = true; emit roomDeleted(); }
 
-QList<UserConnection*> SrvRoom::getConnectedUsers() const
+QSet<QSharedPointer<UserConnection>> SrvRoom::getConnectedUsers() const
 {
-    return QList<UserConnection*>();
+    return connected_users;
 }
 
-QList<User_Message*> SrvRoom::getMessages(const QDateTime& from_, const QDateTime& to_) const
+QSet<QSharedPointer<User_Message>> SrvRoom::getMessages(const QDateTime& from_, const QDateTime& to_) const
 {
-    return QList<User_Message*>();
+    QSet<QSharedPointer<User_Message>> result;
+    QtConcurrent::map(messages, [&result, &from_, &to_](QSharedPointer<User_Message> message) {
+        if (auto date = message->getDateTime(); date >= from_ && date <= to_)
+        {
+            result.insert(message);
+        }
+    }).waitForFinished();
+
+    return result;
 }
 
 
 
-void SrvRoom::connectUser(UserConnection* user)
+void SrvRoom::connectUser(const QSharedPointer<UserConnection>& shp_user_)
 {
+    if (!connected_users.contains(shp_user_)) {
+        connected_users.insert(shp_user_);
+    }
+    else PLOGE << "User already connected! Login: " + shp_user_->getUserName();
 }
-
-void SrvRoom::initRoom() {
-
-}
-
-//void SrvRoom::loadMsgHistory(QDateTime from_, QDateTime to_)
-//{
-    //QJsonDocument msgHistory;
-    //QJsonArray msgArray;
-    //QJsonParseError jsonError;
-    //QFile msgFile;
-
-    //msgFile.setFileName(path);
-    //if (msgFile.open(QIODevice::ReadOnly | QFile::Text))
-    //{
-    //    //тот нужно блокировать обращение к ресурсу msgFile
-    //    msgHistory = QJsonDocument::fromJson(QByteArray(msgFile.readAll()), &jsonError);
-    //    msgFile.close();
-
-    //    if (jsonError.errorString().toInt() == QJsonParseError::NoError)
-    //    {
-    //        msgArray = QJsonValue(msgHistory.object().value("messanges")).toArray();
-    //        for (const auto& msgJson : msgArray)
-    //        {
-    //            Message msg{ msgJson.toObject().value("id").toString(),
-    //                       static_cast<quint32>(msgJson.toObject().value("roomId").toInt()),
-    //                        QDateTime::fromString(msgJson.toObject().value("time").toString()),
-    //                        msgJson.toObject().value("nickname").toString(),
-    //                        msgJson.toObject().value("text").toString(),
-    //                        msgJson.toObject().value("mediaId").toString(),
-    //                        msgJson.toObject().value("parentId").toString(),
-    //                        msgJson.toObject().value("deleted").toBool() };
-    //            messages.push_back(msg);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        qDebug() << "Error message history read: " << jsonError.error;
-    //    }
-    //}
-    //else
-    //{
-    //    qDebug() << "File message history can't be open.";
-    //}
-//}

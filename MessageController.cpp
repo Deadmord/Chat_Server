@@ -32,12 +32,12 @@ User_Message MessageController::createMessage(const QString& nickname_, const QS
 
 void MessageController::broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> shp_room_, const UserConnection* exclude_)
 {
-    for (UserConnection* user : shp_room_->getConnectedUsers()) {
+    /*for (UserConnection* user : shp_room_->getConnectedUsers()) {
         Q_ASSERT(user);
         if (user == exclude_)
             continue;
         sendJson(user, message_);
-    }
+    }*/
 }
 
 void MessageController::sendJson(UserConnection* destination_, const QJsonObject& message_)

@@ -38,7 +38,8 @@ signals:
 
 public slots:
    
-    void addMessages(User_Message* shp_message_, quint32 room_id_);
+    void addMessages(QSet<QSharedPointer<User_Message>> messages_, quint32 room_id_);
+    void addMessage(QSharedPointer<User_Message> shp_message_, quint32 room_id_);
     //void getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_);
     void saveAllMessages();
 
