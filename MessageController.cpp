@@ -19,16 +19,17 @@ QSharedPointer<MessageController> MessageController::instance()
 //    return &inst;
 //}
 
-User_Message MessageController::createMessage(const QString& nickname_, const QString& text_)
-{
-    Message msg;
-    msg.nickname = nickname_;
-    msg.text = text_;
-    msg.room_id = 0;
-    msg.deleted = false;
-    return User_Message(msg);
-    //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
-}
+//TODO: НЕ ПОНЯТНО ЧТО ЭТО ТАКОЕ
+//User_Message MessageController::createMessage(const QString& nickname_, const QString& text_)
+//{
+//    User_Message msg;
+//    msg.nickname = nickname_;
+//    msg.text = text_;
+//    msg.room_id = 0;
+//    msg.deleted = false;
+//    return User_Message();
+//    //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
+//}
 
 void MessageController::broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> shp_room_, const UserConnection* exclude_)
 {

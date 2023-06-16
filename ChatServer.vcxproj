@@ -95,6 +95,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AsyncConsoleWin.cpp" />
+    <ClCompile Include="DTOMessage.cpp" />
     <ClCompile Include="DTORoom.cpp" />
     <ClCompile Include="DTOUser.cpp" />
     <ClCompile Include="FileRepository.cpp" />
@@ -116,9 +117,9 @@
     <QtMoc Include="UserController.h" />
     <QtMoc Include="UserConnection.h" />
     <QtMoc Include="Message.h" />
-    <QtMoc Include="DBMessage.h" />
+    <ClInclude Include="DBMessage.h" />
     <QtMoc Include="AsyncConsoleWin.h" />
-    <ClInclude Include="entities.h" />
+    <ClInclude Include="DTOMessage.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="FileRepository.h" />
     <QtMoc Include="RoomController.h" />

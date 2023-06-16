@@ -8,9 +8,8 @@ QJsonObject DBEntity::DBMessage::toJson() const {
     QJsonObject obj;
     obj["id"] = id.toString();
     obj["date_time"] = date_time.toString();
-    obj["room_id"] = room_id;
     obj["login"] = login;
-    obj["parent_id"] = parent_id.isNull()?"":parent_id->getId().toString();
+    obj["parent_id"] = parent_id;
     obj["text"] = text;
     obj["media"] = media.isNull()?"":media;
     obj["deleted"] = deleted;
@@ -25,25 +24,11 @@ QJsonObject DBEntity::DBMessage::toJson() const {
     return obj;
 }
 
-//DBEntity::DBMessage::DBMessage(const DBMessage& _message) 
-//{
-//    id = _message.id;
-//    date_time = _message.date_time;
-//    room_id = _message.room_id;
-//    login = _message.login;
-//    parent_id = _message.parent_id;
-//    text = _message.text;
-//    media = _message.media;
-//    deleted = _message.deleted;
-//    likes = _message.likes;
-//}
-
-
 void DBEntity::DBMessage::fromJson(const QJsonObject &obj_) {
 
     id = QUuid::fromString(obj_.value("id").toString());
     date_time = QDateTime::fromString(obj_.value("date_time").toString());
-    room_id = obj_.value("room_id").toInt();
+   
     login = obj_.value("login").toString();
 //    todo: parent id
 //    parent_id = obj.value("parent_id").toString();
@@ -56,6 +41,15 @@ void DBEntity::DBMessage::fromJson(const QJsonObject &obj_) {
         
         likes.insert(it.key() , it.value().toBool());
     }
+}
+
+DBEntity::DBMessage::DBMessage()
+{
+}
+
+bool DBEntity::DBMessage::isRtl() const
+{
+	return is_rtl;
 }
 
 void DBEntity::DBMessage::setDeleted(const bool flag_) {
@@ -100,7 +94,7 @@ QSet<QSharedPointer<DBEntity::DBMessage>> DBEntity::DBMessage::readMessages(cons
        if (obj.isObject())
        {
            QJsonObject json_object = obj.toObject();
-           QSharedPointer<DBMessage> message (new DBMessage, &QObject::deleteLater);
+           QSharedPointer<DBMessage> message (new DBMessage());
            message->fromJson(json_object);
            messages.insert(message);
        }
@@ -118,16 +112,13 @@ const QDateTime &DBEntity::DBMessage::getDateTime() const {
     return date_time;
 }
 
-qint32 DBEntity::DBMessage::getRoomId() const {
-    return room_id;
-}
 
 const QString &DBEntity::DBMessage::getLogin() const {
     return login;
 }
 
 QString DBEntity::DBMessage::getParentId() const {
-    return parent_id.isNull()?"":parent_id->getId().toString();
+    return parent_id;
 }
 
 const QString &DBEntity::DBMessage::getText() const {
@@ -150,17 +141,19 @@ const QUuid &DBEntity::DBMessage::getId() const {
     return id;
 }
 
-DBEntity::DBMessage::DBMessage(const qint32 room_id_, const QString &login_, const QString &text_, const QString &media_, const QObject* parent_) {
+DBEntity::DBMessage::DBMessage(const QUuid& id_, const QDateTime& date_time_, const QString& login_,
+                               const QString& text_, const QString& media_, const QString& parent_id_, const bool is_rtl_
+                               )
+{
 
-    id = QUuid::createUuid();
-    date_time = QDateTime::currentDateTime();
-    room_id = room_id_;
+    id = id_;
+    date_time = date_time_;
     login = login_;
     text = text_;
     media = media_;
+    parent_id = parent_id_;
+    is_rtl = is_rtl_;
 }
-    DBEntity::DBMessage::DBMessage(QObject * parent_):QObject(parent_)
-    {}
 
 
     //TODO: заглушка парсера

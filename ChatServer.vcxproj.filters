@@ -198,6 +198,9 @@
     <ClCompile Include="MediaSaver_Service.cpp">
       <Filter>Services\MediaSaverService</Filter>
     </ClCompile>
+    <ClCompile Include="DTOMessage.cpp">
+      <Filter>Entities\Models\DTOModels\DTOMessage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBRoom.h">
@@ -218,8 +221,11 @@
     <ClInclude Include="Enums.h">
       <Filter>Entities\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="entities.h">
-      <Filter>Entities</Filter>
+    <ClInclude Include="DTOMessage.h">
+      <Filter>Entities\Models\DTOModels\DTOMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="DBMessage.h">
+      <Filter>Entities\Models\DBModels\DBMessage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -264,9 +270,6 @@
     </QtMoc>
     <QtMoc Include="AsyncConsoleWin.h">
       <Filter>Core\Console</Filter>
-    </QtMoc>
-    <QtMoc Include="DBMessage.h">
-      <Filter>Entities\Models\DBModels\DBMessage</Filter>
     </QtMoc>
     <QtMoc Include="Message.h">
       <Filter>Entities\Models\Srv Models\SrvMessage</Filter>
