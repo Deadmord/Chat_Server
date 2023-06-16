@@ -27,6 +27,10 @@ QSharedPointer<LocalStorage_Service> LocalStorage_Service::getInstance(int minut
 LocalStorage_Service::LocalStorage_Service(QObject* object_) : QObject(object_) {}
 
 
+void LocalStorage_Service::addMessage(QSharedPointer<User_Message> shp_message_, quint32 room_id_)
+{
+}
+
 void LocalStorage_Service::saveAllMessages() {
 
     if (!shp_instance->message_storage.empty())
@@ -65,7 +69,7 @@ void LocalStorage_Service::safeExit()
 }
 
 
-void LocalStorage_Service::addMessages(User_Message* message_, quint32 room_id_) {
+void LocalStorage_Service::addMessages(QSet<QSharedPointer<User_Message>> messages_, quint32 room_id_) {
     //if (!message_storage.contains(room_id_)) {
     //    QList<QSharedPointer<DBEntity::DBMessage>> new_room_history;
     //    message_storage.insert(room_id_, new_room_history);
