@@ -52,10 +52,13 @@ void MessageController::jsonReceived(SrvUser* sender_, const QJsonObject& doc_)
     PLOGI << QLatin1String("JSON received: ") + QJsonDocument(doc_).toJson(QJsonDocument::Compact);
     if (sender_->getUserName().isEmpty())
         return jsonFromLoggedOut(sender_, doc_);
+    if (sender_->getRoomId() == 0)
+        return jsonFromLoggedWoRoom(sender_, doc_);
+    jsonFromLoggedIn(sender_, doc_);
     //-------------- проверять принадлежность комнате ------------------
     // -----------------если принадлежит то отправлять сообщение в конкретную комнату---------------
     //вместо этого
-    jsonFromLoggedInCmd(sender_, doc_);
+
 }
 
 void MessageController::jsonFromLoggedOut(SrvUser* sender_, const QJsonObject& doc_obj_)
@@ -95,7 +98,7 @@ void MessageController::jsonFromLoggedOut(SrvUser* sender_, const QJsonObject& d
     broadcastSend(connected_message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
 }
 
-void MessageController::jsonFromLoggedInCmd(SrvUser* sender_, const QJsonObject& doc_obj_)
+void MessageController::jsonFromLoggedIn(SrvUser* sender_, const QJsonObject& doc_obj_)
 {
     Q_ASSERT(sender_);
     const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
@@ -150,23 +153,28 @@ void MessageController::jsonFromLoggedInCmd(SrvUser* sender_, const QJsonObject&
 
 }
 
-void MessageController::jsonFromLoggedInMsg(const SrvUser* sender_, const QJsonObject& doc_obj_)
+void MessageController::jsonFromLoggedWoRoom(SrvUser* sender_, const QJsonObject& doc_obj_)
 {
-    Q_ASSERT(sender_);
-    const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
-    if (type_val.isNull() || !type_val.isString())
-        return;
-    if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) != 0)
-        return;
-    const QJsonValue text_val = doc_obj_.value(QLatin1String("text"));
-    if (text_val.isNull() || !text_val.isString())
-        return;
-    const QString text = text_val.toString().trimmed();
-    if (text.isEmpty())
-        return;
-    QJsonObject message;
-    message[QStringLiteral("type")] = QStringLiteral("message");
-    message[QStringLiteral("text")] = text;
-    message[QStringLiteral("sender")] = sender_->getUserName();
-    broadcastSend(message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
+
 }
+
+//void MessageController::jsonFromLoggedInMsg(const SrvUser* sender_, const QJsonObject& doc_obj_)
+//{
+//    Q_ASSERT(sender_);
+//    const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
+//    if (type_val.isNull() || !type_val.isString())
+//        return;
+//    if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) != 0)
+//        return;
+//    const QJsonValue text_val = doc_obj_.value(QLatin1String("text"));
+//    if (text_val.isNull() || !text_val.isString())
+//        return;
+//    const QString text = text_val.toString().trimmed();
+//    if (text.isEmpty())
+//        return;
+//    QJsonObject message;
+//    message[QStringLiteral("type")] = QStringLiteral("message");
+//    message[QStringLiteral("text")] = text;
+//    message[QStringLiteral("sender")] = sender_->getUserName();
+//    broadcastSend(message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
+//}

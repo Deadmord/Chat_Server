@@ -28,8 +28,8 @@ public:
 	~MessageController() override;
 
 	void jsonFromLoggedOut(SrvUser* sender_, const QJsonObject& doc_);
-	void jsonFromLoggedInMsg(const SrvUser* sender_, const QJsonObject& doc_obj_);      //Убрать в RoomController
-	void jsonFromLoggedInCmd(SrvUser* sender_, const QJsonObject& doc_obj_);
+	void jsonFromLoggedIn(SrvUser* sender_, const QJsonObject& doc_obj_);      //Убрать в RoomController
+	void jsonFromLoggedWoRoom(SrvUser* sender_, const QJsonObject& doc_obj_);
 	void sendJson(SrvUser* destination_, const QJsonObject& message_);
 	User_Message createMessage(const QString& nickname_, const QString& text_);
 
