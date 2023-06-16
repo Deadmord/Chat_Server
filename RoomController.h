@@ -29,6 +29,7 @@ public:
 
 	explicit RoomController(QObject* parent = nullptr);
 	~RoomController() override;
+	static QSharedPointer<RoomController> instance();
 
 	
 public slots:
@@ -41,8 +42,8 @@ private:
 	void broadcastSend(QSharedPointer<SrvRoom> shp_room_, const QJsonObject& message, SrvUser* exclude);
 	void sendJson(SrvUser* destination, const QJsonObject& message);
 	
-
-
+private:
+	inline static QSharedPointer<RoomController> shp_instance{};
 };
 
 Q_DECLARE_METATYPE(RoomController)

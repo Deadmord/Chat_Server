@@ -6,6 +6,15 @@ RoomController::RoomController(QObject* parent) : QObject(parent)
 
 RoomController::~RoomController() = default;
 
+QSharedPointer<RoomController> RoomController::instance()
+{
+    if (!shp_instance)
+    {
+        shp_instance = QSharedPointer<RoomController>(new RoomController());
+    }
+    return shp_instance;
+}
+
 //void RoomController::initRoom()
 //{
 //    loadMsgHistory(msg_history_path);
