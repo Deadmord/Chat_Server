@@ -10,6 +10,9 @@ QSharedPointer<UserController> UserController::instance()
     {
         shp_instance = QSharedPointer<UserController>(new UserController());
     }
+
+    connect(shp_instance.get(), &UserController::broadcastSend, MessageController::instance().get(), &MessageController::broadcastSend); //это нужно перенести в MessageController
+
     return shp_instance;
 }
 
@@ -23,9 +26,7 @@ void UserController::addConnection(qintptr socket_descriptor_)
     }
     connect(user_connection, &UserConnection::disconnectedFromClient, this, std::bind(&UserController::userDisconnected, this, user_connection));
     connect(user_connection, &UserConnection::errorSignal, this, std::bind(&UserController::userError, this, user_connection));
-    connect(user_connection, &UserConnection::jsonReceived, this, std::bind(&UserController::jsonReceived, this, user_connection, std::placeholders::_1));  //it become to signal now
     connect(user_connection, &UserConnection::jsonReceived, MessageController::instance().get(), std::bind(&MessageController::jsonReceived, MessageController::instance().get(), user_connection, std::placeholders::_1));  //connect with MessageController (это нужно перенести в MessageController)
-    connect(this, &UserController::broadcastSend, MessageController::instance().get(), &MessageController::broadcastSend); //это нужно перенести в MessageController
 
     connected_users.append(user_connection);
     PLOGI << "New client Connected! Now users: " + QString::number(connected_users.size());

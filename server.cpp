@@ -29,23 +29,24 @@ void Server::stopServer()
     }
 }
 
-//void Server::incomingConnection(qintptr socket_descriptor_)
-//{
-//    UserConnection* user_connection = new UserConnection();
-//    if (!user_connection->setSocketDescriptor(socket_descriptor_)) {
-//        user_connection->deleteLater();         //if the socket descriptor could not be set, delete the socket
-//        PLOGE << "Socket descriptor could not be set";
-//        return;
-//    }
-//    connect(user_connection, &UserConnection::disconnectedFromClient, this, std::bind(&Server::userDisconnected, this, user_connection));
-//    connect(user_connection, &UserConnection::errorSignal, this, std::bind(&Server::userError, this, user_connection));
-//    connect(user_connection, &UserConnection::jsonReceived, this, std::bind(&Server::jsonReceived, this, user_connection, std::placeholders::_1));  //it become to signal now
-//    connect(user_connection, &UserConnection::jsonReceived, MessageController::instance().get(), std::bind(&MessageController::jsonReceived, MessageController::instance().get(), user_connection, std::placeholders::_1));  //connect with MessageController (это нужно перенести в MessageController)
-//    connect(this, &Server::broadcastSend, MessageController::instance().get(), &MessageController::broadcastSend); //это нужно перенести в MessageController
-//
-//    connected_users.append(user_connection);
-//    PLOGI << "New client Connected! Now users: " + QString::number(connected_users.size());
-//}
+void Server::openConnection()
+{
+    if (!this->isListening()) {
+        if (this->listen(QHostAddress::Any, server_port))      //QHostAddress::Any, 5555
+        {
+            PLOGD << "Server start - OK";
+            emit serverStarted();
+        }
+        else
+        {
+            PLOGE << "Sever start - Error";
+        }
+    }
+    else
+    {
+        PLOGD << "Server is already listening";
+    }
+}
 
 void Server::loadConfig(const QString& path_)
 {
@@ -99,25 +100,6 @@ void Server::loadConfig(const QString& path_)
         qWarning("Couldn't open config file.");
     }
     
-}
-
-void Server::openConnection()
-{
-    if (!this->isListening()) {
-        if (this->listen(QHostAddress::Any, server_port))      //QHostAddress::Any, 5555
-        {
-            PLOGD << "Server start - OK";
-            emit serverStarted();
-        }
-        else
-        {
-            PLOGE << "Sever start - Error";
-        }
-    }
-    else
-    {
-        PLOGD << "Server is already listening";
-    }
 }
 
 //void Server::loadRooms()
