@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QSharedPointer>
 #include "DBRoom.h"
+#include "SrvRoom.h"
 
 namespace DTOModel {
 
@@ -15,7 +16,7 @@ namespace DTOModel {
 	public:
 
 		DTORoom(QObject* parent = nullptr);
-		DTORoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const bool& is_private_, const QString& password_, bool is_deleted = false);
+		DTORoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const bool& is_private_, const QString& password_);
 		~DTORoom();
 
 		qint32 getId() const;
@@ -30,11 +31,9 @@ namespace DTOModel {
 		void setIsPrivate(const bool& is_private_);
 		QString getPassword() const;
 		void setPassword(const QString& password_);
-		bool isDeleted() const;
-		void setIsDeleted(const bool& deleted_);
 
-		static QSharedPointer<DTOModel::DTORoom> createDTORoom(const DBEntity::DBRoom& db_room_);
-		static QSharedPointer<DBEntity::DBRoom> createDBRoom(const DTOModel::DTORoom& dto_room_);
+		//static QSharedPointer<DTOModel::DTORoom> createDTORoom(const DBEntity::DBRoom& db_room_);
+		//static QSharedPointer<DBEntity::DBRoom> createDBRoom(const DTOModel::DTORoom& dto_room_);
 
 	private:
 
@@ -44,7 +43,6 @@ namespace DTOModel {
 		qint32 a_topic_id;
 		bool a_is_private;
 		QString a_password;
-		bool a_is_deleted;
 	};
 }
 

@@ -19,7 +19,7 @@ class UserConnection : public QObject
 
 public:
     explicit UserConnection(QObject* parent = nullptr);
-
+    //UserConnection(const QTcpSocket)
     virtual bool setSocketDescriptor(qintptr _socket_descriptor);
 
     QString getId() const;
