@@ -2,7 +2,7 @@
 
 namespace DBService {
 
-	DBConnection UserRepository::a_dbConnection("Driver={ODBC Driver 18 for SQL Server};Server=tcp:comp-zionet-server.database.windows.net,1433;Database=CPP_Chat_DB;Uid=Logika4417;Pwd=Fyyf1998;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;");
+	DBConnection_Service UserRepository::a_dbConnection("Driver={ODBC Driver 18 for SQL Server};Server=tcp:comp-zionet-server.database.windows.net,1433;Database=CPP_Chat_DB;Uid=Logika4417;Pwd=Fyyf1998;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;", 0);
 	UserRepository::UserRepository(const QString& connection_string_) { a_dbConnection.setConnectionString(connection_string_); }
 	UserRepository::~UserRepository(){}
 
@@ -10,9 +10,9 @@ namespace DBService {
 		return QtConcurrent::run([query_string_ = "SELECT * FROM [user] WHERE login=:login;", &login_]() {
 			try
 			{
-				a_dbConnection.databaseConnectionOpen();
-				if (a_dbConnection.getDatabase().isOpen()) {
-					QSqlQuery query;
+				auto connection = DBService::DBConnection_Service::getConnection();
+				if (connection->getDatabase()->isOpen()) {
+					QSqlQuery query(*connection->getDatabase());
 					query.prepare(query_string_);
 					query.bindValue(":login", login_);
 
@@ -22,19 +22,16 @@ namespace DBService {
 						QByteArray userpicc = query.value("userpic").toByteArray();
 						qint32 rating = query.value("rating").toInt();
 						bool is_deleted = query.value("is_deleted").toBool();
-						a_dbConnection.databaseConnectionClose();
 						QSharedPointer<DBEntity::DBUser> shp_user = QSharedPointer<DBEntity::DBUser>::create(login, password, userpicc, rating, is_deleted);
 						return shp_user;
 					}
 					else {
 						PLOG_ERROR << "Cannot get user by login: " << login_;
-						a_dbConnection.databaseConnectionClose();
 						return static_cast<QSharedPointer<DBEntity::DBUser>>(nullptr);
 					}
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the data base.";
-					a_dbConnection.databaseConnectionClose();
 					return static_cast<QSharedPointer<DBEntity::DBUser>>(nullptr);
 				}
 			}
@@ -50,10 +47,10 @@ namespace DBService {
 		return QtConcurrent::run([query_string_ = "INSERT INTO [user] (login, password, userpic, rating, is_deleted) VALUES (:login, :password, :userpic, :rating, :is_deleted)", user_]() {
 			try
 			{
-				a_dbConnection.databaseConnectionOpen();
-				if (a_dbConnection.getDatabase().isOpen()) {
+				auto connection = DBService::DBConnection_Service::getConnection();
+				if (connection->getDatabase()->isOpen()) {
 
-					QSqlQuery query;
+					QSqlQuery query(*connection->getDatabase());
 					query.prepare(query_string_);
 
 					const QString user_password = user_.getPassword();
@@ -68,18 +65,15 @@ namespace DBService {
 
 					if (query.exec()) {
 						PLOG_INFO << "Created new User db entity with login: " << user_.getLogin();
-						a_dbConnection.databaseConnectionClose();
 						return true;
 					}
 					else {
 						PLOG_ERROR << "Error adding a new User db entity.";
-						a_dbConnection.databaseConnectionClose();
 						return false;
 					}
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the data base.";
-					a_dbConnection.databaseConnectionClose();
 					return false;
 				}
 			}
@@ -94,9 +88,9 @@ namespace DBService {
 	QFuture<bool> UserRepository::updateUserPasswordUserpic(const QString& login_, const QString& new_password_, const QByteArray& new_userpic_) {
 		return QtConcurrent::run([login_, new_password_, new_userpic_]() {
 			try {
-				a_dbConnection.databaseConnectionOpen();
-				if (a_dbConnection.getDatabase().isOpen()) {
-					QSqlQuery query;
+				auto connection = DBService::DBConnection_Service::getConnection();
+				if (connection->getDatabase()->isOpen()) {
+					QSqlQuery query(*connection->getDatabase());
 					QString query_string = "UPDATE [user] SET ";
 
 					if (!new_password_.isEmpty()) {
@@ -121,18 +115,15 @@ namespace DBService {
 					query.bindValue(":login", login_);
 					if (query.exec()) {
 						PLOG_INFO << "User updated.";
-						a_dbConnection.databaseConnectionClose();
 						return true;
 					}
 					else {
 						PLOG_ERROR << "Error updating a user.";
-						a_dbConnection.databaseConnectionClose();
 						return false;
 					}
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the database.";
-					a_dbConnection.databaseConnectionClose();
 					return false;
 				}
 			}
@@ -147,9 +138,9 @@ namespace DBService {
 		return QtConcurrent::run([login_, rating_]() {
 			try
 			{
-				a_dbConnection.databaseConnectionOpen();
-				if (a_dbConnection.getDatabase().isOpen()) {
-					QSqlQuery query;
+				auto connection = DBService::DBConnection_Service::getConnection();
+				if (connection->getDatabase()->isOpen()) {
+					QSqlQuery query(*connection->getDatabase());
 					QString query_string = "UPDATE [user] SET rating=:rating WHERE login=:login";
 					query.prepare(query_string);
 					query.bindValue(":rating", rating_);
@@ -170,18 +161,15 @@ namespace DBService {
 							PLOG_ERROR << "Cannot get new rating.";
 						}
 
-						a_dbConnection.databaseConnectionClose();
 						return qMakePair(true, new_rating);
 					}
 					else {
 						PLOG_ERROR << "Error updating rating.";
-						a_dbConnection.databaseConnectionClose();
 						return qMakePair(false, -1);
 					}
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the database.";
-					a_dbConnection.databaseConnectionClose();
 					return qMakePair(false, -1);
 				}
 			}
@@ -197,9 +185,9 @@ namespace DBService {
 		return QtConcurrent::run([login_]() {
 			try
 			{
-				a_dbConnection.databaseConnectionOpen();
-				if (a_dbConnection.getDatabase().isOpen()) {
-					QSqlQuery query;
+				auto connection = DBService::DBConnection_Service::getConnection();
+				if (connection->getDatabase()->isOpen()) {
+					QSqlQuery query(*connection->getDatabase());
 					QString query_string = "SELECT rating from [user] WHERE login=:login";
 					query.prepare(query_string);
 					query.bindValue(":login", login_);
@@ -207,18 +195,15 @@ namespace DBService {
 					if (query.exec() && query.next()) {
 						qint32 rating = query.value("rating").toInt();
 						PLOG_INFO << "User '" << login_ << "' rating : " << rating;
-						a_dbConnection.databaseConnectionClose();
 						return rating;
 					}
 					else {
 						PLOG_ERROR << "Cannot get rating.";
-						a_dbConnection.databaseConnectionClose();
 						return -1;
 					}
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the data base.";
-					a_dbConnection.databaseConnectionClose();
 					return -1;
 				}
 			}

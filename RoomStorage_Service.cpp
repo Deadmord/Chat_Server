@@ -7,8 +7,6 @@ void RoomStorage_Service::init()
         getInstance()->make_started();
 
         shp_instance->downloadRoomsFromDB();
-
-        shp_instance->getMessages(1, QDateTime::currentDateTime().addDays(-1), QDateTime::currentDateTime());
     }
 }
 
@@ -35,8 +33,6 @@ void RoomStorage_Service::downloadRoomsFromDB()
         PLOGD << "Rooms uploaded";
 
         });
-
-    future.waitForFinished();
 
     //auto dbrooms = QSharedPointer<QList<QSharedPointer<DBEntity::DBRoom>>>::create(qMove(future.result()));
     //auto futurew = QtConcurrent::run([](auto dbrooms) -> decltype(rooms_set) {

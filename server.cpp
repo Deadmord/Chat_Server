@@ -10,7 +10,9 @@ void Server::startServer()
 {
     loadConfig(CONFIG_FILE_PATH);
     openConnection();
-    RoomStorage_Service::init();
+    DBService::DBConnection_Service::init().then([]() {
+        RoomStorage_Service::init();
+        });
     PLOGI << "Server initialized";
 }
 
