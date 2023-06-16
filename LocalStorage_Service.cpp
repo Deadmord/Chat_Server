@@ -6,38 +6,8 @@ QSharedPointer<LocalStorage_Service> LocalStorage_Service::shp_instance = nullpt
 QMutex LocalStorage_Service::mutex;
 QSharedPointer<QTimer> LocalStorage_Service::shp_timer = nullptr;
 
-QList<QString> LocalStorage_Service::searchForFiles(
-	const QDateTime& from_, const QDateTime& to_,
-	const quint32& room_)
-{
-    QList<QString> file_names;
-    QDir directory("rooms/" + QString::number(room_));
-    QStringList all_files = directory.entryList(QDir::Files);
-    bool is_empty = true;
-    const QRegularExpression regex(R"((\d{8}_\d{4})\.json)"); // Regular expression to match file names like "20230102_1000.json"
 
-    for (const QString& file_name : all_files)
-    {
-        if (QRegularExpressionMatch match = regex.match(file_name); match.hasMatch())
-        {
-            QString date_string = match.captured(1);
-
-            if (QDateTime file_date_time = QDateTime::fromString(date_string, "yyyyMMdd_hhmm"); file_date_time >= from_ && file_date_time <= to_)
-            {
-                file_names.append(file_name);
-                is_empty = false;
-            }
-        }
-    }
-    if (is_empty)
-    {
-        PLOGW << "No messages for this date was retrieved from database";
-    }
-    return file_names;
-
-}
-
-LocalStorage_Service* LocalStorage_Service::getInstance(int minutes_) {
+QSharedPointer<LocalStorage_Service> LocalStorage_Service::getInstance(int minutes_) {
     if (!shp_instance)
     {
         QMutexLocker locker(&mutex); 
@@ -47,12 +17,11 @@ LocalStorage_Service* LocalStorage_Service::getInstance(int minutes_) {
             shp_timer = QSharedPointer<QTimer>(new QTimer(), &QObject::deleteLater);
             int timeout = minutes_ == 0? 5*60000 : minutes_ * 60000;
             connect(shp_instance.get(), &close, shp_instance.get(), &safeExit);
-            connect(shp_timer.get(), &QTimer::timeout, shp_instance.get(), &LocalStorage_Service::deleteMessages);
             shp_timer->start(timeout);
         }
 
     }
-    return shp_instance.get();
+    return shp_instance;
 }
 
 LocalStorage_Service::LocalStorage_Service(QObject* object_) : QObject(object_) {}
@@ -84,10 +53,6 @@ void LocalStorage_Service::saveAllMessages() {
     else PLOGI << "message_storage is empty.";
 }
 
-void LocalStorage_Service::deleteMessages()
-{
-    current_messages.clear();
-}
 
 
 void LocalStorage_Service::safeExit()
@@ -113,21 +78,3 @@ void LocalStorage_Service::addMessages(User_Message* message_, quint32 room_id_)
     //message_storage.value(room_id_).append(QSharedPointer<DBEntity::DBMessage>(new DBEntity::DBMessage(message_), &QObject::deleteLater));
 }
 
-QSet<QSharedPointer<DBEntity::DBMessage>> LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_) {
-    QSet<QSharedPointer<DBEntity::DBMessage>> messages;
-    QMutexLocker locker(&mutex);
-	
-    if (message_storage.contains(room_))
-    {
-    	foreach(const auto& message, message_storage.value(room_))
-	    {
-		    if(auto date = message->getDateTime(); date>= from_ && date <= to_)
-		    {
-                messages.insert(message);
-		    }
-	    }
-        
-    }
-
-    return messages;
-}

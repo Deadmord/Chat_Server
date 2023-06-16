@@ -24,7 +24,7 @@ private:
 
 public:
 
-    static RatingCounter_Service* getInstance();
+    static QSharedPointer<RatingCounter_Service> getInstance();
     RatingCounter_Service(const RatingCounter_Service&) = delete;
     RatingCounter_Service& operator=(const RatingCounter_Service&) = delete;
 

@@ -99,6 +99,7 @@
     <ClCompile Include="DTOUser.cpp" />
     <ClCompile Include="FileRepository.cpp" />
     <ClCompile Include="LocalStorage_Service.cpp" />
+    <ClCompile Include="MediaSaver_Service.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="MessageController.cpp" />
     <ClCompile Include="DBMessage.cpp" />
@@ -111,6 +112,7 @@
     <ClCompile Include="UserConnection.cpp" />
     <ClCompile Include="UserController.cpp" />
     <ClCompile Include="UserRepository.cpp" />
+    <QtMoc Include="MediaSaver_Service.h" />
     <QtMoc Include="UserController.h" />
     <QtMoc Include="UserConnection.h" />
     <QtMoc Include="Message.h" />

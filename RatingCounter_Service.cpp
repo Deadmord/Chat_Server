@@ -5,7 +5,7 @@ QMutex RatingCounter_Service::mutex;
 
 RatingCounter_Service::RatingCounter_Service(QObject* parent_) : QObject(parent_) {}
 
-RatingCounter_Service* RatingCounter_Service::getInstance()
+QSharedPointer<RatingCounter_Service> RatingCounter_Service::getInstance()
 {
     if (!shp_instance)
     {
@@ -17,7 +17,7 @@ RatingCounter_Service* RatingCounter_Service::getInstance()
         }
 
     }
-    return shp_instance.get();
+    return shp_instance;
 }
 
 void RatingCounter_Service::updateRating()

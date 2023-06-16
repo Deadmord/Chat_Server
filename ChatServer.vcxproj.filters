@@ -118,6 +118,9 @@
     <Filter Include="Services\RatingCounterService">
       <UniqueIdentifier>{e9cd5dfe-a830-4f6f-b7c1-e879e69c93a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Services\MediaSaverService">
+      <UniqueIdentifier>{e9be6c54-7a1d-4490-838c-9614184adb6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MessageSaver_Service.cpp">
@@ -128,9 +131,6 @@
     </ClCompile>
     <ClCompile Include="RatingCounter_Service.cpp">
       <Filter>Services\RatingCounterService</Filter>
-    </ClCompile>
-    <ClCompile Include="DB\JSONS\messages.cpp">
-      <Filter>Source Files\Classes\DBModels</Filter>
     </ClCompile>
     <ClCompile Include="RoomStorage_Service.cpp">
       <Filter>Services\RoomStorageService</Filter>
@@ -194,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="UserController.cpp">
       <Filter>Controllers\UserController</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaSaver_Service.cpp">
+      <Filter>Services\MediaSaverService</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +276,9 @@
     </QtMoc>
     <QtMoc Include="UserController.h">
       <Filter>Controllers\UserController</Filter>
+    </QtMoc>
+    <QtMoc Include="MediaSaver_Service.h">
+      <Filter>Services\MediaSaverService</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

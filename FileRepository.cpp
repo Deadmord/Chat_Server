@@ -80,6 +80,38 @@ bool FileRepository::readJsonArr(const QString &file_path_, QJsonArray &json_obj
     json_object_ = json_doc.array();
     return true;
 }
+bool FileRepository::saveToBinFile(const QByteArray& data_, const QString& file_path_) {
+    QFile file(file_path_ + ".bin");
+    if (QFile::exists(file_path_)){
+        PLOGW << "Already existing id";
+        return false;
+    }
+    if (!file.open(QIODevice::WriteOnly)) {
+        PLOGE << "Failed to create file";
+        return false;
+    }
+     
+    QDataStream out(&file);
+    out << data_;
+    file.close();
+    PLOGI << "File " << file_path_ << " was written";
+    return true;
+}
+
+QByteArray FileRepository::readFromBinFile(const QString& file_path_) {
+    QFile file(file_path_ + ".bin");
+    if (!file.open(QIODevice::ReadOnly)) {
+        PLOGE << "Failed to open file";
+        return QByteArray();
+    }
+
+    QDataStream in(&file);
+    QByteArray data;
+    in >> data;
+    file.close();
+    PLOGI << "File " << file_path_ << "was read";
+    return data;
+}
 
 FileRepository::FileRepository() = default;
 
