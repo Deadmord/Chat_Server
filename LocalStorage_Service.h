@@ -12,6 +12,10 @@
 
 #include "DBMessage.h"
 #include "Message.h"
+#include <qthread.h>
+#include <QtConcurrent>
+
+#include "DTOMessage.h"
 
 class LocalStorage_Service:
     public QObject
@@ -21,7 +25,7 @@ private:
     static QSharedPointer<LocalStorage_Service> shp_instance;
     static QMutex mutex;
     explicit LocalStorage_Service(QObject* object_ = nullptr);
-    QMap<quint32, QList<QSharedPointer<DBEntity::DBMessage>>> message_storage;
+    QMap<quint32, QSet<QSharedPointer<DBEntity::DBMessage>>> message_storage;
     //TODO: do dtorooms
     QMap < quint32, QSet<QSharedPointer<DBEntity::DBMessage>>> current_messages;
     static QSharedPointer<QTimer> shp_timer;
@@ -39,11 +43,11 @@ signals:
 public slots:
    
     void addMessages(QSet<QSharedPointer<User_Message>> messages_, quint32 room_id_);
-    void addMessage(QSharedPointer<User_Message> shp_message_, quint32 room_id_);
+    void addMessage(const QSharedPointer<User_Message>& shp_message_, quint32 room_id_);
     //void getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_);
-    void saveAllMessages();
+    void saveAllMessages() ;
 
-    void safeExit();
+    void safeExit() ;
 };
 
 
