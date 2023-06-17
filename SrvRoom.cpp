@@ -64,18 +64,27 @@ QSet<QSharedPointer<User_Message>> SrvRoom::getMessages(const QDateTime& from_, 
     return result;
 }
 
-void SrvRoom::connectUser(const QSharedPointer<SrvUser>& shp_user_)
+bool SrvRoom::connectUser(const QSharedPointer<SrvUser>& shp_user_)
 {
     if (!connected_users.contains(shp_user_)) {
         connected_users.insert(shp_user_);
+        return true;
     }
-    else PLOGE << "User already connected! Login: " + shp_user_->getUserName();
+    else {
+        PLOGE << "User already connected! Login: " + shp_user_->getUserName();
+        return false;
+    }
 }
 
-void SrvRoom::disconnectUser(const QSharedPointer<SrvUser>& shp_user_)
+
+bool SrvRoom::disconnectUser(const QSharedPointer<SrvUser>& shp_user_)
 {
     if (connected_users.contains(shp_user_)) {
         connected_users.remove(shp_user_);
+        return true;
     }
-    else PLOGE << "User already disconnected! Login: " + shp_user_->getUserName();
+    else {
+        PLOGE << "User isn't connected! Login: " + shp_user_->getUserName();
+        return false;
+    }
 }

@@ -101,20 +101,26 @@ void RoomStorage_Service::addMessageToRoom(const qint32& room_id_, const QShared
 
 RoomStorage_Service::RoomStorage_Service(QObject* parent_) : QObject(parent_) {};
 
-void RoomStorage_Service::addConnecntedUserToRoom(const qint32& room_id_, const QSharedPointer<SrvUser>& shp_user_)
+bool RoomStorage_Service::addConnecntedUserToRoom(const qint32& room_id_, const QSharedPointer<SrvUser>& shp_user_)
 {
     if (rooms_storage.contains(room_id_)) {
-        rooms_storage.value(room_id_)->connectUser(shp_user_);
+        return rooms_storage.value(room_id_)->connectUser(shp_user_);
     }
-    else PLOGE << "Room doesn't exist. Id: " + room_id_;
+    else {
+        PLOGE << "Room doesn't exist. Id: " + room_id_;
+        return false;
+    }
 }
 
-void RoomStorage_Service::deleteConnecntedUserFromRoom(const qint32& room_id_, const QSharedPointer<SrvUser>& shp_user_)
+bool RoomStorage_Service::deleteConnecntedUserFromRoom(const qint32& room_id_, const QSharedPointer<SrvUser>& shp_user_)
 {
     if (rooms_storage.contains(room_id_)) {
-        rooms_storage.value(room_id_)->connectUser(shp_user_);
+        return rooms_storage.value(room_id_)->disconnectUser(shp_user_);
     }
-    else PLOGE << "Room doesn't exist. Id: " + room_id_;
+    else {
+        PLOGE << "Room doesn't exist. Id: " + room_id_;
+        return false;
+    }
 }
 
 void RoomStorage_Service::addMessagesToRoom(const qint32& room_id_, const QSet<QSharedPointer<User_Message>>& messages_)
