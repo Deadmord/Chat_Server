@@ -8,6 +8,9 @@ SrvUser::SrvUser(QObject* parent) : QObject(parent) , user_socket(new QTcpSocket
     connect(user_socket, &QAbstractSocket::errorOccurred, this, &SrvUser::errorSignal);
 }
 
+SrvUser::SrvUser(const QString& username_, const QString& password_, const QByteArray& userpic_, const qint32& rating_, const qint32& room_id_)
+    : username(username_), password(password_), userpic(userpic_), rating(rating_), room_id(room_id_) {}
+
 bool SrvUser::setSocketDescriptor(qintptr socketDescriptor)
 {
     return user_socket->setSocketDescriptor(socketDescriptor);
@@ -21,23 +24,30 @@ void SrvUser::disconnectFromClient()
 
 QString SrvUser::getUserName() const
 {
-    return user_name;
+    return username;
 }
 
 void SrvUser::setUserName(const QString& userName)
 {
-    user_name = userName;
+    username = userName;
 }
 
-quint32 SrvUser::getRoomId() const
+qint32 SrvUser::getRoomId() const
 {
     return room_id;
 }
 
-void SrvUser::setRoomId(const quint32& _room_id)
+void SrvUser::setRoomId(const qint32& _room_id)
 {
     room_id = _room_id;
 }
+
+QString SrvUser::getPassword() const { return password; }
+void SrvUser::setPassword(const QString& password_) { password = password_; }
+QByteArray SrvUser::getUserpic() const { return userpic; }
+void SrvUser::setUserpic(const QByteArray& userpic_) { userpic = userpic_; }
+qint32 SrvUser::getRating() const { return rating; }
+void SrvUser::setRating(const qint32& rating_) { rating = rating_; }
 
 bool SrvUser::isFloodLimit() const { return flood_limit; }
 

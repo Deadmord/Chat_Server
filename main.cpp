@@ -13,6 +13,7 @@
 #include "SwearHelper.h"
 
 #include "RoomRepository.h"
+#include "UserRepository.h"
 #include "DBRoom.h"
 #include "DBUser.h"
 #include "MediaSaver_Service.h"
@@ -84,10 +85,11 @@ Q_COREAPP_STARTUP_FUNCTION(startup_routine)
 int main(int argc, char* argv[])
 {
     QCoreApplication a(argc, argv);
-    QByteArray arr;
     
-    MediaSaver_Service::getInstance()->saveMedia(1231312, "asdasds", QUuid::createUuid(), arr);
+
+
     return a.exec();
+
 
 }
 

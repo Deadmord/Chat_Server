@@ -104,6 +104,7 @@
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="MessageController.cpp" />
     <ClCompile Include="DBMessage.cpp" />
+    <ClCompile Include="QueryHelper.cpp" />
     <ClCompile Include="RoomController.cpp" />
     <ClCompile Include="RoomStorage_Service.cpp" />
     <ClCompile Include="MessageSaver_Service.cpp" />
@@ -113,9 +114,9 @@
     <ClCompile Include="SrvUser.cpp" />
     <ClCompile Include="UserController.cpp" />
     <ClCompile Include="UserRepository.cpp" />
+    <ClInclude Include="QueryHelper.h" />
     <QtMoc Include="MediaSaver_Service.h" />
     <QtMoc Include="UserController.h" />
-    <QtMoc Include="SrvUser.h" />
     <QtMoc Include="Message.h" />
     <ClInclude Include="DBMessage.h" />
     <QtMoc Include="AsyncConsoleWin.h" />
@@ -134,6 +135,7 @@
     <QtMoc Include="RoomRepository.h" />
     <QtMoc Include="DTORoom.h" />
     <QtMoc Include="DTOUser.h" />
+    <QtMoc Include="SrvUser.h" />
     <ClInclude Include="DBConncetion_Service.h" />
     <ClInclude Include="DBUser.h">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>

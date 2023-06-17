@@ -9,8 +9,6 @@
 
 #include <plog/Log.h>
 
-#include "Enums.h"
-#include "DBUser.h"
 
 class SrvUser : public QObject
 {
@@ -19,26 +17,22 @@ class SrvUser : public QObject
 
 public:
     explicit SrvUser(QObject* parent = nullptr);
+    explicit SrvUser(const QString& username_, const QString& password_, const QByteArray& userpic_, const qint32& rating_, const qint32& room_id_);
     //SrvUser(const QTcpSocket)
     virtual bool setSocketDescriptor(qintptr _socket_descriptor);
 
-    QString getId() const;
-    void setId(const QString& _id);
     QString getUserName() const;
-    void setUserName(const QString& _user_name);
+    void setUserName(const QString& username_);
     QString getPassword() const;
-    void setPassword(const QString& _password);
-    QString getUserPicId() const;
-    void setUserPicId(const QString& _userpic_id);
-    quint32 getRatingLikes() const;
-    void setRatingLikes(const quint32& _rating_likes);
-    quint32 getRatingDislikes() const;
-    void setRatingDislikes(const quint32& _rating_dislikes);
-    quint32 getRoomId() const;
-    void setRoomId(const quint32& _room_id);
+    void setPassword(const QString& password_);
+    QByteArray getUserpic() const;
+    void setUserpic(const QByteArray& userpic_);
+    qint32 getRating() const;
+    void setRating(const qint32& rating_);
+    qint32 getRoomId() const;
+    void setRoomId(const qint32& room_id_);
     bool isFloodLimit() const;
     void setFloodLimit();
-
 
 signals:
     void jsonReceived(const QJsonObject& _json_doc);
@@ -54,13 +48,11 @@ private slots:
 
 private:
     QTcpSocket* user_socket;
-    QString id;
-    QString user_name;
+    QString username;
     QString password;
-    QString userpic_id;
-    quint32 rating_likes;
-    quint32 rating_dislikes;
-    quint32 room_id;
+    QByteArray userpic;
+    qint32 rating;
+    qint32 room_id;
     bool flood_limit = false;
     quint16 nextBlockSize = 0;
 };

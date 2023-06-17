@@ -19,7 +19,7 @@
 #include "RoomController.h"
 #include "MessageController.h"
 #include "RoomStorage_Service.h"
-
+#include "UserRepository.h"
 
 const QString CONFIG_FILE_PATH = "./config.json";
 
