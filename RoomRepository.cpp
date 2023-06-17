@@ -59,52 +59,52 @@ namespace DBService {
 
 
 	QList<QSharedPointer<DBEntity::DBRoom>> RoomRepository::getAllActiveRooms() {
-			auto query_string_ = Helper::QueryHelper::getAllActiveRooms();
-			QList<QSharedPointer<DBEntity::DBRoom>> room_list;
-			try
-			{
-				auto connection = DBService::DBConnection_Service::getConnection();
+		auto query_string_ = Helper::QueryHelper::getAllActiveRooms();
+		QList<QSharedPointer<DBEntity::DBRoom>> room_list;
+		try
+		{
+			auto connection = DBService::DBConnection_Service::getConnection();
 
-				if (connection->getDatabase()->isOpen()) {
-					QSqlQueryModel query_model;
-					query_model.setQuery(query_string_, *connection->getDatabase());
+			if (connection->getDatabase()->isOpen()) {
+				QSqlQueryModel query_model;
+				query_model.setQuery(query_string_, *connection->getDatabase());
 
-					if (query_model.lastError().isValid()) {
-						PLOG_ERROR << "Query error: " << query_model.lastError().text();
-						return room_list;
-					}
+				if (query_model.lastError().isValid()) {
+					PLOG_ERROR << "Query error: " << query_model.lastError().text();
+					return room_list;
+				}
 
-					const int rowCount = query_model.rowCount();
-					for (int i = 0; i < rowCount; ++i) {
-						qint32 id = query_model.record(i).value("id").toInt();
-						QString name = query_model.record(i).value("name").toString();
-						QString description = query_model.record(i).value("description").toString();
-						qint32 topic_id = query_model.record(i).value("topic_id").toInt();
-						QString topic_name = query_model.record(i).value("topic_name").toString();
-						bool is_private = query_model.record(i).value("is_private").toBool();
-						QString password = query_model.record(i).value("password").toString();
-						bool is_deleted = query_model.record(i).value("is_deleted").toBool();
+				const int rowCount = query_model.rowCount();
+				for (int i = 0; i < rowCount; ++i) {
+					qint32 id = query_model.record(i).value("id").toInt();
+					QString name = query_model.record(i).value("name").toString();
+					QString description = query_model.record(i).value("description").toString();
+					qint32 topic_id = query_model.record(i).value("topic_id").toInt();
+					QString topic_name = query_model.record(i).value("topic_name").toString();
+					bool is_private = query_model.record(i).value("is_private").toBool();
+					QString password = query_model.record(i).value("password").toString();
+					bool is_deleted = query_model.record(i).value("is_deleted").toBool();
 
-						auto shp_room = QSharedPointer<DBEntity::DBRoom>(new DBEntity::DBRoom (id, name, description, topic_id, topic_name, is_private, password, is_deleted));
-						room_list.append(shp_room);
-					}
+					auto shp_room = QSharedPointer<DBEntity::DBRoom>(new DBEntity::DBRoom (id, name, description, topic_id, topic_name, is_private, password, is_deleted));
+					room_list.append(shp_room);
+				}
 
-					if (!room_list.isEmpty()) {
-						return room_list;
-					}
-					else {
-						PLOG_INFO << "No data found.";
-					}
+				if (!room_list.isEmpty()) {
+					return room_list;
 				}
 				else {
-					PLOG_ERROR << "Cannot connect to the data base.";
+					PLOG_INFO << "No data found.";
 				}
 			}
-			catch (const std::exception& exception)
-			{
-				PLOG_ERROR << "Exception in getAllActiveRooms method: " << exception.what();
+			else {
+				PLOG_ERROR << "Cannot connect to the data base.";
 			}
-			return room_list;
+		}
+		catch (const std::exception& exception)
+		{
+			PLOG_ERROR << "Exception in getAllActiveRooms method: " << exception.what();
+		}
+		return room_list;
 	}
 
 	QFuture<QSharedPointer<DBEntity::DBRoom>> RoomRepository::getRoomById(const qint32& room_id_) {
