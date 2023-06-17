@@ -65,6 +65,16 @@ void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<Srv
     broadcastSend(userMessage, room_id_, sender_);
 }
 
+void RoomController::roomListRequest(QSharedPointer<SrvUser> user_)
+{
+    auto rooms_ptr_list =  RoomStorage_Service::getInstance()->getRooms();
+    //тут собрать массив из комнат и преобразовать его в JsonArray
+    QJsonObject roomList;
+    roomList[QStringLiteral("type")] = QStringLiteral("roomList");
+    roomList[QStringLiteral("rooms")] = "JSONArray DTORoom wo password";
+    sendJson(user_, roomList);
+}
+
 void RoomController::broadcastSend(const QJsonObject& message_,const quint32& room_id_, const QSharedPointer<SrvUser>& exclude_)
 {
     for (const auto& user : RoomStorage_Service::getInstance()->getRoom(room_id_)->getConnectedUsers()) {

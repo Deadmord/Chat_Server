@@ -13,6 +13,7 @@ QSharedPointer<MessageController> MessageController::instance()
         connect(shp_instance.get(), &MessageController::userEntrySignal, RoomController::instance().get(), &RoomController::userEntry);
         connect(shp_instance.get(), &MessageController::userLeaveSignal, RoomController::instance().get(), &RoomController::userLeave);
         connect(shp_instance.get(), &MessageController::messageToRoom, RoomController::instance().get(), &RoomController::jsonMsgReceived);
+        connect(shp_instance.get(), &MessageController::roomListRequestSignal, RoomController::instance().get(), &RoomController::roomListRequest);
     }
 
     return shp_instance;
@@ -219,9 +220,9 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
         if (!toDTOMessageFromJson(tempDTO, messagebody_val))
             return;
         QSharedPointer<User_Message> spr_srv_msg = DTOModel::DTOMessage::createSrvFromDTO(QSharedPointer<DTOModel::DTOMessage>(&tempDTO));
+        RoomStorage_Service::getInstance()->addMessageToRoom(sender_->getRoomId(), spr_srv_msg);    //archive message
 
         emit messageToRoom(sender_->getRoomId(), sender_, messagebody_val);     //Send message to all members in room
-        RoomStorage_Service::getInstance()->addMessageToRoom(sender_->getRoomId(), spr_srv_msg);    //archive message
         return;
     }
 }
@@ -234,7 +235,7 @@ void MessageController::jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, co
         return;
     if (type_val.toString().compare(QLatin1String("roomListRequest"), Qt::CaseInsensitive) == 0)
     {
-
+        emit roomListRequestSignal(sender_);
     }
     if (type_val.toString().compare(QLatin1String("roomEntry"), Qt::CaseInsensitive) == 0)
     {
