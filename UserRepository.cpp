@@ -7,7 +7,7 @@ namespace DBService {
 	UserRepository::~UserRepository(){}
 
 	QFuture<QSharedPointer<DBEntity::DBUser>> UserRepository::getUserByLogin(const QString& login_) {
-		return QtConcurrent::run([query_string_ = "SELECT * FROM [user] WHERE login=:login;", &login_]() {
+		return QtConcurrent::run([query_string_ = Helper::QueryHelper::getUserByLogin(), &login_]() {
 			try
 			{
 				auto connection = DBService::DBConnection_Service::getConnection();
@@ -44,7 +44,7 @@ namespace DBService {
 	}
 
 	QFuture<bool> UserRepository::createUser(const DBEntity::DBUser& user_) {
-		return QtConcurrent::run([query_string_ = "INSERT INTO [user] (login, password, userpic, rating, is_deleted) VALUES (:login, :password, :userpic, :rating, :is_deleted)", user_]() {
+		return QtConcurrent::run([query_string_ = Helper::QueryHelper::createUser(), user_]() {
 			try
 			{
 				auto connection = DBService::DBConnection_Service::getConnection();
@@ -141,14 +141,14 @@ namespace DBService {
 				auto connection = DBService::DBConnection_Service::getConnection();
 				if (connection->getDatabase()->isOpen()) {
 					QSqlQuery query(*connection->getDatabase());
-					QString query_string = "UPDATE [user] SET rating=:rating WHERE login=:login";
+					QString query_string = Helper::QueryHelper::updateUserRating();
 					query.prepare(query_string);
 					query.bindValue(":rating", rating_);
 					query.bindValue(":login", login_);
 
 					if (query.exec()) {
 						QSqlQuery queryResult;
-						QString query_string_result = "SELECT rating from [user] WHERE login=:login";
+						QString query_string_result = Helper::QueryHelper::getRatingByLogin();
 						queryResult.prepare(query_string_result);
 						queryResult.bindValue(":login", login_);
 
@@ -181,6 +181,7 @@ namespace DBService {
 			});
 	}
 
+
 	QFuture<qint32> UserRepository::getRatingByLogin(const QString& login_) {
 		return QtConcurrent::run([login_]() {
 			try
@@ -188,7 +189,7 @@ namespace DBService {
 				auto connection = DBService::DBConnection_Service::getConnection();
 				if (connection->getDatabase()->isOpen()) {
 					QSqlQuery query(*connection->getDatabase());
-					QString query_string = "SELECT rating from [user] WHERE login=:login";
+					QString query_string = Helper::QueryHelper::getRatingByLogin();
 					query.prepare(query_string);
 					query.bindValue(":login", login_);
 

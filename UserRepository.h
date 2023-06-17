@@ -3,6 +3,7 @@
 
 #include "DBConncetion_Service.h"
 #include "DBUser.h"
+#include "QueryHelper.h"
 #include <QtConcurrent>
 #include <plog/Log.h> 
 #include <QCryptographicHash>
