@@ -43,8 +43,6 @@ private:
     static QSharedPointer<User_Message> fromDBMessageToUserMessage(const QSharedPointer<DBEntity::DBMessage>& shp_user_message_);
 
     QList<QSharedPointer<User_Message>> getMessages(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_);
-
-    QList<QString> searchForFiles(const QDateTime& from_, const QDateTime& to_, const quint32& room_);
     
     void addLikeToMessage(const quint32& room_id_, const QUuid& message_id_, const QString& user_login_, const bool like_dislike_);
     void downloadRoomsFromDB();

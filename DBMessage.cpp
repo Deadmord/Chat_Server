@@ -60,17 +60,17 @@ void DBEntity::DBMessage::setLikes(const QMap<QString, bool> &likes_) {
     DBMessage::likes = likes_;
 }
 
-void DBEntity::DBMessage::writeMessages(const QString& file_name_,const QList<DBEntity::DBMessage>& messages_) {
-
-    QJsonArray array;
-    for (const auto& message: messages_) {
-        array.append(message.toJson());
-    }
-    if (!FileRepository::writeJsonArr(file_name_, array)){
-        PLOGE << "Error writing to file";
-    }
-
-}
+//void DBEntity::DBMessage::writeMessages(const QString& file_name_,const QList<DBEntity::DBMessage>& messages_) {
+//
+//    QJsonArray array;
+//    for (const auto& message: messages_) {
+//        array.append(message.toJson());
+//    }
+//    if (!FileRepository::writeJsonArr(file_name_, array)){
+//        PLOGE << "Error writing to file";
+//    }
+//
+//}
 
 void DBEntity::DBMessage::writeMessage(const QString& file_name_,const DBEntity::DBMessage& messages_) {
 

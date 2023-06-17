@@ -54,6 +54,7 @@ private:
     bool is_rtl;
     bool deleted {false};
     QMap<QString, bool> likes;
+    
 
 };
 Q_DECLARE_METATYPE(User_Message)
