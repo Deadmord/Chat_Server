@@ -23,23 +23,37 @@ QSharedPointer<RoomController> RoomController::instance()
 
 void RoomController::userEntry(const quint32& room_id, QSharedPointer<SrvUser> user_)
 {
-
+    RoomStorage_Service::getInstance()->addConnecntedUserToRoom(room_id, user_);
+    
     QJsonObject connected_message;
     connected_message[QStringLiteral("type")] = QStringLiteral("newuser");
     connected_message[QStringLiteral("username")] = user_->getUserName();
-    broadcastSend(connected_message, user_->getRoomId(), user_);
-    RoomStorage_Service::getInstance()->addConnecntedUserToRoom(room_id, user_);
+    broadcastSend(connected_message, room_id, user_);
+    //проверить что комната с таким номером вообще существует
+    //назначить комнату юзеру
+    user_->setRoomId(room_id);
+    //Отправить юзера в нужную комнату
+    //уже в комнате по сигналу вхождения юзера сделать рассылку
+    
 }
 
-void RoomController::userLeave(const quint32& room_id, QSharedPointer<SrvUser> user_)
+void RoomController::userLeave(QSharedPointer<SrvUser> user_)
 {
+    quint32 room_id = user_->getRoomId();
+    if (!room_id)
+    {
+        PLOGW << "Room leave request wo room number.";
+        return;
+    }
+    RoomStorage_Service::getInstance()->deleteConnecntedUserFromRoom(room_id, user_);
+    //Проверять что успешно удален
     QJsonObject disconnectedMessage;
     disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
     disconnectedMessage[QStringLiteral("username")] = user_->getUserName();
-    broadcastSend(disconnectedMessage, user_->getRoomId(), nullptr);
-
-    //Удалить пользователя из комнаты:
-    RoomStorage_Service::getInstance()->deleteConnecntedUserFromRoom(room_id, user_);
+    broadcastSend(disconnectedMessage, room_id, nullptr);
+    //проверить что комната с таким номером вообще существует
+    //обнулить номер
+    user_->setRoomId(0);
 }
 
 void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<SrvUser> sender_, const QJsonObject& message_)
@@ -48,7 +62,17 @@ void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<Srv
     userMessage[QStringLiteral("type")] = QStringLiteral("message");
     userMessage[QStringLiteral("sender")] = sender_->getUserName();
     userMessage[QStringLiteral("text")] = message_;
-    broadcastSend(userMessage, sender_->getRoomId(), sender_);
+    broadcastSend(userMessage, room_id_, sender_);
+}
+
+void RoomController::roomListRequest(QSharedPointer<SrvUser> user_)
+{
+    auto rooms_ptr_list =  RoomStorage_Service::getInstance()->getRooms();
+    //тут собрать массив из комнат и преобразовать его в JsonArray
+    QJsonObject roomList;
+    roomList[QStringLiteral("type")] = QStringLiteral("roomList");
+    roomList[QStringLiteral("rooms")] = "JSONArray DTORoom wo password";
+    sendJson(user_, roomList);
 }
 
 void RoomController::broadcastSend(const QJsonObject& message_,const quint32& room_id_, const QSharedPointer<SrvUser>& exclude_)
