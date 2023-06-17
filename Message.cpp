@@ -1,55 +1,19 @@
 #include "Message.h"
 
-User_Message::User_Message(QObject* parent_): _deleted(false) 
+
+User_Message::User_Message(const QUuid& id_, const QDateTime& date_time_, const QString& nickname_,
+	const QString& text_, const bool is_rtl_, const QString& media_id_, const QString& parent_id_, const bool& deleted_,
+	const QMap<QString, bool>& likes_, QObject* parent_) : id(id_), date_time(date_time_),
+	nickname(nickname_), text(text_), media_id(media_id_), parent_id(parent_id_), deleted(deleted_),
+	likes(likes_), is_rtl(is_rtl_)
 {
-	_id = generateId();
 }
-
-//User_Message::User_Message(const Message& msg_sruct_, QObject* parent_)
-//	: _id(msg_sruct_.id), _room_id(msg_sruct_.room_id), _date_time(msg_sruct_.date_time), _nickname(msg_sruct_.nickname), _text(msg_sruct_.text), _media_id(msg_sruct_.media_id), _parent_id(msg_sruct_.parent_id), _deleted(msg_sruct_.deleted), _likes(msg_sruct_.likes)
-//{
-//	if (msg_sruct_.id.isEmpty()) { _id = generateId(); };
-//	if (msg_sruct_.date_time.isNull()) { _date_time = QDateTime::currentDateTime(); }
-//}
-
-User_Message::User_Message(const QString& id_, const quint32& room_id_, const QDateTime& date_time_, const QString& nickname_, const QString& text_, const QString& media_id_, const QString& parent_id_, const bool& deleted_, const QMap<QUuid, bool>& likes_, QObject* parent_)
-	: _id(id_), _date_time(date_time_), _nickname(nickname_), _text(text_), _media_id(media_id_), _parent_id(parent_id_), _deleted(deleted_), _likes(likes_), QObject(parent_)
-{}
 
 User_Message::~User_Message(){}
 
-User_Message::User_Message(const User_Message& other)
-{
-    _id = other._id + "Copy";			//Change to new Id
-	//_room_id = other._room_id;
-	_date_time = other._date_time;
-	_nickname = other._nickname;
-	_text = other._text;
-	_media_id = other._media_id;
-	_likes = other._likes;
-	_parent_id = other._parent_id;
-	_deleted = other._deleted;
-}
 
-User_Message& User_Message::operator=(const User_Message& other)
-{
-	if (this != &other)
-	{
-		_id = other._id + "CopyAsgn";			//Change to new Id
-		//_room_id = other._room_id;
-		_date_time = other._date_time;
-		_nickname = other._nickname;
-		_text = other._text;
-		_media_id = other._media_id;
-		_likes = other._likes;
-		_parent_id = other._parent_id;
-		_deleted = other._deleted;
-	}
-	return *this;
-}
-
-const QString& User_Message::getId() const {
-	return _id;
+const QUuid& User_Message::getId() const {
+	return id;
 }
 
 //quint32 User_Message::getRoomId() const {
@@ -57,44 +21,44 @@ const QString& User_Message::getId() const {
 //}
 
 const QDateTime& User_Message::getDateTime() const {
-	return _date_time;
+	return date_time;
 }
 
 const QString& User_Message::getNickname() const {
-	return _nickname;
+	return nickname;
 }
 
 const QString& User_Message::getText() const {
-	return _text;
+	return text;
 }
 
 const QString& User_Message::getMedia() const {
-	return _media_id;
+	return media_id;
 }
 
-const QMap<QUuid, bool>& User_Message::getLikes() const {
-	return _likes;
+const QMap<QString, bool>& User_Message::getLikes() const {
+	return likes;
 }
 
 QString User_Message::getParentId() const {
-	return _parent_id;
+	return parent_id.toString();
 }
 
 bool User_Message::isDeleted() const {
-	return _deleted;
+	return deleted;
 }
 
-void User_Message::setDeleted(bool flag) {
-	_deleted = flag;
+void User_Message::setDeleted(bool flag_) {
+	deleted = flag_;
 }
 
-void User_Message::setLikes(const QMap<QUuid, bool>& likes) {
-	_likes = likes;
+void User_Message::setLikes(const QMap<QString, bool>& likes_) {
+	likes = likes_;
 }
 
-QString User_Message::generateId()
+bool User_Message::isRtl() const
 {
-	return QUuid::createUuid().toString();
+	return is_rtl;
 }
 
 

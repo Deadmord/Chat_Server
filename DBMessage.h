@@ -19,25 +19,19 @@
 
 
 namespace DBEntity{
-//    struct Likes{
-//        QUuid user_id;
-//        bool grade;
-//    };
 
-
-    class DBMessage final : public QObject{
-        Q_OBJECT
-
+    class DBMessage final {
+        
     	QUuid id;
         QDateTime date_time;
-        explicit DBMessage(QObject *parent_ = nullptr);
+      
     public:
         //explicit DBMessage(User_Message* message, QObject* parent_ = nullptr);
     	void setDeleted(bool flag_);
         void setLikes(const QMap<QString, bool> &likes_);
         [[nodiscard]] const QUuid& getId() const;
         [[nodiscard]] const QDateTime &getDateTime() const;
-        [[nodiscard]] qint32 getRoomId() const;
+     
 
         [[nodiscard]] const QString &getLogin() const;
 
@@ -48,27 +42,25 @@ namespace DBEntity{
         [[nodiscard]] const QString &getMedia() const;
 
         [[nodiscard]] bool isDeleted() const;
+        [[nodiscard]] bool isRtl() const;
 
         [[nodiscard]] const QMap<QString, bool> &getLikes() const;
         [[nodiscard]] QJsonObject toJson() const;
-        //DBMessage(const DBMessage& _message);
-        DBMessage(DBMessage&& _message) = default;
 
     private:
-        qint32 room_id{};
         QString login;
-        QPointer<DBMessage> parent_id;
+		QString parent_id;
         QString text;
-
-        //TODO: how to store media
         QString media;
+        bool is_rtl{};
         bool deleted{false};
         QMap<QString, bool> likes;
 
         void fromJson(const QJsonObject &obj_);
     public:
-
-        DBMessage(qint32 room_id_, const QString &login_, const QString &text_, const QString &media_,const QObject* parent = nullptr);
+        DBMessage();
+        DBMessage(const QUuid& id_, const QDateTime& date_time_, const QString& login_,
+            const QString& text_, const QString& media_, const QString& parent_id_, bool is_rtl_);
 
         static void writeMessages(const QString& file_name_, const QList<DBEntity::DBMessage>& messages_) ;
         static void writeMessage(const QString& file_name_,const DBEntity::DBMessage& messages_) ;

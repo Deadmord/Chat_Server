@@ -13,13 +13,13 @@
 
 #include <plog/Log.h>
 
-#include "entities.h"
+
 #include "Enums.h"
 #include "UserController.h"
 #include "RoomController.h"
 #include "MessageController.h"
 #include "RoomStorage_Service.h"
-
+#include "UserRepository.h"
 
 const QString CONFIG_FILE_PATH = "./config.json";
 

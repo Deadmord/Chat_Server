@@ -7,7 +7,7 @@ namespace DBService {
 	RoomRepository::~RoomRepository() {}
 
 	QFuture<QList<QSharedPointer<DBEntity::DBRoom>>> RoomRepository::getAllRooms() {
-		return QtConcurrent::run([query_string_ = "SELECT r.*, t.name AS topic_name FROM room r JOIN topic t ON r.topic_id=t.id;"]() {
+		return QtConcurrent::run([query_string_ = Helper::QueryHelper::getAllRooms()]() {
 			QList<QSharedPointer<DBEntity::DBRoom>> room_list;
 			try
 			{
@@ -58,14 +58,8 @@ namespace DBService {
 	}
 
 
-
-
-
-
-
-
 	QList<QSharedPointer<DBEntity::DBRoom>> RoomRepository::getAllActiveRooms() {
-			auto query_string_ = "SELECT r.*, t.name AS topic_name FROM room r JOIN topic t ON r.topic_id=t.id WHERE r.is_deleted=0;";
+			auto query_string_ = Helper::QueryHelper::getAllActiveRooms();
 			QList<QSharedPointer<DBEntity::DBRoom>> room_list;
 			try
 			{
@@ -114,7 +108,7 @@ namespace DBService {
 	}
 
 	QFuture<QSharedPointer<DBEntity::DBRoom>> RoomRepository::getRoomById(const qint32& room_id_) {
-		return QtConcurrent::run([query_string_ = "SELECT r.*, t.name AS topic_name FROM room r JOIN topic t ON r.topic_id = t.id WHERE r.id=:id;", &room_id_]() {
+		return QtConcurrent::run([query_string_ = Helper::QueryHelper::getRoomById(), &room_id_]() {
 			try
 			{
 				auto connection = DBService::DBConnection_Service::getConnection();
@@ -154,7 +148,7 @@ namespace DBService {
 	}
 
 	QFuture<qint32> RoomRepository::createRoom( const DBEntity::DBRoom& room_) {
-		return QtConcurrent::run([query_string_ = "INSERT INTO room (name, description, topic_id, is_private, password, is_deleted) VALUES (:name, :description, :topic_id, :is_private, :password, :is_deleted)", &room_]() {
+		return QtConcurrent::run([query_string_ = Helper::QueryHelper::createRoom(), &room_]() {
 			try
 			{
 				auto connection = DBService::DBConnection_Service::getConnection();
@@ -194,7 +188,7 @@ namespace DBService {
 	}
 
 	QFuture<bool> RoomRepository::deleteRoom(const qint32& id_) {
-		return QtConcurrent::run([query_string_ = "UPDATE room SET is_deleted=:is_deleted WHERE id=:id", id_]() {
+		return QtConcurrent::run([query_string_ = Helper::QueryHelper::deleteRoom(), id_]() {
 			try
 			{
 				auto connection = DBService::DBConnection_Service::getConnection();

@@ -121,6 +121,9 @@
     <Filter Include="Services\MediaSaverService">
       <UniqueIdentifier>{e9be6c54-7a1d-4490-838c-9614184adb6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helpers\QueryHelper">
+      <UniqueIdentifier>{32244138-7a59-4ba4-86c3-2939a255f9c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MessageSaver_Service.cpp">
@@ -198,6 +201,12 @@
     <ClCompile Include="MediaSaver_Service.cpp">
       <Filter>Services\MediaSaverService</Filter>
     </ClCompile>
+    <ClCompile Include="DTOMessage.cpp">
+      <Filter>Entities\Models\DTOModels\DTOMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="QueryHelper.cpp">
+      <Filter>Helpers\QueryHelper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DBRoom.h">
@@ -218,8 +227,14 @@
     <ClInclude Include="Enums.h">
       <Filter>Entities\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="entities.h">
-      <Filter>Entities</Filter>
+    <ClInclude Include="DTOMessage.h">
+      <Filter>Entities\Models\DTOModels\DTOMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="DBMessage.h">
+      <Filter>Entities\Models\DBModels\DBMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryHelper.h">
+      <Filter>Helpers\QueryHelper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -264,9 +279,6 @@
     </QtMoc>
     <QtMoc Include="AsyncConsoleWin.h">
       <Filter>Core\Console</Filter>
-    </QtMoc>
-    <QtMoc Include="DBMessage.h">
-      <Filter>Entities\Models\DBModels\DBMessage</Filter>
     </QtMoc>
     <QtMoc Include="Message.h">
       <Filter>Entities\Models\Srv Models\SrvMessage</Filter>
