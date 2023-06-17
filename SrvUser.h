@@ -51,8 +51,8 @@ private:
     QString username;
     QString password;
     QByteArray userpic;
-    qint32 rating;
-    qint32 room_id;
+    qint32 rating = 0;
+    qint32 room_id = 0;
     bool flood_limit = false;
     quint16 nextBlockSize = 0;
 };

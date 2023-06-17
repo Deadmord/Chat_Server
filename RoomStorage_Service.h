@@ -7,6 +7,8 @@
 #include "DBMessage.h"
 #include "RoomRepository.h"
 #include "LocalStorage_Service.h"
+#include "RatingCounter_Service.h"
+#include <QtCore>
 
 
 class RoomStorage_Service : public QObject
@@ -25,6 +27,9 @@ public:
 
     [[nodiscard]] QList<QSharedPointer<SrvRoom>> getRooms();
     [[nodiscard]] QSharedPointer<SrvRoom> getRoom(const qint32& room_id_);
+    QSet<QSharedPointer<User_Message>> getMessages(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_);
+    // If from_to_ == false - search for older than time_
+    QSet<QSharedPointer<User_Message>> getMessages(const quint32& room_id_, const QDateTime& time_, const bool from_to_, const quint32& pool_size_ = 20);
 
 public slots:
 
@@ -40,7 +45,7 @@ private:
     explicit RoomStorage_Service(QObject* parent_ = nullptr);
     static inline QSharedPointer<RoomStorage_Service> shp_instance = nullptr;
 
-    QSet<QSharedPointer<User_Message>> getMessages(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_);
+    
 
     
     
@@ -49,7 +54,7 @@ private:
     void uploadRoomToDB(const QSharedPointer<SrvRoom>& shp_new_room_) const;
     void getMessagesFromDB(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_);
     void getMessagesFromLocalStorage(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_);
-
+    QSet<QSharedPointer<User_Message>> getMessagesFromLocalStorage(const quint32& room_id_, const QDateTime& time_, bool from_to_, const quint32& pool_size_);
     QMap<qint32, QSharedPointer<SrvRoom>> rooms_storage;
     bool started = false;
     
