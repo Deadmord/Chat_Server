@@ -8,6 +8,10 @@ void RoomStorage_Service::init()
 
         shp_instance->downloadRoomsFromDB();
     }
+    else
+    {
+        PLOGW << "Service already started";
+    }
 }
 
 bool RoomStorage_Service::is_started()
@@ -51,12 +55,20 @@ void RoomStorage_Service::downloadRoomsFromDB()
 
 RoomStorage_Service* RoomStorage_Service::getInstance()
 {
-
-    if (shp_instance == nullptr) {
-        shp_instance = QSharedPointer<RoomStorage_Service>(new RoomStorage_Service, &QObject::deleteLater);
-        PLOGD << "RoomStorage_Service instance created";
+    try
+    {
+        if (shp_instance == nullptr) {
+            shp_instance = QSharedPointer<RoomStorage_Service>(new RoomStorage_Service, &QObject::deleteLater);
+            PLOGD << "RoomStorage_Service instance created";
+        }
+        return shp_instance.get();
     }
-    return shp_instance.get();
+    catch (const QException& ex)
+    {
+        PLOGE << "Cannot get instance" << ex.what();
+        return nullptr;
+    }
+
 }
 
 QList<QSharedPointer<SrvRoom>> RoomStorage_Service::getRooms()
@@ -69,11 +81,12 @@ QSharedPointer<SrvRoom> RoomStorage_Service::getRoom(const qint32& room_id_)
     if (rooms_storage.contains(room_id_)) {
         return rooms_storage.value(room_id_);
     }
-    else return nullptr;
+    return nullptr;
 }
 
 void RoomStorage_Service::uploadRoomToDB(const QSharedPointer<SrvRoom>& shp_new_room_) const 
 {
+    
     if (shp_new_room_ != nullptr) {
         QtConcurrent::run(DBService::RoomRepository::createRoom, DBEntity::DBRoom(shp_new_room_));
     }
@@ -81,22 +94,37 @@ void RoomStorage_Service::uploadRoomToDB(const QSharedPointer<SrvRoom>& shp_new_
 
 void RoomStorage_Service::createRoom(const QSharedPointer<SrvRoom>& shp_new_room_)
 {
-    if (!rooms_storage.contains(shp_new_room_->getId())) {
-        rooms_storage.insert(shp_new_room_->getId(), shp_new_room_);
-        uploadRoomToDB(shp_new_room_);
-        PLOGI << "New room created. " + shp_new_room_->getName();
+    try
+    {
+        if (!rooms_storage.contains(shp_new_room_->getId())) {
+            rooms_storage.insert(shp_new_room_->getId(), shp_new_room_);
+            uploadRoomToDB(shp_new_room_);
+            PLOGI << "New room created. " + shp_new_room_->getName();
+        }
+        else PLOGE << "Room already exist! " + shp_new_room_->getName();
     }
-    else PLOGE << "Room already exist! " + shp_new_room_->getName();
+    catch (const QException& ex)
+    {
+        PLOGE << "Cannot create room in roomStorage" << ex.what();
+    }
 }
 
 void RoomStorage_Service::addMessageToRoom(const qint32& room_id_, const QSharedPointer<User_Message>& message_)
 {
-    Q_ASSERT(rooms_storage.contains(room_id_));
-    if (rooms_storage.contains(room_id_)) {
-        rooms_storage.value(room_id_)->addMessage(message_);
-        LocalStorage_Service::getInstance()->addMessage(message_, room_id_);
+    try
+    {
+        Q_ASSERT(rooms_storage.contains(room_id_));
+        if (rooms_storage.contains(room_id_)) {
+            rooms_storage.value(room_id_)->addMessage(message_);
+            LocalStorage_Service::getInstance()->addMessage(message_, room_id_);
+        }
+        else PLOGE << "Room doesn't exist. Id: " + room_id_;
     }
-    else PLOGE << "Room doesn't exist. Id: " + room_id_;
+    catch (const QException& ex)
+    {
+        PLOGE << "Cannot add message to roomStorage" << ex.what();
+        
+    }
 }
 
 RoomStorage_Service::RoomStorage_Service(QObject* parent_) : QObject(parent_) {};
@@ -120,47 +148,28 @@ void RoomStorage_Service::addMessagesToRoom(const qint32& room_id_, const QSet<Q
 
 void RoomStorage_Service::getMessagesFromDB(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_)
 {
-    QSet<QSharedPointer<DBEntity::DBMessage>> messages;
-
-    auto files = searchForFiles(from_, to_, room_id_);
-    foreach(const auto & file, files)
+    try
     {
-        messages.unite(DBEntity::DBMessage::readMessages(file));
-    }
+        QSet<QSharedPointer<DBEntity::DBMessage>> messages;
 
-    foreach(const auto & message, messages) {
-
-        rooms_storage[room_id_]->addMessage(fromDBMessageToUserMessage(message));
-    }
-}
-
-QList<QString> RoomStorage_Service::searchForFiles(const QDateTime& from_, const QDateTime& to_, const quint32& room_)
-{
-    QList<QString> file_names;
-    QDir directory("rooms/" + QString::number(room_));
-    QStringList all_files = directory.entryList(QDir::Files);
-    bool is_empty = true;
-    const QRegularExpression regex(R"((\d{8}_\d{4})\.json)"); // Regular expression to match file names like "20230102_1000.json"
-
-    for (const QString& file_name : all_files)
-    {
-        if (QRegularExpressionMatch match = regex.match(file_name); match.hasMatch())
+        auto files = LocalStorage_Service::getInstance()->searchForFiles(from_, to_, room_id_);
+        foreach(const auto & file, files)
         {
-            QString date_string = match.captured(1);
+            messages.unite(DBEntity::DBMessage::readMessages(file));
+        }
 
-            if (QDateTime file_date_time = QDateTime::fromString(date_string, "yyyyMMdd_hhmm"); file_date_time >= from_ && file_date_time <= to_)
-            {
-                file_names.append(file_name);
-                is_empty = false;
-            }
+        foreach(const auto & message, messages) {
+
+            rooms_storage[room_id_]->addMessage(fromDBMessageToUserMessage(message));
         }
     }
-    if (is_empty)
+    catch (const QException& ex)
     {
-        PLOGW << "No messages for this date was retrieved from database";
+        PLOGE << "Cannot get messages from DB" << ex.what();
     }
-    return file_names;
 }
+
+
 
 void RoomStorage_Service::getMessagesFromLocalStorage(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_)
 {
@@ -209,7 +218,7 @@ QList<QSharedPointer<User_Message>> RoomStorage_Service::getMessages(const quint
             PLOGF << "DRATUTY!!!";
             });
 
-        rooms_storage[room_id_]->getMessages(from_, to_);
+        messages.unite(rooms_storage[room_id_]->getMessages(from_, to_));
 
     }
     else
