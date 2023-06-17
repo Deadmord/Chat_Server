@@ -1,4 +1,5 @@
 ﻿#include "SrvUser.h"
+
 SrvUser::SrvUser(QObject* parent) : QObject(parent) , user_socket(new QTcpSocket(this))
 {
     // connect readyRead() to the slot that will take care of reading the data in
