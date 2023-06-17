@@ -1,11 +1,14 @@
 ﻿#include "LocalStorage_Service.h"
-#include <qthread.h>
-#include <QtConcurrent>
 
 QSharedPointer<LocalStorage_Service> LocalStorage_Service::shp_instance = nullptr;
 QMutex LocalStorage_Service::mutex;
-QSharedPointer<QTimer> LocalStorage_Service::shp_timer = nullptr;
 
+
+bool LocalStorage_Service::addLikeToMessage(const quint32& room_id_, const QUuid& message_id_, const QDateTime& message_datetime_, const QString& user_login_, const bool like_dislike_)
+{
+    return false;
+    
+}
 
 QSharedPointer<LocalStorage_Service> LocalStorage_Service::getInstance(int minutes_) {
     if (!shp_instance)
@@ -14,10 +17,7 @@ QSharedPointer<LocalStorage_Service> LocalStorage_Service::getInstance(int minut
         if (!shp_instance)
         {
             shp_instance = QSharedPointer<LocalStorage_Service>(new LocalStorage_Service(), &QObject::deleteLater);
-            shp_timer = QSharedPointer<QTimer>(new QTimer(), &QObject::deleteLater);
-            int timeout = minutes_ == 0? 5*60000 : minutes_ * 60000;
             connect(shp_instance.get(), &close, shp_instance.get(), &safeExit);
-            shp_timer->start(timeout);
         }
 
     }
@@ -29,6 +29,20 @@ LocalStorage_Service::LocalStorage_Service(QObject* object_) : QObject(object_) 
 
 void LocalStorage_Service::addMessage(QSharedPointer<User_Message> shp_message_, quint32 room_id_)
 {
+
+}
+
+QSet<QSharedPointer<User_Message>> LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_id_)
+{
+    QSet<QSharedPointer<User_Message>> result;
+    QtConcurrent::map(message_storage.value(room_id_), [&result, &from_, &to_](QSharedPointer<DBEntity::DBMessage> message) {
+        if (auto date = message->getDateTime(); date >= from_ && date <= to_)
+        {
+            result.insert(DTOModel::DTOMessage::createSrvFromDB(message));
+        }
+    }).waitForFinished();
+
+    return result;
 }
 
 void LocalStorage_Service::saveAllMessages() {
@@ -62,23 +76,13 @@ void LocalStorage_Service::saveAllMessages() {
 void LocalStorage_Service::safeExit()
 {
     saveAllMessages();
-    shp_timer->stop();
-    shp_timer->deleteLater();
     shp_instance->deleteLater();
     PLOGI << "Local storage service safely closed";
 }
 
 
-void LocalStorage_Service::addMessages(QSet<QSharedPointer<User_Message>> messages_, quint32 room_id_) {
-    //if (!message_storage.contains(room_id_)) {
-    //    QList<QSharedPointer<DBEntity::DBMessage>> new_room_history;
-    //    message_storage.insert(room_id_, new_room_history);
-    //}
-    //if(!current_messages.contains(room_id_))
-    //{
-	   // 
-    //}
-    ////new DBEntity::DBMessage(message_) - ��������
-    //message_storage.value(room_id_).append(QSharedPointer<DBEntity::DBMessage>(new DBEntity::DBMessage(message_), &QObject::deleteLater));
+void LocalStorage_Service::addMessages(QSet<QSharedPointer<User_Message>> messages_, quint32 room_id_) 
+{
+
 }
 

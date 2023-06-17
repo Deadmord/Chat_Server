@@ -36,17 +36,15 @@ public slots:
        
 private:
 
+    void addRoom(const QSharedPointer<SrvRoom>& shp_room_);
     explicit RoomStorage_Service(QObject* parent_ = nullptr);
     static inline QSharedPointer<RoomStorage_Service> shp_instance = nullptr;
 
-    static QSharedPointer<DBEntity::DBMessage> fromUserMessageToDBMessage(const QSharedPointer<User_Message>& shp_user_message_);
-    static QSharedPointer<User_Message> fromDBMessageToUserMessage(const QSharedPointer<DBEntity::DBMessage>& shp_user_message_);
-
-    QList<QSharedPointer<User_Message>> getMessages(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_);
+    QSet<QSharedPointer<User_Message>> getMessages(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_);
 
     QList<QString> searchForFiles(const QDateTime& from_, const QDateTime& to_, const quint32& room_);
     
-    void addLikeToMessage(const quint32& room_id_, const QUuid& message_id_, const QString& user_login_, const bool like_dislike_);
+    void addLikeToMessage(const quint32& room_id_, const QUuid& message_id_, const QDateTime& message_datetime_, const QString& user_login_, const bool like_dislike_);
     void downloadRoomsFromDB();
     void uploadRoomToDB(const QSharedPointer<SrvRoom>& shp_new_room_) const;
     void getMessagesFromDB(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_);
