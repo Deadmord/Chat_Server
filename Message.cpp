@@ -16,9 +16,9 @@ const QUuid& User_Message::getId() const {
 	return id;
 }
 
-quint32 User_Message::getRoomId() const {
-	return room_id;
-}
+//quint32 User_Message::getRoomId() const {
+//	return _room_id;
+//}
 
 const QDateTime& User_Message::getDateTime() const {
 	return date_time;

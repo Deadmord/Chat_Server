@@ -22,7 +22,7 @@ public:
 
     [[nodiscard]] const QDateTime& getDateTime() const;
 
-    [[nodiscard]] quint32 getRoomId() const;
+    //[[nodiscard]] quint32 getRoomId() const;
 
     [[nodiscard]] const QString& getNickname() const;
 
@@ -45,7 +45,7 @@ public:
 
 private:
 	QUuid id;
-    quint32 room_id {0};
+    //quint32 room_id {0};
     QDateTime date_time;
     QString nickname;
     QString text;

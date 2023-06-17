@@ -32,7 +32,8 @@ public:
 	void jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_);      //Убрать в RoomController
 	void jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_);
 	void sendJson(QSharedPointer<SrvUser> destination_, const QJsonObject& message_);
-	User_Message createMessage(const QString& nickname_, const QString& text_);
+	//User_Message createMessage(const QString& nickname_, const QString& text_);
+	bool createDTOMessage(const QJsonObject& user_msg_);
 
 private:
 	inline static QSharedPointer<MessageController> shp_instance{};
