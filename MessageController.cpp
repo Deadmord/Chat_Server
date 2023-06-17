@@ -30,7 +30,7 @@ User_Message MessageController::createMessage(const QString& nickname_, const QS
     //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
 }
 
-void MessageController::broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> shp_room_, const SrvUser* exclude_)
+void MessageController::broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> shp_room_, const QSharedPointer<SrvUser> exclude_)
 {
     /*for (UserConnection* user : shp_room_->getConnectedUsers()) {
         Q_ASSERT(user);
@@ -40,25 +40,28 @@ void MessageController::broadcastSend(const QJsonObject& message_, const QShared
     }*/
 }
 
-void MessageController::sendJson(SrvUser* destination_, const QJsonObject& message_)
+void MessageController::sendJson(QSharedPointer<SrvUser> destination_, const QJsonObject& message_)
 {
     Q_ASSERT(destination_);
     destination_->sendJson(message_);
 }
 
-void MessageController::jsonReceived(SrvUser* sender_, const QJsonObject& doc_)
+void MessageController::jsonReceived(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_)
 {
     Q_ASSERT(sender_);
     PLOGI << QLatin1String("JSON received: ") + QJsonDocument(doc_).toJson(QJsonDocument::Compact);
     if (sender_->getUserName().isEmpty())
         return jsonFromLoggedOut(sender_, doc_);
+    if (sender_->getRoomId() == 0)
+        return jsonFromLoggedWoRoom(sender_, doc_);
+    jsonFromLoggedIn(sender_, doc_);
     //-------------- проверять принадлежность комнате ------------------
     // -----------------если принадлежит то отправлять сообщение в конкретную комнату---------------
     //вместо этого
-    jsonFromLoggedInCmd(sender_, doc_);
+
 }
 
-void MessageController::jsonFromLoggedOut(SrvUser* sender_, const QJsonObject& doc_obj_)
+void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_)
 {
     Q_ASSERT(sender_);
     const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
@@ -66,36 +69,69 @@ void MessageController::jsonFromLoggedOut(SrvUser* sender_, const QJsonObject& d
         return;
     if (type_val.toString().compare(QLatin1String("login"), Qt::CaseInsensitive) != 0)
         return;
+
     const QJsonValue username_val = doc_obj_.value(QLatin1String("username"));
     if (username_val.isNull() || !username_val.isString())
         return;
     const QString new_user_name = username_val.toString().simplified();
     if (new_user_name.isEmpty())
         return;
-    for (const SrvUser* user : QList<SrvUser*>{}) {    //Find duplicat username //qAsConst(server.getUsersList()))
-        if (user == sender_)
+
+    const QJsonValue password_val = doc_obj_.value(QLatin1String("password"));
+    if (password_val.isNull() || !password_val.isString())
+        return;
+    const QString password_str = password_val.toString().simplified();
+    if (password_str.isEmpty())
+        return;
+
+    for (const QSharedPointer<SrvUser> user : UserController::instance()->getUsersList()) {     //Find duplicat username //qAsConst(server.getUsersList()))
+        if (user == sender_)                             
             continue;
         if (user->getUserName().compare(new_user_name, Qt::CaseInsensitive) == 0) {
+            PLOGI << "duplicate username or allrady loggin" + new_user_name;
             QJsonObject message;
             message[QStringLiteral("type")] = QStringLiteral("login");
             message[QStringLiteral("success")] = false;
-            message[QStringLiteral("reason")] = QStringLiteral("duplicate username");
+            message[QStringLiteral("reason")] = QStringLiteral("duplicate username or allrady loggin");
             sendJson(sender_, message);
             return;
         }
     }
+
+    {   // Query to DB
+        QSet<QString> username = { "User01","User02","User03" };
+        QSet<QString> password = { "Pass01","Pass02","Pass03" };
+
+        if (!username.contains(new_user_name)|| !password.contains(password_str)) {
+            PLOGI << "wrong loggin or password" + new_user_name;
+            QJsonObject message;
+            message[QStringLiteral("type")] = QStringLiteral("login");
+            message[QStringLiteral("success")] = false;
+            message[QStringLiteral("reason")] = QStringLiteral("wrong loggin or password");
+            sendJson(sender_, message);
+            return;
+        }
+    }
+
     sender_->setUserName(new_user_name);
+    {   // Upload user from DB, (check for name equals db?, socket steal the same)  
+        //sender_->setUserPicId("011");
+        //sender_->setRatingLikes(100);
+    }
+
     QJsonObject success_message;
     success_message[QStringLiteral("type")] = QStringLiteral("login");
     success_message[QStringLiteral("success")] = true;
+    success_message[QStringLiteral("userinfo")] = QJsonObject();    //Send DTO User
     sendJson(sender_, success_message);
+
     QJsonObject connected_message;
     connected_message[QStringLiteral("type")] = QStringLiteral("newuser");
     connected_message[QStringLiteral("username")] = new_user_name;
     broadcastSend(connected_message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
 }
 
-void MessageController::jsonFromLoggedInCmd(SrvUser* sender_, const QJsonObject& doc_obj_)
+void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_)
 {
     Q_ASSERT(sender_);
     const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
@@ -150,23 +186,28 @@ void MessageController::jsonFromLoggedInCmd(SrvUser* sender_, const QJsonObject&
 
 }
 
-void MessageController::jsonFromLoggedInMsg(const SrvUser* sender_, const QJsonObject& doc_obj_)
+void MessageController::jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_)
 {
-    Q_ASSERT(sender_);
-    const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
-    if (type_val.isNull() || !type_val.isString())
-        return;
-    if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) != 0)
-        return;
-    const QJsonValue text_val = doc_obj_.value(QLatin1String("text"));
-    if (text_val.isNull() || !text_val.isString())
-        return;
-    const QString text = text_val.toString().trimmed();
-    if (text.isEmpty())
-        return;
-    QJsonObject message;
-    message[QStringLiteral("type")] = QStringLiteral("message");
-    message[QStringLiteral("text")] = text;
-    message[QStringLiteral("sender")] = sender_->getUserName();
-    broadcastSend(message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
+
 }
+
+//void MessageController::jsonFromLoggedInMsg(const QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_)
+//{
+//    Q_ASSERT(sender_);
+//    const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
+//    if (type_val.isNull() || !type_val.isString())
+//        return;
+//    if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) != 0)
+//        return;
+//    const QJsonValue text_val = doc_obj_.value(QLatin1String("text"));
+//    if (text_val.isNull() || !text_val.isString())
+//        return;
+//    const QString text = text_val.toString().trimmed();
+//    if (text.isEmpty())
+//        return;
+//    QJsonObject message;
+//    message[QStringLiteral("type")] = QStringLiteral("message");
+//    message[QStringLiteral("text")] = text;
+//    message[QStringLiteral("sender")] = sender_->getUserName();
+//    broadcastSend(message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
+//}
