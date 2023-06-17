@@ -10,6 +10,8 @@ QSharedPointer<MessageController> MessageController::instance()
     if (!shp_instance)
     {
         shp_instance = QSharedPointer<MessageController>(new MessageController());
+        connect(shp_instance.get(), &MessageController::userEntrySignal, RoomController::instance().get(), &RoomController::userEntry);
+        connect(shp_instance.get(), &MessageController::userLeaveSignal, RoomController::instance().get(), &RoomController::userLeave);
         connect(shp_instance.get(), &MessageController::messageToRoom, RoomController::instance().get(), &RoomController::jsonMsgReceived);
     }
 
@@ -198,7 +200,7 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
         return;
     if (type_val.toString().compare(QLatin1String("roomLeave"), Qt::CaseInsensitive) == 0)
     {
-
+        emit userLeaveSignal(sender_);
     }
     if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) == 0)
     {
@@ -242,11 +244,7 @@ void MessageController::jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, co
         const quint32 room_id = room_val.toInt();
         if (!room_id)
             return;
-        //проверить что комната с таким номером вообще существует
-        //назначить комнату юзеру
-        sender_->setRoomId(room_id);
-        //Отправить юзера в нужную комнату
-        //уже в комнате по сигналу вхождения юзера сделать рассылку
+        emit userEntrySignal(room_id, sender_);
     }
 }
 

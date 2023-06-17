@@ -21,6 +21,8 @@ public:
 	static QSharedPointer<MessageController> instance();
 
 signals:
+	void userEntrySignal(const quint32& room_id, QSharedPointer<SrvUser> user_);
+	void userLeaveSignal(QSharedPointer<SrvUser> user_);
 	void messageToRoom(const quint32& room_id_, QSharedPointer<SrvUser> sender, const QJsonObject& message);
 
 public slots:
