@@ -69,29 +69,62 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
         return;
     if (type_val.toString().compare(QLatin1String("login"), Qt::CaseInsensitive) != 0)
         return;
+
     const QJsonValue username_val = doc_obj_.value(QLatin1String("username"));
     if (username_val.isNull() || !username_val.isString())
         return;
     const QString new_user_name = username_val.toString().simplified();
     if (new_user_name.isEmpty())
         return;
-    for (const QSharedPointer<SrvUser> user : QList<QSharedPointer<SrvUser>>{}) {     //Find duplicat username //qAsConst(server.getUsersList()))
+
+    const QJsonValue password_val = doc_obj_.value(QLatin1String("password"));
+    if (password_val.isNull() || !password_val.isString())
+        return;
+    const QString password_str = password_val.toString().simplified();
+    if (password_str.isEmpty())
+        return;
+
+    for (const QSharedPointer<SrvUser> user : UserController::instance()->getUsersList()) {     //Find duplicat username //qAsConst(server.getUsersList()))
         if (user == sender_)                             
             continue;
         if (user->getUserName().compare(new_user_name, Qt::CaseInsensitive) == 0) {
+            PLOGI << "duplicate username or allrady loggin" + new_user_name;
             QJsonObject message;
             message[QStringLiteral("type")] = QStringLiteral("login");
             message[QStringLiteral("success")] = false;
-            message[QStringLiteral("reason")] = QStringLiteral("duplicate username");
+            message[QStringLiteral("reason")] = QStringLiteral("duplicate username or allrady loggin");
             sendJson(sender_, message);
             return;
         }
     }
+
+    {   // Query to DB
+        QSet<QString> username = { "User01","User02","User03" };
+        QSet<QString> password = { "Pass01","Pass02","Pass03" };
+
+        if (!username.contains(new_user_name)|| !password.contains(password_str)) {
+            PLOGI << "wrong loggin or password" + new_user_name;
+            QJsonObject message;
+            message[QStringLiteral("type")] = QStringLiteral("login");
+            message[QStringLiteral("success")] = false;
+            message[QStringLiteral("reason")] = QStringLiteral("wrong loggin or password");
+            sendJson(sender_, message);
+            return;
+        }
+    }
+
     sender_->setUserName(new_user_name);
+    {   // Upload user from DB, (check for name equals db?, socket steal the same)  
+        //sender_->setUserPicId("011");
+        //sender_->setRatingLikes(100);
+    }
+
     QJsonObject success_message;
     success_message[QStringLiteral("type")] = QStringLiteral("login");
     success_message[QStringLiteral("success")] = true;
+    success_message[QStringLiteral("userinfo")] = QJsonObject();    //Send DTO User
     sendJson(sender_, success_message);
+
     QJsonObject connected_message;
     connected_message[QStringLiteral("type")] = QStringLiteral("newuser");
     connected_message[QStringLiteral("username")] = new_user_name;

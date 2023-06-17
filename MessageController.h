@@ -8,6 +8,7 @@
 #include "SrvRoom.h"
 #include "Message.h"
 #include "SrvUser.h"
+#include "UserController.h"
 #include "RoomStorage_Service.h"
 
 class MessageController : public QObject
