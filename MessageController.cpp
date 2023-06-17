@@ -213,8 +213,8 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
         sender_->setFloodLimit();
 
         const QJsonObject messagebody_val = doc_obj_.value(QLatin1String("messagebody")).toObject();
-        if (messagebody_val.isEmpty())
-            return;
+        //if (messagebody_val.isEmpty())
+           // return;
 
         DTOModel::DTOMessage tempDTO;
         if (!toDTOMessageFromJson(tempDTO, messagebody_val))
