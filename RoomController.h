@@ -35,11 +35,11 @@ public:
 public slots:
 	
 	void userEntry(const quint32& room_id, QSharedPointer<SrvUser> user_);
-	void jsonReceived(QSharedPointer<SrvRoom> shp_room_, QSharedPointer<SrvUser> sender, const QJsonObject& doc);
+	void userLeave(const quint32& room_id, QSharedPointer<SrvUser> user_);
+	void jsonMsgReceived(const quint32& room_id_, QSharedPointer<SrvUser> sender, const QJsonObject& message);
 
 private:
-
-	void broadcastSend(quint32& room_id_, const QJsonObject& message, const QSharedPointer<SrvUser>&);
+	void broadcastSend(const QJsonObject& message_, const quint32& room_id_, const QSharedPointer<SrvUser>& exclude_);
 	void sendJson(const QSharedPointer<SrvUser>& destination, const QJsonObject& message);
 	
 

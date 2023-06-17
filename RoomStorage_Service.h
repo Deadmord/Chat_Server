@@ -32,6 +32,7 @@ public slots:
     void addMessageToRoom(const qint32& room_id_, const QSharedPointer<User_Message>& shp_user_);
     void addMessagesToRoom(const qint32& room_id_, const QSet<QSharedPointer<User_Message>>& messages_);
     void addConnecntedUserToRoom(const qint32& room_id_, const QSharedPointer<SrvUser>& shp_user_);
+    void deleteConnecntedUserFromRoom(const qint32& room_id_, const QSharedPointer<SrvUser>& shp_user_);
        
 private:
 

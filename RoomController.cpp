@@ -23,33 +23,35 @@ QSharedPointer<RoomController> RoomController::instance()
 
 void RoomController::userEntry(const quint32& room_id, QSharedPointer<SrvUser> user_)
 {
+
+    QJsonObject connected_message;
+    connected_message[QStringLiteral("type")] = QStringLiteral("newuser");
+    connected_message[QStringLiteral("username")] = user_->getUserName();
+    broadcastSend(connected_message, user_->getRoomId(), user_);
     RoomStorage_Service::getInstance()->addConnecntedUserToRoom(room_id, user_);
 }
 
-//---!!!---это от сюда нужно убрать
-void RoomController::jsonReceived(QSharedPointer<SrvRoom> shp_room_, QSharedPointer<SrvUser> sender, const QJsonObject& docObj)
+void RoomController::userLeave(const quint32& room_id, QSharedPointer<SrvUser> user_)
 {
-    //Q_ASSERT(sender);
-    //const QJsonValue typeVal = docObj.value(QLatin1String("type"));
-    //if (typeVal.isNull() || !typeVal.isString())
-    //    return;
-    //if (typeVal.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) != 0)
-    //    return;
-    //const QJsonValue textVal = docObj.value(QLatin1String("text"));
-    //if (textVal.isNull() || !textVal.isString())
-    //    return;
-    //const QString text = textVal.toString().trimmed();
-    //if (text.isEmpty())
-    //    return;
-    //QJsonObject message;
-    //message[QStringLiteral("type")] = QStringLiteral("message");
-    //message[QStringLiteral("text")] = text;
-    //message[QStringLiteral("sender")] = sender->getUserName();
-    //broadcastSend(shp_room_, message, sender);
+    QJsonObject disconnectedMessage;
+    disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
+    disconnectedMessage[QStringLiteral("username")] = user_->getUserName();
+    broadcastSend(disconnectedMessage, user_->getRoomId(), nullptr);
+
+    //Удалить пользователя из комнаты:
+    RoomStorage_Service::getInstance()->deleteConnecntedUserFromRoom(room_id, user_);
 }
 
-//---!!!---это от сюда нужно убрать
-void RoomController::broadcastSend(quint32& room_id_, const QJsonObject& message_, const QSharedPointer<SrvUser>& exclude_)
+void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<SrvUser> sender_, const QJsonObject& message_)
+{
+    QJsonObject userMessage;
+    userMessage[QStringLiteral("type")] = QStringLiteral("message");
+    userMessage[QStringLiteral("sender")] = sender_->getUserName();
+    userMessage[QStringLiteral("text")] = message_;
+    broadcastSend(userMessage, sender_->getRoomId(), sender_);
+}
+
+void RoomController::broadcastSend(const QJsonObject& message_,const quint32& room_id_, const QSharedPointer<SrvUser>& exclude_)
 {
     for (const auto& user : RoomStorage_Service::getInstance()->getRoom(room_id_)->getConnectedUsers()) {
         Q_ASSERT(user);
@@ -59,7 +61,6 @@ void RoomController::broadcastSend(quint32& room_id_, const QJsonObject& message
     }
 }
 
-//---!!!---это от сюда нужно убрать
 void RoomController::sendJson(const QSharedPointer<SrvUser>& destination, const QJsonObject& message)
 {
     Q_ASSERT(destination);
