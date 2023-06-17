@@ -20,7 +20,7 @@ namespace DTOModel {
 
 
 	public:
-
+		DTOMessage(){}
 		DTOMessage(const QUuid& id_, const QDateTime& date_time_, const QString& login_,
 			const QString& text_, bool is_rtl_, const QString& media_id_, const QString& parent_id_)
 			: id(id_),

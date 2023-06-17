@@ -6,6 +6,7 @@
 #include <QJsonParseError>
 #include <QFile>
 #include "SrvRoom.h"
+#include "DTOMessage.h"
 #include "Message.h"
 #include "SrvUser.h"
 #include "UserController.h"
@@ -19,9 +20,12 @@ class MessageController : public QObject
 public:
 	static QSharedPointer<MessageController> instance();
 
+signals:
+	void messageToRoom(const quint32& room_id_, QSharedPointer<SrvUser> sender, const QJsonObject& message);
+
 public slots:
 
-	void broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> room_, const QSharedPointer<SrvUser> exclude_);
+	//void broadcastSend(QSharedPointer<User_Message> spr_srv_msg, const QSharedPointer<SrvRoom> room_, const QSharedPointer<SrvUser> exclude_);
 	void jsonReceived(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_);
 
 public:
@@ -32,8 +36,11 @@ public:
 	void jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_);      //Убрать в RoomController
 	void jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_);
 	void sendJson(QSharedPointer<SrvUser> destination_, const QJsonObject& message_);
+
+private:
 	//User_Message createMessage(const QString& nickname_, const QString& text_);
-	bool createDTOMessage(const QJsonObject& user_msg_);
+	bool toDTOMessageFromJson(DTOModel::DTOMessage& user_masg_dto_, const QJsonObject& user_msg_);
+	bool toJsonFromDTOMessage(QJsonObject& user_msg_, const DTOModel::DTOMessage& user_masg_dto_);
 
 private:
 	inline static QSharedPointer<MessageController> shp_instance{};

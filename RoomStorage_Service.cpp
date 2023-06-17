@@ -109,6 +109,14 @@ void RoomStorage_Service::addConnecntedUserToRoom(const qint32& room_id_, const 
     else PLOGE << "Room doesn't exist. Id: " + room_id_;
 }
 
+void RoomStorage_Service::deleteConnecntedUserFromRoom(const qint32& room_id_, const QSharedPointer<SrvUser>& shp_user_)
+{
+    if (rooms_storage.contains(room_id_)) {
+        rooms_storage.value(room_id_)->connectUser(shp_user_);
+    }
+    else PLOGE << "Room doesn't exist. Id: " + room_id_;
+}
+
 void RoomStorage_Service::addMessagesToRoom(const qint32& room_id_, const QSet<QSharedPointer<User_Message>>& messages_)
 {
     if (rooms_storage.contains(room_id_)) {

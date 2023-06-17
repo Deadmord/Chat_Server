@@ -1,5 +1,6 @@
 ﻿#include "MessageController.h"
 
+
 MessageController::MessageController(QObject* object_) : QObject(object_) {}
 
 MessageController::~MessageController() {}
@@ -9,7 +10,9 @@ QSharedPointer<MessageController> MessageController::instance()
     if (!shp_instance)
     {
         shp_instance = QSharedPointer<MessageController>(new MessageController());
+        connect(shp_instance.get(), &MessageController::messageToRoom, RoomController::instance().get(), &RoomController::jsonMsgReceived);
     }
+
     return shp_instance;
 }
 
@@ -29,7 +32,7 @@ QSharedPointer<MessageController> MessageController::instance()
 //    return User_Message(msg);
 //    //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
 //}
-bool MessageController::createDTOMessage(const QJsonObject& user_msg_)
+bool MessageController::toDTOMessageFromJson(DTOModel::DTOMessage& user_masg_dto_, const QJsonObject& user_msg_)
 {
     const QJsonValue id_val = user_msg_.value(QLatin1String("id"));
     if (id_val.isNull() || !id_val.isString())
@@ -47,14 +50,14 @@ bool MessageController::createDTOMessage(const QJsonObject& user_msg_)
     if (date_time_val.isNull() || !date_time_val.isString())
         return false;
     const QString date_time = date_time_val.toString().trimmed();
-    if (id.isEmpty())
+    if (date_time.isEmpty())
         return false;
 
     const QJsonValue nickname_val = user_msg_.value(QLatin1String("nickname"));
     if (nickname_val.isNull() || !nickname_val.isString())
         return false;
     const QString nickname = nickname_val.toString().trimmed();
-    if (id.isEmpty())
+    if (nickname.isEmpty())
         return false;
 
     const QJsonValue text_val = user_msg_.value(QLatin1String("text"));
@@ -64,36 +67,40 @@ bool MessageController::createDTOMessage(const QJsonObject& user_msg_)
     if (text.isEmpty())
         return false;
 
+    const QJsonValue mediaid_val = user_msg_.value(QLatin1String("mediaid"));
+    if (mediaid_val.isNull() || !mediaid_val.isString())
+        return false;
+    const QString mediaid = mediaid_val.toString().trimmed();
 
-    QString _id;
-    //QUuid _id;
-    QDateTime _date_time;
-    QString _nickname;
-    QString _text;
-    QString _media_id;
-    QString _parent_id;
-    //QUuid _parent_id;
-    bool _deleted{ false };
-    QMap<QUuid, bool> _likes;
+    const QJsonValue rtl_val = user_msg_.value(QLatin1String("rtl"));
+    if (rtl_val.isNull() || !mediaid_val.isBool())
+        return false;
+    const bool rtl = rtl_val.toBool();
 
-    //Message msg;
-    //msg.nickname = nickname_;
-    //msg.text = text_;
-    //msg.room_id = 0;
-    //msg.deleted = false;
-    //return User_Message(msg);
-    //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
+    
+    const auto likes_val = user_msg_.value(QLatin1String("likes")).toObject().toVariantMap();
+    QMap<QString, bool> likes;
+    for (auto it = likes_val.constBegin(); it != likes_val.constEnd(); ++it)
+    {
+        likes.insert(it.key(), it.value().toBool());
+    }
+
+    user_masg_dto_ = DTOModel::DTOMessage(QUuid(id), QDateTime::fromString(date_time), nickname,
+        text, rtl, mediaid, parentid);
+    user_masg_dto_.setLikes(likes);
+
+    return true;
 }
 
-void MessageController::broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> shp_room_, const QSharedPointer<SrvUser> exclude_)
-{
-    /*for (UserConnection* user : shp_room_->getConnectedUsers()) {
-        Q_ASSERT(user);
-        if (user == exclude_)
-            continue;
-        sendJson(user, message_);
-    }*/
-}
+//void MessageController::broadcastSend(QSharedPointer<User_Message> spr_srv_msg, const QSharedPointer<SrvRoom> shp_room_, const QSharedPointer<SrvUser> exclude_)
+//{
+//    for (UserConnection* user : shp_room_->getConnectedUsers()) {
+//        Q_ASSERT(user);
+//        if (user == exclude_)
+//            continue;
+//        sendJson(user, message_);
+//    }
+//}
 
 void MessageController::sendJson(QSharedPointer<SrvUser> destination_, const QJsonObject& message_)
 {
@@ -181,14 +188,43 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
     success_message[QStringLiteral("userinfo")] = QJsonObject();    //Send DTO User
     sendJson(sender_, success_message);
 
-    QJsonObject connected_message;
-    connected_message[QStringLiteral("type")] = QStringLiteral("newuser");
-    connected_message[QStringLiteral("username")] = new_user_name;
-
-    broadcastSend(connected_message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
 }
 
 void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_)
+{
+    Q_ASSERT(sender_);
+    const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
+    if (type_val.isNull() || !type_val.isString())
+        return;
+    if (type_val.toString().compare(QLatin1String("roomLeave"), Qt::CaseInsensitive) == 0)
+    {
+
+    }
+    if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) == 0)
+    {
+        if (sender_->isFloodLimit())                 //implementation of flood protection mechanism
+        {
+            PLOGD << "flood protection, wait...";    //notify the server of invalid data
+            return;
+        }
+        sender_->setFloodLimit();
+
+        const QJsonObject messagebody_val = doc_obj_.value(QLatin1String("messagebody")).toObject();
+        if (messagebody_val.isEmpty())
+            return;
+
+        DTOModel::DTOMessage tempDTO;
+        if (!toDTOMessageFromJson(tempDTO, messagebody_val))
+            return;
+        QSharedPointer<User_Message> spr_srv_msg = DTOModel::DTOMessage::createSrvFromDTO(QSharedPointer<DTOModel::DTOMessage>(&tempDTO));
+
+        emit messageToRoom(sender_->getRoomId(), sender_, messagebody_val);     //Send message to all members in room
+        RoomStorage_Service::getInstance()->addMessageToRoom(sender_->getRoomId(), spr_srv_msg);    //archive message
+        return;
+    }
+}
+
+void MessageController::jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_)
 {
     Q_ASSERT(sender_);
     const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
@@ -211,58 +247,5 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
         //Отправить юзера в нужную комнату
         //уже в комнате по сигналу вхождения юзера сделать рассылку
     }
-    if (type_val.toString().compare(QLatin1String("roomLeave"), Qt::CaseInsensitive) == 0)
-    {
-
-    }
-    if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) == 0)
-    {
-        if (sender_->isFloodLimit())                 //implementation of flood protection mechanism
-        {
-            PLOGD << "flood protection, wait...";    //notify the server of invalid data
-            return;
-        }
-        sender_->setFloodLimit();
-
-        const QJsonValue text_val = doc_obj_.value(QLatin1String("text"));
-        if (text_val.isNull() || !text_val.isString())
-            return;
-        const QString text = text_val.toString().trimmed();
-        if (text.isEmpty())
-            return;
-        QJsonObject message;
-        message[QStringLiteral("type")] = QStringLiteral("message");
-        message[QStringLiteral("text")] = text;
-        message[QStringLiteral("sender")] = sender_->getUserName();
-        broadcastSend(message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
-        return;
-    }
-
-
 }
 
-void MessageController::jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_)
-{
-
-}
-
-//void MessageController::jsonFromLoggedInMsg(const QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_)
-//{
-//    Q_ASSERT(sender_);
-//    const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
-//    if (type_val.isNull() || !type_val.isString())
-//        return;
-//    if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) != 0)
-//        return;
-//    const QJsonValue text_val = doc_obj_.value(QLatin1String("text"));
-//    if (text_val.isNull() || !text_val.isString())
-//        return;
-//    const QString text = text_val.toString().trimmed();
-//    if (text.isEmpty())
-//        return;
-//    QJsonObject message;
-//    message[QStringLiteral("type")] = QStringLiteral("message");
-//    message[QStringLiteral("text")] = text;
-//    message[QStringLiteral("sender")] = sender_->getUserName();
-//    broadcastSend(message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
-//}

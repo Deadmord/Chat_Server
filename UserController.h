@@ -21,7 +21,7 @@ private:
 
 signals:
 	void jsonReceived(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_);
-	void broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> room_, const QSharedPointer<SrvUser> exclude_);
+	//void broadcastSend(const QJsonObject& message_, const QSharedPointer<SrvRoom> room_, const QSharedPointer<SrvUser> exclude_);
 
 public slots:
 	void addConnection(qintptr socket_descriptor_);

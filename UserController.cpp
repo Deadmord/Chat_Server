@@ -11,8 +11,6 @@ QSharedPointer<UserController> UserController::instance()
         shp_instance = QSharedPointer<UserController>(new UserController());
     }
 
-    connect(shp_instance.get(), &UserController::broadcastSend, MessageController::instance().get(), &MessageController::broadcastSend); //это нужно перенести в MessageController
-
     return shp_instance;
 }
 
@@ -42,14 +40,11 @@ void UserController::disableUsers()
 void UserController::userDisconnected(QSharedPointer<SrvUser> sender_)
 {
     connected_users.remove(sender_);
-    const QString userName = sender_->getUserName();
-    if (!userName.isEmpty()) {
-        QJsonObject disconnectedMessage;
-        disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
-        disconnectedMessage[QStringLiteral("username")] = userName;
-        broadcastSend(disconnectedMessage, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), nullptr);
-        PLOGI << userName + QLatin1String(" disconnected, users left: ") + QString::number(connected_users.size());
+    const quint32 userRoom = sender_->getRoomId();
+    if (userRoom != 0) {
+        RoomController::instance()->userLeave(userRoom, sender_);
     }
+    PLOGI << sender_->getUserName() + QLatin1String(" disconnected, total users left: ") + QString::number(connected_users.size());
     sender_->deleteLater();
 }
 
@@ -58,8 +53,6 @@ void UserController::userError(const QSharedPointer<SrvUser> sender_)
     Q_UNUSED(sender_)
         PLOGE << QLatin1String("Error from ") + sender_->getUserName();
 }
-
-
 
 QSet<QSharedPointer<SrvUser>> UserController::getUsersList() const
 {

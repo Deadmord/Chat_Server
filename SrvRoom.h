@@ -66,6 +66,7 @@ signals:
 public slots:
 
 	void connectUser(const QSharedPointer<SrvUser>& shp_user_);
+	void disconnectUser(const QSharedPointer<SrvUser>& shp_user_);
 
 private:
 	quint32 id;
