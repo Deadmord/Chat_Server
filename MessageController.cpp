@@ -19,14 +19,69 @@ QSharedPointer<MessageController> MessageController::instance()
 //    return &inst;
 //}
 
-User_Message MessageController::createMessage(const QString& nickname_, const QString& text_)
+//User_Message MessageController::createMessage(const QString& nickname_, const QString& text_)
+//{
+//    Message msg;
+//    msg.nickname = nickname_;
+//    msg.text = text_;
+//    msg.room_id = 0;
+//    msg.deleted = false;
+//    return User_Message(msg);
+//    //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
+//}
+bool MessageController::createDTOMessage(const QJsonObject& user_msg_)
 {
-    Message msg;
-    msg.nickname = nickname_;
-    msg.text = text_;
-    msg.room_id = 0;
-    msg.deleted = false;
-    return User_Message(msg);
+    const QJsonValue id_val = user_msg_.value(QLatin1String("id"));
+    if (id_val.isNull() || !id_val.isString())
+        return false;
+    const QString id = id_val.toString().trimmed();
+    if (id.isEmpty())
+        return false;
+
+    const QJsonValue parentid_val = user_msg_.value(QLatin1String("parentid"));
+    if (parentid_val.isNull() || !parentid_val.isString())
+        return false;
+    const QString parentid = parentid_val.toString().trimmed();
+
+    const QJsonValue date_time_val = user_msg_.value(QLatin1String("datetime"));
+    if (date_time_val.isNull() || !date_time_val.isString())
+        return false;
+    const QString date_time = date_time_val.toString().trimmed();
+    if (id.isEmpty())
+        return false;
+
+    const QJsonValue nickname_val = user_msg_.value(QLatin1String("nickname"));
+    if (nickname_val.isNull() || !nickname_val.isString())
+        return false;
+    const QString nickname = nickname_val.toString().trimmed();
+    if (id.isEmpty())
+        return false;
+
+    const QJsonValue text_val = user_msg_.value(QLatin1String("text"));
+    if (text_val.isNull() || !text_val.isString())
+        return false;
+    const QString text = text_val.toString().trimmed();
+    if (text.isEmpty())
+        return false;
+
+
+    QString _id;
+    //QUuid _id;
+    QDateTime _date_time;
+    QString _nickname;
+    QString _text;
+    QString _media_id;
+    QString _parent_id;
+    //QUuid _parent_id;
+    bool _deleted{ false };
+    QMap<QUuid, bool> _likes;
+
+    //Message msg;
+    //msg.nickname = nickname_;
+    //msg.text = text_;
+    //msg.room_id = 0;
+    //msg.deleted = false;
+    //return User_Message(msg);
     //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
 }
 
@@ -64,7 +119,7 @@ void MessageController::jsonReceived(QSharedPointer<SrvUser> sender_, const QJso
 void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_)
 {
     Q_ASSERT(sender_);
-    const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
+    const QJsonValue type_val = doc_obj_.value(QLatin1String("type")); 
     if (type_val.isNull() || !type_val.isString())
         return;
     if (type_val.toString().compare(QLatin1String("login"), Qt::CaseInsensitive) != 0)
@@ -97,6 +152,7 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
             return;
         }
     }
+    //QConcurent::run()
 
     {   // Query to DB
         QSet<QString> username = { "User01","User02","User03" };
@@ -112,7 +168,7 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
             return;
         }
     }
-
+    //User-repository. get user by ID
     sender_->setUserName(new_user_name);
     {   // Upload user from DB, (check for name equals db?, socket steal the same)  
         //sender_->setUserPicId("011");
@@ -128,6 +184,7 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
     QJsonObject connected_message;
     connected_message[QStringLiteral("type")] = QStringLiteral("newuser");
     connected_message[QStringLiteral("username")] = new_user_name;
+
     broadcastSend(connected_message, RoomStorage_Service::getInstance()->getRoom(sender_->getRoomId()), sender_);
 }
 
@@ -160,19 +217,17 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
     }
     if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) == 0)
     {
-
-        
-
-        const QJsonValue text_val = doc_obj_.value(QLatin1String("text"));
-        if (text_val.isNull() || !text_val.isString())
-            return;
-        const QString text = text_val.toString().trimmed();
-        if (sender_->isFloodLimit())                                //implementation of flood protection mechanism
+        if (sender_->isFloodLimit())                 //implementation of flood protection mechanism
         {
             PLOGD << "flood protection, wait...";    //notify the server of invalid data
             return;
         }
         sender_->setFloodLimit();
+
+        const QJsonValue text_val = doc_obj_.value(QLatin1String("text"));
+        if (text_val.isNull() || !text_val.isString())
+            return;
+        const QString text = text_val.toString().trimmed();
         if (text.isEmpty())
             return;
         QJsonObject message;
