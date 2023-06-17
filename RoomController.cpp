@@ -23,23 +23,26 @@ QSharedPointer<RoomController> RoomController::instance()
 
 void RoomController::userEntry(const quint32& room_id, QSharedPointer<SrvUser> user_)
 {
-
+    RoomStorage_Service::getInstance()->addConnecntedUserToRoom(room_id, user_);
+    
     QJsonObject connected_message;
     connected_message[QStringLiteral("type")] = QStringLiteral("newuser");
     connected_message[QStringLiteral("username")] = user_->getUserName();
-    broadcastSend(connected_message, user_->getRoomId(), user_);
-    RoomStorage_Service::getInstance()->addConnecntedUserToRoom(room_id, user_);
+    broadcastSend(connected_message, room_id, user_);
+    
 }
 
 void RoomController::userLeave(const quint32& room_id, QSharedPointer<SrvUser> user_)
 {
+    RoomStorage_Service::getInstance()->deleteConnecntedUserFromRoom(room_id, user_);
+    //Проверять что успешно удален
     QJsonObject disconnectedMessage;
     disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
     disconnectedMessage[QStringLiteral("username")] = user_->getUserName();
-    broadcastSend(disconnectedMessage, user_->getRoomId(), nullptr);
+    broadcastSend(disconnectedMessage, room_id, nullptr);
 
-    //Удалить пользователя из комнаты:
-    RoomStorage_Service::getInstance()->deleteConnecntedUserFromRoom(room_id, user_);
+
+
 }
 
 void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<SrvUser> sender_, const QJsonObject& message_)
@@ -48,7 +51,7 @@ void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<Srv
     userMessage[QStringLiteral("type")] = QStringLiteral("message");
     userMessage[QStringLiteral("sender")] = sender_->getUserName();
     userMessage[QStringLiteral("text")] = message_;
-    broadcastSend(userMessage, sender_->getRoomId(), sender_);
+    broadcastSend(userMessage, room_id_, sender_);
 }
 
 void RoomController::broadcastSend(const QJsonObject& message_,const quint32& room_id_, const QSharedPointer<SrvUser>& exclude_)

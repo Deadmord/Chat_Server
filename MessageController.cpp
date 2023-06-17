@@ -243,6 +243,7 @@ void MessageController::jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, co
         if (!room_id)
             return;
         //проверить что комната с таким номером вообще существует
+        //назначить комнату юзеру
         sender_->setRoomId(room_id);
         //Отправить юзера в нужную комнату
         //уже в комнате по сигналу вхождения юзера сделать рассылку
