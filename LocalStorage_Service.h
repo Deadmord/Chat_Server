@@ -6,14 +6,17 @@
 #include <QMutex>
 #include <QMap>
 #include <QDir>
+#include <QtCore>
+#include <qthread.h>
+#include <QtConcurrent>
+#include <algorithm>
 
 #include <plog/Log.h>
 #include <QTimer>
 
 #include "DBMessage.h"
 #include "Message.h"
-#include <qthread.h>
-#include <QtConcurrent>
+#include "DTOMessage.h"
 
 #include "DTOMessage.h"
 
@@ -26,11 +29,10 @@ private:
     static QMutex mutex;
     explicit LocalStorage_Service(QObject* object_ = nullptr);
     QMap<quint32, QSet<QSharedPointer<DBEntity::DBMessage>>> message_storage;
-
-    static QSharedPointer<QTimer> shp_timer;
     
 
 public:
+    bool addLikeToMessage(const quint32& room_id_, const QUuid& message_id_, const QDateTime& message_datetime_, const QString& user_login_, const bool like_dislike_);
     QList<QString> searchForFiles(const QDateTime& from_, const QDateTime& to_, const quint32& room_) const;
     static QSharedPointer<LocalStorage_Service> getInstance(int minutes_ = 0);
     LocalStorage_Service& operator=(const LocalStorage_Service&) = delete;
@@ -44,7 +46,7 @@ public slots:
    
     void addMessages(const QSet<QSharedPointer<User_Message>>& messages_, const quint32 room_id_);
     void addMessage(const QSharedPointer<User_Message>& shp_message_, quint32 room_id_);
-    //void getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_);
+    QSet<QSharedPointer<User_Message>> getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_id_);
     void saveAllMessages() ;
 
     void safeExit() ;

@@ -1,4 +1,6 @@
 #include "RoomStorage_Service.h"
+#include "DTOMessage.h"
+#include "DTORoom.h"
 
 void RoomStorage_Service::init()
 {
@@ -25,6 +27,14 @@ void RoomStorage_Service::make_started()
     PLOGI << "RoomStorage_Service started.";
 }
 
+void RoomStorage_Service::addLikeToMessage(const quint32& room_id_, const QUuid& message_id_, const QDateTime& message_datetime_, const QString& user_login_, const bool like_dislike_)
+{
+    QtConcurrent::run([](const quint32& room_id_, const QUuid& message_id_, const QDateTime& message_datetime_, const QString& user_login_, const bool like_dislike_) {
+        LocalStorage_Service::getInstance()->addLikeToMessage(room_id_, message_id_, message_datetime_, user_login_, like_dislike_);
+
+        }, room_id_, message_id_, message_datetime_, user_login_, like_dislike_);
+}
+
 void RoomStorage_Service::downloadRoomsFromDB()
 {
 
@@ -37,20 +47,6 @@ void RoomStorage_Service::downloadRoomsFromDB()
         PLOGD << "Uploaded rooms: " + QString::number(rooms_storage.size());
 
     });
-
-    //auto dbrooms = QSharedPointer<QList<QSharedPointer<DBEntity::DBRoom>>>::create(qMove(future.result()));
-    //auto futurew = QtConcurrent::run([](auto dbrooms) -> decltype(rooms_set) {
-    //    decltype(rooms_set) cash;
-    //    for (auto& shp : *dbrooms) {
-    //        cash.insert(shp->getId(), QSharedPointer<SrvRoom>(new SrvRoom(shp)));
-    //        }
-
-    //    return cash;
-    //    }, dbrooms);
-
-    //auto future_watcher = new QFutureWatcher<decltype(rooms_set)>();
-
-
 }
 
 RoomStorage_Service* RoomStorage_Service::getInstance()
@@ -97,7 +93,7 @@ void RoomStorage_Service::createRoom(const QSharedPointer<SrvRoom>& shp_new_room
     try
     {
         if (!rooms_storage.contains(shp_new_room_->getId())) {
-            rooms_storage.insert(shp_new_room_->getId(), shp_new_room_);
+            addRoom(shp_new_room_);
             uploadRoomToDB(shp_new_room_);
             PLOGI << "New room created. " + shp_new_room_->getName();
         }
@@ -127,22 +123,33 @@ void RoomStorage_Service::addMessageToRoom(const qint32& room_id_, const QShared
     }
 }
 
-RoomStorage_Service::RoomStorage_Service(QObject* parent_) : QObject(parent_) {};
-
-void RoomStorage_Service::addConnecntedUserToRoom(const qint32& room_id_, const QSharedPointer<SrvUser>& shp_user_)
+void RoomStorage_Service::addRoom(const QSharedPointer<SrvRoom>& shp_room_)
 {
-    if (rooms_storage.contains(room_id_)) {
-        rooms_storage.value(room_id_)->connectUser(shp_user_);
-    }
-    else PLOGE << "Room doesn't exist. Id: " + room_id_;
+    rooms_storage.insert(shp_room_->getId(), shp_room_);
 }
 
-void RoomStorage_Service::deleteConnecntedUserFromRoom(const qint32& room_id_, const QSharedPointer<SrvUser>& shp_user_)
+RoomStorage_Service::RoomStorage_Service(QObject* parent_) : QObject(parent_) {};
+
+bool RoomStorage_Service::addConnecntedUserToRoom(const qint32& room_id_, const QSharedPointer<SrvUser>& shp_user_)
 {
     if (rooms_storage.contains(room_id_)) {
-        rooms_storage.value(room_id_)->connectUser(shp_user_);
+        return rooms_storage.value(room_id_)->connectUser(shp_user_);
     }
-    else PLOGE << "Room doesn't exist. Id: " + room_id_;
+    else {
+        PLOGE << "Room doesn't exist. Id: " + room_id_;
+        return false;
+    }
+}
+
+bool RoomStorage_Service::deleteConnecntedUserFromRoom(const qint32& room_id_, const QSharedPointer<SrvUser>& shp_user_)
+{
+    if (rooms_storage.contains(room_id_)) {
+        return rooms_storage.value(room_id_)->disconnectUser(shp_user_);
+    }
+    else {
+        PLOGE << "Room doesn't exist. Id: " + room_id_;
+        return false;
+    }
 }
 
 void RoomStorage_Service::addMessagesToRoom(const qint32& room_id_, const QSet<QSharedPointer<User_Message>>& messages_)
@@ -168,7 +175,7 @@ void RoomStorage_Service::getMessagesFromDB(const quint32& room_id_, const QDate
 
         foreach(const auto & message, messages) {
 
-            rooms_storage[room_id_]->addMessage(fromDBMessageToUserMessage(message));
+            rooms_storage[room_id_]->addMessage(DTOModel::DTOMessage::createSrvFromDB(message));
         }
     }
     catch (const QException& ex)
@@ -195,50 +202,45 @@ void RoomStorage_Service::getMessagesFromLocalStorage(const quint32& room_id_, c
     }
 }
 
-QSharedPointer<DBEntity::DBMessage> RoomStorage_Service::fromUserMessageToDBMessage(const QSharedPointer<User_Message>& shp_user_message_)
-{
-    return QSharedPointer<DBEntity::DBMessage>();
-}
 
-QSharedPointer<User_Message> RoomStorage_Service::fromDBMessageToUserMessage(const QSharedPointer<DBEntity::DBMessage>& shp_user_message_)
-{
-    return QSharedPointer<User_Message>();
-}
 
-QList<QSharedPointer<User_Message>> RoomStorage_Service::getMessages(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_)
+QSet<QSharedPointer<User_Message>> RoomStorage_Service::getMessages(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_)
 {
     
     QSet<QSharedPointer<User_Message>> messages;
-    if (rooms_storage.contains(room_id_))
+
+    if (!rooms_storage.contains(room_id_))
     {
-        QList<std::function<void(const quint32&, const QDateTime&, const QDateTime&)>> delegates;
-
-        delegates.append([this](const quint32& room_id_, const QDateTime& from_, const QDateTime& to_) {
-            getMessagesFromLocalStorage(room_id_, from_, to_);
-            });
-
-        delegates.append([this](const quint32& room_id_, const QDateTime& from_, const QDateTime& to_) {
-            getMessagesFromDB(room_id_, from_, to_);
-            });
-
-        QtConcurrent::blockingMap(delegates, [&](std::function<void(const quint32&, const QDateTime&, const QDateTime&)> delegate) {
-            delegate(room_id_, from_, to_);
-            PLOGF << "DRATUTY!!!";
-            });
-
-        messages.unite(rooms_storage[room_id_]->getMessages(from_, to_));
-
-    }
-    else
-    {
-        //TODO: auto future = RoomRepository::getRoomById(room_id_);
-        // future.waitForFinished();
-        // auto room = future.result();
-        // addRoom(room);
-        PLOGE << "Room id: " + QString::number(room_id_) + " doesn't exist";
+        auto future = DBService::RoomRepository::getRoomById(room_id_);
+        future.waitForFinished();
+        auto room = future.result();
+        if (room != nullptr) {
+            addRoom(DTOModel::DTORoom::createSrvRoomFromDB(*room));
+        }
+        else {
+            PLOGE << "Room id: " + QString::number(room_id_) + " doesn't exist";
+            return messages;
+        }
     }
 
-    return QList(messages.begin(), messages.end());
+    QList<std::function<void(const quint32&, const QDateTime&, const QDateTime&)>> delegates;
+
+    delegates.append([this](const quint32& room_id_, const QDateTime& from_, const QDateTime& to_) {
+        getMessagesFromLocalStorage(room_id_, from_, to_);
+        });
+
+    delegates.append([this](const quint32& room_id_, const QDateTime& from_, const QDateTime& to_) {
+        getMessagesFromDB(room_id_, from_, to_);
+        });
+
+    QtConcurrent::blockingMap(delegates, [&](std::function<void(const quint32&, const QDateTime&, const QDateTime&)> delegate) {
+        delegate(room_id_, from_, to_);
+        PLOGF << "DRATUTY!!!";
+        });
+
+    messages.unite(rooms_storage[room_id_]->getMessages(from_, to_));
+    
+    return messages;
     //emit messageRetrieved(QList(messages.begin(), messages.end()));
 }
 

@@ -3,7 +3,6 @@
 
 QSharedPointer<LocalStorage_Service> LocalStorage_Service::shp_instance = nullptr;
 QMutex LocalStorage_Service::mutex;
-QSharedPointer<QTimer> LocalStorage_Service::shp_timer = nullptr;
 
 
 QSharedPointer<LocalStorage_Service> LocalStorage_Service::getInstance(const int minutes_)
@@ -16,10 +15,7 @@ QSharedPointer<LocalStorage_Service> LocalStorage_Service::getInstance(const int
             if (!shp_instance)
             {
                 shp_instance = QSharedPointer<LocalStorage_Service>(new LocalStorage_Service(), &QObject::deleteLater);
-                shp_timer = QSharedPointer<QTimer>(new QTimer(), &QObject::deleteLater);
-                const int timeout = minutes_ == 0 ? 5 * 60000 : minutes_ * 60000;
                 connect(shp_instance.get(), &close, shp_instance.get(), &safeExit);
-                shp_timer->start(timeout);
             }
 
         }
@@ -33,6 +29,11 @@ QSharedPointer<LocalStorage_Service> LocalStorage_Service::getInstance(const int
 }
 
 LocalStorage_Service::LocalStorage_Service(QObject* object_) : QObject(object_) {}
+
+bool LocalStorage_Service::addLikeToMessage(const quint32& room_id_, const QUuid& message_id_, const QDateTime& message_datetime_, const QString& user_login_, const bool like_dislike_)
+{
+    return false;
+}
 
 QList<QString> LocalStorage_Service::searchForFiles(const QDateTime& from_, const QDateTime& to_, const quint32& room_) const
 {
@@ -86,6 +87,18 @@ void LocalStorage_Service::addMessage(const QSharedPointer<User_Message>& shp_me
     }
 }
 
+QSet<QSharedPointer<User_Message>> LocalStorage_Service::getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_id_)
+{
+    QSet<QSharedPointer<User_Message>> result;
+    QtConcurrent::map(message_storage.value(room_id_), [&result, &from_, &to_](QSharedPointer<DBEntity::DBMessage> message) {
+        if (auto date = message->getDateTime(); date >= from_ && date <= to_)
+        {
+            result.insert(DTOModel::DTOMessage::createSrvFromDB(message));
+        }
+        }).waitForFinished();
+
+        return result;
+}
 void LocalStorage_Service::saveAllMessages() 
 {
 
@@ -131,8 +144,6 @@ void LocalStorage_Service::saveAllMessages()
 void LocalStorage_Service::safeExit()
 {
     saveAllMessages();
-    shp_timer->stop();
-    shp_timer->deleteLater();
     shp_instance->deleteLater();
     PLOGI << "Local storage service safely closed";
 }
