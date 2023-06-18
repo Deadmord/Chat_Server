@@ -67,7 +67,6 @@ void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<Srv
 
 void RoomController::roomListRequest(QSharedPointer<SrvUser> user_)
 {
-    auto future = QtConcurrent::run([&]() {
         auto rooms_ptr_list = RoomStorage_Service::getInstance()->getRooms();
 
         QJsonObject roomList;
@@ -88,7 +87,6 @@ void RoomController::roomListRequest(QSharedPointer<SrvUser> user_)
         roomList[QStringLiteral("type")] = QStringLiteral("roomList");
         roomList[QStringLiteral("rooms")] = rooms;
         sendJson(user_, roomList);
-        });
 }
 
 void RoomController::broadcastSend(const QJsonObject& message_,const quint32& room_id_, const QSharedPointer<SrvUser>& exclude_)

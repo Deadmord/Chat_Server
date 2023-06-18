@@ -48,6 +48,9 @@ namespace DTOModel {
 		static QSharedPointer<DBEntity::DBMessage> createDBFromSrv(QSharedPointer< User_Message> srv_message_);
 		static QSharedPointer<User_Message> createSrvFromDB(QSharedPointer<DBEntity::DBMessage> db_message_);
 
+		static bool toDTOMessageFromJson(DTOModel::DTOMessage& user_masg_dto_, const QJsonObject& user_msg_);
+		static bool toJsonFromDTOMessage(QJsonObject& user_msg_, const DTOModel::DTOMessage& user_masg_dto_);
+
 	};
 }
 #endif
