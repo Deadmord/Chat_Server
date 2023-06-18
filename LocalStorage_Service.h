@@ -24,15 +24,17 @@ class LocalStorage_Service:
     public QObject
 {
     Q_OBJECT
-private:
+
     static QSharedPointer<LocalStorage_Service> shp_instance;
     static QMutex mutex;
     explicit LocalStorage_Service(QObject* object_ = nullptr);
     QMap<quint32, QSet<QSharedPointer<DBEntity::DBMessage>>> message_storage;
-    
 
 public:
+    [[nodiscard]] QString searchForFiles(const QDateTime& date_, const quint32& room_) const;
+    QString searchForFiles(const QDateTime& date_, const quint32& room_, const bool& from_to_) const;
     bool addLikeToMessage(const quint32& room_id_, const QUuid& message_id_, const QDateTime& message_datetime_, const QString& user_login_, const bool like_dislike_);
+    static QSet<QSharedPointer<DBEntity::DBMessage>> readMessagesFromDB(const QString& file_name_) ;
     QList<QString> searchForFiles(const QDateTime& from_, const QDateTime& to_, const quint32& room_) const;
     static QSharedPointer<LocalStorage_Service> getInstance(int minutes_ = 0);
     LocalStorage_Service& operator=(const LocalStorage_Service&) = delete;

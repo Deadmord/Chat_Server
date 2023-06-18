@@ -29,6 +29,7 @@ namespace DBEntity{
         //explicit DBMessage(User_Message* message, QObject* parent_ = nullptr);
     	void setDeleted(bool flag_);
         void setLikes(const QMap<QString, bool> &likes_);
+        void addLike(const QString& login_, bool like_or_dislike_);
         [[nodiscard]] const QUuid& getId() const;
         [[nodiscard]] const QDateTime &getDateTime() const;
      
@@ -46,6 +47,7 @@ namespace DBEntity{
 
         [[nodiscard]] const QMap<QString, bool> &getLikes() const;
         [[nodiscard]] QJsonObject toJson() const;
+        void fromJson(const QJsonObject& obj_);
 
     private:
         QString login;
@@ -56,15 +58,15 @@ namespace DBEntity{
         bool deleted{false};
         QMap<QString, bool> likes;
 
-        void fromJson(const QJsonObject &obj_);
+        
     public:
         DBMessage();
         DBMessage(const QUuid& id_, const QDateTime& date_time_, const QString& login_,
             const QString& text_, const QString& media_, const QString& parent_id_, bool is_rtl_);
 
-        static void writeMessages(const QString& file_name_, const QList<DBEntity::DBMessage>& messages_) ;
+       /* static void writeMessages(const QString& file_name_, const QList<DBEntity::DBMessage>& messages_) ;
         static void writeMessage(const QString& file_name_,const DBEntity::DBMessage& messages_) ;
-        static QSet<QSharedPointer<DBEntity::DBMessage>> readMessages(const QString& file_name_) ;
+        static QSet<QSharedPointer<DBEntity::DBMessage>> readMessages(const QString& file_name_) ;*/
     };
 
 }

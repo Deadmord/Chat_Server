@@ -6,7 +6,7 @@
 
 
 
-bool FileRepository::writeJsonArr(const QString &file_name_, const QJsonArray &data_) {
+bool FileRepository::writeJsonArr(const QString &file_name_, const QJsonArray &data_, const bool clear_) {
     QFile file(file_name_);
     if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
         PLOGE << "File cannot be opened";
@@ -17,7 +17,7 @@ bool FileRepository::writeJsonArr(const QString &file_name_, const QJsonArray &d
 
     QJsonDocument doc = QJsonDocument::fromJson(content);
     QJsonArray data_json;
-    if (!doc.isNull() && doc.isArray()) {
+    if (!doc.isNull() && doc.isArray() && !clear_) {
         data_json = doc.array();
     }
 

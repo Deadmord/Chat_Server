@@ -19,7 +19,7 @@ public:
     FileRepository();
     static bool saveToBinFile(const QByteArray& data_, const QString& file_path_);
     static QByteArray readFromBinFile(const QString& file_path_);
-    static bool writeJsonArr(const QString &file_name_, const QJsonArray &data_);
+    static bool writeJsonArr(const QString& file_name_, const QJsonArray& data_, bool clear_ = false);
 	static bool readJson(const QString& file_path_, QJsonObject& json_object_);
 	static bool readJsonArr(const QString& file_path_, QJsonArray& json_object_);
 };  
