@@ -119,8 +119,6 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
 
         //check login and password
         if (new_user_name != user_info->getLogin() || QString(hash.result().toHex()) != user_info->getPassword())
-            //if (hash.result().toHex().compare(QByteArray::(user_info->getPassword())) != 0)
-            //if(false)
         {
             PLOGI << "wrong loggin or password" + new_user_name;
             QJsonObject message;
@@ -177,6 +175,24 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
     {
         emit userLeaveSignal(sender_);
     }
+
+    if (type_val.toString().compare(QLatin1String("messageHystoryRequest"), Qt::CaseInsensitive) == 0)
+    {
+        const QJsonValue message_time_val = doc_obj_.value(QLatin1String("messagetime"));
+        if (message_time_val.isNull() || !message_time_val.isString())
+            return;
+        const QDateTime message_time = QDateTime::fromString(message_time_val.toString());
+        if (!message_time.isValid())
+            return;
+
+        const QJsonValue pool_size_val = doc_obj_.value(QLatin1String("poolsize"));
+        if (pool_size_val.isNull() || !pool_size_val.isDouble())
+            return;
+        const quint32 pool_size = pool_size_val.toInt();
+
+        emit messageHystoryRequestSignal(sender_->getRoomId(), sender_, message_time, pool_size);
+    }
+
     if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) == 0)
     {
         if (sender_->isFloodLimit())                 //implementation of flood protection mechanism
