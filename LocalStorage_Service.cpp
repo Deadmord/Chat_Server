@@ -32,7 +32,59 @@ LocalStorage_Service::LocalStorage_Service(QObject* object_) : QObject(object_) 
 
 bool LocalStorage_Service::addLikeToMessage(const quint32& room_id_, const QUuid& message_id_, const QDateTime& message_datetime_, const QString& user_login_, const bool like_dislike_)
 {
-    return false;
+    try
+    {
+        const auto file = searchForFiles(message_datetime_, room_id_);
+        auto db_messages = readMessagesFromDB("rooms/" + QString::number(room_id_) + file);
+        if (!db_messages.empty())
+        {
+            foreach(auto & message, db_messages)
+            {
+                if (message->getId() == message_id_)
+                {
+                    message->addLike(user_login_, like_dislike_);
+                    break;
+                }
+            }
+            QJsonArray array;
+            for (const auto& message : db_messages) {
+
+                array.append(message->toJson());
+            }
+            FileRepository::writeJsonArr("rooms/" + QString::number(room_id_) + file, array, true);
+            return true;
+        }
+        return false;
+    }
+    catch (const QException& ex)
+    {
+        PLOGE << "Error occurred while adding message to local storage: " << ex.what();
+        return false;
+    }
+}
+
+QSet<QSharedPointer<DBEntity::DBMessage>> LocalStorage_Service::readMessagesFromDB(const QString& file_name_) 
+{
+    QJsonArray array;
+    FileRepository::readJsonArr(file_name_, array);
+    QSet<QSharedPointer<DBEntity::DBMessage>> messages;
+
+    for (const auto obj : array) {
+        if (obj.isObject())
+        {
+            QJsonObject json_object = obj.toObject();
+            QSharedPointer<DBEntity::DBMessage> message(new DBEntity::DBMessage());
+            message->fromJson(json_object);
+            messages.insert(message);
+        }
+        else
+        {
+            PLOGE << "File is corrupted";
+        }
+    }
+
+    return messages;
+
 }
 
 QList<QString> LocalStorage_Service::searchForFiles(const QDateTime& from_, const QDateTime& to_, const quint32& room_) const
@@ -41,7 +93,7 @@ QList<QString> LocalStorage_Service::searchForFiles(const QDateTime& from_, cons
     QDir directory("rooms/" + QString::number(room_));
     QStringList all_files = directory.entryList(QDir::Files);
     bool is_empty = true;
-    const QRegularExpression regex(R"(((\d{8}_\d{4})&(\d{8}_\d{4}))\.json)"); // Regular expression to match file names like "20230102_1000.json"
+    const QRegularExpression regex(R"(((\d{8}_\d{4})&(\d{8}_\d{4}))\.json)"); 
 
     for (const QString& file_name : all_files)
     {
@@ -63,6 +115,72 @@ QList<QString> LocalStorage_Service::searchForFiles(const QDateTime& from_, cons
         PLOGW << "No messages for this date was retrieved from database";
     }
     return file_names;
+}
+
+QString LocalStorage_Service::searchForFiles(const QDateTime& date_, const quint32& room_) const
+{
+    QString file_names_res;
+    QDir directory("rooms/" + QString::number(room_));
+    QStringList all_files = directory.entryList(QDir::Files);
+    bool is_empty = true;
+    const QRegularExpression regex(R"(((\d{8}_\d{4})&(\d{8}_\d{4}))\.json)");
+    for (const QString& file_name : all_files)
+    {
+        if (QRegularExpressionMatch match = regex.match(file_name); match.hasMatch())
+        {
+            QString earliest_date = match.captured(2);
+            QString latest_date = match.captured(3);
+            QDateTime from = QDateTime::fromString(earliest_date, "yyyyMMdd_hhmm");
+            QDateTime to = QDateTime::fromString(latest_date, "yyyyMMdd_hhmm");
+            if (from <= date_ && to >= date_)
+            {
+                return file_name;
+            }
+        }
+    }
+    if (is_empty)
+    {
+        PLOGW << "No messages for this date was retrieved from database";
+    }
+    return "";
+}
+QString LocalStorage_Service::searchForFiles(const QDateTime& date_, const quint32& room_, const bool& from_to_) const
+{
+    
+    QDir directory("rooms/" + QString::number(room_));
+    QStringList all_files = directory.entryList(QDir::Files);
+    bool is_empty = true;
+    const QRegularExpression regex(R"(((\d{8}_\d{4})&(\d{8}_\d{4}))\.json)");
+    for (const QString& file_name : all_files)
+    {
+        if (QRegularExpressionMatch match = regex.match(file_name); match.hasMatch())
+        {
+            QString earliest_date = match.captured(2);
+            QString latest_date = match.captured(3);
+            QDateTime from = QDateTime::fromString(earliest_date, "yyyyMMdd_hhmm");
+            QDateTime to = QDateTime::fromString(latest_date, "yyyyMMdd_hhmm");
+            if(from_to_)
+            {
+        		if (to >= date_)
+	            {
+	                return file_name;
+	            }
+                
+            }
+            else
+            {
+	            if(from <= date_)
+	            {
+                    return file_name;
+	            }
+            }
+        }
+    }
+    if (is_empty)
+    {
+        PLOGW << "No messages for this date was retrieved from database";
+    }
+    return "";
 }
 
 

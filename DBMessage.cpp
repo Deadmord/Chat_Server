@@ -60,6 +60,9 @@ void DBEntity::DBMessage::setLikes(const QMap<QString, bool> &likes_) {
     DBMessage::likes = likes_;
 }
 
+void DBEntity::DBMessage::addLike(const QString& login_, const bool like_or_dislike_) {
+    likes.insert(login_, like_or_dislike_);
+}
 //void DBEntity::DBMessage::writeMessages(const QString& file_name_,const QList<DBEntity::DBMessage>& messages_) {
 //
 //    QJsonArray array;
@@ -71,42 +74,19 @@ void DBEntity::DBMessage::setLikes(const QMap<QString, bool> &likes_) {
 //    }
 //
 //}
+//
+//void DBEntity::DBMessage::writeMessage(const QString& file_name_,const DBEntity::DBMessage& messages_) {
+//
+//    QJsonArray array;
+//
+//    array.append(messages_.toJson());
+//
+//    if (!FileRepository::writeJsonArr(file_name_, array)){
+//       PLOGE << "Error writing to file";
+//    }
+//    PLOGI << "Writing message successfully";
+//}
 
-void DBEntity::DBMessage::writeMessage(const QString& file_name_,const DBEntity::DBMessage& messages_) {
-
-    QJsonArray array;
-
-    array.append(messages_.toJson());
-
-    if (!FileRepository::writeJsonArr(file_name_, array)){
-       PLOGE << "Error writing to file";
-    }
-    PLOGI << "Writing message successfully";
-}
-
-QSet<QSharedPointer<DBEntity::DBMessage>> DBEntity::DBMessage::readMessages(const QString& file_name_)
-{
-    QJsonArray array;
-   FileRepository::readJsonArr(file_name_, array);
-   QSet<QSharedPointer<DBMessage>> messages;
-
-   for(const auto  obj: array) {
-       if (obj.isObject())
-       {
-           QJsonObject json_object = obj.toObject();
-           QSharedPointer<DBMessage> message (new DBMessage());
-           message->fromJson(json_object);
-           messages.insert(message);
-       }
-       else
-       {
-           PLOGE << "File is corrupted";
-       }
-   }
-  
-   	return messages;
-
-}
 
 const QDateTime &DBEntity::DBMessage::getDateTime() const {
     return date_time;

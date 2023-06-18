@@ -171,7 +171,7 @@ void RoomStorage_Service::getMessagesFromDB(const quint32& room_id_, const QDate
         auto files = LocalStorage_Service::getInstance()->searchForFiles(from_, to_, room_id_);
         foreach(const auto & file, files)
         {
-            messages.unite(DBEntity::DBMessage::readMessages(file));
+            messages.unite(LocalStorage_Service::readMessagesFromDB(file));
         }
 
         foreach(const auto & message, messages) {
@@ -185,6 +185,51 @@ void RoomStorage_Service::getMessagesFromDB(const quint32& room_id_, const QDate
     }
 }
 
+QSet<QSharedPointer<User_Message>> RoomStorage_Service::getMessagesFromDB(const quint32& room_id_, const QDateTime& date_, const bool& from_to_, const quint32 pool_size_)
+{
+    try
+    {
+        QList<QSharedPointer<User_Message>> temp;
+        auto date = date_;
+        while (true)
+        {
+            auto file = LocalStorage_Service::getInstance()->searchForFiles(date, room_id_, from_to_);
+            if(file == "")
+            {
+                break;
+            }
+            QSet<QSharedPointer<DBEntity::DBMessage>> messages;
+
+
+            messages.unite(LocalStorage_Service::readMessagesFromDB(file));
+
+            auto it = messages.begin();
+            quint32 k = 0;
+            
+
+            while (it != messages.end() && k < pool_size_) {
+                rooms_storage[room_id_]->addMessage(DTOModel::DTOMessage::createSrvFromDB(*it));
+                temp.append(DTOModel::DTOMessage::createSrvFromDB(*it));
+                k++;
+            }
+            if(k >= pool_size_)
+            {
+                break;
+            }
+            if(from_to_)
+            {
+				date = temp.last()->getDateTime().addSecs(60);
+            }
+            date = temp.first()->getDateTime().addSecs(-60);
+        }
+        return QSet(temp.begin(), temp.end());
+    }
+    catch (const QException& ex)
+    {
+        PLOGE << "Cannot get messages from DB" << ex.what();
+        throw;
+    }
+}
 
 
 void RoomStorage_Service::getMessagesFromLocalStorage(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_)

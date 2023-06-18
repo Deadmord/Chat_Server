@@ -53,6 +53,8 @@ private:
     void downloadRoomsFromDB();
     void uploadRoomToDB(const QSharedPointer<SrvRoom>& shp_new_room_) const;
     void getMessagesFromDB(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_);
+    QSet<QSharedPointer<User_Message>> getMessagesFromDB(const quint32& room_id_, const QDateTime& date_,
+                                                         const bool& from_to_, quint32 pool_size_);
     void getMessagesFromLocalStorage(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_);
     QSet<QSharedPointer<User_Message>> getMessagesFromLocalStorage(const quint32& room_id_, const QDateTime& time_, bool from_to_, const quint32& pool_size_);
     QMap<qint32, QSharedPointer<SrvRoom>> rooms_storage;
