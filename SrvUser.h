@@ -39,6 +39,7 @@ signals:
     void jsonWMedia(QSharedPointer<SrvUser> sender_, const QJsonObject& _json_doc_, const QByteArray& media_);
     void disconnectedFromClient();
     void errorSignal();
+    void mediaRequest(const QSharedPointer<SrvUser>& create_, const QJsonObject& object_);
 
 public slots:
     void disconnectFromClient();

@@ -80,11 +80,20 @@ void SrvUser::receiveJson()
 {
     // prepare a container to hold the UTF-8 encoded JSON we receive from the socket
     QByteArray jsonData;
+    QJsonDocument json;
     QByteArray data;
+    QByteArray type;
     // create a QDataStream operating on the socket
     QDataStream socketStream(user_socket);
-    // set the version so that programs compiled with different versions of Qt can agree on how to serialise
+    qint16 typeSize;
+    qint16 jsonDataSize;
+    qint16 dataSize;
     socketStream.setVersion(QDataStream::Qt_6_5);
+   
+
+   
+
+    // set the version so that programs compiled with different versions of Qt can agree on how to serialise
     if (socketStream.status() == QDataStream::Ok)
     {
         
@@ -109,15 +118,36 @@ void SrvUser::receiveJson()
             // we start a transaction so we can revert to the previous state in case we try to read more data than is available on the socket
             socketStream.startTransaction();
             // we try to read the JSON data
-            QString type;
+            socketStream >> data;
+
             socketStream >> type;
-        	socketStream >> jsonData;
-        	socketStream >> data;
-            
+            PLOGE << type;
+            //socketStream >> jsonData;
+            //socketStream >> typeSize;
+            //QByteArray typeBytes(typeSize, Qt::Uninitialized);
+            //if (socketStream.readRawData(typeBytes.data(), typeSize) != typeSize) {
+            //    // Handle error condition
+            //    return;
+            //}
+            //type = QString::fromUtf8(typeBytes);
+            //socketStream >> jsonDataSize;
+            //jsonData.resize(jsonDataSize);
+            //if (socketStream.readRawData(jsonData.data(), jsonDataSize) != jsonDataSize) {
+            //    // Handle error condition
+            //    return;
+            //}
+            //socketStream >> dataSize;
+            //data.resize(dataSize);
+            //if (socketStream.readRawData(data.data(), dataSize) != dataSize) {
+            //    // Handle error condition
+            //    return;
+            //}
                 if (socketStream.commitTransaction()) {
                     // we successfully read some data
                     // we now need to make sure it's in fact a valid JSON
                     QJsonParseError parseError;
+                    PLOGI << type;
+                    PLOGF << jsonData;
                     // we try to create a json document with the data we received
                 	QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &parseError);
                     if (parseError.error == QJsonParseError::NoError) {
@@ -128,9 +158,14 @@ void SrvUser::receiveJson()
                             {
                                 emit jsonWMedia(QSharedPointer<SrvUser>::create(this), jsonDoc.object(), data);
                             }
-                            else if(type == "message")
+                            else if(type == "Json")
                             {
+                                PLOGI << "WORKING!!!";
 								emit jsonReceived(QSharedPointer<SrvUser>::create(this), jsonDoc.object()); // send the message to the central server
+                            }
+                            else if(type == "mediaRequest")
+                            {
+                                emit mediaRequest(QSharedPointer<SrvUser>::create(this), jsonDoc.object());
                             }
                         }
                         else

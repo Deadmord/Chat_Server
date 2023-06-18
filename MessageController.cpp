@@ -114,6 +114,12 @@ void MessageController::sendJson(QSharedPointer<SrvUser> destination_, const QJs
     destination_->sendJson(message_);
 }
 
+//void MessageController::sendMedia(QSharedPointer<SrvUser> destination_, const QJsonObject& message_)
+//{
+//    Q_ASSERT(destination_);
+//    destination_->sendJson(message_);
+//}
+
 void MessageController::jsonReceived(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_)
 {
     Q_ASSERT(sender_);
@@ -142,6 +148,17 @@ void MessageController::jsonWMediaReceived(QSharedPointer<SrvUser> sender_, cons
     // -----------------если принадлежит то отправлять сообщение в конкретную комнату---------------
     //вместо этого
 
+}
+
+void MessageController::jsonMediaRequest(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_)
+{
+    /*Q_ASSERT(sender_);
+    const auto media_id = QUuid::fromString(doc_.value(QLatin1String("mediaid")).toString());
+    auto future = MediaSaver_Service::getInstance()->getMedia(sender_->getUserName(), media_id, sender_->getRoomId());
+    QFutureWatcher<decltype(future.result())> watcher;
+    connect(&watcher, &QFutureWatcher<decltype(future.result())>::finished, [&]() {
+        sendJson(sender_, messageList);
+        });*/
 }
 
 void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_)

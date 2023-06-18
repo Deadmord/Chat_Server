@@ -26,7 +26,7 @@ void UserController::addConnection(qintptr socket_descriptor_)
     connect(user_connection.get(), &SrvUser::errorSignal, this, std::bind(&UserController::userError, this, user_connection));
     connect(user_connection.get(), &SrvUser::jsonReceived, MessageController::instance().get(), &MessageController::jsonReceived);  //connect with MessageController (это нужно перенести в MessageController)
     connect(user_connection.get(), &SrvUser::jsonWMedia, MessageController::instance().get(), &MessageController::jsonWMediaReceived);  //connect with MessageController (это нужно перенести в MessageController)
-
+    //connect(user_connection.get(), &SrvUser::mediaRequest, MessageController::instance().get(), &);
 
     connected_users.insert(user_connection);
     PLOGI << "New client Connected! Now users: " + QString::number(connected_users.size());

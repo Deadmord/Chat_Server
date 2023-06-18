@@ -31,7 +31,7 @@ public slots:
 	//void broadcastSend(QSharedPointer<User_Message> spr_srv_msg, const QSharedPointer<SrvRoom> room_, const QSharedPointer<SrvUser> exclude_);
 	void jsonReceived(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_);
 	void jsonWMediaReceived(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_, const QByteArray& data_);
-
+	void jsonMediaRequest(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_);
 public:
 	explicit MessageController(QObject* parent_ = nullptr);
 	~MessageController() override;
