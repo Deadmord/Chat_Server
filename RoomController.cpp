@@ -45,15 +45,19 @@ void RoomController::userLeave(QSharedPointer<SrvUser> user_)
         PLOGW << "Room leave request wo room number.";
         return;
     }
-    RoomStorage_Service::getInstance()->deleteConnecntedUserFromRoom(room_id, user_);
-    //Проверять что успешно удален
-    QJsonObject disconnectedMessage;
-    disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
-    disconnectedMessage[QStringLiteral("username")] = user_->getUserName();
-    broadcastSend(disconnectedMessage, room_id, nullptr);
-    //проверить что комната с таким номером вообще существует
-    //обнулить номер
-    user_->setRoomId(0);
+    if(RoomStorage_Service::getInstance()->deleteConnecntedUserFromRoom(room_id, user_))
+    {
+	    QJsonObject disconnectedMessage;
+	    disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
+	    disconnectedMessage[QStringLiteral("username")] = user_->getUserName();
+	    broadcastSend(disconnectedMessage, room_id, nullptr);
+	    user_->setRoomId(0);
+    }
+    else
+    {
+        PLOGE << "User was not deleted";
+    }
+    
 }
 
 void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<SrvUser> sender_, const QJsonObject& message_)

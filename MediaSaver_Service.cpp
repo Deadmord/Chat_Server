@@ -23,15 +23,14 @@ QSharedPointer<MediaSaver_Service>  MediaSaver_Service::getInstance() {
 }
 
 
-void MediaSaver_Service::getMedia(const QString& login, const QUuid &media_id_, const quint32 &room_id_) {
-    auto future = QtConcurrent::run([&]() {
+QFuture<QByteArray> MediaSaver_Service::getMedia(const QString& login, const QUuid& media_id_, const quint32& room_id_) {
+    return QtConcurrent::run([&]() {
         auto file_path = "rooms/" + QString::number(room_id_) + "/media/" + media_id_.toString();
         auto byte_array = FileRepository::readFromBinFile(file_path);
         return byte_array;
     });
-    future.then([&](const QByteArray& data_){
-        emit retrievedMedia(login, media_id_, room_id_, data_);
-    });
+    
+    
 }
 
 void MediaSaver_Service::saveMedia(const quint32 &room_id_, const QString &login, const QUuid &id_,

@@ -29,7 +29,7 @@ public:
     void savedMedia(const QUuid& id_, const quint32& room_id_, const QString& login_, bool success_);
     void retrievedMedia(const QString& login_, const QUuid& media_id_, const quint32& room_id_, QByteArray data_ );
 public slots:
-    void getMedia( const QString& login, const QUuid& media_id_, const quint32& room_id_);
+    QFuture<QByteArray> getMedia(const QString& login, const QUuid& media_id_, const quint32& room_id_);
     void saveMedia(const quint32& room_id_, const QString& login, const QUuid& id_, const QByteArray& data_);
 
 };
