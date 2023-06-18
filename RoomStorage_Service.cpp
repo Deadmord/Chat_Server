@@ -108,20 +108,23 @@ void RoomStorage_Service::createRoom(const QSharedPointer<SrvRoom>& shp_new_room
 
 void RoomStorage_Service::addMessageToRoom(const qint32& room_id_, const QSharedPointer<User_Message>& message_)
 {
-    try
-    {
-        Q_ASSERT(rooms_storage.contains(room_id_));
-        if (rooms_storage.contains(room_id_)) {
-            rooms_storage.value(room_id_)->addMessage(message_);
-            LocalStorage_Service::getInstance()->addMessage(message_, room_id_);
+    QtConcurrent::run([&](const qint32& room_id_, const QSharedPointer<User_Message>& message_) {
+        try
+        {
+            Q_ASSERT(rooms_storage.contains(room_id_));
+            if (rooms_storage.contains(room_id_)) {
+                rooms_storage.value(room_id_)->addMessage(message_);
+                LocalStorage_Service::getInstance()->addMessage(message_, room_id_);
+            }
+            else PLOGE << "Room doesn't exist. Id: " + room_id_;
         }
-        else PLOGE << "Room doesn't exist. Id: " + room_id_;
-    }
-    catch (const QException& ex)
-    {
-        PLOGE << "Cannot add message to roomStorage" << ex.what();
-        
-    }
+        catch (const QException& ex)
+        {
+            PLOGE << "Cannot add message to roomStorage" << ex.what();
+
+        }
+    }, room_id_, message_);
+    
 }
 
 void RoomStorage_Service::addRoom(const QSharedPointer<SrvRoom>& shp_room_)
