@@ -42,8 +42,6 @@ public:
 
 private:
 	//User_Message createMessage(const QString& nickname_, const QString& text_);
-	bool toDTOMessageFromJson(DTOModel::DTOMessage& user_masg_dto_, const QJsonObject& user_msg_);
-	bool toJsonFromDTOMessage(QJsonObject& user_msg_, const DTOModel::DTOMessage& user_masg_dto_);
 
 private:
 	inline static QSharedPointer<MessageController> shp_instance{};
