@@ -77,92 +77,114 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
         const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
         if (type_val.isNull() || !type_val.isString())
             return;
-        if (type_val.toString().compare(QLatin1String("login"), Qt::CaseInsensitive) != 0)
-            return;
+        if (type_val.toString().compare(QLatin1String("signin"), Qt::CaseInsensitive) == 0)
+        {
+            const QJsonValue username_val = doc_obj_.value(QLatin1String("username"));
+            if (username_val.isNull() || !username_val.isString())
+                return;
+            const QString new_user_name = username_val.toString().simplified();
+            if (new_user_name.isEmpty())
+                return;
 
-        const QJsonValue username_val = doc_obj_.value(QLatin1String("username"));
-        if (username_val.isNull() || !username_val.isString())
-            return;
-        const QString new_user_name = username_val.toString().simplified();
-        if (new_user_name.isEmpty())
-            return;
+            const QJsonValue password_val = doc_obj_.value(QLatin1String("password"));
+            if (password_val.isNull() || !password_val.isString())
+                return;
+            const QString password_str = password_val.toString().simplified();
+            if (password_str.isEmpty())
+                return;
 
-        const QJsonValue password_val = doc_obj_.value(QLatin1String("password"));
-        if (password_val.isNull() || !password_val.isString())
-            return;
-        const QString password_str = password_val.toString().simplified();
-        if (password_str.isEmpty())
-            return;
+            //userpic
+            //Б логика записи в БД
+            //вместо ответа передавать успешный логин
 
-        //QFuture<QSharedPointer<DBEntity::DBUser>> future_user_info = QtConcurrent::run(&DBService::UserRepository::getUserByLogin, new_user_name); //ask to db for user info
-        QFuture<QSharedPointer<DBEntity::DBUser>> future_user_info = DBService::UserRepository::getUserByLogin(new_user_name); //ask to DB for user info
+        }
+        if (type_val.toString().compare(QLatin1String("login"), Qt::CaseInsensitive) == 0)
+        {
+            const QJsonValue username_val = doc_obj_.value(QLatin1String("username"));
+            if (username_val.isNull() || !username_val.isString())
+                return;
+            const QString new_user_name = username_val.toString().simplified();
+            if (new_user_name.isEmpty())
+                return;
 
-        for (const QSharedPointer<SrvUser> user : UserController::instance()->getUsersList()) {     //Find duplicat username //qAsConst(server.getUsersList()))
-            if (user == sender_)
-                continue;
-            if (user->getUserName().compare(new_user_name, Qt::CaseInsensitive) == 0) {
-                PLOGI << "duplicate username or allrady loggin" + new_user_name;
+            const QJsonValue password_val = doc_obj_.value(QLatin1String("password"));
+            if (password_val.isNull() || !password_val.isString())
+                return;
+            const QString password_str = password_val.toString().simplified();
+            if (password_str.isEmpty())
+                return;
+
+            //QFuture<QSharedPointer<DBEntity::DBUser>> future_user_info = QtConcurrent::run(&DBService::UserRepository::getUserByLogin, new_user_name); //ask to db for user info
+            QFuture<QSharedPointer<DBEntity::DBUser>> future_user_info = DBService::UserRepository::getUserByLogin(new_user_name); //ask to DB for user info
+
+            for (const QSharedPointer<SrvUser> user : UserController::instance()->getUsersList()) {     //Find duplicat username //qAsConst(server.getUsersList()))
+                if (user == sender_)
+                    continue;
+                if (user->getUserName().compare(new_user_name, Qt::CaseInsensitive) == 0) {
+                    PLOGI << "duplicate username or allrady loggin" + new_user_name;
+                    QJsonObject message;
+                    message[QStringLiteral("type")] = QStringLiteral("login");
+                    message[QStringLiteral("success")] = false;
+                    message[QStringLiteral("reason")] = QStringLiteral("duplicate username or allrady loggin");
+                    sendJson(sender_, message);
+                    return;
+                }
+            }
+
+            QCryptographicHash hash(QCryptographicHash::Sha256);
+            hash.addData(password_str.toUtf8());
+
+            future_user_info.waitForFinished(); //wait for DB responce
+            QSharedPointer<DBEntity::DBUser> user_info = future_user_info.result();
+
+            //check login and password
+            if (new_user_name != user_info->getLogin() || QString(hash.result().toHex()) != user_info->getPassword())
+            {
+                PLOGI << "wrong loggin or password" + new_user_name;
                 QJsonObject message;
                 message[QStringLiteral("type")] = QStringLiteral("login");
                 message[QStringLiteral("success")] = false;
-                message[QStringLiteral("reason")] = QStringLiteral("duplicate username or allrady loggin");
+                message[QStringLiteral("reason")] = QStringLiteral("wrong loggin or password");
                 sendJson(sender_, message);
                 return;
             }
+
+            //{   // Query to DB
+            //    QSet<QString> username = { "User01","User02","User03" };
+            //    QSet<QString> password = { "Pass01","Pass02","Pass03" };
+
+            //    if (!username.contains(new_user_name)|| !password.contains(password_str)) {
+            //        PLOGI << "wrong loggin or password" + new_user_name;
+            //        QJsonObject message;
+            //        message[QStringLiteral("type")] = QStringLiteral("login");
+            //        message[QStringLiteral("success")] = false;
+            //        message[QStringLiteral("reason")] = QStringLiteral("wrong loggin or password");
+            //        sendJson(sender_, message);
+            //        return;
+            //    }
+            //}
+
+            //sinchronise with DB user
+            sender_->setUserName(user_info->getLogin());
+            sender_->setPassword(user_info->getPassword());
+            sender_->setUserpic(user_info->getUserpic());
+            sender_->setRating(user_info->getRating());
+
+            QByteArray userpicData = user_info->getUserpic();
+            QString base64Userpic = QString::fromLatin1(userpicData.toBase64());
+
+            //send loggin success + user info
+            QJsonObject userinfo;
+            userinfo[QStringLiteral("username")] = sender_->getUserName();
+            userinfo[QStringLiteral("userpic")] = base64Userpic;
+            userinfo[QStringLiteral("rating")] = double(sender_->getRating());
+            QJsonObject success_message;
+            success_message[QStringLiteral("type")] = QStringLiteral("login");
+            success_message[QStringLiteral("success")] = true;
+            success_message[QStringLiteral("userinfo")] = userinfo;    //Send DTO User
+            sendJson(sender_, success_message);
         }
-
-        QCryptographicHash hash(QCryptographicHash::Sha256);
-        hash.addData(password_str.toUtf8());
-
-        future_user_info.waitForFinished(); //wait for DB responce
-        QSharedPointer<DBEntity::DBUser> user_info = future_user_info.result();
-
-        //check login and password
-        if (new_user_name != user_info->getLogin() || QString(hash.result().toHex()) != user_info->getPassword())
-        {
-            PLOGI << "wrong loggin or password" + new_user_name;
-            QJsonObject message;
-            message[QStringLiteral("type")] = QStringLiteral("login");
-            message[QStringLiteral("success")] = false;
-            message[QStringLiteral("reason")] = QStringLiteral("wrong loggin or password");
-            sendJson(sender_, message);
-            return;
-        }
-
-        //{   // Query to DB
-        //    QSet<QString> username = { "User01","User02","User03" };
-        //    QSet<QString> password = { "Pass01","Pass02","Pass03" };
-
-        //    if (!username.contains(new_user_name)|| !password.contains(password_str)) {
-        //        PLOGI << "wrong loggin or password" + new_user_name;
-        //        QJsonObject message;
-        //        message[QStringLiteral("type")] = QStringLiteral("login");
-        //        message[QStringLiteral("success")] = false;
-        //        message[QStringLiteral("reason")] = QStringLiteral("wrong loggin or password");
-        //        sendJson(sender_, message);
-        //        return;
-        //    }
-        //}
-
-        //sinchronise with DB user
-        sender_->setUserName(user_info->getLogin());
-        sender_->setPassword(user_info->getPassword());
-        sender_->setUserpic(user_info->getUserpic());
-        sender_->setRating(user_info->getRating());
-
-        QByteArray userpicData = user_info->getUserpic();
-        QString base64Userpic = QString::fromLatin1(userpicData.toBase64());
-
-        //send loggin success + user info
-        QJsonObject userinfo;
-        userinfo[QStringLiteral("username")] = sender_->getUserName();
-        userinfo[QStringLiteral("userpic")] = base64Userpic;
-        userinfo[QStringLiteral("rating")] = double(sender_->getRating());
-        QJsonObject success_message;
-        success_message[QStringLiteral("type")] = QStringLiteral("login");
-        success_message[QStringLiteral("success")] = true;
-        success_message[QStringLiteral("userinfo")] = userinfo;    //Send DTO User
-        sendJson(sender_, success_message);
+        
 }
 
 void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_)
