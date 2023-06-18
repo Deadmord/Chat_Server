@@ -91,11 +91,44 @@ void RoomController::roomListRequest(QSharedPointer<SrvUser> user_)
 
 void RoomController::messageHystoryRequest(quint32 room_id_, QSharedPointer<SrvUser> user_, QDateTime message_time_, quint32 pool_size_)
 {
-    QJsonObject messageList;
-    QJsonArray messages;
+    auto future = RoomStorage_Service::getInstance()->getMessages(room_id_, message_time_, pool_size_);
+    QFutureWatcher<decltype(future.result())> watcher;
+
+    QObject::connect(&watcher, &QFutureWatcher<decltype(future.result())>::finished, [&]() {
+        QJsonObject messageList;
+        QJsonArray messages;
+        auto messages_set = std::move(future.result());
+        foreach (auto message, messages_set)
+        {
+            QJsonObject message_json;
+            QJsonObject jsonObject;
+
+    
+            
+            if (message->getLikes().size() != 0) {
+
+                QMapIterator<QString, bool> it(message->getLikes());
+                while (it.hasNext()) {
+                    it.next();
+                    jsonObject.insert(it.key(), QJsonValue(it.value()));
+                }
+            }
+            message_json[QStringLiteral("id")] = message->getId().toString();
+            message_json[QStringLiteral("dateTime")] = message->getDateTime().toString();
+            message_json[QStringLiteral("text")] = message->getText();
+            message_json[QStringLiteral("parentid")] = message->getParentId();
+            message_json[QStringLiteral("nickname")] = message->getNickname();
+            message_json[QStringLiteral("mediaid")] = message->getMedia();
+            message_json[QStringLiteral("rtl")] = message->isRtl();
+            message_json[QStringLiteral("likes")] = jsonObject;
+            messages.append(message_json);
+        }
+        sendJson(user_, messageList);
+    });
     //Тут запрос истории
     //Тут преобразование в JSON
-    sendJson(user_, messageList);
+
+    
 }
 
 void RoomController::broadcastSend(const QJsonObject& message_,const quint32& room_id_, const QSharedPointer<SrvUser>& exclude_)
