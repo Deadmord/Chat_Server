@@ -35,7 +35,8 @@ public:
     void setFloodLimit();
 
 signals:
-    void jsonReceived(const QJsonObject& _json_doc);
+    void jsonReceived(QSharedPointer<SrvUser> sender_, const QJsonObject& _json_doc);
+    void jsonWMedia(QSharedPointer<SrvUser> sender_, const QJsonObject& _json_doc_, const QByteArray& media_);
     void disconnectedFromClient();
     void errorSignal();
 

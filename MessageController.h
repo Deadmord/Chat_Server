@@ -30,6 +30,7 @@ public slots:
 
 	//void broadcastSend(QSharedPointer<User_Message> spr_srv_msg, const QSharedPointer<SrvRoom> room_, const QSharedPointer<SrvUser> exclude_);
 	void jsonReceived(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_);
+	void jsonWMediaReceived(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_, const QByteArray& data_);
 
 public:
 	explicit MessageController(QObject* parent_ = nullptr);
@@ -37,6 +38,7 @@ public:
 
 	void jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_);
 	void jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_);      //Убрать в RoomController
+	void jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_, const QByteArray& data_);
 	void jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_);
 	void sendJson(QSharedPointer<SrvUser> destination_, const QJsonObject& message_);
 

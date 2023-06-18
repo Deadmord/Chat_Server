@@ -1,5 +1,6 @@
 ﻿#include "MessageController.h"
 #include "DBUser.h"
+#include "MediaSaver_Service.h"
 #include "UserRepository.h"
 
 
@@ -122,6 +123,21 @@ void MessageController::jsonReceived(QSharedPointer<SrvUser> sender_, const QJso
     if (sender_->getRoomId() == 0)
         return jsonFromLoggedWoRoom(sender_, doc_);
     jsonFromLoggedIn(sender_, doc_);
+    //-------------- проверять принадлежность комнате ------------------
+    // -----------------если принадлежит то отправлять сообщение в конкретную комнату---------------
+    //вместо этого
+
+}
+
+void MessageController::jsonWMediaReceived(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_, const QByteArray& data_)
+{
+    Q_ASSERT(sender_);
+    PLOGI << QLatin1String("JSON received: ") + QJsonDocument(doc_).toJson(QJsonDocument::Compact);
+    if (sender_->getUserName().isEmpty())
+        return jsonFromLoggedOut(sender_, doc_);
+    if (sender_->getRoomId() == 0)
+        return jsonFromLoggedWoRoom(sender_, doc_);
+    jsonFromLoggedIn(sender_, doc_, data_);
     //-------------- проверять принадлежность комнате ------------------
     // -----------------если принадлежит то отправлять сообщение в конкретную комнату---------------
     //вместо этого
@@ -251,6 +267,42 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
         DTOModel::DTOMessage tempDTO;
         if (!toDTOMessageFromJson(tempDTO, messagebody_val))
             return;
+        QSharedPointer<User_Message> spr_srv_msg = DTOModel::DTOMessage::createSrvFromDTO(QSharedPointer<DTOModel::DTOMessage>(&tempDTO));
+        RoomStorage_Service::getInstance()->addMessageToRoom(sender_->getRoomId(), spr_srv_msg);    //archive message
+
+        emit messageToRoom(sender_->getRoomId(), sender_, messagebody_val);     //Send message to all members in room
+        return;
+    }
+}
+
+void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_, const QByteArray& data_)
+{
+    Q_ASSERT(sender_);
+    const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
+    if (type_val.isNull() || !type_val.isString())
+        return;
+    if (type_val.toString().compare(QLatin1String("roomLeave"), Qt::CaseInsensitive) == 0)
+    {
+        emit userLeaveSignal(sender_);
+    }
+    if (type_val.toString().compare(QLatin1String("message"), Qt::CaseInsensitive) == 0)
+    {
+        if (sender_->isFloodLimit())                 //implementation of flood protection mechanism
+        {
+            PLOGD << "flood protection, wait...";    //notify the server of invalid data
+            return;
+        }
+        sender_->setFloodLimit();
+        QUuid media_id = QUuid::createUuid();
+        QJsonObject messagebody_val = doc_obj_.value(QLatin1String("messagebody")).toObject();
+        messagebody_val["mediaid"] = media_id.toString();
+        //if (messagebody_val.isEmpty())
+           // return;
+
+        DTOModel::DTOMessage tempDTO;
+        if (!toDTOMessageFromJson(tempDTO, messagebody_val))
+            return;
+        MediaSaver_Service::getInstance()->saveMedia(sender_->getRoomId(), sender_->getUserName(), media_id, data_);
         QSharedPointer<User_Message> spr_srv_msg = DTOModel::DTOMessage::createSrvFromDTO(QSharedPointer<DTOModel::DTOMessage>(&tempDTO));
         RoomStorage_Service::getInstance()->addMessageToRoom(sender_->getRoomId(), spr_srv_msg);    //archive message
 
