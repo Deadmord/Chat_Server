@@ -12,7 +12,11 @@ void Server::startServer()
     openConnection();
     DBService::DBConnection_Service::init().then([]() {
         RoomStorage_Service::init();
-        });
+        }).waitForFinished();
+        QByteArray array;
+        DBEntity::DBUser user("login", "password", array, 10);
+        auto future = DBService::UserRepository::createUser(user);
+        qDebug() << future.result();
     PLOGI << "Server initialized";
 }
 
