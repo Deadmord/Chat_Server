@@ -16,6 +16,7 @@ QSharedPointer<MessageController> MessageController::instance()
         connect(shp_instance.get(), &MessageController::userLeaveSignal, RoomController::instance().get(), &RoomController::userLeave);
         connect(shp_instance.get(), &MessageController::messageToRoom, RoomController::instance().get(), &RoomController::jsonMsgReceived);
         connect(shp_instance.get(), &MessageController::roomListRequestSignal, RoomController::instance().get(), &RoomController::roomListRequest);
+        connect(shp_instance.get(), &MessageController::messageHystoryRequestSignal, RoomController::instance().get(), &RoomController::messageHystoryRequest);
     }
 
     return shp_instance;
@@ -197,6 +198,23 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
 
         emit messageToRoom(sender_->getRoomId(), sender_, messagebody_val);     //Send message to all members in room
         return;
+    }
+
+    if (type_val.toString().compare(QLatin1String("messageHystoryRequest"), Qt::CaseInsensitive) == 0)
+    {
+        const QJsonValue message_time_val = doc_obj_.value(QLatin1String("messagetime"));
+        if (message_time_val.isNull() || !message_time_val.isString())
+            return;
+        const QDateTime message_time = QDateTime::fromString(message_time_val.toString());
+        if (!message_time.isValid())
+            return;
+
+        const QJsonValue pool_size_val = doc_obj_.value(QLatin1String("poolsize"));
+        if (pool_size_val.isNull() || !pool_size_val.isDouble())
+            return;
+        const quint32 pool_size = pool_size_val.toInt();
+
+        emit messageHystoryRequestSignal(sender_->getRoomId(), sender_, message_time, pool_size);
     }
 }
 
