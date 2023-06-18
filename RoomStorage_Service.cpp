@@ -280,6 +280,25 @@ QSet<QSharedPointer<User_Message>> RoomStorage_Service::getMessages(const quint3
         return result;
     }
 
+    if (from_to_) auto new_time = result.values().last()->getDateTime();
+    else auto new_time = result.values().last()->getDateTime();
+
+    new_pool_size = pool_size_ - result.size();
+
+    result.unite(getMessagesFromLocalStorage(room_id_, new_time, from_to_, new_pool_size));
+
+     temp_list = result.values();
+
+    std::sort(temp_list.begin(), temp_list.end(), [](const QSharedPointer<User_Message>& a, const QSharedPointer<User_Message>& b) {
+        return a->getDateTime() > b->getDateTime();
+        });
+
+    result = QSet<QSharedPointer<User_Message>>(temp_list.begin(), temp_list.end());
+
+    if (result.size() == pool_size_) {
+        return result;
+    }
+
 
     if (from_to_) new_time = temp_list.last()->getDateTime();
     else new_time = temp_list.last()->getDateTime();
@@ -295,6 +314,31 @@ QSet<QSharedPointer<User_Message>> RoomStorage_Service::getMessages(const quint3
         });
 
     result = QSet<QSharedPointer<User_Message>>(temp_list.begin(), temp_list.end());
+
+
+
+
+
+
+    if (from_to_) new_time = temp_list.last()->getDateTime();
+    else new_time = temp_list.last()->getDateTime();
+
+    new_pool_size = pool_size_ - result.size();
+
+    //result.unite(getMessagesFromDB(room_id_, new_time, from_to_, new_pool_size));
+
+    temp_list = result.values();
+
+    std::sort(temp_list.begin(), temp_list.end(), [](const QSharedPointer<User_Message>& a, const QSharedPointer<User_Message>& b) {
+        return a->getDateTime() > b->getDateTime();
+        });
+
+    QSet<QSharedPointer<User_Message>> result_2;
+
+    for (auto& var : temp_list)
+    {
+        result_2.insert(var);
+    }
 
 }
 

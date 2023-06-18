@@ -64,6 +64,45 @@ QSet<QSharedPointer<User_Message>> SrvRoom::getMessages(const QDateTime& from_, 
     return result;
 }
 
+QSet<QSharedPointer<User_Message>> SrvRoom::getMessages(const QDateTime& time_, const bool from_to_, const quint32& pool_size_) const
+{
+
+    QList<QSharedPointer<User_Message>> temp_messages;
+    QSet<QSharedPointer<User_Message>> result;
+    QtConcurrent::map(messages, [&temp_messages, &time_, &from_to_, &pool_size_](QSharedPointer<User_Message> message) {
+
+        if (from_to_) {
+            if (auto date = message->getDateTime(); date > time_)
+            {
+                temp_messages.append(message);
+            }
+        }
+        else {
+
+            if (auto date = message->getDateTime(); date < time_)
+            {
+                temp_messages.append(message);
+            }
+        }
+
+    }).waitForFinished();
+
+    std::sort(temp_messages.begin(), temp_messages.end(), [](const QSharedPointer<User_Message>& a, const QSharedPointer<User_Message>& b) {
+        return a->getDateTime() > b->getDateTime();
+    });
+
+    if (!temp_messages.empty()) {
+        int j = 0;
+        for (QList<QSharedPointer<User_Message>>::iterator i = temp_messages.begin(); i != temp_messages.end() || j < pool_size_; i++)
+        {
+            j++;
+            result.insert(*i);
+        }
+    }
+
+    return result;
+}
+
 bool SrvRoom::connectUser(const QSharedPointer<SrvUser>& shp_user_)
 {
     if (!connected_users.contains(shp_user_)) {
