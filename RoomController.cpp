@@ -89,6 +89,15 @@ void RoomController::roomListRequest(QSharedPointer<SrvUser> user_)
         sendJson(user_, roomList);
 }
 
+void RoomController::messageHystoryRequest(quint32 room_id_, QSharedPointer<SrvUser> user_, QDateTime message_time_, quint32 pool_size_)
+{
+    QJsonObject messageList;
+    QJsonArray messages;
+    //Тут запрос истории
+    //Тут преобразование в JSON
+    sendJson(user_, messageList);
+}
+
 void RoomController::broadcastSend(const QJsonObject& message_,const quint32& room_id_, const QSharedPointer<SrvUser>& exclude_)
 {
     for (const auto& user : RoomStorage_Service::getInstance()->getRoom(room_id_)->getConnectedUsers()) {
