@@ -1,4 +1,6 @@
 ﻿#include "MessageController.h"
+#include "DBUser.h"
+#include "UserRepository.h"
 
 
 MessageController::MessageController(QObject* object_) : QObject(object_) {}
@@ -149,6 +151,9 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
     if (password_str.isEmpty())
         return;
 
+    //QFuture<QSharedPointer<DBEntity::DBUser>> future_user_info = QtConcurrent::run(&DBService::UserRepository::getUserByLogin, new_user_name); //ask to db for user info
+    QFuture<QSharedPointer<DBEntity::DBUser>> future_user_info = DBService::UserRepository::getUserByLogin(new_user_name); //ask to DB for user info
+
     for (const QSharedPointer<SrvUser> user : UserController::instance()->getUsersList()) {     //Find duplicat username //qAsConst(server.getUsersList()))
         if (user == sender_)                             
             continue;
@@ -162,35 +167,62 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
             return;
         }
     }
-    //QConcurent::run()
 
-    {   // Query to DB
-        QSet<QString> username = { "User01","User02","User03" };
-        QSet<QString> password = { "Pass01","Pass02","Pass03" };
+    QCryptographicHash hash(QCryptographicHash::Sha256);
+    hash.addData(password_str.toUtf8());
 
-        if (!username.contains(new_user_name)|| !password.contains(password_str)) {
-            PLOGI << "wrong loggin or password" + new_user_name;
-            QJsonObject message;
-            message[QStringLiteral("type")] = QStringLiteral("login");
-            message[QStringLiteral("success")] = false;
-            message[QStringLiteral("reason")] = QStringLiteral("wrong loggin or password");
-            sendJson(sender_, message);
-            return;
-        }
-    }
-    //User-repository. get user by ID
-    sender_->setUserName(new_user_name);
-    {   // Upload user from DB, (check for name equals db?, socket steal the same)  
-        //sender_->setUserPicId("011");
-        //sender_->setRatingLikes(100);
+    future_user_info.waitForFinished(); //wait for DB responce
+    QSharedPointer<DBEntity::DBUser> user_info = future_user_info.result();
+
+    //check login and password
+    //if (new_user_name != user_info->getLogin() || QString(hash.result().toHex()) != user_info->getPassword())
+    //if (hash.result().toHex().compare(QByteArray::(user_info->getPassword())) != 0)
+    if(false)
+    {
+        PLOGI << "wrong loggin or password" + new_user_name;
+        QJsonObject message;
+        message[QStringLiteral("type")] = QStringLiteral("login");
+        message[QStringLiteral("success")] = false;
+        message[QStringLiteral("reason")] = QStringLiteral("wrong loggin or password");
+        sendJson(sender_, message);
+        return;
     }
 
+    //{   // Query to DB
+    //    QSet<QString> username = { "User01","User02","User03" };
+    //    QSet<QString> password = { "Pass01","Pass02","Pass03" };
+
+    //    if (!username.contains(new_user_name)|| !password.contains(password_str)) {
+    //        PLOGI << "wrong loggin or password" + new_user_name;
+    //        QJsonObject message;
+    //        message[QStringLiteral("type")] = QStringLiteral("login");
+    //        message[QStringLiteral("success")] = false;
+    //        message[QStringLiteral("reason")] = QStringLiteral("wrong loggin or password");
+    //        sendJson(sender_, message);
+    //        return;
+    //    }
+    //}
+
+    //sinchronise with DB user
+    sender_->setUserName(user_info->getLogin());
+    sender_->setPassword(user_info->getPassword());
+    sender_->setUserpic(user_info->getUserpic());
+    sender_->setRating(user_info->getRating());
+
+    QByteArray userpicData = user_info->getUserpic();
+    QString base64Userpic = QString::fromLatin1(userpicData.toBase64());
+
+    //send loggin success + user info
+    QJsonObject userinfo;
+    userinfo[QStringLiteral("username")] = sender_->getUserName();
+    userinfo[QStringLiteral("userpic")] = base64Userpic;
+    userinfo[QStringLiteral("rating")] = double(sender_->getRating());
     QJsonObject success_message;
     success_message[QStringLiteral("type")] = QStringLiteral("login");
     success_message[QStringLiteral("success")] = true;
-    success_message[QStringLiteral("userinfo")] = QJsonObject();    //Send DTO User
+    success_message[QStringLiteral("userinfo")] = userinfo;    //Send DTO User
     sendJson(sender_, success_message);
-
+    return;
 }
 
 void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_)
