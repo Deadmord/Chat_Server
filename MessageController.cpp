@@ -214,7 +214,7 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
 
     //send loggin success + user info
     QJsonObject userinfo;
-    userinfo[QStringLiteral("login")] = sender_->getUserName();
+    userinfo[QStringLiteral("username")] = sender_->getUserName();
     userinfo[QStringLiteral("userpic")] = base64Userpic;
     userinfo[QStringLiteral("rating")] = double(sender_->getRating());
     QJsonObject success_message;
