@@ -29,7 +29,7 @@ public:
     [[nodiscard]] QSharedPointer<SrvRoom> getRoom(const qint32& room_id_);
     QSet<QSharedPointer<User_Message>> getMessages(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_);
     // If from_to_ == false - search for older than time_
-    QSet<QSharedPointer<User_Message>> getMessages(const quint32& room_id_, const QDateTime& time_, const bool from_to_, const quint32& pool_size_ = 20);
+    QFuture<QSet<QSharedPointer<User_Message>>> getMessages(const quint32& room_id_, const QDateTime& time_, const quint32& pool_size_ = 20, const bool from_to_ = false);
 
 public slots:
 
