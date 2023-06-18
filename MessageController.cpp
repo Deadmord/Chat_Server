@@ -119,8 +119,6 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
 
         //check login and password
         if (new_user_name != user_info->getLogin() || QString(hash.result().toHex()) != user_info->getPassword())
-            //if (hash.result().toHex().compare(QByteArray::(user_info->getPassword())) != 0)
-            //if(false)
         {
             PLOGI << "wrong loggin or password" + new_user_name;
             QJsonObject message;
