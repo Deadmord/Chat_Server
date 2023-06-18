@@ -14,6 +14,7 @@ QSharedPointer<UserController> UserController::instance()
     return shp_instance;
 }
 
+
 void UserController::addConnection(qintptr socket_descriptor_)
 {
     QSharedPointer<SrvUser> user_connection = QSharedPointer<SrvUser>(new SrvUser());
@@ -32,21 +33,26 @@ void UserController::addConnection(qintptr socket_descriptor_)
 
 void UserController::disableUsers()
 {
-    for (QSharedPointer<SrvUser> user : connected_users) {
+    QtConcurrent::map(connected_users, [](QSharedPointer<SrvUser> user) {
         user->disconnectFromClient();
-    }
+        }).waitForFinished();
 }
 
 void UserController::userDisconnected(QSharedPointer<SrvUser> sender_)
 {
-    connected_users.remove(sender_);
-    const quint32 userRoom = sender_->getRoomId();
-    if (userRoom != 0) {
-        RoomController::instance()->userLeave(sender_);
-        //добавить connection() и заменить на emit user leave
-    }
-    PLOGI << sender_->getUserName() + QLatin1String(" disconnected, total users left: ") + QString::number(connected_users.size());
-    sender_->deleteLater();
+    QtConcurrent::run([&](QSharedPointer<SrvUser> sender_) {
+        connected_users.remove(sender_);
+        const quint32 userRoom = sender_->getRoomId();
+        if (userRoom != 0) {
+            RoomController::instance()->userLeave(sender_);
+            //добавить connection() и заменить на emit user leave
+        }
+        PLOGI << sender_->getUserName() + QLatin1String(" disconnected, total users left: ") + QString::number(connected_users.size());
+        sender_->deleteLater();
+    }, sender_)
+        .then([&sender_]() {
+            PLOGI << "User disconected from server. Id: " + sender_->getUserName(); 
+        });
 }
 
 void UserController::userError(const QSharedPointer<SrvUser> sender_)

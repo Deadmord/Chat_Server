@@ -32,6 +32,7 @@ private slots:
 	void userDisconnected(QSharedPointer<SrvUser> sender_);
 	void userError(const QSharedPointer<SrvUser> sender_);
 
+
 private:
 	inline static QSharedPointer<UserController> shp_instance{};
 	QSet<QSharedPointer<SrvUser>> connected_users;
