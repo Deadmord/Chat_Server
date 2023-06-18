@@ -67,12 +67,28 @@ void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<Srv
 
 void RoomController::roomListRequest(QSharedPointer<SrvUser> user_)
 {
-    auto rooms_ptr_list =  RoomStorage_Service::getInstance()->getRooms();
-    //тут собрать массив из комнат и преобразовать его в JsonArray
-    QJsonObject roomList;
-    roomList[QStringLiteral("type")] = QStringLiteral("roomList");
-    roomList[QStringLiteral("rooms")] = "JSONArray DTORoom wo password";
-    sendJson(user_, roomList);
+    auto future = QtConcurrent::run([&]() {
+        auto rooms_ptr_list = RoomStorage_Service::getInstance()->getRooms();
+
+        QJsonObject roomList;
+        QJsonArray rooms;
+
+        //id name description topic is_private
+        foreach(const auto room, rooms_ptr_list)
+        {
+            QJsonObject room_json;
+            room_json[QStringLiteral("id")] = QString::number(room->getId());
+            room_json[QStringLiteral("name")] = room->getName();
+            room_json[QStringLiteral("description")] = room->getDescription();
+            room_json[QStringLiteral("topic")] = room->getTopicName();
+            room_json[QStringLiteral("is_private")] = room->isPrivate();
+            rooms.append(std::move(room_json));
+
+        }
+        roomList[QStringLiteral("type")] = QStringLiteral("roomList");
+        roomList[QStringLiteral("rooms")] = rooms;
+        sendJson(user_, roomList);
+        });
 }
 
 void RoomController::broadcastSend(const QJsonObject& message_,const quint32& room_id_, const QSharedPointer<SrvUser>& exclude_)
