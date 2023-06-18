@@ -6,6 +6,7 @@
 #include <qmetatype.h>
 #include <QSharedPointer>
 #include <QtConcurrent>
+#include <algorithm>
 
 
 #include "Message.h"
@@ -38,6 +39,8 @@ public:
 	[[nodiscard]] QSet<QSharedPointer<SrvUser>> getConnectedUsers() const;
 	[[nodiscard]] QSet<QSharedPointer<User_Message>> getMessages() const;
 	[[nodiscard]] QSet<QSharedPointer<User_Message>> getMessages(const QDateTime& from_, const QDateTime& to_) const;
+	// If from_to_ == false - search for older than time
+	[[nodiscard]] QSet<QSharedPointer<User_Message>> getMessages(const QDateTime& time_, const bool from_to_, const quint32& pool_size_) const; 
 	
 
 

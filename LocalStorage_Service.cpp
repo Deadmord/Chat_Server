@@ -99,6 +99,46 @@ QSet<QSharedPointer<User_Message>> LocalStorage_Service::getMessages(const QDate
 
         return result;
 }
+
+
+QSet<QSharedPointer<User_Message>> LocalStorage_Service::getMessages(const quint32& room_id_, const QDateTime& time_, bool from_to_, const quint32& pool_size_)
+{
+    QList<QSharedPointer<DBEntity::DBMessage>> temp_messages;
+    QSet<QSharedPointer<User_Message>> result;
+    QtConcurrent::map(message_storage.value(room_id_), [&temp_messages, &time_, &from_to_, &pool_size_](QSharedPointer<DBEntity::DBMessage> message) {
+
+        if (from_to_) {
+            if (auto date = message->getDateTime(); date > time_)
+            {
+                temp_messages.append(message);
+            }
+        }
+        else {
+
+            if (auto date = message->getDateTime(); date < time_)
+            {
+                temp_messages.append(message);
+            }
+        }
+
+        }).waitForFinished();
+
+        std::sort(temp_messages.begin(), temp_messages.end(), [](const QSharedPointer<DBEntity::DBMessage>& a, const QSharedPointer<DBEntity::DBMessage>& b) {
+            return a->getDateTime() > b->getDateTime();
+            });
+
+        if (!temp_messages.empty()) {
+
+            for (QList<QSharedPointer<DBEntity::DBMessage>>::iterator i = temp_messages.begin(), int j = 0; i != temp_messages.end() || j < pool_size_; i++, j++)
+            {
+                result.insert(DTOModel::DTOMessage::createSrvFromDB(*i));
+            }
+        }
+
+        return result;
+}
+
+
 void LocalStorage_Service::saveAllMessages() 
 {
 
@@ -114,8 +154,8 @@ void LocalStorage_Service::saveAllMessages()
                 {
                         return a->getDateTime() > b ->getDateTime();
                 });
-                QString earliest_time = (*list.begin())->getDateTime().toString("yyyyMMdd_hhmm");
-                QString latest_time = (*list.end())->getDateTime().toString("yyyyMMdd_hhmm");
+                QString earliest_time = list.first()->getDateTime().toString("yyyyMMdd_hhmm");
+                QString latest_time = list.last()->getDateTime().toString("yyyyMMdd_hhmm");
                 QString file_name = "rooms/" + QString::number(key_) + "/" + earliest_time +"&" + latest_time + ".json";
                 QDir().mkpath("rooms/" + QString::number(key_));
                 QJsonArray array;

@@ -1,4 +1,5 @@
 #include "RatingCounter_Service.h"
+#include "UserRepository.h"
 
 QSharedPointer<RatingCounter_Service> RatingCounter_Service::shp_instance = nullptr;
 QMutex RatingCounter_Service::mutex;
@@ -27,9 +28,12 @@ void RatingCounter_Service::updateRating()
         auto keys = rating_storage.keys();
         for (const auto& key : keys)
         {
-            //qint32 temp_rating = UserRepository::getRating(key);
-            //temp_rating += rating_storage.value(key);
-            //UserRepository::updateRating(key, temp_rating);
+            auto future = DBService::UserRepository::getRatingByLogin(key);
+            future.waitForFinished();
+            qint32 temp_rating = future.result();
+            
+            temp_rating += rating_storage.value(key);
+            DBService::UserRepository::updateUserRating(key, temp_rating);
             PLOGI << "Update rating succesfully";
 
             shp_instance->rating_storage.remove(key);

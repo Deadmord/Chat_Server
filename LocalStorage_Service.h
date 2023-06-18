@@ -47,6 +47,7 @@ public slots:
     void addMessages(const QSet<QSharedPointer<User_Message>>& messages_, const quint32 room_id_);
     void addMessage(const QSharedPointer<User_Message>& shp_message_, quint32 room_id_);
     QSet<QSharedPointer<User_Message>> getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_id_);
+    QSet<QSharedPointer<User_Message>> getMessages(const quint32& room_id_, const QDateTime& time_, bool from_to_, const quint32& pool_size_);
     void saveAllMessages() ;
 
     void safeExit() ;
