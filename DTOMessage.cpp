@@ -88,3 +88,67 @@ QSharedPointer<User_Message> DTOModel::DTOMessage::createSrvFromDB(QSharedPointe
 }
 
 
+bool DTOModel::DTOMessage::toDTOMessageFromJson(DTOModel::DTOMessage& user_masg_dto_, const QJsonObject& user_msg_)
+{
+    const QJsonValue id_val = user_msg_.value(QLatin1String("id"));
+    if (id_val.isNull() || !id_val.isString())
+        return false;
+    const QString id = id_val.toString().trimmed();
+    if (id.isEmpty())
+        return false;
+
+    const QJsonValue parentid_val = user_msg_.value(QLatin1String("parentid"));
+    if (parentid_val.isNull() || !parentid_val.isString())
+        return false;
+    const QString parentid = parentid_val.toString().trimmed();
+
+    const QJsonValue date_time_val = user_msg_.value(QLatin1String("datetime"));
+    if (date_time_val.isNull() || !date_time_val.isString())
+        return false;
+    const QString date_time = date_time_val.toString().trimmed();
+    if (date_time.isEmpty())
+        return false;
+
+    const QJsonValue nickname_val = user_msg_.value(QLatin1String("nickname"));
+    if (nickname_val.isNull() || !nickname_val.isString())
+        return false;
+    const QString nickname = nickname_val.toString().trimmed();
+    if (nickname.isEmpty())
+        return false;
+
+    const QJsonValue text_val = user_msg_.value(QLatin1String("text"));
+    if (text_val.isNull() || !text_val.isString())
+        return false;
+    const QString text = text_val.toString().trimmed();
+    if (text.isEmpty())
+        return false;
+
+    const QJsonValue mediaid_val = user_msg_.value(QLatin1String("mediaid"));
+    if (mediaid_val.isNull() || !mediaid_val.isString())
+        return false;
+    const QString mediaid = mediaid_val.toString().trimmed();
+
+    const QJsonValue rtl_val = user_msg_.value(QLatin1String("rtl"));
+    if (rtl_val.isNull() || !mediaid_val.isBool())
+        return false;
+    const bool rtl = rtl_val.toBool();
+
+
+    const auto likes_val = user_msg_.value(QLatin1String("likes")).toObject().toVariantMap();
+    QMap<QString, bool> likes;
+    for (auto it = likes_val.constBegin(); it != likes_val.constEnd(); ++it)
+    {
+        likes.insert(it.key(), it.value().toBool());
+    }
+
+    user_masg_dto_ = DTOModel::DTOMessage(QUuid(id), QDateTime::fromString(date_time), nickname,
+        text, rtl, mediaid, parentid);
+    user_masg_dto_.setLikes(likes);
+
+    return true;
+}
+
+bool DTOModel::DTOMessage::toJsonFromDTOMessage(QJsonObject& user_msg_, const DTOModel::DTOMessage& user_masg_dto_)
+{
+    return false;
+}
