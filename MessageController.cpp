@@ -199,7 +199,6 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
         emit messageToRoom(sender_->getRoomId(), sender_, messagebody_val);     //Send message to all members in room
         return;
     }
-
     if (type_val.toString().compare(QLatin1String("messageHystoryRequest"), Qt::CaseInsensitive) == 0)
     {
         const QJsonValue message_time_val = doc_obj_.value(QLatin1String("messagetime"));
