@@ -24,6 +24,7 @@ public:
 signals:
 	void userEntrySignal(const quint32& room_id, QSharedPointer<SrvUser> user_);
 	void userLeaveSignal(QSharedPointer<SrvUser> user_);
+	void createRoomSignal(QSharedPointer<SrvUser> user_, const QJsonObject room_ );
 	void messageToRoom(const quint32& room_id_, QSharedPointer<SrvUser> sender, const QJsonObject& message);
 	void roomListRequestSignal(QSharedPointer<SrvUser> sender);
 	void messageHystoryRequestSignal(quint32 room_id_, QSharedPointer<SrvUser> sender_, QDateTime message_time_, quint32 pool_size_);

@@ -30,10 +30,10 @@ public:
     QSet<QSharedPointer<User_Message>> getMessages(const quint32& room_id_, const QDateTime& from_, const QDateTime& to_);
     // If from_to_ == false - search for older than time_
     QFuture<QSet<QSharedPointer<User_Message>>> getMessages(const quint32& room_id_, const QDateTime& time_, const quint32& pool_size_ = 20, const bool from_to_ = false);
+    QFuture<QSharedPointer<SrvRoom>> createRoom(const QSharedPointer<SrvRoom>& shp_new_room_);
 
 public slots:
 
-    void createRoom(const QSharedPointer<SrvRoom>& shp_new_room_);
     void addMessageToRoom(const qint32& room_id_, const QSharedPointer<User_Message>& shp_user_);
     void addMessagesToRoom(const qint32& room_id_, const QSet<QSharedPointer<User_Message>>& messages_);
     [[nodiscard]] bool addConnecntedUserToRoom(const qint32& room_id_, const QSharedPointer<SrvUser>& shp_user_);
