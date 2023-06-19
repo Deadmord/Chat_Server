@@ -12,6 +12,7 @@
 #include "SrvUser.h"
 #include "UserController.h"
 #include "RoomStorage_Service.h"
+#include "SwearHelper.h"
 
 class MessageController : public QObject
 {

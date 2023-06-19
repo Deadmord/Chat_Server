@@ -283,11 +283,19 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
         DTOModel::DTOMessage tempDTO;
         if (!DTOModel::DTOMessage::toDTOMessageFromJson(tempDTO, messagebody_val))
             return;
+
         QSharedPointer<User_Message> spr_srv_msg = DTOModel::DTOMessage::createSrvFromDTO(QSharedPointer<DTOModel::DTOMessage>::create(tempDTO));
         RoomStorage_Service::getInstance()->addMessageToRoom(sender_->getRoomId(), spr_srv_msg);    //archive message
-
-        emit messageToRoom(sender_->getRoomId(), sender_, messagebody_val);     //Send message to all members in room
-        return;
+        //if true -> sender /kick
+        //else emit
+        if (Helper::SwearHelper::checkForbiddenWords(spr_srv_msg->getText())) {
+            PLOG_INFO << "User " << spr_srv_msg->getNickname() << "uses forbidden words in room id: " << sender_->getRoomId();
+            return;
+        }
+        else {
+            emit messageToRoom(sender_->getRoomId(), sender_, messagebody_val);     //Send message to all members in room
+            return;
+        }
     }
     if (type_val.toString().compare(QLatin1String("messageHystoryRequest"), Qt::CaseInsensitive) == 0)
     {
