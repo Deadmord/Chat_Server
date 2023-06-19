@@ -45,15 +45,19 @@ void RoomController::userLeave(QSharedPointer<SrvUser> user_)
         PLOGW << "Room leave request wo room number.";
         return;
     }
-    RoomStorage_Service::getInstance()->deleteConnecntedUserFromRoom(room_id, user_);
-    //Проверять что успешно удален
-    QJsonObject disconnectedMessage;
-    disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
-    disconnectedMessage[QStringLiteral("username")] = user_->getUserName();
-    broadcastSend(disconnectedMessage, room_id, nullptr);
-    //проверить что комната с таким номером вообще существует
-    //обнулить номер
-    user_->setRoomId(0);
+    if(RoomStorage_Service::getInstance()->deleteConnecntedUserFromRoom(room_id, user_))
+    {
+	    QJsonObject disconnectedMessage;
+	    disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
+	    disconnectedMessage[QStringLiteral("username")] = user_->getUserName();
+	    broadcastSend(disconnectedMessage, room_id, nullptr);
+	    user_->setRoomId(0);
+    }
+    else
+    {
+        PLOGE << "User was not deleted";
+    }
+    
 }
 
 void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<SrvUser> sender_, const QJsonObject& message_)
@@ -134,12 +138,19 @@ void RoomController::messageHystoryRequest(quint32 room_id_, QSharedPointer<SrvU
 void RoomController::createRoom(QSharedPointer<SrvUser> sender_, const QJsonObject& room_)
 {
 
-    QSharedPointer<SrvRoom> room;
-    room->setName(room_[QStringLiteral("name")].toString());
-    room->setDescription(room_[QStringLiteral("description")].toString());
-    room->setTopicName(room_[QStringLiteral("topic")].toString());
-    room->setPassword(room_[QStringLiteral("password")].toString());
-    room->setPrivate(room_[QStringLiteral("isprivate")].toBool());
+    auto room = QSharedPointer<SrvRoom>::create(
+        room_[QStringLiteral("name")].toString(),
+        room_[QStringLiteral("description")].toString(),
+        room_[QStringLiteral("topic")].toString(),
+        room_[QStringLiteral("is_private")].toBool(),
+        room_[QStringLiteral("password")].toString()
+    );
+    
+    /*room.setName(room_[QStringLiteral("name")].toString());
+    room.setDescription(room_[QStringLiteral("description")].toString());
+    room.setTopicName(room_[QStringLiteral("topic")].toString());
+    room.setPassword(room_[QStringLiteral("password")].toString());
+    room.setPrivate(room_[QStringLiteral("is_private")].toBool());*/
 
     auto future = RoomStorage_Service::getInstance()->createRoom(room);
 
@@ -148,7 +159,7 @@ void RoomController::createRoom(QSharedPointer<SrvUser> sender_, const QJsonObje
         QJsonObject res;
         res[QStringLiteral("createChat")] = "success";
         sendJson(sender_, res);
-        });
+    });
 
 }
 

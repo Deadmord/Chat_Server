@@ -26,6 +26,8 @@ public:
 	//explicit SrvRoom(const QSharedPointer<DTOHelper::DTORoom> cshp_dto_room_, QObject* parent = nullptr);
 	explicit SrvRoom(QSharedPointer<DBEntity::DBRoom> cshp_db_room_, QObject* p_parent_ = nullptr);
 	explicit SrvRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const QString& topic_name_, const bool& is_private_, const QString& password_, const bool& is_deleted_);
+	explicit SrvRoom(const QString& name_, const QString& description_, const QString& topic_name_, const bool& is_private_, const QString& password_, const bool& is_deleted_ = false);
+
 	~SrvRoom() = default;
 
 	[[nodiscard]] quint32 getId() const;

@@ -25,7 +25,19 @@ void UserController::addConnection(qintptr socket_descriptor_)
     }
     connect(user_connection.get(), &SrvUser::disconnectedFromClient, this, std::bind(&UserController::userDisconnected, this, user_connection));
     connect(user_connection.get(), &SrvUser::errorSignal, this, std::bind(&UserController::userError, this, user_connection));
-    connect(user_connection.get(), &SrvUser::jsonReceived, MessageController::instance().get(), std::bind(&MessageController::jsonReceived, MessageController::instance().get(), user_connection, std::placeholders::_1));  //connect with MessageController (это нужно перенести в MessageController)
+    connect(user_connection.get(), &SrvUser::jsonReceived, MessageController::instance().get(),
+        [this, user_connection](const QJsonObject& doc) {
+	        MessageController::instance()->jsonReceived(user_connection, doc);
+        });  //connect with MessageController (это нужно перенести в MessageController)
+    connect(user_connection.get(), &SrvUser::jsonWMedia, MessageController::instance().get(),
+        [this, user_connection](const QJsonObject& doc, const QByteArray& data) {
+        MessageController::instance()->jsonWMediaReceived(user_connection, doc, data);
+    });   //connect with MessageController (это нужно перенести в MessageController)
+    connect(user_connection.get(), &SrvUser::mediaRequest, MessageController::instance().get(),
+        [this, user_connection](const QJsonObject& doc) {
+        MessageController::instance()->jsonReceived(user_connection, doc);
+    });
+        
 
     connected_users.insert(user_connection);
     PLOGI << "New client Connected! Now users: " + QString::number(connected_users.size());
@@ -55,7 +67,7 @@ void UserController::userDisconnected(QSharedPointer<SrvUser> sender_)
 void UserController::userError(const QSharedPointer<SrvUser> sender_)
 {
     Q_UNUSED(sender_)
-    PLOGE << QLatin1String("Error from ")/* + sender_->getUserName()*/;
+    //PLOGE << QLatin1String("Error from ")/* + sender_->getUserName()*/;
 }
 
 QSet<QSharedPointer<SrvUser>> UserController::getUsersList() const
