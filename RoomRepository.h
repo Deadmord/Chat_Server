@@ -23,8 +23,9 @@ namespace DBService {
 		static QFuture<QList<QSharedPointer<DBEntity::DBRoom>>> getAllRooms();
 		static QList<QSharedPointer<DBEntity::DBRoom>> getAllActiveRooms();
 		static QFuture<QSharedPointer<DBEntity::DBRoom>> getRoomById(const qint32& room_id_);
-		static QFuture<qint32> createRoom(const DBEntity::DBRoom& room_);
+		static qint32 createRoom(const DBEntity::DBRoom& room_);
 		static QFuture<bool> deleteRoom(const qint32& id_);
+		static qint32 getTopicIdByTopicName(const QString& topic_name_);
 
 	};
 }

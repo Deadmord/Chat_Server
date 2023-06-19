@@ -26,6 +26,8 @@ public:
 	//explicit SrvRoom(const QSharedPointer<DTOHelper::DTORoom> cshp_dto_room_, QObject* parent = nullptr);
 	explicit SrvRoom(QSharedPointer<DBEntity::DBRoom> cshp_db_room_, QObject* p_parent_ = nullptr);
 	explicit SrvRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const QString& topic_name_, const bool& is_private_, const QString& password_, const bool& is_deleted_);
+	explicit SrvRoom(const QString& name_, const QString& description_, const QString& topic_name_, const bool& is_private_, const QString& password_, const bool& is_deleted_ = false);
+
 	~SrvRoom() = default;
 
 	[[nodiscard]] quint32 getId() const;
@@ -54,6 +56,8 @@ public:
 	void setName(const QString& val);
 	void setDescription(const QString& val);
 	void setPrivate(bool val);
+	void setTopicName(const QString& val);
+	void setTopicId(const quint32& val);
 	void setPassword(const QString& val);
 	void Delete();
 
@@ -79,7 +83,7 @@ private:
 	QString topic_name;
 	bool	is_private;
 	QString password;
-	bool	is_deleted;
+	bool	is_deleted = false;
 
 	QSet<QSharedPointer<User_Message>> messages;
 	QSet<QSharedPointer<SrvUser>> connected_users;

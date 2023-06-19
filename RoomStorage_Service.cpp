@@ -43,7 +43,16 @@ void RoomStorage_Service::downloadRoomsFromDB()
 
         auto dbrooms = DBService::RoomRepository::getAllActiveRooms();
         for (auto& room : dbrooms) {
-            rooms_storage.insert(room->getId(), QSharedPointer<SrvRoom>(new SrvRoom(room), &QObject::deleteLater));
+            rooms_storage.insert(room->getId(), QSharedPointer<SrvRoom>(new SrvRoom(
+                room->getId(),
+                room->getName(),
+                room->getDescription(),
+                room->getTopicId(),
+                room->getTopicName(),
+                room->isPrivate(),
+                room->getPassword(),
+                room->isDeleted()
+            ), &QObject::deleteLater));
         }
         PLOGD << "Uploaded rooms: " + QString::number(rooms_storage.size());
 
@@ -85,25 +94,33 @@ void RoomStorage_Service::uploadRoomToDB(const QSharedPointer<SrvRoom>& shp_new_
 {
     
     if (shp_new_room_ != nullptr) {
-        QtConcurrent::run(DBService::RoomRepository::createRoom, DBEntity::DBRoom(shp_new_room_));
+        DBService::RoomRepository::createRoom( DBEntity::DBRoom(shp_new_room_));
     }
 }
 
-void RoomStorage_Service::createRoom(const QSharedPointer<SrvRoom>& shp_new_room_)
+QFuture<QSharedPointer<SrvRoom>> RoomStorage_Service::createRoom(QSharedPointer<SrvRoom>& shp_new_room_)
 {
-    try
-    {
-        if (!rooms_storage.contains(shp_new_room_->getId())) {
-            addRoom(shp_new_room_);
-            uploadRoomToDB(shp_new_room_);
-            PLOGI << "New room created. " + shp_new_room_->getName();
+    return QtConcurrent::run([&, shp_new_room_]() -> QSharedPointer<SrvRoom> {
+        try
+        {
+            if (!rooms_storage.contains(shp_new_room_->getId())) {
+                auto topic_id = DBService::RoomRepository::getTopicIdByTopicName(shp_new_room_->getTopicName());
+                shp_new_room_->setTopicId(1);
+                uploadRoomToDB(shp_new_room_);
+                addRoom(shp_new_room_);
+                return shp_new_room_;
+            }
+            else {
+                PLOGE << "Room already exist! " + shp_new_room_->getName();
+                return nullptr;
+            }
         }
-        else PLOGE << "Room already exist! " + shp_new_room_->getName();
-    }
-    catch (const QException& ex)
-    {
-        PLOGE << "Cannot create room in roomStorage" << ex.what();
-    }
+        catch (const QException& ex)
+        {
+            PLOGE << "Cannot create room in roomStorage" << ex.what();
+        }
+    });
+    
 }
 
 void RoomStorage_Service::addMessageToRoom(const qint32& room_id_, const QSharedPointer<User_Message>& message_)

@@ -16,6 +16,10 @@ SrvRoom::SrvRoom(QSharedPointer<DBEntity::DBRoom> cshp_db_room_, QObject* p_pare
 SrvRoom::SrvRoom(const qint32& id_, const QString& name_, const QString& description_, const qint32& topic_id_, const QString& topic_name_, const bool& is_private_, const QString& password_, const bool& is_deleted_)
     : id(id_), name(name_), description(description_), topic_id(topic_id_), topic_name(topic_name_), is_private(is_private_), password(password_), is_deleted(is_deleted_), messages(), connected_users() {}
 
+SrvRoom::SrvRoom(const QString& name_, const QString& description_, const QString& topic_name_, const bool& is_private_, const QString& password_, const bool& is_deleted_)
+    : name(name_), description(description_), topic_name(topic_name_), is_private(is_private_), password(password_), is_deleted(is_deleted_), messages(), connected_users() {}
+
+
 quint32 SrvRoom::getId() const { return id; }
 QString SrvRoom::getName() const { return name; }
 QString SrvRoom::getDescription() const { return description; }
@@ -40,9 +44,17 @@ void SrvRoom::addMessages(const QSet<QSharedPointer<User_Message>>& messages_)
     messages.unite(messages_);
 }
 
-void SrvRoom::setName(const QString& val) { name = val; emit nameChanged(val); }
+void SrvRoom::setName(const QString& val) { name = val; }
 void SrvRoom::setDescription(const QString& val) { description = val; emit descriptionChanged(val); }
 void SrvRoom::setPrivate(bool val) { is_private = val; emit privateChanged(val); }
+void SrvRoom::setTopicName(const QString& val)
+{
+    topic_name = val;
+}
+void SrvRoom::setTopicId(const quint32& val)
+{
+    topic_id = val;
+}
 void SrvRoom::setPassword(const QString& val) { password = val; emit passwordChanged(); }
 void SrvRoom::Delete() { is_deleted = true; emit roomDeleted(); }
 

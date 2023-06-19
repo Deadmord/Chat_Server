@@ -7,7 +7,7 @@ namespace DBService {
 	UserRepository::~UserRepository(){}
 
 	QFuture<QSharedPointer<DBEntity::DBUser>> UserRepository::getUserByLogin(const QString& login_) {
-		return QtConcurrent::run([query_string_ = Helper::QueryHelper::getUserByLogin(), &login_]() {
+		return QtConcurrent::run([query_string_ = Helper::QueryHelper::getUserByLogin(), login_]() {
 			try
 			{
 				auto connection = DBService::DBConnection_Service::getConnection();
@@ -86,7 +86,7 @@ namespace DBService {
 	}
 
 	QFuture<bool> UserRepository::updateUserPasswordUserpic(const QString& login_, const QString& new_password_, const QByteArray& new_userpic_) {
-		return QtConcurrent::run([login_, new_password_, new_userpic_]() {
+		return QtConcurrent::run([new_password_, new_userpic_](const QString login_) {
 			try {
 				auto connection = DBService::DBConnection_Service::getConnection();
 				if (connection->getDatabase()->isOpen()) {
@@ -113,14 +113,15 @@ namespace DBService {
 
 					query_string += " WHERE login=:login";
 					query.bindValue(":login", login_);
-					if (query.exec()) {
-						PLOG_INFO << "User updated.";
-						return true;
-					}
-					else {
-						PLOG_ERROR << "Error updating a user.";
-						return false;
-					}
+					query.exec();
+					//if (query.exec()) {
+					//	PLOG_INFO << "User updated.";
+					//	return true;
+					//}
+					//else {
+					//	PLOG_ERROR << "Error updating a user.";
+					//	return false;
+					//}
 				}
 				else {
 					PLOG_ERROR << "Cannot connect to the database.";
@@ -131,7 +132,7 @@ namespace DBService {
 				PLOG_ERROR << "Exception in updateUserPasswordUserpic method: " << exception.what();
 				return false;
 			}
-			});
+			}, login_);
 	}
 
 	QFuture<QPair<bool, qint32>> UserRepository::updateUserRating(const QString& login_, const qint32& rating_) {
