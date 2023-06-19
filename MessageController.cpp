@@ -109,7 +109,7 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
                 QJsonObject success_message;
                 success_message[QStringLiteral("type")] = QStringLiteral("login");
                 success_message[QStringLiteral("success")] = true;
-                success_message[QStringLiteral("userinfo")] = userinfo;    //Send DTO User
+                success_message[QStringLiteral("userinfo")] = userinfo;
                 sendJson(sender_, success_message);
             }
             //userpic
