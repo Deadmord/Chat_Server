@@ -286,8 +286,7 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
 
         QSharedPointer<User_Message> spr_srv_msg = DTOModel::DTOMessage::createSrvFromDTO(QSharedPointer<DTOModel::DTOMessage>::create(tempDTO));
         RoomStorage_Service::getInstance()->addMessageToRoom(sender_->getRoomId(), spr_srv_msg);    //archive message
-        //if true -> sender /kick
-        //else emit
+
         if (Helper::SwearHelper::checkForbiddenWords(spr_srv_msg->getText())) {
             PLOG_INFO << "User " << spr_srv_msg->getNickname() << "uses forbidden words in room id: " << sender_->getRoomId();
             return;
