@@ -7,6 +7,7 @@
 #include <QFile>
 #include "SrvRoom.h"
 #include "DTOMessage.h"
+#include "DTOUser.h"
 #include "Message.h"
 #include "SrvUser.h"
 #include "UserController.h"

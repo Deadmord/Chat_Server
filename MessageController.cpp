@@ -256,7 +256,7 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
         DTOModel::DTOMessage tempDTO;
         if (!DTOModel::DTOMessage::toDTOMessageFromJson(tempDTO, messagebody_val))
             return;
-        QSharedPointer<User_Message> spr_srv_msg = DTOModel::DTOMessage::createSrvFromDTO(QSharedPointer<DTOModel::DTOMessage>(&tempDTO));
+        QSharedPointer<User_Message> spr_srv_msg = DTOModel::DTOMessage::createSrvFromDTO(QSharedPointer<DTOModel::DTOMessage>::create(tempDTO));
         RoomStorage_Service::getInstance()->addMessageToRoom(sender_->getRoomId(), spr_srv_msg);    //archive message
 
         emit messageToRoom(sender_->getRoomId(), sender_, messagebody_val);     //Send message to all members in room
@@ -300,6 +300,93 @@ void MessageController::jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, co
         if (!room_id)
             return;
         emit userEntrySignal(room_id, sender_);
+    }
+    if (type_val.toString().compare(QLatin1String("changeUserPic"), Qt::CaseInsensitive) == 0) {
+
+        const QJsonValue nickname = doc_obj_.value(QLatin1String("nickname"));
+        if (nickname.isNull()) {
+            return;
+        }
+        const QJsonValue userpic = doc_obj_.value(QLatin1String("userpic"));
+        if (userpic.isNull()) {
+            return;
+        }
+        QString userpic_str = userpic.toString();
+        auto updateUserpicRes = DBService::UserRepository::updateUserPasswordUserpic(nickname.toString(), "", userpic_str.toUtf8());
+        updateUserpicRes.waitForFinished();
+        if (updateUserpicRes.result()) {
+            auto getUser = DBService::UserRepository::getUserByLogin(nickname.toString());
+            getUser.waitForFinished();
+            auto userFromDB = getUser.result();
+
+            QByteArray userpicData = userFromDB->getUserpic();
+            QString base64Userpic = QString::fromLatin1(userpicData.toBase64());
+
+            //send loggin success + user info
+            QJsonObject userinfo;
+            userinfo[QStringLiteral("username")] = sender_->getUserName();
+            userinfo[QStringLiteral("userpic")] = base64Userpic;
+            userinfo[QStringLiteral("rating")] = double(sender_->getRating());
+            QJsonObject success_message;
+            success_message[QStringLiteral("type")] = QStringLiteral("userpicChanged");
+            success_message[QStringLiteral("success")] = true;
+            success_message[QStringLiteral("userinfo")] = userinfo;
+            sendJson(sender_, success_message);
+        }
+    }
+    if (type_val.toString().compare(QLatin1String("changePassword"), Qt::CaseInsensitive) == 0) {
+        const QJsonValue nickname = doc_obj_.value(QLatin1String("nickname"));
+        if (nickname.isNull()) {
+            return;
+        }
+        const QJsonValue password = doc_obj_.value(QLatin1String("password"));
+        if (password.isNull()) {
+            return;
+        }
+        QString password_str = password.toString();
+        auto updatePasswordRes = DBService::UserRepository::updateUserPasswordUserpic(nickname.toString(), password_str, "");
+        updatePasswordRes.waitForFinished();
+        if (updatePasswordRes.result()) {
+            auto getUser = DBService::UserRepository::getUserByLogin(nickname.toString());
+            getUser.waitForFinished();
+            auto userFromDB = getUser.result();
+
+            QByteArray userpicData = userFromDB->getUserpic();
+            QString base64Userpic = QString::fromLatin1(userpicData.toBase64());
+
+            //send loggin success + user info
+            QJsonObject userinfo;
+            userinfo[QStringLiteral("username")] = sender_->getUserName();
+            userinfo[QStringLiteral("userpic")] = base64Userpic;
+            userinfo[QStringLiteral("rating")] = double(sender_->getRating());
+            QJsonObject success_message;
+            success_message[QStringLiteral("type")] = QStringLiteral("passwordChanged");
+            success_message[QStringLiteral("success")] = true;
+            success_message[QStringLiteral("userinfo")] = userinfo;
+            sendJson(sender_, success_message);
+        }
+    }
+    if (type_val.toString().compare(QLatin1String("askCurrentUser"), Qt::CaseInsensitive) == 0) {
+        const QJsonValue nickname = doc_obj_.value(QLatin1String("nickname"));
+        if (nickname.isNull()) {
+            return;
+        }
+        auto future = DBService::UserRepository::getUserByLogin(nickname.toString());
+        future.waitForFinished();
+        auto userFromDB = future.result();
+        QByteArray userpicData = userFromDB->getUserpic();
+        QString base64Userpic = QString::fromLatin1(userpicData.toBase64());
+
+        //send loggin success + user info
+        QJsonObject userinfo;
+        userinfo[QStringLiteral("username")] = sender_->getUserName();
+        userinfo[QStringLiteral("userpic")] = base64Userpic;
+        userinfo[QStringLiteral("rating")] = double(sender_->getRating());
+        QJsonObject success_message;
+        success_message[QStringLiteral("type")] = QStringLiteral("myUserData");
+        success_message[QStringLiteral("success")] = true;
+        success_message[QStringLiteral("userinfo")] = userinfo;
+        sendJson(sender_, success_message);
     }
 }
 

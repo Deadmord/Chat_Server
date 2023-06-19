@@ -61,7 +61,7 @@ void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<Srv
     QJsonObject userMessage;
     userMessage[QStringLiteral("type")] = QStringLiteral("message");
     userMessage[QStringLiteral("sender")] = sender_->getUserName();
-    userMessage[QStringLiteral("text")] = message_;
+    userMessage[QStringLiteral("messagebody")] = message_;
     broadcastSend(userMessage, room_id_, nullptr);
 }
 
