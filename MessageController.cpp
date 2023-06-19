@@ -217,11 +217,6 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
     {
         emit userLeaveSignal(sender_);
     }
-    if (type_val.toString().compare(QLatin1String("createRoom"), Qt::CaseInsensitive) == 0)
-    {
-        const QJsonObject roombody_val = doc_obj_.value(QLatin1String("roombody")).toObject();
-        emit createRoomSignal(sender_, roombody_val);
-    }
 
     if (type_val.toString().compare(QLatin1String("messageHystoryRequest"), Qt::CaseInsensitive) == 0)
     {
@@ -290,6 +285,11 @@ void MessageController::jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, co
     if (type_val.toString().compare(QLatin1String("roomListRequest"), Qt::CaseInsensitive) == 0)
     {
         emit roomListRequestSignal(sender_);
+    }
+    if (type_val.toString().compare(QLatin1String("createRoom"), Qt::CaseInsensitive) == 0)
+    {
+        const QJsonObject roombody_val = doc_obj_.value(QLatin1String("chatbody")).toObject();
+        emit createRoomSignal(sender_, roombody_val);
     }
     if (type_val.toString().compare(QLatin1String("roomEntry"), Qt::CaseInsensitive) == 0)
     {
