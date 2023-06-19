@@ -256,7 +256,7 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
         DTOModel::DTOMessage tempDTO;
         if (!DTOModel::DTOMessage::toDTOMessageFromJson(tempDTO, messagebody_val))
             return;
-        QSharedPointer<User_Message> spr_srv_msg = DTOModel::DTOMessage::createSrvFromDTO(QSharedPointer<DTOModel::DTOMessage>(&tempDTO));
+        QSharedPointer<User_Message> spr_srv_msg = DTOModel::DTOMessage::createSrvFromDTO(QSharedPointer<DTOModel::DTOMessage>::create(tempDTO));
         RoomStorage_Service::getInstance()->addMessageToRoom(sender_->getRoomId(), spr_srv_msg);    //archive message
 
         emit messageToRoom(sender_->getRoomId(), sender_, messagebody_val);     //Send message to all members in room
