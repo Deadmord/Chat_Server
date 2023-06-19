@@ -72,9 +72,6 @@ void MessageController::jsonReceived(QSharedPointer<SrvUser> sender_, const QJso
     if (sender_->getRoomId() == 0)
         return jsonFromLoggedWoRoom(sender_, doc_);
     jsonFromLoggedIn(sender_, doc_);
-    //-------------- проверять принадлежность комнате ------------------
-    // -----------------если принадлежит то отправлять сообщение в конкретную комнату---------------
-    //вместо этого
 
 }
 
@@ -87,9 +84,6 @@ void MessageController::jsonWMediaReceived(QSharedPointer<SrvUser> sender_, cons
     if (sender_->getRoomId() == 0)
         return jsonFromLoggedWoRoom(sender_, doc_);
     jsonFromLoggedIn(sender_, doc_, data_);
-    //-------------- проверять принадлежность комнате ------------------
-    // -----------------если принадлежит то отправлять сообщение в конкретную комнату---------------
-    //вместо этого
 
 }
 
@@ -245,7 +239,7 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
     const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
     if (type_val.isNull() || !type_val.isString())
         return;
-    if (type_val.toString().compare(QLatin1String("roomLeave"), Qt::CaseInsensitive) == 0)
+    if (type_val.toString().compare(QLatin1String("roomOut"), Qt::CaseInsensitive) == 0)
     {
         emit userLeaveSignal(sender_);
     }
