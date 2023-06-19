@@ -17,6 +17,7 @@ QSharedPointer<MessageController> MessageController::instance()
         connect(shp_instance.get(), &MessageController::messageToRoom, RoomController::instance().get(), &RoomController::jsonMsgReceived);
         connect(shp_instance.get(), &MessageController::roomListRequestSignal, RoomController::instance().get(), &RoomController::roomListRequest);
         connect(shp_instance.get(), &MessageController::messageHystoryRequestSignal, RoomController::instance().get(), &RoomController::messageHystoryRequest);
+        connect(shp_instance.get(), &MessageController::createRoomSignal, RoomController::instance().get(), &RoomController::createRoom);
     }
 
     return shp_instance;
@@ -215,6 +216,11 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
     if (type_val.toString().compare(QLatin1String("roomLeave"), Qt::CaseInsensitive) == 0)
     {
         emit userLeaveSignal(sender_);
+    }
+    if (type_val.toString().compare(QLatin1String("createRoom"), Qt::CaseInsensitive) == 0)
+    {
+        const QJsonObject roombody_val = doc_obj_.value(QLatin1String("roombody")).toObject();
+        emit createRoomSignal(sender_, roombody_val);
     }
 
     if (type_val.toString().compare(QLatin1String("messageHystoryRequest"), Qt::CaseInsensitive) == 0)

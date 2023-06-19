@@ -54,6 +54,8 @@ public:
 	void setName(const QString& val);
 	void setDescription(const QString& val);
 	void setPrivate(bool val);
+	void setTopicName(const QString& val);
+	void setTopicId(const quint32& val);
 	void setPassword(const QString& val);
 	void Delete();
 
@@ -79,7 +81,7 @@ private:
 	QString topic_name;
 	bool	is_private;
 	QString password;
-	bool	is_deleted;
+	bool	is_deleted = false;
 
 	QSet<QSharedPointer<User_Message>> messages;
 	QSet<QSharedPointer<SrvUser>> connected_users;

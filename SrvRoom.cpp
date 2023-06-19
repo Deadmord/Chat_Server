@@ -43,6 +43,14 @@ void SrvRoom::addMessages(const QSet<QSharedPointer<User_Message>>& messages_)
 void SrvRoom::setName(const QString& val) { name = val; emit nameChanged(val); }
 void SrvRoom::setDescription(const QString& val) { description = val; emit descriptionChanged(val); }
 void SrvRoom::setPrivate(bool val) { is_private = val; emit privateChanged(val); }
+void SrvRoom::setTopicName(const QString& val)
+{
+    topic_name = val;
+}
+void SrvRoom::setTopicId(const quint32& val)
+{
+    topic_id = val;
+}
 void SrvRoom::setPassword(const QString& val) { password = val; emit passwordChanged(); }
 void SrvRoom::Delete() { is_deleted = true; emit roomDeleted(); }
 
