@@ -71,7 +71,7 @@ void SrvUser::sendJson(const QJsonObject& json)
     QDataStream socketStream(&buffer, QIODevice::WriteOnly);
     socketStream.setVersion(QDataStream::Qt_6_5);
     QString type = "Json";
-    socketStream << quint16(0) << type << jsonData;
+    socketStream << quint16(0) << jsonData;
     socketStream.device()->seek(0); //go to beginning data storage
     socketStream << quint16(buffer.size() - sizeof(quint16));
     user_socket->write(buffer);
