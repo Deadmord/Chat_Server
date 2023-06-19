@@ -371,6 +371,7 @@ void MessageController::jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, co
         if (nickname.isNull()) {
             return;
         }
+        auto a = nickname.toString();
         auto future = DBService::UserRepository::getUserByLogin(nickname.toString());
         future.waitForFinished();
         auto userFromDB = future.result();

@@ -7,7 +7,7 @@ namespace DBService {
 	UserRepository::~UserRepository(){}
 
 	QFuture<QSharedPointer<DBEntity::DBUser>> UserRepository::getUserByLogin(const QString& login_) {
-		return QtConcurrent::run([query_string_ = Helper::QueryHelper::getUserByLogin(), &login_]() {
+		return QtConcurrent::run([query_string_ = Helper::QueryHelper::getUserByLogin(), login_]() {
 			try
 			{
 				auto connection = DBService::DBConnection_Service::getConnection();
