@@ -144,7 +144,7 @@ void RoomController::createRoom(QSharedPointer<SrvUser> sender_, const QJsonObje
     auto future = RoomStorage_Service::getInstance()->createRoom(room);
 
     QFutureWatcher<decltype(future.result())> watcher;
-    connect(&watcher, QFutureWatcher<decltype(future.result())>::finished, [&, sender_]() {
+    connect(&watcher, &QFutureWatcher<decltype(future.result())>::finished, [&, sender_]() {
         QJsonObject res;
         res[QStringLiteral("createChat")] = "success";
         sendJson(sender_, res);
