@@ -130,6 +130,7 @@ void SrvUser::receiveJson()
         	socketStream >> jsonData;
         	socketStream >> data;
             
+            
                 if (socketStream.commitTransaction()) {
                     // we successfully read some data
                     // we now need to make sure it's in fact a valid JSON
@@ -142,15 +143,15 @@ void SrvUser::receiveJson()
                         {
                             if (type == "wMedia")
                             {
-                                emit jsonWMedia(QSharedPointer<SrvUser>::create(this), jsonDoc.object(), data);
+                                emit jsonWMedia( jsonDoc.object(), data);
                             }
                             else if(type == "Json")
                             {
-								emit jsonReceived(QSharedPointer<SrvUser>::create(this), jsonDoc.object()); // send the message to the central server
+								emit jsonReceived( jsonDoc.object()); // send the message to the central server
                             }
                             else if(type == "mediaRequest")
                             {
-                                emit mediaRequest(QSharedPointer<SrvUser>::create(this), jsonDoc.object());
+                                emit mediaRequest( jsonDoc.object());
                             }
                         }
                         else
