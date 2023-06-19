@@ -17,6 +17,7 @@ namespace Helper {
 		static QString createUser();
 		static QString updateUserRating();
 		static QString getRatingByLogin();
+		static QString getTopicIdByTopicName();
 	};
 }
 

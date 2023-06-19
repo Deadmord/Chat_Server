@@ -93,8 +93,25 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
             if (password_str.isEmpty())
                 return;
 
-            const QJsonValue userpic = doc_obj_.value(QLatin1String("userpic"));
-            
+            const QJsonValue userpic_val = doc_obj_.value(QLatin1String("userpic"));
+            const QString userpic_str = userpic_val.toString();
+            DBEntity::DBUser user(new_user_name, password_str, userpic_str.toUtf8(), 0);
+            auto createUserResult = DBService::UserRepository::createUser(user);
+            createUserResult.waitForFinished();
+            auto result = createUserResult.result();
+            if (result) {
+                QJsonObject userinfo;
+                QByteArray userpicData = userpic_str.toUtf8();
+                QString base64Userpic = QString::fromLatin1(userpicData.toBase64());
+                userinfo[QStringLiteral("username")] = sender_->getUserName();
+                userinfo[QStringLiteral("userpic")] = base64Userpic;
+                userinfo[QStringLiteral("rating")] = double(sender_->getRating());
+                QJsonObject success_message;
+                success_message[QStringLiteral("type")] = QStringLiteral("login");
+                success_message[QStringLiteral("success")] = true;
+                success_message[QStringLiteral("userinfo")] = userinfo;    //Send DTO User
+                sendJson(sender_, success_message);
+            }
             //userpic
             //Б логика записи в БД
             //вместо ответа передавать успешный логин

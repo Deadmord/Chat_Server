@@ -11,4 +11,5 @@ namespace Helper {
 	QString QueryHelper::createUser() { return "INSERT INTO [user] (login, password, userpic, rating, is_deleted) VALUES (:login, :password, :userpic, :rating, :is_deleted)"; }
 	QString QueryHelper::updateUserRating() { return "UPDATE [user] SET rating=:rating WHERE login=:login"; }
 	QString QueryHelper::getRatingByLogin() { return "SELECT rating from [user] WHERE login=:login"; }
+	QString QueryHelper::getTopicIdByTopicName() { return "SELECT id from [topic] WHERE name=:name"; }
 }

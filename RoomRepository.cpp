@@ -221,4 +221,34 @@ namespace DBService {
 			}
 			});
 	}
+
+	qint32 RoomRepository::getTopicIdByTopicName(const QString& topic_name_) {
+		try
+		{	
+			auto connection = DBService::DBConnection_Service::getConnection();
+			if (connection->getDatabase()->isOpen()) {
+				QSqlQuery query(*connection->getDatabase());
+				query.prepare(Helper::QueryHelper::getTopicIdByTopicName());
+				query.bindValue(":name", topic_name_);
+
+				if (query.exec() && query.next()) {
+					qint32 topic_id = query.value("id").toInt();
+					return topic_id;
+				}
+				else {
+					PLOG_ERROR << "Cannot get topic id by name: " << topic_name_;
+					return -1;
+				}
+			}
+			else {
+				PLOG_ERROR << "Cannot connect to the data base.";
+				return -1;
+			}
+		}
+		catch (const std::exception& exception)
+		{
+			PLOG_ERROR << "Exception in getTopicIdByTopicName method: " << exception.what();
+			return -1;
+		}
+	}
 }
