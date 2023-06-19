@@ -93,6 +93,8 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
             if (password_str.isEmpty())
                 return;
 
+            const QJsonValue userpic = doc_obj_.value(QLatin1String("userpic"));
+            
             //userpic
             //Б логика записи в БД
             //вместо ответа передавать успешный логин
@@ -101,13 +103,13 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
         if (type_val.toString().compare(QLatin1String("login"), Qt::CaseInsensitive) == 0)
         {
             const QJsonValue username_val = doc_obj_.value(QLatin1String("username"));
+            const QJsonValue password_val = doc_obj_.value(QLatin1String("password"));
             if (username_val.isNull() || !username_val.isString())
                 return;
             const QString new_user_name = username_val.toString().simplified();
             if (new_user_name.isEmpty())
                 return;
 
-            const QJsonValue password_val = doc_obj_.value(QLatin1String("password"));
             if (password_val.isNull() || !password_val.isString())
                 return;
             const QString password_str = password_val.toString().simplified();

@@ -43,7 +43,16 @@ void RoomStorage_Service::downloadRoomsFromDB()
 
         auto dbrooms = DBService::RoomRepository::getAllActiveRooms();
         for (auto& room : dbrooms) {
-            rooms_storage.insert(room->getId(), QSharedPointer<SrvRoom>(new SrvRoom(room), &QObject::deleteLater));
+            rooms_storage.insert(room->getId(), QSharedPointer<SrvRoom>(new SrvRoom(
+                room->getId(),
+                room->getName(),
+                room->getDescription(),
+                room->getTopicId(),
+                room->getTopicName(),
+                room->isPrivate(),
+                room->getPassword(),
+                room->isDeleted()
+            ), &QObject::deleteLater));
         }
         PLOGD << "Uploaded rooms: " + QString::number(rooms_storage.size());
 
