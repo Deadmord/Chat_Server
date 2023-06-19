@@ -312,6 +312,7 @@ void MessageController::jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, co
             return;
         }
         QString userpic_str = userpic.toString();
+        PLOGF << nickname.toString();
         auto updateUserpicRes = DBService::UserRepository::updateUserPasswordUserpic(nickname.toString(), "", userpic_str.toUtf8());
         updateUserpicRes.waitForFinished();
         if (updateUserpicRes.result()) {
