@@ -67,7 +67,7 @@ void UserController::userDisconnected(QSharedPointer<SrvUser> sender_)
 void UserController::userError(const QSharedPointer<SrvUser> sender_)
 {
     Q_UNUSED(sender_)
-    PLOGE << QLatin1String("Error from ")/* + sender_->getUserName()*/;
+    //PLOGE << QLatin1String("Error from ")/* + sender_->getUserName()*/;
 }
 
 QSet<QSharedPointer<SrvUser>> UserController::getUsersList() const
