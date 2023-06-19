@@ -62,7 +62,7 @@ void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<Srv
     userMessage[QStringLiteral("type")] = QStringLiteral("message");
     userMessage[QStringLiteral("sender")] = sender_->getUserName();
     userMessage[QStringLiteral("text")] = message_;
-    broadcastSend(userMessage, room_id_, sender_);
+    broadcastSend(userMessage, room_id_, nullptr);
 }
 
 void RoomController::roomListRequest(QSharedPointer<SrvUser> user_)
@@ -76,7 +76,7 @@ void RoomController::roomListRequest(QSharedPointer<SrvUser> user_)
         foreach(const auto room, rooms_ptr_list)
         {
             QJsonObject room_json;
-            room_json[QStringLiteral("id")] = QString::number(room->getId());
+            room_json[QStringLiteral("id")] = int(room->getId());
             room_json[QStringLiteral("name")] = room->getName();
             room_json[QStringLiteral("description")] = room->getDescription();
             room_json[QStringLiteral("topic")] = room->getTopicName();
