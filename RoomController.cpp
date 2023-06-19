@@ -62,7 +62,7 @@ void RoomController::jsonMsgReceived(const quint32& room_id_, QSharedPointer<Srv
     userMessage[QStringLiteral("type")] = QStringLiteral("message");
     userMessage[QStringLiteral("sender")] = sender_->getUserName();
     userMessage[QStringLiteral("text")] = message_;
-    broadcastSend(userMessage, room_id_, sender_);
+    broadcastSend(userMessage, room_id_, nullptr);
 }
 
 void RoomController::roomListRequest(QSharedPointer<SrvUser> user_)
@@ -144,7 +144,7 @@ void RoomController::createRoom(QSharedPointer<SrvUser> sender_, const QJsonObje
     auto future = RoomStorage_Service::getInstance()->createRoom(room);
 
     QFutureWatcher<decltype(future.result())> watcher;
-    connect(&watcher, QFutureWatcher<decltype(future.result())>::finished, [&, sender_]() {
+    connect(&watcher, &QFutureWatcher<decltype(future.result())>::finished, [&, sender_]() {
         QJsonObject res;
         res[QStringLiteral("createChat")] = "success";
         sendJson(sender_, res);
