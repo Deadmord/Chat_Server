@@ -147,10 +147,10 @@ namespace DBService {
 			});
 	}
 
-	QFuture<qint32> RoomRepository::createRoom( const DBEntity::DBRoom& room_) {
-		return QtConcurrent::run([query_string_ = Helper::QueryHelper::createRoom(), &room_]() {
+	qint32 RoomRepository::createRoom( const DBEntity::DBRoom& room_) {
 			try
 			{
+				auto query_string_ = Helper::QueryHelper::createRoom();
 				auto connection = DBService::DBConnection_Service::getConnection();
 				if (connection->getDatabase()->isOpen()) {
 
@@ -184,7 +184,6 @@ namespace DBService {
 				PLOG_ERROR << "Exception in createRoom method: " << exception.what();
 				return -1;
 			}
-			});
 	}
 
 	QFuture<bool> RoomRepository::deleteRoom(const qint32& id_) {
