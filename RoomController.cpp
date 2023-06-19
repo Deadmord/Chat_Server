@@ -29,11 +29,7 @@ void RoomController::userEntry(const quint32& room_id, QSharedPointer<SrvUser> u
     connected_message[QStringLiteral("type")] = QStringLiteral("newuser");
     connected_message[QStringLiteral("username")] = user_->getUserName();
     broadcastSend(connected_message, room_id, user_);
-    //проверить что комната с таким номером вообще существует
-    //назначить комнату юзеру
     user_->setRoomId(room_id);
-    //Отправить юзера в нужную комнату
-    //уже в комнате по сигналу вхождения юзера сделать рассылку
     
 }
 
@@ -51,6 +47,12 @@ void RoomController::userLeave(QSharedPointer<SrvUser> user_)
 	    disconnectedMessage[QStringLiteral("type")] = QStringLiteral("userdisconnected");
 	    disconnectedMessage[QStringLiteral("username")] = user_->getUserName();
 	    broadcastSend(disconnectedMessage, room_id, nullptr);
+
+        QJsonObject disconnectedMessageforUser;
+        disconnectedMessageforUser[QStringLiteral("type")] = QStringLiteral("exitRoom");
+        disconnectedMessageforUser[QStringLiteral("success")] = "success";
+        sendJson(user_, disconnectedMessageforUser);
+
 	    user_->setRoomId(0);
     }
     else
