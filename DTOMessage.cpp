@@ -62,6 +62,7 @@ QSharedPointer<User_Message> DTOModel::DTOMessage::createSrvFromDTO(QSharedPoint
 	dto_model_->getId(), dto_model_->getDateTime(), dto_model_->getLogin(), dto_model_->getText(), dto_model_->isRtl(), dto_model_->getMediaId(),
 		dto_model_->getParentId()));
 	shp_message->setLikes(dto_model_->getLikes());
+
 	return shp_message;
 }
 
@@ -129,7 +130,7 @@ bool DTOModel::DTOMessage::toDTOMessageFromJson(DTOModel::DTOMessage& user_masg_
     const QString mediaid = mediaid_val.toString().trimmed();
 
     const QJsonValue rtl_val = user_msg_.value(QLatin1String("rtl"));
-    if (rtl_val.isNull() || !mediaid_val.isBool())
+    if (rtl_val.isNull() || !rtl_val.isBool())
         return false;
     const bool rtl = rtl_val.toBool();
 
