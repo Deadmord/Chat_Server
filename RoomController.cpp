@@ -94,7 +94,7 @@ void RoomController::messageHystoryRequest(quint32 room_id_, QSharedPointer<SrvU
     auto future = RoomStorage_Service::getInstance()->getMessages(room_id_, message_time_, pool_size_);
     QFutureWatcher<decltype(future.result())> watcher;
 
-    QObject::connect(&watcher, &QFutureWatcher<decltype(future.result())>::finished, [&]() {
+    QObject::connect(&watcher, &QFutureWatcher<decltype(future.result())>::finished, [&, user_]() {
         QJsonObject messageList;
         QJsonArray messages;
         auto messages_set = std::move(future.result());
@@ -129,6 +129,27 @@ void RoomController::messageHystoryRequest(quint32 room_id_, QSharedPointer<SrvU
     //Тут преобразование в JSON
 
     
+}
+
+void RoomController::createRoom(QSharedPointer<SrvUser> sender_, const QJsonObject& room_)
+{
+
+    QSharedPointer<SrvRoom> room;
+    room->setName(room_[QStringLiteral("name")].toString());
+    room->setDescription(room_[QStringLiteral("description")].toString());
+    room->setTopicName(room_[QStringLiteral("topic")].toString());
+    room->setPassword(room_[QStringLiteral("password")].toString());
+    room->setPrivate(room_[QStringLiteral("isprivate")].toBool());
+
+    auto future = RoomStorage_Service::getInstance()->createRoom(room);
+
+    QFutureWatcher<decltype(future.result())> watcher;
+    connect(&watcher, QFutureWatcher<decltype(future.result())>::finished, [&, sender_]() {
+        QJsonObject res;
+        res[QStringLiteral("createChat")] = "success";
+        sendJson(sender_, res);
+        });
+
 }
 
 void RoomController::broadcastSend(const QJsonObject& message_,const quint32& room_id_, const QSharedPointer<SrvUser>& exclude_)
