@@ -320,7 +320,7 @@ void MessageController::jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const 
     const QJsonValue type_val = doc_obj_.value(QLatin1String("type"));
     if (type_val.isNull() || !type_val.isString())
         return;
-    if (type_val.toString().compare(QLatin1String("roomLeave"), Qt::CaseInsensitive) == 0)
+    if (type_val.toString().compare(QLatin1String("exitRoom"), Qt::CaseInsensitive) == 0)
     {
         emit userLeaveSignal(sender_);
     }

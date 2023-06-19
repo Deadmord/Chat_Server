@@ -64,7 +64,7 @@ void SrvUser::sendJson(const QJsonObject& json)
     // to its UTF-8 encoded version. We use QJsonDocument::Compact to save bandwidth
     const QByteArray jsonData = QJsonDocument(json).toJson(QJsonDocument::Compact);
     // we notify the central server we are about to send the message
-    PLOGD << QLatin1String("Sending to ") + getUserName() + QLatin1String(" - ") + QString::fromUtf8(jsonData);
+    //PLOGD << QLatin1String("Sending to ") + getUserName() + QLatin1String(" - ") + QString::fromUtf8(jsonData);
     QByteArray buffer;
     buffer.clear();
     // create a QDataStream for buffer operating 
