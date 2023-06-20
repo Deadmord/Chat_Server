@@ -20,7 +20,6 @@ bool SrvUser::setSocketDescriptor(qintptr socketDescriptor)
 void SrvUser::disconnectFromClient()
 {
     user_socket->disconnectFromHost();
-    //-----------------сделать рефакторинг тут и в сервере-------------------------------
 }
 
 QString SrvUser::getUserName() const

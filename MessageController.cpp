@@ -24,33 +24,6 @@ QSharedPointer<MessageController> MessageController::instance()
     return shp_instance;
 }
 
-//MessageController* MessageController::instance(QObject* parent)
-//{
-//    static MessageController inst(parent);
-//    return &inst;
-//}
-
-//User_Message MessageController::createMessage(const QString& nickname_, const QString& text_)
-//{
-//    Message msg;
-//    msg.nickname = nickname_;
-//    msg.text = text_;
-//    msg.room_id = 0;
-//    msg.deleted = false;
-//    return User_Message(msg);
-//    //return User_Message(QUuid::createUuid().toString(), 0, QDateTime::currentDateTime(), _nickname, _text);
-//}
-
-
-//void MessageController::broadcastSend(QSharedPointer<User_Message> spr_srv_msg, const QSharedPointer<SrvRoom> shp_room_, const QSharedPointer<SrvUser> exclude_)
-//{
-//    for (UserConnection* user : shp_room_->getConnectedUsers()) {
-//        Q_ASSERT(user);
-//        if (user == exclude_)
-//            continue;
-//        sendJson(user, message_);
-//    }
-//}
 
 void MessageController::sendJson(QSharedPointer<SrvUser> destination_, const QJsonObject& message_)
 {
@@ -194,21 +167,6 @@ void MessageController::jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const
                 sendJson(sender_, message);
                 return;
             }
-
-            //{   // Query to DB
-            //    QSet<QString> username = { "User01","User02","User03" };
-            //    QSet<QString> password = { "Pass01","Pass02","Pass03" };
-
-            //    if (!username.contains(new_user_name)|| !password.contains(password_str)) {
-            //        PLOGI << "wrong loggin or password" + new_user_name;
-            //        QJsonObject message;
-            //        message[QStringLiteral("type")] = QStringLiteral("login");
-            //        message[QStringLiteral("success")] = false;
-            //        message[QStringLiteral("reason")] = QStringLiteral("wrong loggin or password");
-            //        sendJson(sender_, message);
-            //        return;
-            //    }
-            //}
 
             //sinchronise with DB user
             sender_->setUserName(user_info->getLogin());

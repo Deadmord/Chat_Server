@@ -100,25 +100,4 @@ void Server::loadConfig(const QString& path_)
     
 }
 
-//void Server::loadRooms()
-//{
-//    //Load rooms from repository to vector<Room>        ------------------!!!!!-----------------------
-//    //run loop to init all rooms
-//
-//    //QVector<DBEntity::DBRoom> dbRooms =
-//    //{
-//    //    DBEntity::DBRoom{1, "room1", "a_description", 11, false, "a_password", false },
-//    //    DBEntity::DBRoom{2, "room2", "b_description", 12, true, "b_password", false },
-//    //    DBEntity::DBRoom{3, "room3", "c_description", 13, false, "c_password", true }
-//    //};
-//
-//    //for(const DBEntity::DBRoom& db_room: dbRooms)
-//    //{
-//	   // auto* room = new SrvRoom(db_room.getId(), db_room.getName(), db_room.getDescription(), db_room.getTopicId(), db_room.isPrivate(), db_room.getPassword(), db_room.isDeleted(), this);
-//    //    //connect();
-//    //    rooms.append(room);
-//    //    PLOGI << "New room created! Now rooms: " + QString::number(rooms.size());
-//    //}
-//}
-
 

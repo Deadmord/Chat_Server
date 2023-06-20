@@ -56,7 +56,6 @@ void UserController::userDisconnected(QSharedPointer<SrvUser> sender_)
     const quint32 userRoom = sender_->getRoomId();
     if (userRoom != 0) {
         RoomController::instance()->userLeave(sender_);
-        //добавить connection() и заменить на emit user leave
     }
     PLOGI << sender_->getUserName() + QLatin1String(" disconnected, total users left: ") + QString::number(connected_users.size());
     //sender_->deleteLater();
@@ -67,7 +66,6 @@ void UserController::userDisconnected(QSharedPointer<SrvUser> sender_)
 void UserController::userError(const QSharedPointer<SrvUser> sender_)
 {
     Q_UNUSED(sender_)
-    //PLOGE << QLatin1String("Error from ")/* + sender_->getUserName()*/;
 }
 
 QSet<QSharedPointer<SrvUser>> UserController::getUsersList() const

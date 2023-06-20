@@ -42,14 +42,11 @@ public:
 	~MessageController() override;
 
 	void jsonFromLoggedOut(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_);
-	void jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_);      //Убрать в RoomController
+	void jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_);     
 	void jsonFromLoggedIn(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_, const QByteArray& data_);
 	void jsonFromLoggedWoRoom(QSharedPointer<SrvUser> sender_, const QJsonObject& doc_obj_);
 	void sendJson(QSharedPointer<SrvUser> destination_, const QJsonObject& message_);
 	void sendMedia(QSharedPointer<SrvUser> destination_, const QByteArray& data_);
-
-private:
-	//User_Message createMessage(const QString& nickname_, const QString& text_);
 
 private:
 	inline static QSharedPointer<MessageController> shp_instance{};

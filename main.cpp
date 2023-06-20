@@ -71,10 +71,7 @@ static void startup_routine()
     qDebug() << "AsyncConsoleWin can't be loaded! Curent OS doesnt support.";
     PLOGD << "AsyncConsoleWin can't be loaded! Curent OS doesnt support.";
 #endif
-    QTimer::singleShot(0, [&]()
-        {
-            //MessageSaver_Service::start(0.05);
-        });
+
     QTimer::singleShot(0, [&]()
         {
             server.startServer();
@@ -85,41 +82,6 @@ Q_COREAPP_STARTUP_FUNCTION(startup_routine)
 int main(int argc, char* argv[])
 {
     QCoreApplication a(argc, argv);
-    
-
 
     return a.exec();
-
-
 }
-
-
-//Logger severity
-//enum Severity
-//{
-//    none = 0,
-//    fatal = 1,
-//    error = 2,
-//    warning = 3,..
-//    info = 4,
-//    debug = 5,
-//    verbose = 6
-//};
-
-//Short simple macros
-//PLOGV << "verbose";
-//PLOGD << "debug";
-//PLOGI << "info";
-//PLOGW << "warning";
-//PLOGE << "error";
-//PLOGF << "fatal";
-//PLOGN << "none";
-
-//Conditional macros
-//PLOGV_IF(cond) << "verbose";
-//PLOGD_IF(cond) << "debug";
-//PLOGI_IF(cond) << "info";
-//PLOGW_IF(cond) << "warning";
-//PLOGE_IF(cond) << "error";
-//PLOGF_IF(cond) << "fatal";
-//PLOGN_IF(cond) << "none";

@@ -26,7 +26,7 @@ signals:
 public slots:
 	void addConnection(qintptr socket_descriptor_);
 	void disableUsers();
-	QSet<QSharedPointer<SrvUser>> getUsersList() const;                          //TODO remove from rerver with connected_users prop.
+	QSet<QSharedPointer<SrvUser>> getUsersList() const;                          
 
 private slots:
 	void userDisconnected(QSharedPointer<SrvUser> sender_);

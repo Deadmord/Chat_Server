@@ -131,10 +131,6 @@ void RoomController::messageHystoryRequest(quint32 room_id_, QSharedPointer<SrvU
         }
         sendJson(user_, messageList);
     });
-    //Тут запрос истории
-    //Тут преобразование в JSON
-
-    
 }
 
 void RoomController::createRoom(QSharedPointer<SrvUser> sender_, const QJsonObject& room_)
@@ -147,12 +143,6 @@ void RoomController::createRoom(QSharedPointer<SrvUser> sender_, const QJsonObje
         room_[QStringLiteral("is_private")].toBool(),
         room_[QStringLiteral("password")].toString()
     );
-    
-    /*room.setName(room_[QStringLiteral("name")].toString());
-    room.setDescription(room_[QStringLiteral("description")].toString());
-    room.setTopicName(room_[QStringLiteral("topic")].toString());
-    room.setPassword(room_[QStringLiteral("password")].toString());
-    room.setPrivate(room_[QStringLiteral("is_private")].toBool());*/
 
     auto future = RoomStorage_Service::getInstance()->createRoom(room);
 
