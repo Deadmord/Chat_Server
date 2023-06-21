@@ -12,6 +12,7 @@
 #include <plog/Log.h>
 
 #include "LocalStorage_Service.h"
+#include "RatingCounter_Service.h"
 
 class MessageSaver_Service : public QObject
 {

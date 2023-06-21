@@ -13,6 +13,9 @@
 class RatingCounter_Service :
     public QObject
 {
+    Q_OBJECT
+
+private:
 
     static QSharedPointer<RatingCounter_Service> shp_instance;
     static QMutex mutex;
