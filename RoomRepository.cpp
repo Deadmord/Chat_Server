@@ -2,7 +2,7 @@
 
 namespace DBService {
 
-	DBConnection_Service RoomRepository::a_dbConnection("Driver={ODBC Driver 18 for SQL Server};Server=tcp:comp-zionet-server.database.windows.net,1433;Database=CPP_Chat_DB;Uid=Logika4417;Pwd=Fyyf1998;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;", 0);
+	DBConnection_Service RoomRepository::a_dbConnection("database connection string", 0);
 	RoomRepository::RoomRepository(const QString& connection_string_) { a_dbConnection.setConnectionString(connection_string_); }
 	RoomRepository::~RoomRepository() {}
 
