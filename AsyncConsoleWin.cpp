@@ -1,18 +1,18 @@
-﻿#include "async_console_win.h"
+﻿#include "AsyncConsoleWin.h"
 
 extern int gl_exit_timeout;
 
 #if defined (Q_OS_WIN)
-asyncConsoleWin::asyncConsoleWin(QObject *parent)
+AsyncConsoleWin::AsyncConsoleWin(QObject *parent)
 	: QObject(parent)
 {
     inputHandle = GetStdHandle(STD_INPUT_HANDLE);
     notifier = new QWinEventNotifier(inputHandle, this);
-    connect(notifier, &QWinEventNotifier::activated, this, &asyncConsoleWin::handleInput);
+    connect(notifier, &QWinEventNotifier::activated, this, &AsyncConsoleWin::handleInput);
 }
 
 
-void asyncConsoleWin::handleInput(HANDLE h)
+void AsyncConsoleWin::handleInput(HANDLE h)
 {
     INPUT_RECORD inputBuffer[128];
     DWORD numEventsRead;
@@ -46,13 +46,13 @@ void asyncConsoleWin::handleInput(HANDLE h)
     }
 }
 
-void asyncConsoleWin::processInputText(const QString& input)
+void AsyncConsoleWin::processInputText(const QString& input)
 {
     QTextStream qout(stdout);
     qDebug() << "You entered: " << input;
 }
 
-void asyncConsoleWin::processInputCommand(const QString& input)
+void AsyncConsoleWin::processInputCommand(const QString& input)
 {
     QTextStream qout(stdout);
     qDebug() << "You entered: " << input;
@@ -108,7 +108,7 @@ void asyncConsoleWin::processInputCommand(const QString& input)
     }
 }
 
-void asyncConsoleWin::logMessage(enum Severity log_lvl, const QString& msg)
+void AsyncConsoleWin::logMessage(enum Severity log_lvl, const QString& msg)
 {
     qDebug().noquote() << msg;
     switch (log_lvl)

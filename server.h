@@ -2,61 +2,48 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QVector>
-#include <QJsonObject>
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QJsonParseError>
-#include <QFile>
+//#include <QJsonObject>
+//#include <QJsonDocument>
+//#include <QJsonArray>
+//#include <QJsonParseError>
+//#include <QFile>
 #include <QTime>
-#include <QUuid>
+//#include <QUuid>
 #include <QTimer>
+
 #include <plog/Log.h>
-#include "Entities/entities.h"
-#include "Entities/Enums/Enums.h"
-#include "Entities/SrvModels/Message.h"
-#include "Controllers/RoomController/RoomController.h"
+
+
+#include "Enums.h"
+#include "UserController.h"
+#include "RoomController.h"
+#include "MessageController.h"
+#include "RoomStorage_Service.h"
+#include "UserRepository.h"
 
 const QString CONFIG_FILE_PATH = "./config.json";
 
-class Server : public QTcpServer
+class Server final : public QTcpServer
 {
     Q_OBJECT
     Q_DISABLE_COPY(Server)
 public:
-    explicit Server(QObject* parent = nullptr);
+    explicit Server(QObject* parent_ = nullptr);
     ~Server();
 
 signals:
-    void logMessage(enum Severity log_lvl, const QString& msg);
+    void serverStarted();
+    void serverStopped();
+    void incomingConnection(qintptr socket_descriptor_);
 
 public slots:
     void startServer();
     void stopServer();
-    void incomingConnection(qintptr socketDescriptor) override;
-
-private slots:
-
-    void broadcastSend(const QJsonObject& message, UserConnection* exclude);
-    void jsonReceived(UserConnection* sender, const QJsonObject& doc);
-    void userDisconnected(UserConnection* sender);
-    void userError(UserConnection* sender);
+    //void incomingConnection(qintptr socket_descriptor_) override;
 
 private: 
-    void disableUsers();
-    void loadConfig(QString _path);
+    void loadConfig(const QString& path_);
     void openConnection();
-    void loadRooms();
-
-
-    //void SendToClient(const User_Message& msg, QTcpSocket* socket);
-    //void SendToClient(const QVector<User_Message>& msgs, QTcpSocket* socket);
-    ////void SendToAllClients(const QString &str);
-    //void SendToAllClients(const User_Message&msg);
-
-    void jsonFromLoggedOut(UserConnection* sender, const QJsonObject& doc);
-    void jsonFromLoggedIn(UserConnection* sender, const QJsonObject& doc);
-    void sendJson(UserConnection* destination, const QJsonObject& message);
-    User_Message createMessage(QString nickame, QString text);
 
 private:
     QString server_address;
@@ -64,12 +51,8 @@ private:
     quint16 flood_limit;
     QString black_list_path;
 
-    //QTcpSocket* socket;
-    //QVector <QTcpSocket*> sockets;
-    QVector<UserConnection*> connected_users;
-    QVector<RoomController*> rooms;
     //переделать в QVector <User_Message*> messages и перенести в Room
-    QVector <User_Message> messages;
+    QList <User_Message> messages;
 
-    QByteArray Data;
+    QByteArray data_;
 };

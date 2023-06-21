@@ -2,29 +2,31 @@
 #include <iostream>
 
 #include "server.h"
-#include "Controllers/RoomController/RoomController.h"
-#include "Entities/Enums/Enums.h"
-#include "DBRoom.h"
-#include "DBService.h"
+#include "RoomController.h"
+#include "Enums.h"
 
 #include <plog/Log.h> 
 #include <plog/Initializers/RollingFileInitializer.h>
 #include <plog/Appenders/ColorConsoleAppender.h>
 
+#include "MessageSaver_Service.h"
+#include "SwearHelper.h"
+
 #include "RoomRepository.h"
 #include "UserRepository.h"
-#include "MessageSaver_Service.h"
+#include "DBRoom.h"
+#include "DBUser.h"
+#include "MediaSaver_Service.h"
 
 #if defined (Q_OS_WIN)
-#include "Core/async_console_win.h"
+#include "AsyncConsoleWin.h"
 #else
 
 #endif
-#include "LocalStorage_Service.h"
 
 
 Server server;  //create server instace
-asyncConsoleWin* asyncConsole;
+AsyncConsoleWin* asyncConsole;
 
 static void shutdown_routine()
 {
@@ -62,18 +64,14 @@ static void startup_routine()
 
 #if defined (Q_OS_WIN)
     //(void)new asyncConsoleWin(qApp);
-    asyncConsole = new asyncConsoleWin(qApp);
-    QObject::connect(asyncConsole, &asyncConsoleWin::startServer, &server, &Server::startServer);
-    QObject::connect(asyncConsole, &asyncConsoleWin::stopServer, &server, &Server::stopServer);
-    QObject::connect(&server, &Server::logMessage, asyncConsole, &asyncConsoleWin::logMessage);
+    asyncConsole = new AsyncConsoleWin(qApp);
+    QObject::connect(asyncConsole, &AsyncConsoleWin::startServer, &server, &Server::startServer);
+    QObject::connect(asyncConsole, &AsyncConsoleWin::stopServer, &server, &Server::stopServer);
 #else
     qDebug() << "AsyncConsoleWin can't be loaded! Curent OS doesnt support.";
     PLOGD << "AsyncConsoleWin can't be loaded! Curent OS doesnt support.";
 #endif
-    QTimer::singleShot(0, [&]()
-        {
-            //MessageSaver_Service::start(0.05);
-        });
+
     QTimer::singleShot(0, [&]()
         {
             server.startServer();
@@ -87,34 +85,3 @@ int main(int argc, char* argv[])
 
     return a.exec();
 }
-
-
-//Logger severity
-//enum Severity
-//{
-//    none = 0,
-//    fatal = 1,
-//    error = 2,
-//    warning = 3,
-//    info = 4,
-//    debug = 5,
-//    verbose = 6
-//};
-
-//Short simple macros
-//PLOGV << "verbose";
-//PLOGD << "debug";
-//PLOGI << "info";
-//PLOGW << "warning";
-//PLOGE << "error";
-//PLOGF << "fatal";
-//PLOGN << "none";
-
-//Conditional macros
-//PLOGV_IF(cond) << "verbose";
-//PLOGD_IF(cond) << "debug";
-//PLOGI_IF(cond) << "info";
-//PLOGW_IF(cond) << "warning";
-//PLOGE_IF(cond) << "error";
-//PLOGF_IF(cond) << "fatal";
-//PLOGN_IF(cond) << "none";

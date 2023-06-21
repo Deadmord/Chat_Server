@@ -2,15 +2,14 @@
 // Created by Admin on 5/25/2023.
 //
 
-#include "file_repository.h"
-
-#include <plog/Log.h>
+#include "FileRepository.h"
 
 
-bool FileRepository::writeJsonArr(const QString &file_name_, const QJsonArray &data_) {
+
+bool FileRepository::writeJsonArr(const QString &file_name_, const QJsonArray &data_, const bool clear_) {
     QFile file(file_name_);
     if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        PLOGE<< "File cannot be opened" << Qt::endl;
+        PLOGE << "File cannot be opened";
         return false;
     }
     const QByteArray content = file.readAll();
@@ -18,7 +17,7 @@ bool FileRepository::writeJsonArr(const QString &file_name_, const QJsonArray &d
 
     QJsonDocument doc = QJsonDocument::fromJson(content);
     QJsonArray data_json;
-    if (!doc.isNull() && doc.isArray()) {
+    if (!doc.isNull() && doc.isArray() && !clear_) {
         data_json = doc.array();
     }
 
@@ -32,8 +31,8 @@ bool FileRepository::writeJsonArr(const QString &file_name_, const QJsonArray &d
     return true;
 }
 
-bool FileRepository::readJson(const QString &filePath, QJsonObject &jsonObject) {
-    QFile file(filePath);
+bool FileRepository::readJson(const QString &file_path_, QJsonObject &json_object_) {
+    QFile file(file_path_);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         PLOGE << "Failed to open file for reading:" << file.errorString();
@@ -51,14 +50,14 @@ bool FileRepository::readJson(const QString &filePath, QJsonObject &jsonObject) 
         return false;
     }
 
-    jsonObject = json_doc.object();
+    json_object_ = json_doc.object();
     return true;
 }
 
-bool FileRepository::readJsonArr(const QString &filePath, QJsonArray &jsonObject) {
-    QFile file(filePath);
+bool FileRepository::readJsonArr(const QString &file_path_, QJsonArray &json_object_) {
+    QFile file(file_path_);
     if (!file.exists()) {
-    	PLOGE<< "File not found" << Qt::endl;
+    	PLOGE<< "File not found";
         return false;
     }
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -78,9 +77,41 @@ bool FileRepository::readJsonArr(const QString &filePath, QJsonArray &jsonObject
         return false;
     }
 
-    jsonObject = json_doc.array();
+    json_object_ = json_doc.array();
+    return true;
+}
+bool FileRepository::saveToBinFile(const QByteArray& data_, const QString& file_path_) {
+    QFile file(file_path_ + ".bin");
+    if (QFile::exists(file_path_)){
+        PLOGW << "Already existing id";
+        return false;
+    }
+    if (!file.open(QIODevice::WriteOnly)) {
+        PLOGE << "Failed to create file";
+        return false;
+    }
+     
+    QDataStream out(&file);
+    out << data_;
+    file.close();
+    PLOGI << "File " << file_path_ << " was written";
     return true;
 }
 
-FileRepository::FileRepository() {}
+QByteArray FileRepository::readFromBinFile(const QString& file_path_) {
+    QFile file(file_path_ + ".bin");
+    if (!file.open(QIODevice::ReadOnly)) {
+        PLOGE << "Failed to open file";
+        return QByteArray();
+    }
+
+    QDataStream in(&file);
+    QByteArray data;
+    in >> data;
+    file.close();
+    PLOGI << "File " << file_path_ << "was read";
+    return data;
+}
+
+FileRepository::FileRepository() = default;
 

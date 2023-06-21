@@ -6,33 +6,54 @@
 #include <QMutex>
 #include <QMap>
 #include <QDir>
+#include <QtCore>
+#include <qthread.h>
+#include <QtConcurrent>
+#include <algorithm>
 
 #include <plog/Log.h>
+#include <QTimer>
 
-#include "DB/JSONS/messages.h"
+#include "DBMessage.h"
+#include "Message.h"
+#include "DTOMessage.h"
 
-class LocalStorage_Service :
+#include "DTOMessage.h"
+
+class LocalStorage_Service:
     public QObject
 {
     Q_OBJECT
-private:
-    static LocalStorage_Service* instance;
+
+    static QSharedPointer<LocalStorage_Service> shp_instance;
     static QMutex mutex;
     explicit LocalStorage_Service(QObject* object_ = nullptr);
-    QMap<QUuid, QList<QSharedPointer<DBEntity::DBMessage>>> message_storage;
+    QMap<quint32, QSet<QSharedPointer<DBEntity::DBMessage>>> message_storage;
 
 public:
-    static LocalStorage_Service* getInstance();
+    [[nodiscard]] QString searchForFiles(const QDateTime& date_, const quint32& room_) const;
+    QString searchForFiles(const QDateTime& date_, const quint32& room_, const bool& from_to_) const;
+    bool addLikeToMessage(const quint32& room_id_, const QUuid& message_id_, const QDateTime& message_datetime_, const QString& user_login_, const bool like_dislike_);
+    static QSet<QSharedPointer<DBEntity::DBMessage>> readMessagesFromDB(const QString& file_name_) ;
+    QList<QString> searchForFiles(const QDateTime& from_, const QDateTime& to_, const quint32& room_) const;
+    static QSharedPointer<LocalStorage_Service> getInstance(int minutes_ = 0);
     LocalStorage_Service& operator=(const LocalStorage_Service&) = delete;
     LocalStorage_Service(const LocalStorage_Service&) = delete;
 
 signals:
-    void messageRetrieved(QList<DBEntity::DBMessage*> message_);
+    void messageRetrieved(QList<QSharedPointer<DBEntity::DBMessage>> messages_);
     void close();
 
 public slots:
-    void addMessages(DBEntity::DBMessage* message_, QUuid room_id_);
+   
+    void addMessages(const QSet<QSharedPointer<User_Message>>& messages_, const quint32 room_id_);
+    void addMessage(const QSharedPointer<User_Message>& shp_message_, quint32 room_id_);
+    QSet<QSharedPointer<User_Message>> getMessages(const QDateTime& from_, const QDateTime& to_, const quint32& room_id_);
+    QSet<QSharedPointer<User_Message>> getMessages(const quint32& room_id_, const QDateTime& time_, bool from_to_, const quint32& pool_size_);
     void saveAllMessages();
-    void safeExit();
+
+    void safeExit() ;
 };
+
+
 #endif //LOCALSTORAGE_SERVICE_H

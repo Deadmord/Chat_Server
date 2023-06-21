@@ -13,7 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F6C43B12-4433-4AFE-B2D8-DA3A07E147F8}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0.22621.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
@@ -94,26 +94,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AsyncConsoleWin.cpp" />
+    <ClCompile Include="DTOMessage.cpp" />
     <ClCompile Include="DTORoom.cpp" />
     <ClCompile Include="DTOUser.cpp" />
-    <ClCompile Include="Entities\SrvModels\UserConnection.cpp" />
+    <ClCompile Include="FileRepository.cpp" />
     <ClCompile Include="LocalStorage_Service.cpp" />
+    <ClCompile Include="MediaSaver_Service.cpp" />
+    <ClCompile Include="Message.cpp" />
+    <ClCompile Include="MessageController.cpp" />
+    <ClCompile Include="DBMessage.cpp" />
+    <ClCompile Include="QueryHelper.cpp" />
+    <ClCompile Include="RoomController.cpp" />
+    <ClCompile Include="RoomStorage_Service.cpp" />
     <ClCompile Include="MessageSaver_Service.cpp" />
     <ClCompile Include="RatingCounter_Service.cpp" />
+    <ClCompile Include="SrvRoom.cpp" />
+    <ClCompile Include="SwearHelper.cpp" />
+    <ClCompile Include="SrvUser.cpp" />
+    <ClCompile Include="UserController.cpp" />
     <ClCompile Include="UserRepository.cpp" />
-    <ClInclude Include="RatingCounter_Service.h" />
+    <ClInclude Include="QueryHelper.h" />
+    <QtMoc Include="MediaSaver_Service.h" />
+    <QtMoc Include="UserController.h" />
+    <QtMoc Include="Message.h" />
+    <ClInclude Include="DBMessage.h" />
+    <QtMoc Include="AsyncConsoleWin.h" />
+    <ClInclude Include="DTOMessage.h" />
+    <ClInclude Include="Enums.h" />
+    <ClInclude Include="FileRepository.h" />
+    <QtMoc Include="RoomController.h" />
+    <QtMoc Include="MessageController.h" />
+    <QtMoc Include="RoomStorage_Service.h" />
+    <QtMoc Include="SrvRoom.h" />
+    <QtMoc Include="RatingCounter_Service.h" />
+    <QtMoc Include="SwearHelper.h" />
     <QtMoc Include="MessageSaver_Service.h" />
     <QtMoc Include="LocalStorage_Service.h" />
     <QtMoc Include="UserRepository.h" />
     <QtMoc Include="RoomRepository.h" />
-    <QtMoc Include="Entities\SrvModels\UserConnection.h" />
-    <ClInclude Include="DTORoom.h" />
-    <ClInclude Include="DTOUser.h" />
-    <ClInclude Include="Entities\Enums\Enums.h" />
-    <ClInclude Include="file_repository.h" />
-    <QtMoc Include="Controllers\RoomController\RoomController.h" />
-    <QtMoc Include="Core\async_console_win.h" />
-    <ClInclude Include="DBService.h" />
+    <QtMoc Include="DTORoom.h" />
+    <QtMoc Include="DTOUser.h" />
+    <QtMoc Include="SrvUser.h" />
+    <ClInclude Include="DBConncetion_Service.h" />
     <ClInclude Include="DBUser.h">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
@@ -132,10 +155,8 @@
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(Filename).moc</QtMocFileName>
     </ClInclude>
-    <ClCompile Include="Controllers\RoomController\RoomController.cpp" />
-    <ClCompile Include="Core\async_console_win.cpp" />
     <ClCompile Include="DBRoom.cpp" />
-    <ClCompile Include="DBService.cpp">
+    <ClCompile Include="DBConncetion_Service.cpp">
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">input</DynamicSource>
       <QtMocFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(Filename).moc</QtMocFileName>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Release|x64'">input</DynamicSource>
@@ -143,17 +164,11 @@
     </ClCompile>
     <ClCompile Include="DBTopic.cpp" />
     <ClCompile Include="DBUser.cpp" />
-    <ClCompile Include="DB\JSONS\messages.cpp" />
-    <ClCompile Include="Entities\SrvModels\Message.cpp" />
-    <ClCompile Include="file_repository.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RoomRepository.cpp" />
     <ClCompile Include="server.cpp" />
-    <ClInclude Include="Entities\entities.h" />
-    <QtMoc Include="Entities\SrvModels\Message.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="DB\JSONS\messages.h" />
     <QtMoc Include="server.h" />
   </ItemGroup>
   <ItemGroup>
