@@ -34,3 +34,4 @@ public slots:
     void updateRating();
 };
 
+#endif RATINGCOUNTER_SERVICE_H
